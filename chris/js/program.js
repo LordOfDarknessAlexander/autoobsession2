@@ -398,6 +398,7 @@ function vehicle ()
 	this.update   = function()
 	{
 		this.anim = vehicle.drawAnim;
+		(Object.create(Vector.prototype));
     }
 
    	
@@ -414,7 +415,7 @@ function vehicle ()
     return vehicle;
 
 	
-})(Object.create(Vector.prototype));
+}
 
 function createTestVehicle()
 {
