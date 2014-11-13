@@ -2,6 +2,9 @@
 // define variables
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
+//aspect ratio
+var width = canvas.getAttribute('width');
+var height = canvas.getAttribute('height');
 var player, money, stop, ticker;
 //vehicle class
 var vehicle = [];
@@ -18,9 +21,27 @@ var PLAYER_YPOS = 50;
 var BIDDER_XPOS = 650;
 var BIDDER_YPOS = 250;
 var ENEMY_X = 80;
-
 var VEHICLE_XPOS = 660;
 var VEHICLE_YPOS = 850;
+
+//background images
+//garage doors
+var splashImage = new Image();
+splashImage.src = "images/MBackground.png";
+//Menu Background Image
+var backgroundImage = new Image();
+backgroundImage.src = "images/inventoryMenu.png";
+
+//Menu velocity 
+var backgroundY = 0;
+var speed = 0.5;
+//Enemy Avatars
+//Sad enemy avatars
+var slimer = new Image();
+slimer.src = 'images/slime.png';
+//Happy Enemies
+var curBidImage = new Image();
+curBidImage.src = 'images/slime2.png';
 
 //Buttons functions
 var auctionButton = {};
@@ -35,8 +56,9 @@ var addFundsButton = {};
 var addFundsBackButoon = {};
 //AI
 //Create an empty array of Bidders
-var bidders = ["Sparkles", "hotdog" ,"gangmanstyle", "shinobi" ,"Noy" ,"Behemoth", "Quatarian" ,"Ol G", "Cindy","Bobby","Obama", "OsamabennBombin"];
-var enemyBids = []; 
+var bidders = ["Sparkles ", "hotdog " ,"gangmanstyle ", "shinobi " ,"Noy " ,"Behemoth ", "Quatarian " ,"Ol G ", "Cindy ","Bobby ","Obama ", "OsamaBinBombin ","Ortega Mammon ","LOD Alexander ","Meatwad ","Candela","Oprah ","Jerry Springer ","Sam Jaxon ",
+"Moody Blue ","Shitake Shroom ","Macabre ","Sancho Pancho ","Quijote ","Leo ","Centurion ","Omega Pepper ","Osiris Moon ","Sass McFrass ","Smiley ","Budapest Guy ","Larry Queen ","Special Head ","Primitivo Montoya ","The Skywalker ","Sam Squirrel ","Dante ","Sparkles King ","Onion Knight "];
+var enemyBids = [1,2,3,4,5,6]; 
 
 //AuctionMode Game HUD bool 
 var inAuctionMode = false;
@@ -82,12 +104,11 @@ function rand(low, high)
   return Math.floor( Math.random() * (high - low + 1) + low );
 }
 
-/**
- * Bound a number between range
- * @param {integer} num - Number to bound
- * @param {integer}
- * @param {integer}
- */
+//Bound a number between range
+//datatype{integer} num - Number to bound
+//datatype {integer}
+//datatype {integer}
+
 function bound(num, low, high) 
 {
   return Math.max( Math.min(num, high), low);
@@ -99,12 +120,8 @@ var assetLoader = (function()
   // images dictionary
   this.images        = 
   {
- 	 //inventory background
-    'bg'             : 'images/inventoryMenu.png',
-   	 //player
+ 	  //player
      'avatar_normal'  : 'images/normal_walk.png',
-     //enemies
-     'slime'         : 'images/slime.png',
      
    };
 
@@ -121,10 +138,9 @@ var assetLoader = (function()
   var numSounds    = Object.keys(this.sounds).length;  // total number of sound assets
   this.totalAssest = numImages;                          // total number of assets
 
-  
    //Ensure all assets are loaded before using them
-   // @param {number} dic  - Dictionary name ('images', 'sounds', 'fonts')
-   // @param {number} name - Asset name in the dictionary
+   // datatype {number} dic  - Dictionary name ('images', 'sounds', 'fonts')
+   // datatype {number} name - Asset name in the dictionary
   function assetLoaded(dic, name) 
   {
     // don't count assets that have already loaded
@@ -149,10 +165,9 @@ var assetLoader = (function()
     }
   }
 
-  /**
-   * Check the ready state of an Audio file.
-   * @param {object} sound - Name of the audio asset that was loaded.
-   */
+  //Check the ready state of an Audio file.
+  //datatype {object} sound - Name of the audio asset that was loaded.
+   
   function _checkAudioState(sound) 
   {
     if (this.sounds[sound].status === 'loading' && this.sounds[sound].readyState === 4) 
@@ -160,14 +175,14 @@ var assetLoader = (function()
       assetLoaded.call(this, 'sounds', sound);
     }
   }
-
+  
   //Create assets, set callback for asset loading, set asset source
   this.downloadAll = function() 
   {
     var _this = this;
     var src;
 
-    // load images
+    //Load images
     for (var image in this.images) 
     {
       if (this.images.hasOwnProperty(image)) 
@@ -185,7 +200,7 @@ var assetLoader = (function()
       }
     }
 
-    // load sounds
+    //Load sounds
     for (var sound in this.sounds) 
     {
       if (this.sounds.hasOwnProperty(sound)) 
@@ -217,11 +232,10 @@ var assetLoader = (function()
   };
 })();
 
-/**
- * Show asset loading progress
- * @param {integer} progress - Number of assets loaded
- * @param {integer} total - Total number of assets
- */
+
+//Show asset loading progress
+//@datatype {integer} progress - Number of assets loaded
+//@datatype {integer} total - Total number of assets
 assetLoader.progress = function(progress, total) 
 {
   var pBar = document.getElementById('progress-bar');
@@ -229,20 +243,40 @@ assetLoader.progress = function(progress, total)
   document.getElementById('p').innerHTML = Math.round(pBar.value * 100) + "%";
 }
 
-
 //Load the splash screen first
 assetLoader.finished = function() 
 {
   splash();
 }
 
+//Garage Doors	
+splashImage.onload = function()
+{
+	context.drawImage(splashImage, 0,0);
+};
+//Main Background of game
+backgroundImage.onload = function()
+{
+	context.drawImage(backgroundImage, 50, -10);
+}	
+	
+function garageDoor()
+{
+	backgroundY -= speed;
+	if(backgroundY == -1 * height)
+	{
+		//if we want the splash to keep repeating 
+		//backgroundY = 0;
+		//else backgroundY is animate off screen
+		backgroundY = -1000;
+		console.log("Moving on up bitches");
+	}
+}	
+//Creates a Spritesheet
+//datatype {string} - Path to the image.
+//datatype {number} - Width (in px) of each frame.
+//datatype {number} - Height (in px) of each frame.
 
-/**
- * Creates a Spritesheet
- * @param {string} - Path to the image.
- * @param {number} - Width (in px) of each frame.
- * @param {number} - Height (in px) of each frame.
- */
 function SpriteSheet(path, frameWidth, frameHeight) 
 {
   this.image = new Image();
@@ -259,13 +293,12 @@ function SpriteSheet(path, frameWidth, frameHeight)
   this.image.src = path;
 }
 
-/**
- * Creates an animation from a spritesheet.
- * @param {SpriteSheet} - The spritesheet used to create the animation.
- * @param {number}      - Number of frames to wait for before transitioning the animation.
- * @param {array}       - Range or sequence of frame numbers for the animation.
- * @param {boolean}     - Repeat the animation once completed.
- */
+//Creates an animation from a spritesheet.
+//datatype {SpriteSheet} - The spritesheet used to create the animation.
+//datatype {number}      - Number of frames to wait for before transitioning the animation.
+//datatype {array}       - Range or sequence of frame numbers for the animation.
+//datatype{boolean}     - Repeat the animation once completed.
+ 
 function Animation(spritesheet, frameSpeed, startFrame, endFrame) 
 {
 
@@ -277,24 +310,22 @@ function Animation(spritesheet, frameSpeed, startFrame, endFrame)
   for (var frameNumber = startFrame; frameNumber <= endFrame; frameNumber++)
     animationSequence.push(frameNumber);
 
-  
    // Update the animation
   this.update = function() 
   {
-
     // update to the next frame if it is time
     if (counter == (frameSpeed - 1))
       currentFrame = (currentFrame + 1) % animationSequence.length;
 
-    // update the counter
-    counter = (counter + 1) % frameSpeed;
+     // update the counter
+     counter = (counter + 1) % frameSpeed;
   };
 
-  /**
-   * Draw the current frame
-   * @param {integer} x - X position to draw
-   * @param {integer} y - Y position to draw
-   */
+
+// Draw the current frame
+// datatype {integer} x - X position to draw
+// datatype {integer} y - Y position to draw
+
   this.draw = function(x, y) 
   {
     // get the row and col of the frame
@@ -310,38 +341,12 @@ function Animation(spritesheet, frameSpeed, startFrame, endFrame)
   };
 }
 
-//Draw background
-var background = (function() 
-{
-
-   this.draw = function() 
-   {
-    context.drawImage(assetLoader.images.bg, 0, 0);
-    
-   };
-
-  //Reset background to zero
+ //A vector for 2d space.
  
-   this.reset = function() 
-   {
-     bg.x = 0;
-     bg.y = 0;
-   }
-     
-  return {
-    draw: this.draw,
-    reset: this.reset,
-   
-  };
-})();
-
-/**
- * A vector for 2d space.
- * @param {integer} x - Center x coordinate.
- * @param {integer} y - Center y coordinate.
- * @param {integer} dx - Change in x.
- * @param {integer} dy - Change in y.
- */
+// datatype {integer} x - Center x coordinate.
+// datatype {integer} y - Center y coordinate.
+// @datatype {integer} dx - Change in x.
+// datatype {integer} dy - Change in y.
 function Vector(x, y, dx, dy) 
 {
   // position
@@ -405,9 +410,7 @@ var Car = function(condition,originality)
     if(originality)
     this.originality = originality;
     
-
 };
-
 
 // The player object
 var player = (function(player) 
@@ -442,7 +445,6 @@ var player = (function(player)
     player.anim.draw(player.x, player.y);
   };
 
-  
   // Reset the player's position
   player.reset = function() 
   {
@@ -500,7 +502,6 @@ function updatePlayer()
 
 }
 //Request Animation Polyfill
-
 var requestAnimFrame = (function()
 {
   return  window.requestAnimationFrame       ||
@@ -513,28 +514,8 @@ var requestAnimFrame = (function()
           };
 })();
 
-// enemy avatar
-var slimer = new Image();
-slimer.src = 'images/slime.png';
 
-var curBidImage = new Image();
-curBidImage.src = 'images/slime2.png';
 //Sort Items arrays
-/*
-function shuffleArray(array) 
-{
-    for (var i = array.length - 1; i > 0; i--) 
-    {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-        break;
-    }
-    return array --;
-}
-*/
-
 function shuffleArray(array) 
 {
     var counter = array.length, temp, index;
@@ -552,13 +533,11 @@ function shuffleArray(array)
         temp = array[counter];
         array[counter] = array[index];
         array[index] = temp;
-        //break;
        
     }
 
     return array;
 }
-
 
 //Update the Game Loop
 function animate() 
@@ -568,11 +547,15 @@ function animate()
   {
     requestAnimFrame( animate );
     context.clearRect(0, 0, canvas.width, canvas.height);
-	
-    background.draw();
+	garageDoor();
+	//Order of draws matters
+    context.drawImage(backgroundImage, 0,-10);
+    context.drawImage(splashImage, 0, backgroundY);
+	//Game HUD
     document.getElementById('gameMenu').style.display = 'true';
 
   	update();
+  	
   	
    //	rand(bidders);
     if(timer >= 400.00)
@@ -584,15 +567,7 @@ function animate()
 	if(inAuctionMode)
 	{
 		auctionTimer ++;
-    	//rand(bidders);
-		enemyBids.push(1);
-		enemyBids.push(2);
-		enemyBids.push(3);
-		enemyBids.push(4);
-		enemyBids.push(5);
-		enemyBids.push(6);
-
-	
+    		
 /*
 		var bidderLength = bidders.length;
 		for (var i = 0; i < bidderLength-1 ; i++) 
@@ -602,7 +577,7 @@ function animate()
 		    bidders.push[i];
 		}
 		*/
-				// inherit the prototype from vehicle
+		// inherit the prototype from vehicle
 		Car.prototype = new Vehicle();  
 		// change some properties
 		Car.prototype.condition = 80;
@@ -613,11 +588,7 @@ function animate()
 		
 		var car = new Car(this.image,300,300);
 		car.displayInfo(  );
-		
-		 
-      
-  		
-		
+		//call bidder ai funcs
 		updatePlayer();
 		enemyBidding();
 		currentBidder();
@@ -631,7 +602,7 @@ function animate()
 	  	var player3;
 	  	var player4;
 	  	
-	  	 	//Player
+	  	//Player
 	  	if(( playerBid = currentBid)&& (playerDidBid))
 	  	{
 	  		player.y = 10;
@@ -646,8 +617,8 @@ function animate()
 			playerBid != currentBid;
 			
 		}
-
-	  	
+		//ENENMY HUD
+		
 	  	//Enemy 1
 		//draw them depending on current bid
 	  	if( enemyBids[0] >= currentBid)
@@ -690,7 +661,7 @@ function animate()
 		}
 	
 	   
-	      //current bid
+	    //current bid HUD
 	    var gorguts;
 	    gorguts = context.drawImage(curBidImage,380,100)+ context.fillText('Current Bid :  ' + '$'+ currentBid  ,400, 120);
 	    
@@ -713,6 +684,7 @@ function animate()
 //Show the splash after loading all assets 
 function splash() 
 {
+
   document.getElementById('splash');
   animate();
   $('#progress').hide();
@@ -749,6 +721,7 @@ function startGame()
   playerBid = 0;
   currentBid = 0;
   
+  
   context.font = '26px arial, sans-serif';
   // Create gradient
   var gradient=context.createLinearGradient(36,40,600,1);
@@ -758,17 +731,14 @@ function startGame()
   // Fill with gradient
   context.fillStyle=gradient;
  
-  //enemies = [];
-
   animate();
  
   update();
-
+  
   assetLoader.sounds.gameOver.pause();
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
-  //load auction button
       
 }
 function resetStates()
@@ -788,6 +758,7 @@ function repairState()
 }
 function addFundsMode()
 {
+	
   document.getElementById('AddFunds').style.display = 'true';
   inAddFundsMode = true;
 }
@@ -813,9 +784,6 @@ function auctionMode()
    auctionMode.update = function() 
    {
      playerBidding();
-   
-  	 console.log("shitmapantsman")
-     
    }
   
   $('#Auction').show();
@@ -823,7 +791,6 @@ function auctionMode()
   $('#menu').addClass('Auction');
   $('.sound').show();
 
-  
   assetLoader.sounds.gameOver.pause();
   assetLoader.sounds.bg.currentTime = 0;
   assetLoader.sounds.bg.loop = true;
@@ -845,7 +812,9 @@ function playerBidding()
 	}
 	else
 	{
-	 playerDidBid = false;
+	//cant bid above your cash 
+	//call a new function to alert player hes &$#k up
+	 gameOver();
 	}
 	//Wins BId	
 	if((enemyBids[0] = 0)&&(enemyBids[1] = 0)&&(enemyBid[2] = 0)&&(enemyBid[3] = 0)&& (money >= currentBid))
@@ -875,7 +844,6 @@ function currentBidder()
 	{
 	  bidFinder();
 	}
-	
 	
 }
 
@@ -941,8 +909,6 @@ function enemyBidding()
 		money = money - currentBid;
 	}
 
-	
-	
 }
 
 
