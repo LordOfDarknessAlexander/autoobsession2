@@ -52,8 +52,8 @@ var vehiclePrice = 20000;
 var enemyCap = 0.8 * vehiclePrice;
 var enemyCap2 = 0.6 * vehiclePrice;
 var enemyCap3 = 1.2 * vehiclePrice;
-var enemyCap4 = 0.2 * vehiclePrice;
-var enemyCap5 = 0.5 * vehiclePrice;
+var enemyCap4 = 1.9 * vehiclePrice;
+var enemyCap5 = 1.6 * vehiclePrice;
 
 //DT
 var timer = 0;
@@ -533,7 +533,7 @@ function shuffleArray(array)
         array[j] = temp;
         break;
     }
-    return array;
+    return array --;
 }
 */
 
@@ -557,9 +557,8 @@ function shuffleArray(array)
         break;
     }
 
-    return array;
+    return array--;
 }
-
 
 
 //Update the Game Loop
@@ -597,7 +596,7 @@ function animate()
 	
 /*
 		var bidderLength = bidders.length;
-		for (var i = 0; i < bidderLength; i++) 
+		for (var i = 0; i < bidderLength-1 ; i++) 
 		{
 		  //  alert(bidders[i]);
 		    //Do something
@@ -617,7 +616,8 @@ function animate()
 		car.displayInfo(  );
 		
 		 
-        shuffleArray(enemyBids);
+      
+  
 		
 		updatePlayer();
 		enemyBidding();
@@ -642,6 +642,12 @@ function animate()
 	  	  player.y = 150;
 	  	}
 	  	
+	  	if((playerBid = enemyBids[0]) || (playerBid = enemyBids[1]) || (playerBid = enemyBids[2]) || (playerBid = enemyBids[3]))
+		{
+			playerBid != currentBid;
+			
+		}
+
 	  
 	  	//Enemy 1
 		//draw them depending on current bid
@@ -771,10 +777,7 @@ function resetStates()
 	inRepairMode = false;
 	inAuctionMode = false;
 	inAddFundsMode = false;
-	shuffleArray(bidders);
-    shuffleArray(enemyBids);
-
-	
+		
 }
 
 //Repair State
@@ -811,9 +814,7 @@ function auctionMode()
    {
      playerBidding();
 	 shuffleArray(bidders);
-     shuffleArray(enemyBids);
-
-     
+    
    }
   
   $('#Auction').show();
@@ -841,7 +842,11 @@ function playerBidding()
 	{
 		playerDidBid = true;
 	}
-		
+	else
+	{
+	 playerDidBid = false;
+	}
+	//Wins BId	
 	if((enemyBids[0] = 0)&&(enemyBids[1] = 0)&&(enemyBid[2] = 0)&&(enemyBid[3] = 0)&& (money >= currentBid))
 	{
 	  money = money - currentBid;
@@ -889,13 +894,6 @@ function bidFinder()
 	{
 		currentBid = enemyBids[3];
 	}
-	/*
-	else if((enemyBids[4] > enemyBids[0]) && (enemyBids[4] > enemyBids[1]) && (enemyBids[4] > enemyBids[2]) && (enemyBids[4] > enemyBids[4]))
-	{
-		currentBid = enemyBids[4];
-	}
-
-*/
 }
 function enemyBidding() 
 {
@@ -909,41 +907,39 @@ function enemyBidding()
 	
 	var startBid = vehiclePrice * 0.2;
 	var upPerc = startBid ;
-	
-	if( (playerDidBid) )
+	if((playerBid <= money) && (playerDidBid))
 	{
-		if((playerBid <= money) && (playerDidBid) )
+		if((enemyBids[0] < enemyCap) )
 		{
-			if((enemyBids[0] <= playerBid) && (enemyBids[0] < enemyCap) )
-			{
-			  enemyBids[0]  = currentBid + upPerc;
-			}
-			else if((enemyBids[1] < enemyBids[0]) && (enemyBids[1] < enemyCap2))
-			{
-			    enemyBids[1] = currentBid + upPerc;
-			}
-			else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3) )
-			{
-			    enemyBids[2] = currentBid + upPerc;
-			}
-			else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4))
-			{
-			    enemyBids[3] = currentBid + upPerc;
-			}
-			else if((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5))
-			{
-			    enemyBids[4] = currentBid + upPerc;
-			}
+		  enemyBids[0]  = currentBid + upPerc;
+		}
+		else if((enemyBids[1] < enemyBids[0]) && (enemyBids[1] < enemyCap2))
+		{
+		    enemyBids[1] = currentBid + upPerc;
+		}
+		else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3) )
+		{
+		    enemyBids[2] = currentBid + upPerc;
+		}
+		else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4))
+		{
+		    enemyBids[3] = currentBid + upPerc;
+		}
+		else if((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5))
+		{
+		    enemyBids[4] = currentBid + upPerc;
+		}
 
-					
-		}
-		else if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]) &&(playerBid >enemyBids[4]))
-		{
-			sold();
-			money = money - currentBid;
-		}
-	
+				
 	}
+	else if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
+	{
+		sold();
+		money = money - currentBid;
+	}
+
+	
+	
 }
 
 
@@ -1030,6 +1026,7 @@ $('#auctionBackButton').click(function()
 $('#bid').click(function()
 {
   playerBidding();
+  playerDidBid = true;
 });
 
 //Repair to menu Repair
