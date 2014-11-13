@@ -35,7 +35,7 @@ var addFundsButton = {};
 var addFundsBackButoon = {};
 //AI
 //Create an empty array of Bidders
-var bidders = ["Sparkles", "hotdog" ,"gangmanstyle", "shinobi" ,"Noy" ,"Behemoth", "Quatarian" ,"Ol G", "Cindy","Bobby","GassyGirl69","Obama", "OsamabennBombin"];
+var bidders = ["Sparkles", "hotdog" ,"gangmanstyle", "shinobi" ,"Noy" ,"Behemoth", "Quatarian" ,"Ol G", "Cindy","Bobby","Obama", "OsamabennBombin"];
 var enemyBids = []; 
 
 //AuctionMode Game HUD bool 
@@ -51,9 +51,9 @@ var currentBid = 0;
 var vehiclePrice = 20000;
 var enemyCap = 0.8 * vehiclePrice;
 var enemyCap2 = 0.6 * vehiclePrice;
-var enemyCap3 = 1.2 * vehiclePrice;
-var enemyCap4 = 1.9 * vehiclePrice;
-var enemyCap5 = 1.6 * vehiclePrice;
+var enemyCap3 = 0.2 * vehiclePrice;
+var enemyCap4 = 0.5 * vehiclePrice;
+var enemyCap5 = 1.2 * vehiclePrice;
 
 //DT
 var timer = 0;
@@ -209,8 +209,6 @@ var assetLoader = (function()
     }
   }
   
- 
-
   return {
     images: this.images,
     sounds: this.sounds,
@@ -554,10 +552,11 @@ function shuffleArray(array)
         temp = array[counter];
         array[counter] = array[index];
         array[index] = temp;
-        break;
+        //break;
+       
     }
 
-    return array--;
+    return array;
 }
 
 
@@ -617,7 +616,7 @@ function animate()
 		
 		 
       
-  
+  		
 		
 		updatePlayer();
 		enemyBidding();
@@ -648,7 +647,7 @@ function animate()
 			
 		}
 
-	  
+	  	
 	  	//Enemy 1
 		//draw them depending on current bid
 	  	if( enemyBids[0] >= currentBid)
@@ -805,7 +804,8 @@ function auctionMode()
    money = 50000;
    playerBid = 0;
  	
-   
+   shuffleArray(enemyBids);
+   shuffleArray(bidders);
    context.font = '26px arial, sans-serif';
    update();
    animate();
@@ -813,8 +813,9 @@ function auctionMode()
    auctionMode.update = function() 
    {
      playerBidding();
-	 shuffleArray(bidders);
-    
+   
+  	 console.log("shitmapantsman")
+     
    }
   
   $('#Auction').show();
@@ -869,10 +870,12 @@ function currentBidder()
 	}
 	
 	//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
+	
 	else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
 	{
 	  bidFinder();
 	}
+	
 	
 }
 
@@ -907,13 +910,13 @@ function enemyBidding()
 	
 	var startBid = vehiclePrice * 0.2;
 	var upPerc = startBid ;
-	if((playerBid <= money) && (playerDidBid))
+	if((auctionTimer <= 10000) && (playerDidBid) )
 	{
-		if((enemyBids[0] < enemyCap) )
+		if((enemyBids[0] < currentBid) && (enemyBids[0] < enemyCap))
 		{
 		  enemyBids[0]  = currentBid + upPerc;
 		}
-		else if((enemyBids[1] < enemyBids[0]) && (enemyBids[1] < enemyCap2))
+		else if((enemyBids[1] < currentBid) && (enemyBids[1] < enemyCap2))
 		{
 		    enemyBids[1] = currentBid + upPerc;
 		}
@@ -925,7 +928,7 @@ function enemyBidding()
 		{
 		    enemyBids[3] = currentBid + upPerc;
 		}
-		else if((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5))
+		else ((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5))
 		{
 		    enemyBids[4] = currentBid + upPerc;
 		}
