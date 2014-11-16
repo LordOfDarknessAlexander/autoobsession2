@@ -24,6 +24,7 @@ var ENEMY_X = 80;
 var VEHICLE_XPOS = 660;
 var VEHICLE_YPOS = 850;
 
+
 //background images
 //garage doors
 var splashImage = new Image();
@@ -34,7 +35,7 @@ backgroundImage.src = "images/inventoryMenu.png";
 
 //Menu velocity 
 var backgroundY = 0;
-var speed = 0.5;
+var speed = 0.3;
 //Enemy Avatars
 //Sad enemy avatars
 var slimer = new Image();
@@ -71,11 +72,13 @@ var playerBid = 0;
 var bidAmount = 200;
 var currentBid = 0;
 var vehiclePrice = 20000;
-var enemyCap = 0.8 * vehiclePrice;
-var enemyCap2 = 0.6 * vehiclePrice;
-var enemyCap3 = 0.2 * vehiclePrice;
-var enemyCap4 = 0.5 * vehiclePrice;
-var enemyCap5 = 1.2 * vehiclePrice;
+var enemyCap = 1.25 * vehiclePrice;
+var enemyCap2 = 0.8 * vehiclePrice;
+var enemyCap3 = 0.7 * vehiclePrice;
+var enemyCap4 = 0.2 * vehiclePrice;
+//AI cooldown timer
+var bidderCooldown = 0;
+var playerCanBid = false;
 
 //DT
 var timer = 0;
@@ -592,6 +595,11 @@ function animate()
 		updatePlayer();
 		enemyBidding();
 		currentBidder();
+		if(playerDidBid)
+		{
+			bidderCooldown ++;
+			enemyCanBid = false;
+		}
 	    // draw the money HUD
 	    context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 90);
 	    //player bid
@@ -601,9 +609,14 @@ function animate()
 	  	var player2;
 	  	var player3;
 	  	var player4;
+	  	if(	bidderCooldown >= 1500)
+	  	{
 	  	
-	  	//Player
-	  	if(( playerBid = currentBid)&& (playerDidBid))
+	  		enemyCanBid = true;
+	  		bidderCooldown = 0;
+	  	}
+	  		  	//Player
+	  	if(( playerBid == currentBid)&& (playerDidBid))
 	  	{
 	  		player.y = 10;
 	  	}
@@ -612,7 +625,7 @@ function animate()
 	  	  player.y = 150;
 	  	}
 	  	
-	  	if((playerBid = enemyBids[0]) || (playerBid = enemyBids[1]) || (playerBid = enemyBids[2]) || (playerBid = enemyBids[3]))
+	  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
 		{
 			playerBid != currentBid;
 			
@@ -719,9 +732,10 @@ function startGame()
   stop = false;
   money = 50000;
   playerBid = 0;
-  currentBid = 0;
+  //currentBid = 0;
   
-  
+
+
   context.font = '26px arial, sans-serif';
   // Create gradient
   var gradient=context.createLinearGradient(36,40,600,1);
@@ -746,6 +760,7 @@ function resetStates()
 	inRepairMode = false;
 	inAuctionMode = false;
 	inAddFundsMode = false;
+	
 		
 }
 
@@ -798,17 +813,25 @@ function auctionMode()
 }
 var playerDidBid = false;
 var auctionTimer = 0;
-var playerNextBid = vehiclePrice * 0.1;
 
+var playerNextBid = vehiclePrice * 0.1;
 //Player Bidding Function
 function playerBidding() 
 { 
+	//player Cooldown button
+	if(	bidderCooldown >= 800)
+	  	{
+	  		playerBid = currentBid + playerNextBid;
+	  		playerCanBid = true;
+	  		bidderCooldown = 0;
+	  	}
+
 	
-	playerBid = currentBid + playerNextBid;
 	
 	if(playerBid <= money)
 	{
 		playerDidBid = true;
+	
 	}
 	else
 	{
@@ -817,7 +840,7 @@ function playerBidding()
 	 gameOver();
 	}
 	//Wins BId	
-	if((enemyBids[0] = 0)&&(enemyBids[1] = 0)&&(enemyBid[2] = 0)&&(enemyBid[3] = 0)&& (money >= currentBid))
+	if((enemyBids[0] == 0)&&(enemyBids[1] == 0)&&(enemyBid[2] == 0)&&(enemyBid[3] == 0)&& (money >= currentBid))
 	{
 	  money = money - currentBid;
 	}
@@ -866,40 +889,42 @@ function bidFinder()
 		currentBid = enemyBids[3];
 	}
 }
+var enemyCanBid = false;
 function enemyBidding() 
 {
 	
 	if(auctionTimer > 10000)
 	{
-		gameOver();
+		//gameOver();
 	}
 	//upPercentage of vehicle for next bid
-	//var upPerc = vehiclePrice * 0.1 + currentBid;
+	var upPerc =  0.1 * currentBid;
 	
-	var startBid = vehiclePrice * 0.2;
-	var upPerc = startBid ;
-	if((auctionTimer <= 10000) && (playerDidBid) )
+	var startBid = vehiclePrice * 0.02;
+	//var upPerc = startBid ;
+	if( (playerDidBid) )
 	{
-		if((enemyBids[0] < currentBid) && (enemyBids[0] < enemyCap))
+		if((enemyBids[0] < currentBid) && (enemyBids[0] < enemyCap)&&(enemyCanBid))
 		{
 		  enemyBids[0]  = currentBid + upPerc;
+		  
 		}
-		else if((enemyBids[1] < currentBid) && (enemyBids[1] < enemyCap2))
+		else if((enemyBids[1] < currentBid) && (enemyBids[1] < enemyCap2)&&(enemyCanBid))
 		{
 		    enemyBids[1] = currentBid + upPerc;
 		}
-		else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3) )
+		else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3)&&(enemyCanBid))
 		{
 		    enemyBids[2] = currentBid + upPerc;
 		}
-		else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4))
+		else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4)&&(enemyCanBid))
 		{
 		    enemyBids[3] = currentBid + upPerc;
-		}
-		else ((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5))
+		}/*
+		else if((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5)&&(enemyCanBid))
 		{
 		    enemyBids[4] = currentBid + upPerc;
-		}
+		}*/
 
 				
 	}
@@ -908,6 +933,7 @@ function enemyBidding()
 		sold();
 		money = money - currentBid;
 	}
+	//hacks
 
 }
 
@@ -916,10 +942,12 @@ function enemyBidding()
 function gameOver() 
 {
   document.getElementById('game-over').style.display = 'true';
-  stop = true;
+  resetStates();
+  //stop = true;
+  //Show a message that player has insufficient funds
   $('#money').html(money);
   $('#game-over').show();
-  assetLoader.sounds.bg.pause();
+ // assetLoader.sounds.bg.pause();
   assetLoader.sounds.gameOver.currentTime = 0;
   assetLoader.sounds.gameOver.play();
 }
