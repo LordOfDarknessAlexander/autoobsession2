@@ -14,6 +14,8 @@ var splashTimer = 600.00;
 //InMenu UI Constansts
 var standWidth = 100;
 var buttonsPlaceY = 200;
+//Enemy Bid Timer check
+var BID_THRESHOLD = 4000;
 //Player Pos
 var PLAYER_XPOS = 50;
 var PLAYER_YPOS = 50;
@@ -23,8 +25,7 @@ var BIDDER_YPOS = 250;
 var ENEMY_X = 80;
 var VEHICLE_XPOS = 660;
 var VEHICLE_YPOS = 850;
-
-
+ 
 //background images
 //garage doors
 var splashImage = new Image();
@@ -79,6 +80,23 @@ var enemyCap4 = 0.2 * vehiclePrice;
 //AI cooldown timer
 var bidderCooldown = 0;
 var playerCanBid = false;
+var currentBid = 0;
+var endBidTimer = 0;
+var endBidTimer2 = 0;
+var endBidTimer3 = 0;
+var endBidTimer4 = 0;
+var playerDidBid = false;
+var auctionTimer = 0;
+var playerNextBid = vehiclePrice * 0.1;
+
+//BidTImers Booleans
+var startEndBid = false;
+var startEndBid2 = false;
+var startEndBid3 = false;
+var startEndBid4 = false;
+var startPlayerEndBid = false;
+var playerEndBidTimer = 0;
+
 
 //DT
 var timer = 0;
@@ -268,11 +286,8 @@ function garageDoor()
 	backgroundY -= speed;
 	if(backgroundY == -1 * height)
 	{
-		//if we want the splash to keep repeating 
-		//backgroundY = 0;
-		//else backgroundY is animate off screen
 		backgroundY = -1000;
-		console.log("Moving on up bitches");
+
 	}
 }	
 //Creates a Spritesheet
@@ -541,6 +556,49 @@ function shuffleArray(array)
 
     return array;
 }
+function bidTimers()
+{
+	if(startEndBid)
+	{ 
+		endBidTimer ++;
+	}
+	else
+	{
+		endBidTimer = 0;
+	}
+	if(startEndBid2)
+	{ 
+		endBidTimer2 ++;
+	}
+	else
+	{
+		endBidTimer2 = 0;
+	}
+	if(startEndBid3)
+	{ 
+		endBidTimer3 ++;
+	}
+	else
+	{
+		endBidTimer3 = 0;
+	}
+	if(startEndBid4)
+	{ 
+		endBidTimer4 ++;
+	}
+	else
+	{
+		endBidTimer4 = 0;
+	}
+	if(startPlayerEndBid)
+	{
+		playerEndBidTimer ++;
+	}
+	else
+	{
+		playerEndBidTimer = 0;
+	}	
+}
 
 //Update the Game Loop
 function animate() 
@@ -559,7 +617,7 @@ function animate()
 
   	update();
   	
-  	
+  
    //	rand(bidders);
     if(timer >= 400.00)
 	{
@@ -570,16 +628,9 @@ function animate()
 	if(inAuctionMode)
 	{
 		auctionTimer ++;
-    		
-/*
-		var bidderLength = bidders.length;
-		for (var i = 0; i < bidderLength-1 ; i++) 
-		{
-		  //  alert(bidders[i]);
-		    //Do something
-		    bidders.push[i];
-		}
-		*/
+		
+    	bidTimers();
+	
 		// inherit the prototype from vehicle
 		Car.prototype = new Vehicle();  
 		// change some properties
@@ -599,12 +650,9 @@ function animate()
 		{
 			bidderCooldown ++;
 			enemyCanBid = false;
+			
 		}
-	    // draw the money HUD
-	    context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 90);
-	    //player bid
-	    context.fillText('Player Bid :  '   +'$'+ playerBid  ,ENEMY_X, 90);
-		
+	  
 		var player1;
 	  	var player2;
 	  	var player3;
@@ -614,15 +662,18 @@ function animate()
 	  	
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
+	  		
 	  	}
-	  		  	//Player
+	    //Player
 	  	if(( playerBid == currentBid)&& (playerDidBid))
 	  	{
 	  		player.y = 10;
+	  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
 	  	}
 	  	else
 	  	{
 	  	  player.y = 150;
+	  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
 	  	}
 	  	
 	  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
@@ -630,58 +681,76 @@ function animate()
 			playerBid != currentBid;
 			
 		}
+		findEndBidder();
+
 		//ENENMY HUD
 		
 	  	//Enemy 1
 		//draw them depending on current bid
 	  	if( enemyBids[0] >= currentBid)
 	  	{
-	  		player1 = context.drawImage(curBidImage,10,10) + context.fillText( bidders[0] + '$'+ enemyBids[0]  ,ENEMY_X , 70);
-	  		
+	  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2)  ,ENEMY_X , 70);
+	  		  		
 	  	}
 	  	else
 	  	{
-	  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0]  ,ENEMY_X, 120);
-	  		
+	  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2)  ,ENEMY_X, 120);
+	  	  	
 	  	}
 	    //Enemy 2
 	  	if( enemyBids[1] >= currentBid)
 	  	{
-	  		player2 = context.drawImage(curBidImage,10,10) + context.fillText( bidders[1] + '$'+ enemyBids[1]  ,ENEMY_X , 70);
-
+	  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2)  ,ENEMY_X , 70);
+	  		
 	  	}
 	  	else
 	  	{
-	  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1]  ,ENEMY_X, 160);
+	  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2)  ,ENEMY_X, 160);
+	  		
 	  	}
 	  	//Enemy3
 	  	if( enemyBids[2] >= currentBid)
 	  	{
-	  	    player3 = context.drawImage(curBidImage,10,10) + context.fillText( bidders[2] + '$'+ enemyBids[2]  ,ENEMY_X , 70);
+	  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2)  ,ENEMY_X , 70);
+	  	 	
 	  	}
 	  	else
 	  	{
-	  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2]  ,ENEMY_X, 180);
+	  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2)  ,ENEMY_X, 180);
+	  		 
 	  	}
 	  	//Enemy4
 	  	if( enemyBids[3] >= currentBid)
 	  	{
-	  	    player4 = context.drawImage(curBidImage,10,10) + context.fillText( bidders[3] + '$'+ enemyBids[3]  ,ENEMY_X , 70);
+	  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2)  ,ENEMY_X , 70);
+	  	 	
+
 	  	}
 		else
 		{
-			player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3]  ,ENEMY_X, 200);
+			player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2)  ,ENEMY_X, 200);
+			
 		}
-	
+
 	   
 	    //current bid HUD
 	    var gorguts;
-	    gorguts = context.drawImage(curBidImage,380,100)+ context.fillText('Current Bid :  ' + '$'+ currentBid  ,400, 120);
+	    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
 	    
 		    //current bid
-	    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice  ,400, 90);
+	    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
 	    
 	    context.fillText('Auction Time :  ' + auctionTimer  ,200, 400);
+	      // draw the money HUD
+	    context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 66);
+	    //player bid
+	    
+	    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimer  ,200, 460);
+	    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimer2  ,200, 480);
+	    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimer3  ,200, 500);
+	    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimer4  ,200, 520);
+	    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
+
 	    
 	}
 	else
@@ -732,21 +801,17 @@ function startGame()
   stop = false;
   money = 50000;
   playerBid = 0;
-  //currentBid = 0;
   
-
-
   context.font = '26px arial, sans-serif';
   // Create gradient
   var gradient=context.createLinearGradient(36,40,600,1);
   gradient.addColorStop("0","magenta");
   gradient.addColorStop("0.5","blue");
-  gradient.addColorStop("1.0","red");
+  gradient.addColorStop("1.0","green");
   // Fill with gradient
-  context.fillStyle=gradient;
+  context.fillStyle = gradient;
  
   animate();
- 
   update();
   
   assetLoader.sounds.gameOver.pause();
@@ -760,8 +825,6 @@ function resetStates()
 	inRepairMode = false;
 	inAuctionMode = false;
 	inAddFundsMode = false;
-	
-		
 }
 
 //Repair State
@@ -795,7 +858,8 @@ function auctionMode()
    context.font = '26px arial, sans-serif';
    update();
    animate();
-  
+      
+   console.log(endBidTimer);
    auctionMode.update = function() 
    {
      playerBidding();
@@ -811,22 +875,23 @@ function auctionMode()
   assetLoader.sounds.bg.loop = true;
   assetLoader.sounds.bg.play();
 }
-var playerDidBid = false;
-var auctionTimer = 0;
-
-var playerNextBid = vehiclePrice * 0.1;
 //Player Bidding Function
+
 function playerBidding() 
 { 
 	//player Cooldown button
 	if(	bidderCooldown >= 800)
-	  	{
-	  		playerBid = currentBid + playerNextBid;
-	  		playerCanBid = true;
-	  		bidderCooldown = 0;
-	  	}
-
-	
+	{
+  		playerBid = currentBid + playerNextBid;
+  		playerCanBid = true;
+  		bidderCooldown = 0;
+  		startEndBid = false;
+		startEndBid2 = false;
+		startEndBid3 = false;
+		startEndBid4 = false;
+		startPlayerEndBid = true;
+	  		
+	}
 	
 	if(playerBid <= money)
 	{
@@ -838,6 +903,8 @@ function playerBidding()
 	//cant bid above your cash 
 	//call a new function to alert player hes &$#k up
 	 gameOver();
+	 
+	 startPlayerEndBid = false;
 	}
 	//Wins BId	
 	if((enemyBids[0] == 0)&&(enemyBids[1] == 0)&&(enemyBid[2] == 0)&&(enemyBid[3] == 0)&& (money >= currentBid))
@@ -852,51 +919,70 @@ function playerBidding()
 	}
 }
 //Player Bidding Function
-var currentBid = 0;
 function currentBidder()
 {
 	//Player has the current bid
 	if((playerBid > enemyBids[0])&&(playerBid > enemyBids[1])&&(playerBid > enemyBids[2])&&(playerBid > enemyBids[3]))
 	{
 	   currentBid = playerBid;
+	   
 	}
-	
 	//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
 	
 	else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
 	{
 	  bidFinder();
+	  
 	}
 	
 }
 
 function bidFinder()
 {
-	if((enemyBids[0] > enemyBids[1]) && (enemyBids[0] > enemyBids[2]) && (enemyBids[0] > enemyBids[3]) )
+	if((enemyBids[0] > enemyBids[1]) && (enemyBids[0] > enemyBids[2]) && (enemyBids[0] > enemyBids[3]))
 	{
-		currentBid = enemyBids[0]; 
+		currentBid = enemyBids[0];
+		startEndBid = true;
+		startEndBid2 = false;
+		startEndBid3 = false;
+		startEndBid4 = false;
+		startPlayerEndBid = false;
+		 
 	}
-	else if((enemyBids[1] > enemyBids[0]) && (enemyBids[1] > enemyBids[2]) && (enemyBids[1] > enemyBids[3]) )
+	else if((enemyBids[1] > enemyBids[0]) && (enemyBids[1] > enemyBids[2]) && (enemyBids[1] > enemyBids[3]))
 	{
 		currentBid = enemyBids[1];
+		startEndBid = false;
+		startEndBid2 = true;
+		startEndBid3 = false;
+		startEndBid4 = false;
+		startPlayerEndBid = false;
+
 	}
 	else if((enemyBids[2] > enemyBids[0]) && (enemyBids[2] > enemyBids[1]) && (enemyBids[2] > enemyBids[3]))
 	{
 		currentBid = enemyBids[2];
+		startEndBid = false;
+		startEndBid2 = false;
+		startEndBid3 = true;
+		startEndBid4 = false;
+		startPlayerEndBid = false;
+
 	}
 	else if((enemyBids[3] > enemyBids[0]) && (enemyBids[3] > enemyBids[1]) && (enemyBids[3] > enemyBids[2]))
 	{
 		currentBid = enemyBids[3];
+		startEndBid = false;
+		startEndBid2 = false;
+		startEndBid3 = false;
+		startEndBid4 = true;
+		startPlayerEndBid = false;
 	}
 }
 var enemyCanBid = false;
 function enemyBidding() 
 {
 	
-	if(auctionTimer > 10000)
-	{
-		//gameOver();
-	}
 	//upPercentage of vehicle for next bid
 	var upPerc =  0.1 * currentBid;
 	
@@ -912,32 +998,53 @@ function enemyBidding()
 		else if((enemyBids[1] < currentBid) && (enemyBids[1] < enemyCap2)&&(enemyCanBid))
 		{
 		    enemyBids[1] = currentBid + upPerc;
+		    
 		}
 		else if((enemyBids[2] < currentBid) && (enemyBids[2] < enemyCap3)&&(enemyCanBid))
 		{
 		    enemyBids[2] = currentBid + upPerc;
+		    
 		}
 		else if((enemyBids[3] < currentBid) && (enemyBids[3] < enemyCap4)&&(enemyCanBid))
 		{
 		    enemyBids[3] = currentBid + upPerc;
-		}/*
-		else if((enemyBids[4] < currentBid) && (enemyBids[4] < enemyCap5)&&(enemyCanBid))
-		{
-		    enemyBids[4] = currentBid + upPerc;
-		}*/
-
-				
+		    
+		}
+					
 	}
 	else if((playerBid >enemyBids[0]) && (playerBid >enemyBids[1]) && (playerBid >enemyBids[2]) &&(playerBid >enemyBids[3]))
 	{
 		sold();
 		money = money - currentBid;
 	}
-	//hacks
+	
 
 }
 
-
+function findEndBidder()
+{
+	if((currentBid == enemyBids[0]) && (endBidTimer >= BID_THRESHOLD))
+	{
+		gameOver();
+	   //alert("Sold to " + bidders[0]);
+		
+	}
+	else if((currentBid == enemyBids[1]) && (endBidTimer2 >= BID_THRESHOLD))
+	{
+		gameOver();
+		 //alert("Sold to " + bidders[1]);
+	}
+	else if ((currentBid == enemyBids[2]) && (endBidTimer3 >= BID_THRESHOLD))
+	{
+		gameOver();
+		 //alert("Sold to " + bidders[2]);
+	}
+	else if((currentBid == enemyBids[3]) && (endBidTimer4 >= BID_THRESHOLD))
+	{
+		gameOver();
+		// alert("Sold to " + bidders[3]);
+	}
+}
 //End the game and restart
 function gameOver() 
 {
