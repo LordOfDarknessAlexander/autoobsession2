@@ -6,8 +6,6 @@ var context = canvas.getContext('2d');
 var width = canvas.getAttribute('width');
 var height = canvas.getAttribute('height');
 var player, money, stop, ticker;
-//vehicle class
-var vehicle = [];
 var canUseLocalStorage = 'localStorage' in window && window.localStorage !== null;
 var playSound;
 var splashTimer = 600.00;
@@ -76,7 +74,7 @@ var vehiclePrice = 20000;
 var enemyCap = 1.25 * vehiclePrice;
 var enemyCap2 = 0.8 * vehiclePrice;
 var enemyCap3 = 0.7 * vehiclePrice;
-var enemyCap4 = 0.2 * vehiclePrice;
+var enemyCap4 = 0.9 * vehiclePrice;
 //AI cooldown timer
 var bidderCooldown = 0;
 var playerCanBid = false;
@@ -96,7 +94,6 @@ var startEndBid3 = false;
 var startEndBid4 = false;
 var startPlayerEndBid = false;
 var playerEndBidTimer = 0;
-
 
 //DT
 var timer = 0;
@@ -287,7 +284,6 @@ function garageDoor()
 	if(backgroundY == -1 * height)
 	{
 		backgroundY = -1000;
-
 	}
 }	
 //Creates a Spritesheet
@@ -383,52 +379,7 @@ Vector.prototype.advance = function()
   this.y += this.dy;
 };
 
-var image = new Image();
-image.src = 'images/vehicle.jpg';
-
-//vehicle attributes
-//price, originality, condition, name;
-// create a 'class' Vehicle
-var Vehicle = function() 
-{
-  Vector.call(Vehicle,  VEHICLE_XPOS,  VEHICLE_YPOS, Vehicle.dx, Vehicle.dy);
-  
-
-};
-
-Vehicle.prototype.price = 0;
-Vehicle.prototype.condition = 0;
-Vehicle.prototype.originality = 0;
-Vehicle.prototype.name = "";
-Vehicle.prototype.image = new Image(image);
-Vehicle.prototype.displayInfo = function() 
-{ 
-	 //this.image.src = 'images/vehicle.jpg';
-     //alert("hello, I have " + this.price + " price and a condition of " + this.condition + "shit for originality by this much" + this.originality + "my name is " + this.name + this.image);
-     
-     context.fillText( this.name  ,VEHICLE_XPOS + 40, 120);
-     context.fillText( "Value"+ this.price  ,VEHICLE_XPOS + 40, 140);
-     context.fillText( "Orig" + this.originality  ,VEHICLE_XPOS + 40, 160);
-     context.fillText( "Condition"+ this.condition  ,VEHICLE_XPOS + 40, 180);
-     Vehicle.draw = function() 
-     {
-     	context.drawImage(this.image,VEHICLE_XPOS,VEHICLE_YPOS);
-     }
-};
-
-var vehicleInstance = new Vehicle();
-vehicleInstance.displayInfo(); // displays: Hello, I have 0 price and max speed of 0
-
-// create a 'class' Car using the prototype from Vehicle 
-// and change some properties.
-var Car = function(condition,originality) 
-{ 
-	if(condition)
-    this.condition = condition;
-    if(originality)
-    this.originality = originality;
-    
-};
+//Vehicles
 
 // The player object
 var player = (function(player) 
@@ -617,10 +568,9 @@ function animate()
 
   	update();
   	
-  
-   //	rand(bidders);
     if(timer >= 400.00)
 	{
+	  
 	  mainMenu();
 	}
 	
@@ -631,17 +581,6 @@ function animate()
 		
     	bidTimers();
 	
-		// inherit the prototype from vehicle
-		Car.prototype = new Vehicle();  
-		// change some properties
-		Car.prototype.condition = 80;
-		Car.prototype.originality = 80;
-		Car.prototype.price = 4000;
-		Car.prototype.name = "Shitake";
-		Car.prototype.image = new Image(image);
-		
-		var car = new Car(this.image,300,300);
-		car.displayInfo(  );
 		//call bidder ai funcs
 		updatePlayer();
 		enemyBidding();
@@ -650,106 +589,17 @@ function animate()
 		{
 			bidderCooldown ++;
 			enemyCanBid = false;
-			
 		}
 	  
-		var player1;
-	  	var player2;
-	  	var player3;
-	  	var player4;
 	  	if(	bidderCooldown >= 1500)
 	  	{
-	  	
 	  		enemyCanBid = true;
 	  		bidderCooldown = 0;
 	  		
 	  	}
+	  	findEndBidder();
 	    //Player
-	  	if(( playerBid == currentBid)&& (playerDidBid))
-	  	{
-	  		player.y = 10;
-	  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
-	  	}
-	  	else
-	  	{
-	  	  player.y = 150;
-	  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
-	  	}
-	  	
-	  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
-		{
-			playerBid != currentBid;
-			
-		}
-		findEndBidder();
-
-		//ENENMY HUD
-		
-	  	//Enemy 1
-		//draw them depending on current bid
-	  	if( enemyBids[0] >= currentBid)
-	  	{
-	  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2)  ,ENEMY_X , 70);
-	  		  		
-	  	}
-	  	else
-	  	{
-	  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2)  ,ENEMY_X, 120);
-	  	  	
-	  	}
-	    //Enemy 2
-	  	if( enemyBids[1] >= currentBid)
-	  	{
-	  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2)  ,ENEMY_X , 70);
-	  		
-	  	}
-	  	else
-	  	{
-	  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2)  ,ENEMY_X, 160);
-	  		
-	  	}
-	  	//Enemy3
-	  	if( enemyBids[2] >= currentBid)
-	  	{
-	  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2)  ,ENEMY_X , 70);
-	  	 	
-	  	}
-	  	else
-	  	{
-	  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2)  ,ENEMY_X, 180);
-	  		 
-	  	}
-	  	//Enemy4
-	  	if( enemyBids[3] >= currentBid)
-	  	{
-	  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2)  ,ENEMY_X , 70);
-	  	 	
-
-	  	}
-		else
-		{
-			player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2)  ,ENEMY_X, 200);
-			
-		}
-
-	   
-	    //current bid HUD
-	    var gorguts;
-	    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
-	    
-		    //current bid
-	    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
-	    
-	    context.fillText('Auction Time :  ' + auctionTimer  ,200, 400);
-	      // draw the money HUD
-	    context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 66);
-	    //player bid
-	    
-	    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimer  ,200, 460);
-	    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimer2  ,200, 480);
-	    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimer3  ,200, 500);
-	    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimer4  ,200, 520);
-	    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
+	  	renderAuction();
 
 	    
 	}
@@ -762,16 +612,104 @@ function animate()
     ticker++;
   }
 }
-
+function renderAuction()
+{
+	var player1;
+  	var player2;
+  	var player3;
+  	var player4;
+	if(( playerBid == currentBid)&& (playerDidBid))
+  	{
+  		player.y = 10;
+  		context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 90);
+  	}
+  	else
+  	{
+  	  player.y = 150;
+  	  context.fillText('Player Bid :  '   +'$'+ playerBid.toFixed(2)  ,ENEMY_X, 230);
+  	}
+  	
+  	if((playerBid == enemyBids[0]) || (playerBid == enemyBids[1]) || (playerBid == enemyBids[2]) || (playerBid == enemyBids[3]))
+	{
+		playerBid != currentBid;
+		
+	}
+	
+	//ENENMY HUD
+	
+  	//Enemy 1
+	//draw them depending on current bid
+  	if( enemyBids[0] >= currentBid)
+  	{
+  		player1 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2)  ,ENEMY_X , 70);
+  		  		
+  	}
+  	else
+  	{
+  		player1 = context.drawImage(slimer,10,100) + context.fillText( bidders[0] + '$'+ enemyBids[0].toFixed(2)  ,ENEMY_X, 120);
+  	  	
+  	}
+    //Enemy 2
+  	if( enemyBids[1] >= currentBid)
+  	{
+  		player2 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[1] + '$'+ enemyBids[1].toFixed(2)  ,ENEMY_X , 70);
+  		
+  	}
+  	else
+  	{
+  		player2 = context.drawImage(slimer,10,130) + context.fillText(bidders[1] + '$'+ enemyBids[1].toFixed(2)  ,ENEMY_X, 160);
+  		
+  	}
+  	//Enemy3
+  	if( enemyBids[2] >= currentBid)
+  	{
+  	    player3 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[2] + '$'+ enemyBids[2].toFixed(2)  ,ENEMY_X , 70);
+  	 	
+  	}
+  	else
+  	{
+  		 player3 = context.drawImage(slimer,10,150) + context.fillText(bidders[2] + '$'+ enemyBids[2].toFixed(2)  ,ENEMY_X, 180);
+  		 
+  	}
+  	//Enemy4
+  	if( enemyBids[3] >= currentBid)
+  	{
+  	    player4 = context.drawImage(curBidImage,10,34) + context.fillText( bidders[3] + '$'+ enemyBids[3].toFixed(2)  ,ENEMY_X , 70);
+  	 	
+  	}
+	else
+	{
+		player4 =  context.drawImage(slimer,10,170) + context.fillText(bidders[3] + '$'+ enemyBids[3].toFixed(2)  ,ENEMY_X, 200);
+		
+	}
+	
+    //current bid HUD
+    var gorguts;
+    gorguts = context.drawImage(curBidImage,360,84)+ context.fillText('Current Bid :  ' + '$'+ currentBid.toFixed(2)  ,426, 114);
+    
+	    //current bid
+    context.fillText('Vehicle Price :  ' + '$'+ vehiclePrice.toFixed(2)  ,400, 90);
+    
+    context.fillText('Auction Time :  ' + auctionTimer  ,200, 400);
+      // draw the money HUD
+    context.fillText('Money :  ' + '$'+ money  , canvas.width - 240, 66);
+    //player bid
+    
+    context.fillText('End Bid Time :  ' + bidders[0] + endBidTimer  ,200, 460);
+    context.fillText('End Bid Time2 :  ' + bidders[1] + endBidTimer2  ,200, 480);
+    context.fillText('End Bid Time3 :  ' + bidders[2] + endBidTimer3  ,200, 500);
+    context.fillText('End Bid Time4 :  ' + bidders[3] + endBidTimer4  ,200, 520);
+    context.fillText('End Bid Time Player :  ' + playerEndBidTimer  ,200, 540);
+}
 //Show the splash after loading all assets 
 function splash() 
 {
-
   document.getElementById('splash');
   animate();
   $('#progress').hide();
   $('#splash').show();
   $('.sound').show();
+  
 }
  
 //Main Menu  
@@ -784,7 +722,7 @@ function mainMenu()
       assetLoader.sounds[sound].muted = !playSound;
     }
   }
-
+ 
   $('#progress').hide();
   $('#splash').hide();
   $('#main').show();
@@ -928,7 +866,6 @@ function currentBidder()
 	   
 	}
 	//Find the player who has the highest bid dirty way enemy bidder 1 if it is not players bid then call func to find thru enemies
-	
 	else if((playerBid < enemyBids[0])||(playerBid < enemyBids[1])||(playerBid < enemyBids[2])||(playerBid < enemyBids[3]))
 	{
 	  bidFinder();
