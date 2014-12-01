@@ -2,7 +2,8 @@ $(document).ready(function()
 {
 	var canvas = document.getElementById('myCanvas');
     var context = canvas.getContext('2d');
-	
+    
+ 	
 	switchStates();
 		//app may only exist in one state at a time
 	function switchStates( GAME_STATE) 
@@ -21,7 +22,15 @@ $(document).ready(function()
 		     case GAME:
 			    startGame();
 			      break;
-			        
+			      
+			 case LV2:
+			    level2();
+			      break;
+
+			 case LV3:
+			    level3();
+			      break;
+ 
 			 case GAME_WON:
 			      winGame();
 			      break;
@@ -31,7 +40,7 @@ $(document).ready(function()
 			      break;
 			    	
 			 case UPGRADES:
-			 //   Upgrades.update();
+			 	upgradesMenu();
 			      break; 
 			      
 			 case CREDITS:
@@ -43,8 +52,8 @@ $(document).ready(function()
 		     // etc...
 		 }
 	}
-	var gameTimer = 0;
-	var stop = false;
+	
+	
 	function init()
 	{
 	  if (!stop) 
@@ -81,17 +90,26 @@ $(document).ready(function()
 	}
 	function mainMenu()
 	{
+		stop = true;
 		appState = GAME_STATE.MAIN_MENU;
 		if(appState = GAME_STATE.MAIN_MENU)
 		{
 			console.log("Main Menu Bitches");
-			gameTimer = 0;
+			
 		}
 		$('#splash').hide();
 	    $('#main').show();
 	    $('#menu').addClass('main');
 
-		
+	}
+	function level2()
+	{
+	}
+	function level3()
+	{
+	}
+	function upgradesMenu()
+	{
 	}
 	function credits()
 	{
@@ -99,12 +117,51 @@ $(document).ready(function()
 	}
 	function winGame()
 	{
-		console.log("I won Bitches");
-	}
 		
+		stop = true;
+		document.getElementById('game-won').style.display = 'true';
+		appState = GAME_STATE.GAME_OVER;
+		
+		if(appState == GAME_STATE.GAME_OVER)
+		{
+			
+			$('#game-won').show();
+			console.log("I won Bitches");
+			 //alert('lose');
+		}
+
+	}
+	function gameHud()
+	{
+		lives.push(0);
+	    lives.push(1);
+	    lives.push(2);
+	    
+	    //context.drawImage(lives, 50, -10);
+	    context.fillText('Score :  ' +  score  ,400, 90);
+	}
+	/*
+	function gameLives()
+	{
+		for(var i = 0; i < lives.length; ++ i)
+		{
+			lives.push(i);
+		}
+	}*/
+	function gameFonts()
+	{
+		 var gradient=context.createLinearGradient(36,40,600,1);
+		 gradient.addColorStop("0","magenta");
+		 gradient.addColorStop("0.5","blue");
+		 gradient.addColorStop("1.0","green");
+		  // Fill with gradient
+		 context.fillStyle = gradient;
+
+	}	
 	function GameStart()
 	{	
 		stop = true;
+		score = 0; 
 		appState = GAME_STATE.GAME;
 		enemySpawnX = 0;
 		enemySpawnY = 0;
@@ -130,7 +187,12 @@ $(document).ready(function()
 		enemySpawnX = 0;
 			document.addEventListener("keydown",keyDownHandler, false);	
 			document.addEventListener("keyup",keyUpHandler, false);	
+			
+			//gameLives();
+		gameFonts();
+	
 		gameLoop();
+		
 	}
 	
 	function gameLoop() 
@@ -146,10 +208,12 @@ $(document).ready(function()
 		if(appState == GAME_STATE.GAME)
 		{
 			stop = true;
+			
 			bG1.update();
 			bG1.render(context, bGImage);
 			bG2.update();
 			bG2.render(context, bGImage);
+			
 			if(eShotTimer > 0)
 			{
 				eShotTimer--;
@@ -209,11 +273,14 @@ $(document).ready(function()
 				if(pBulletsArray[i].x + pBulletsArray[i].width < 0)
 				{
 					pBulletsArray.splice(i, 1);
+					score += 20;
+					
 				}
 			}
 			if(pBulletsArray.length != 0 && enemyArray != 0)
 			{
 				eCollision(pBulletsArray, enemyArray);
+				score += 20;
 			}
 			
 			if(eBulletsArray.length != 0)
@@ -233,8 +300,15 @@ $(document).ready(function()
 				}
 				enemySpawnX = 0;
 			}
+			
+			if(score >= 20000)
+			{
+				appState = GAME_STATE.GAME_WON;
+				winGame();
+			}
 		}
 		
+		gameHud();
 		
 	}
 	function keyUpHandler(event)
@@ -281,7 +355,7 @@ $(document).ready(function()
 	{
 		var enemy = Object.create(Enemy);
 		enemy.create(enemySpawnX, enemySpawnY, 2, 1);
-		enemyArray.push(enemy)
+		enemyArray.push(enemy);
 		enemySpawnX + 5;
 	}
 	function pShoot()
@@ -318,6 +392,7 @@ $(document).ready(function()
 				{
 					bArray.splice(i, 1);
 					gameOver();
+					
 				}
 			}
 		}
@@ -326,14 +401,20 @@ $(document).ready(function()
 	{
 		pImage.src = "";
 		player.isControlable = false;
+		
+		//context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+		document.getElementById('game-over').style.display = 'true';
 		appState = GAME_STATE.GAME_OVER;
-		if(appState == GAME_STATE.GAMEOVER)
+		
+		if(appState == GAME_STATE.GAME_OVER)
 		{
 			console.log("Shit its dead");
+			$('#game-over').show();
+			 //alert('lose');
 		}
+		
 		//Need to destroy objects and restart game
 		//GameStart restart for jokes.
-		GameStart();	//context.clearRect(0, 0, myCanvas.width, myCanvas.height);
 		
 	}
 	function eCollision(bArray, eArray)
@@ -348,12 +429,13 @@ $(document).ready(function()
 					{
 						bArray.splice(i, 1);
 						eArray.splice(j, 1);
+						
 					}
 				}
 			}
 		}
 	}
-	//GameStart();
+	
 		
 //Menu state start game button
 //

@@ -10,8 +10,16 @@ var GAME_OVER;
 var UPGRADES;
 var CREDITS;
 //Menu Screens
-var splasher = undefined;
-var menuScreen = undefined;
+var gameTimer = 0;
+var stop = false;
+
+//GAME HUD
+/* Lives */
+var score = 0;
+var lImg = new Image();
+lImg.src = "Images/ship.png";
+
+var lives = [lImg,lImg,lImg];
 
 
 //In game state vars
@@ -43,10 +51,6 @@ var bImage = new Image();
 var bGImage = new Image();
 	bGImage.src = "Images/background.png";
 //Game HUD	
-var gameOverImage = new Image();
-	gameOverImage.src = "Images/logo.png";
-
-var splashScreen = new Image();
-	splashScreen.src = "Images/logo.png";	
+	
 	
 

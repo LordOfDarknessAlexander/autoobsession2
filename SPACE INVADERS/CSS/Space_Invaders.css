@@ -98,83 +98,6 @@ a
   background-image: url('../images/soundOn.png');
   background-repeat: no-repeat;
 }
-/* Inventory Menu Buttons*/
-#auction
-{
-  background: url('../images/auctionButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px; 
-  cursor:pointer;
-}
-#repair
-{
-  background: url('../images/repairButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-  
-}
-#repairBackButton
-{
-  background: url('../images/repairBackButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-	
-}
-#addFundsBackButton
-{
-  background: url('../images/repairBackButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-	
-}
-
-#auctionBackButton
-{
-  background: url('../images/repairBackButton.png') no-repeat 0 0;
-  color: white;
-  font-weight: bold;
-  width:150px;
-  height:50px;
-  cursor:pointer;
-
-	
-}
-
-#addFunds
-{
-   background: url('../images/addFundsButton.png') no-repeat 0 0;
-   color: white;
-   font-weight: bold;
-   width:150px;
-   height:50px;
-   cursor:pointer;
-}
-#myCars
-{
-   background: url('../images/inventoryButton.png') no-repeat 0 0;
-   color: white;
-   font-weight: bold;
-   width:150px;
-   height:50px;
-   cursor:pointer;
- 
-}
-
-
 .sound-off 
 {
   background-image: url('../images/soundOff.png');
@@ -229,94 +152,6 @@ a
   display:inline;
   margin: 8px;
   margin-top: 8em;
-}
-
-#Auction
-{
-  
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 900px;
-  height: 600px;
-  position: absolute;
-}
-
-#menu.Auction
-{
-	
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 900px;
-  height: 600px;
-  position: absolute;
-
-}
-#Auction  li 
-{
-  padding: 5px 0;
-}
-
-#RepairShop
-{
-  
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 900px;
-  height: 600px;
-  position: absolute;
-}
-
-#menu.RepairShop
-{
-	
- 
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 900px;
-  height: 600px;
-  position: absolute;
-
-}
-#RepairShop  li 
-{
-  padding: 5px 0;
-}
-#AddFunds
-{
-  background-image: url('../images/logo.png');
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 900px;
-  height: 600px;
-  position: absolute;
-}
-
-#menu.AddFunds
-{
-	
- background-image: url('../images/logo.png');
-  display: none;
-  text-align: center;
-  padding-top: 92px;
-  z-index: 1;
-  width: 900px;
-  height: 600px;
-  position: absolute;
-
-}
-#AddFunds  li 
-{
-  padding: 5px 0;
 }
 
 
@@ -388,11 +223,21 @@ a
 {
   margin-top: 10px;
 }
-
+#game-won 
+{
+  background-image: url('../Images/logo.png');
+  display: none;
+  text-align: center;
+  padding-top: 92px;
+  z-index: 1;
+  width: 900px;
+  height: 600px;
+  position: absolute;
+}
 
 #game-over 
 {
-  background-image: url('../images/logo.png');
+  background-image: url('../Images/logo.png');
   display: none;
   text-align: center;
   padding-top: 92px;
