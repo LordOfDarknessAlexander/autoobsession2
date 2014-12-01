@@ -1,0 +1,10 @@
+﻿var GAME_STATE = 
+{
+	SPLASH   : 1,
+	MAIN_MENU : 2,
+	GAME : 3,
+	GAME_OVER : 4,
+	GAME_WON : 5,
+	UPGRADES : 6,
+	CREDITS :7,
+};
