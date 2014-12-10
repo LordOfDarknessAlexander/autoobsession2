@@ -1,0 +1,5 @@
+slots 1 and 2 or 2 and 3 at 4
+
+all slots on 2, 
+all slots on 3
+all slots on 1
