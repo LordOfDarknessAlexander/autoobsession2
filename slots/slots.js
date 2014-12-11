@@ -19,6 +19,11 @@ var randSlot1 = 0;
 var randSlot2 = 0;
 var randSlot3 = 0;
 
+
+var imageslot1 = new Image();
+var imageslot2 = new Image();
+var imageslot3 = new Image();
+	
 function init()
 {
 	//initialize the first slot
@@ -86,8 +91,35 @@ function init()
 	slot3.push(6);
 }
 
+
 function update()
 {
+	if(slot1curr == 1)
+	{
+		imageslot1.src = "Images/7.png";
+	}
+	else
+	{
+		imageslot1.src = "Images/72.png";
+	}
+
+	if(slot3curr == 1)
+	{
+		imageslot2.src = "Images/7.png";
+	}
+	else
+	{
+		imageslot2.src = "Images/72.png";
+	}
+	
+	if(slot3curr == 1)
+	{
+		imageslot3.src = "Images/7.png";
+	}
+	else
+	{
+		imageslot3.src = "Images/72.png";
+	}
 	if(slot1spin == true)
 	{
 		randSlot1 = Math.floor(Math.random() * slot1.length);
@@ -180,10 +212,17 @@ function keyUpHandler(event)
 			}
 		}
 	}
+	function drawReels()
+	{
+		context.drawImage(imageslot1, 0, 0);
+		context.drawImage(imageslot2, 100, 100);
+		context.drawImage(imageslot3, 200, 200);
+	}
 function gameLoop() 
 {
 	window.requestAnimationFrame(gameLoop, canvas);
 	update();
+	drawReels();
 	console.log("slot1: " + slot1curr + " slot2: " + slot2curr + " slot3: " + slot3curr);
 }
 	startGame();
