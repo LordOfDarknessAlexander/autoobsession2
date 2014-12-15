@@ -221,6 +221,7 @@ function update()
 			console.log("you have lost, try again, press space to go again");
 		}
 	}
+
 }
 function stop()
 {
@@ -240,36 +241,37 @@ function stop()
 }
 function startGame()
 {
+	document.addEventListener("keyup",keyUpHandler, false);	
 	init();
 	gameLoop();
 	//document.addEventListener("keydown",keyDownHandler, false);	
-	document.addEventListener("keyup",keyUpHandler, false);	
+	
 }
 function keyUpHandler(event)
-	{
-		var keyPressed = event.keyCode;
-		if (keyPressed == 32)
-		{	
-			if(gamefinished == true)
-			{
-				slot1spin = true;
-				slot2spin = true;
-				slot3spin = true;
-				gamefinished = false;
-			}
-			else
-			{
-				stop();
-			}
+{
+	var keyPressed = event.keyCode;
+	if (keyPressed == 32)
+	{	
+		if(gamefinished == true)
+		{
+			slot1spin = true;
+			slot2spin = true;
+			slot3spin = true;
+			gamefinished = false;
+		}
+		else
+		{
+			stop();
 		}
 	}
-	function drawReels()
-	{
-		context.clearRect(0,0, canvas.width, canvas.height);
-		context.drawImage(imageslot1, 0, 0);
-		context.drawImage(imageslot2, 400, 0);
-		context.drawImage(imageslot3, 800, 0);
-	}
+}
+function drawReels()
+{
+	context.clearRect(0,0, canvas.width, canvas.height);
+	context.drawImage(imageslot1, 0, 0);
+	context.drawImage(imageslot2, 400, 0);
+	context.drawImage(imageslot3, 800, 0);
+}
 function gameLoop() 
 {
 	window.requestAnimationFrame(gameLoop, canvas);
