@@ -94,32 +94,83 @@ function init()
 
 function update()
 {
+	//slot 1
 	if(slot1curr == 1)
 	{
-		imageslot1.src = "Images/7.png";
+		imageslot1.src = "Images/000.png";
 	}
-	else
+	else if(slot1curr == 2)
 	{
-		imageslot1.src = "Images/72.png";
+		imageslot1.src = "Images/001.png";
 	}
-
+	else if(slot1curr == 3)
+	{
+		imageslot1.src = "Images/002.png";
+	}
+	else if(slot1curr == 4)
+	{
+		imageslot1.src = "Images/003.png";
+	}
+	else if(slot1curr == 5)
+	{
+		imageslot1.src = "Images/004.png";
+	}
+	else if(slot1curr == 6)
+	{
+		imageslot1.src = "Images/005.png";
+	}
+	//slot two
+	if(slot2curr == 1)
+	{
+		imageslot2.src = "Images/000.png";
+	}
+	else if(slot2curr == 2)
+	{
+		imageslot2.src = "Images/001.png";
+	}
+	else if(slot2curr == 3)
+	{
+		imageslot2.src = "Images/002.png";
+	}
+	else if(slot2curr == 4)
+	{
+		imageslot2.src = "Images/003.png";
+	}
+	else if(slot2curr == 5)
+	{
+		imageslot2.src = "Images/004.png";
+	}
+	else if(slot2curr == 6)
+	{
+		imageslot2.src = "Images/005.png";
+	}
+	//slot3
 	if(slot3curr == 1)
 	{
-		imageslot2.src = "Images/7.png";
+		imageslot3.src = "Images/000.png";
 	}
-	else
+	else if(slot3curr == 2)
 	{
-		imageslot2.src = "Images/72.png";
+		imageslot3.src = "Images/001.png";
+	}
+	else if(slot3curr == 3)
+	{
+		imageslot3.src = "Images/002.png";
+	}
+	else if(slot3curr == 4)
+	{
+		imageslot3.src = "Images/003.png";
+	}
+	else if(slot3curr == 5)
+	{
+		imageslot3.src = "Images/004.png";
+	}
+	else if(slot3curr == 6)
+	{
+		imageslot3.src = "Images/005.png";
 	}
 	
-	if(slot3curr == 1)
-	{
-		imageslot3.src = "Images/7.png";
-	}
-	else
-	{
-		imageslot3.src = "Images/72.png";
-	}
+	
 	if(slot1spin == true)
 	{
 		randSlot1 = Math.floor(Math.random() * slot1.length);
@@ -214,9 +265,10 @@ function keyUpHandler(event)
 	}
 	function drawReels()
 	{
+		context.clearRect(0,0, canvas.width, canvas.height);
 		context.drawImage(imageslot1, 0, 0);
-		context.drawImage(imageslot2, 100, 100);
-		context.drawImage(imageslot3, 200, 200);
+		context.drawImage(imageslot2, 400, 0);
+		context.drawImage(imageslot3, 800, 0);
 	}
 function gameLoop() 
 {
