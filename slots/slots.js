@@ -11,21 +11,25 @@ var slot3 = [];
 var slot1spin = true;
 var slot2spin = true;
 var slot3spin = true;
-var gamefinished = false;
+var gamefinished = true;
 var slot1curr = undefined;
 var slot2curr = undefined;
 var slot3curr = undefined;
 var randSlot1 = 0; 
 var randSlot2 = 0;
 var randSlot3 = 0;
+var div = document.getElementById("textDiv");
+var nestedDiv = document.getElementById("nextedDiv");
 
-
+var money = 0;
+var bet = 0;
 var imageslot1 = new Image();
 var imageslot2 = new Image();
 var imageslot3 = new Image();
 	
 function init()
 {
+	money  = 100;
 	//initialize the first slot
 	slot1.push(1);
 	slot1.push(2);
@@ -244,24 +248,29 @@ function startGame()
 	document.addEventListener("keyup",keyUpHandler, false);	
 	init();
 	gameLoop();
+	
 	//document.addEventListener("keydown",keyDownHandler, false);	
 	
 }
 function keyUpHandler(event)
 {
 	var keyPressed = event.keyCode;
-	if (keyPressed == 32)
-	{	
-		if(gamefinished == true)
-		{
-			slot1spin = true;
-			slot2spin = true;
-			slot3spin = true;
-			gamefinished = false;
-		}
-		else
-		{
-			stop();
+	if(money >= 10)
+	{
+		if (keyPressed == 32)
+		{	
+			if(gamefinished == true)
+			{
+				money -= 10;
+				slot1spin = true;
+				slot2spin = true;
+				slot3spin = true;
+				gamefinished = false;
+			}
+			else
+			{
+				stop();
+			}
 		}
 	}
 }
@@ -275,6 +284,14 @@ function drawReels()
 function gameLoop() 
 {
 	window.requestAnimationFrame(gameLoop, canvas);
+	if(money >= 10)
+	{
+		div.textContent = "welcome to the slots. You have $" + money + " currently. it costs $10 to play";
+	}
+	else
+	{
+		div.textContent = "You do not have enough money to spin";
+	}
 	update();
 	drawReels();
 	console.log("slot1: " + slot1curr + " slot2: " + slot2curr + " slot3: " + slot3curr);
