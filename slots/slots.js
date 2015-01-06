@@ -195,30 +195,37 @@ function update()
 		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1)
 		{
 			console.log("jackpot, press space to go again");
+				money += bet * 7;
 		}
 		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
 		{
 			console.log("almost jackpot, press space to go again");
+				money += bet * 4.75;
 		}
 		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
 		{
 			console.log("uhh pinapple, press space to go again");
+				money += bet * 3.75;
 		}
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 		{
 			console.log("uhh pinata, press space to go again");
+				money += bet * 2.75;
 		}
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
 		{
 			console.log("not the best in fact not even close, press space to go again");
+				money += bet * 2;
 		}
 		else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 		{
 			console.log("all cherries. best part of a fruit salad, press space to go again");
+			money += bet * 1.75;
 		}
 		else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
 		{
 			console.log("2 cherries, not very good, press space to go again");
+			money += bet * 1.5;
 		}
 		else //losing spin
 		{
