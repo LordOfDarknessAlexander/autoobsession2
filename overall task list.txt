@@ -1,0 +1,7 @@
+simple black jack
+-------------
+tornaments
+add in ranks
+when you win you gain points. points increse rank. when you go up in rank you get a reward
+lose 3 times and you have to spend money to get more lives or wait for them to regen
+possibility to have multiple diffrent decks. 
