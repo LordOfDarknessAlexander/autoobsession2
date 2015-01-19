@@ -100,10 +100,6 @@ $(document).ready(function()
 	    $('#menu').addClass('main');
 
 	}
-	function Wipe()
-	{
-		object.destroy(player);
-	}
 	function level2()
 	{
 	
@@ -120,21 +116,7 @@ $(document).ready(function()
 	{
 		console.log("Credits Bitches");
 	}
-	function winGame()
-	{
-		stop = true;
-		document.getElementById('game-won').style.display = 'true';
-		appState = GAME_STATE.GAME_OVER;
-		
-		if(appState == GAME_STATE.GAME_OVER)
-		{
-			
-			$('#game-over').show();
-			console.log("I won Bitches");
-			 //alert('lose');
-		}
-
-	}
+	
 	function gameHud()
 	{
 		lives.push(0);
@@ -164,6 +146,11 @@ $(document).ready(function()
 	}	
 	function GameStart()
 	{	
+		//Object player = new Object;
+		if(player != null)
+		{
+			player = null;
+		}
 		stop = true;
 		score = 0; 
 		appState = GAME_STATE.GAME;
@@ -203,6 +190,7 @@ $(document).ready(function()
 	{
 		window.requestAnimationFrame(gameLoop, canvas);
 		update();
+		context.fillText('Score :  ' +  score  ,400, 90);
 	}
 	
 	function update() 
@@ -403,7 +391,7 @@ $(document).ready(function()
 	}
 	function gameOver()
 	{
-		pImage.src = "";
+		//pImage.src = "";
 		player.isControlable = false;
 		
 		//context.clearRect(0, 0, myCanvas.width, myCanvas.height);
@@ -420,6 +408,25 @@ $(document).ready(function()
 		//Need to destroy objects and restart game
 		//GameStart restart for jokes.
 		
+	}
+	function winGame()
+	{
+	
+		//pImage.src = "";
+		player.isControlable = false;
+		
+		stop = true;
+		document.getElementById('game-won').style.display = 'true';
+		appState = GAME_STATE.GAME_OVER;
+		
+		if(appState == GAME_STATE.GAME_OVER)
+		{
+			
+			$('#game-won').show();
+			console.log("I won Bitches");
+			 //alert('lose');
+		}
+
 	}
 	function eCollision(bArray, eArray)
 	{
@@ -457,8 +464,9 @@ $('.restart').click(function()
 {
   $('#game-over').hide();
   $('#gameMenu').hide();
-	//Wipe();
     GameStart();
+	//splash();
+	//mainMenu();
 });
 function Credits() 
 {
