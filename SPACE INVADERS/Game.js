@@ -62,14 +62,12 @@ $(document).ready(function()
 			window.requestAnimationFrame(init, canvas); 	
 			gameTimer++;
 			console.log(gameTimer);
-			if((gameTimer >= 300.00) && (gameTimer <= 900.00))
+			/*if((gameTimer >= 300.00) && (gameTimer <= 900.00))
 			{
 				
-				appState = GAME_STATE.SPLASH;
-				
-			  
-			}
-			else if(gameTimer >= 900)
+				appState = GAME_STATE.SPLASH;  
+			}*/
+			/*else*/ if(gameTimer >= 20)
 			{
 				appState = GAME_STATE.MAIN_MENU;
 				gameTimer = 0;
@@ -102,14 +100,21 @@ $(document).ready(function()
 	    $('#menu').addClass('main');
 
 	}
+	function Wipe()
+	{
+		object.destroy(player);
+	}
 	function level2()
 	{
+	
 	}
 	function level3()
 	{
+	
 	}
 	function upgradesMenu()
 	{
+	
 	}
 	function credits()
 	{
@@ -117,7 +122,6 @@ $(document).ready(function()
 	}
 	function winGame()
 	{
-		
 		stop = true;
 		document.getElementById('game-won').style.display = 'true';
 		appState = GAME_STATE.GAME_OVER;
@@ -125,7 +129,7 @@ $(document).ready(function()
 		if(appState == GAME_STATE.GAME_OVER)
 		{
 			
-			$('#game-won').show();
+			$('#game-over').show();
 			console.log("I won Bitches");
 			 //alert('lose');
 		}
@@ -138,7 +142,7 @@ $(document).ready(function()
 	    lives.push(2);
 	    
 	    //context.drawImage(lives, 50, -10);
-	    context.fillText('Score :  ' +  score  ,400, 90);
+	    //context.fillText('Score :  ' +  score  ,400, 90);
 	}
 	/*
 	function gameLives()
@@ -184,7 +188,7 @@ $(document).ready(function()
 			spawnEnemy();
 			enemySpawnX += 45;
 		}
-		enemySpawnX = 0;
+			enemySpawnX = 0;
 			document.addEventListener("keydown",keyDownHandler, false);	
 			document.addEventListener("keyup",keyUpHandler, false);	
 			
@@ -204,7 +208,7 @@ $(document).ready(function()
 	function update() 
 	{
 		context.clearRect(0, 0, myCanvas.width, myCanvas.height);
-		
+		context.fillText('Score :  ' +  score  ,400, 90);
 		if(appState == GAME_STATE.GAME)
 		{
 			stop = true;
@@ -280,7 +284,7 @@ $(document).ready(function()
 			if(pBulletsArray.length != 0 && enemyArray != 0)
 			{
 				eCollision(pBulletsArray, enemyArray);
-				score += 20;
+				//score += 20;
 			}
 			
 			if(eBulletsArray.length != 0)
@@ -296,7 +300,7 @@ $(document).ready(function()
 				for(var i = 0; i < numEnemies; i++)
 				{
 					spawnEnemy();
-					enemySpawnX += 45;
+					enemySpawnX += 50;
 				}
 				enemySpawnX = 0;
 			}
@@ -356,7 +360,7 @@ $(document).ready(function()
 		var enemy = Object.create(Enemy);
 		enemy.create(enemySpawnX, enemySpawnY, 2, 1);
 		enemyArray.push(enemy);
-		enemySpawnX + 5;
+		//enemySpawnX + 5;
 	}
 	function pShoot()
 	{
@@ -429,6 +433,9 @@ $(document).ready(function()
 					{
 						bArray.splice(i, 1);
 						eArray.splice(j, 1);
+						score += 500;
+						console.log(score);
+						context.fillText('Score :  ' +  score  ,400, 90);
 						
 					}
 				}
@@ -450,7 +457,7 @@ $('.restart').click(function()
 {
   $('#game-over').hide();
   $('#gameMenu').hide();
-
+	//Wipe();
     GameStart();
 });
 function Credits() 

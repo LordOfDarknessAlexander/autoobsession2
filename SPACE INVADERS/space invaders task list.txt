@@ -1,0 +1,39 @@
+chris
+--------
+fix restart function
+set up player bounds
+no longer survival. points only gotten by killing enemies
+
+power ups - chance to spawn on kill
+---
+spread shot
+temp shielding
+piercing shots
+incresed movement speed
+faster fire rate
+
+diffrent projetile types
+----
+laser
+----
+bomb
+---
+
+work on changing levels
+diffrent enemies with different health values and attacks
+add music to the backgrounds of the levels, diffrent song for each level.
+each enemy has a different death sound
+add dialoge
+try to add enemies that turn into little enemies when killed
+
+--------
+andrew
+--------
+create lives for player
+add bosses
+animation
+
+
+-----
+random tasks
+-----
