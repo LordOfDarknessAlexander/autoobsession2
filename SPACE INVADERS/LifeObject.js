@@ -18,11 +18,50 @@ var LifeObjectClass =
 	
 	render : function(context, image)
 	{
-		context.drawImage(image, this.xPos, this.yPos)
+		if(this.isDrawn = true)
+		{
+			context.drawImage(image, this.xPos, this.yPos);
+		}
 	},
 	
 	update : function()
 	{
-		console.log("Pos: " + this.xPos + ", " + this.yPos);
+		//console.log("Pos: " + this.xPos + ", " + this.yPos);
+	},
+	
+	lifeClear : function(lifeToClear)
+	{
+		lifeObjects[lifeToClear].isDrawn = false;
+	},
+	
+	lifeRemove : function()
+	{
+		for(var i = 0; i < lifeObjects.length; ++i)
+		{
+			if(lifeObjects[i].isDrawn)
+			{
+				setTimeout(function() { lifeClear(i); }, 1000);
+				break;
+			}
+		}
+	},
+	
+	lifeAdd : function()
+	{
+		for(var i = lifeObjects.length - 1; i >= 0; --i)
+		{
+			if(!lifeObjects[i].isDrawn)
+			{
+				lifeObjects[i].isDrawn = true;
+			}
+		}
+	},
+	
+	resetLives : function()
+	{
+		for(var i = 0; i < lifeObjects.length; ++i)
+		{
+			lifeObjects[i].isDrawn = true;
+		}
 	}
 };

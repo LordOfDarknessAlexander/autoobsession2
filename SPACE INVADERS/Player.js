@@ -26,6 +26,7 @@ var Player =
 	{
 		this.x += this.vX;
 		this.y += this.vY;
+		console.log(this.numLives);
 	},
 	
 	render: function(context, image)

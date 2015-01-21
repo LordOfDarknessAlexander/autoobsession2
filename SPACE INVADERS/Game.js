@@ -165,6 +165,7 @@ $(document).ready(function()
 		player = Object.create(Player);
 		player.create(playerSpawnX, playerSpawnY, 0, 0, pImage);
 		player.isControlable = true;
+		player.numLives = 3;
 		
 		bG1 = Object.create(Background);
 			bG1.create(0, 0, 1);
@@ -390,8 +391,11 @@ $(document).ready(function()
 				if((bArray[i].y >= player.y || bArray[i].y + bArray[i].height >= player.y) && (bArray[i].y <= player.y + player.height || bArray[i].y + bArray[i].height <= player.y + player.height))
 				{
 					bArray.splice(i, 1);
-					gameOver();
-					
+					player.numLives--;
+					if(player.numLives <= 0)
+					{
+						gameOver();
+					}
 				}
 			}
 		}
