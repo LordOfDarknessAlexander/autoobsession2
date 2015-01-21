@@ -298,6 +298,15 @@ $(document).ready(function()
 					enemySpawnX += 50;
 				}
 				enemySpawnX = 0;
+				
+				spawnBoss();
+				
+			}
+			
+			if(boss != undefined)
+			{
+				boss.render(context, bossImage);
+				boss.update();
 			}
 			
 			if(score >= 20000)
@@ -357,6 +366,14 @@ $(document).ready(function()
 		enemyArray.push(enemy);
 		//enemySpawnX + 5;
 	}
+	
+	function spawnBoss()
+	{
+		boss = Object.create(Boss);
+		boss.init(60, 60, 2, 1);
+		boss.drawBoss();
+	}
+	
 	function pShoot()
 	{
 		if(shotTimer <= 0)

@@ -32,6 +32,7 @@ var enemySpawnY = undefined;
 var playerSpawnX = undefined;
 var playerSpawnY = undefined;
 var player = undefined;
+var boss = undefined;
 var bG1 = undefined;
 var bG2 = undefined;
 var shotTimer = undefined;
@@ -42,6 +43,9 @@ var pUp = false;
 
 var eImage = new Image();
 	eImage.src = "Images/Enemy.png";
+	
+var bossImage = new Image();
+	bossImage.src = "Images/SpaceShooterAssets/PNG/Enemies/enemyBlack1.png";
 	
 var pImage = new Image();
 	pImage.src = "Images/Player.png";
