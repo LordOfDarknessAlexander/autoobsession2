@@ -4,17 +4,25 @@ var LifeObjectClass =
 	yPos : 0,
 	width : 0,
 	height : 0,
+	xOffset : 0,
 	isDrawn : true,		//true = is drawn on the canvas
 
-	init : function()
+	init : function(posX, posY)
 	{
-	},
-
-	LifeObject.start = function()
-	{
-		this.xPos = 0;
-		this.yPos = 0;
+		this.xPos = posX;
+		this.yPos = posY;
 		this.width = 20;
 		this.height = 20;
+		this.xOffset = this.width + 5;
+	},
+	
+	render : function(context, image)
+	{
+		context.drawImage(image, this.xPos, this.yPos)
+	},
+	
+	update : function()
+	{
+		console.log("Pos: " + this.xPos + ", " + this.yPos);
 	}
 };

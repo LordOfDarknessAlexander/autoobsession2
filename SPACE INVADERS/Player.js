@@ -6,6 +6,7 @@ var Player =
 	vY: 0,
 	width: 0,
 	height: 0,
+	numLives: 0,
 	Player: undefined,
 	isControlable: undefined,
 	create: function(x, y, vX, vY, player)
@@ -17,6 +18,7 @@ var Player =
 		this.Player = player;
 		this.width = 84;
 		this.height = 150;
+		this.numLives = 3;
 		isControlable = true;
 	},
 	

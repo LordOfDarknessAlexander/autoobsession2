@@ -26,6 +26,7 @@ var lives = [lImg,lImg,lImg];
 var enemyArray = new Array();
 var pBulletsArray = new Array();
 var eBulletsArray = new Array();
+var lifeObjects = new Array();
 var enemySpawnX = undefined;
 var enemySpawnY = undefined;
 var playerSpawnX = undefined;
@@ -50,6 +51,9 @@ var bImage = new Image();
 	
 var bGImage = new Image();
 	bGImage.src = "Images/background.png";
+	
+var lifeImage = new Image();
+	lifeImage.src = "Images/Life.png";
 //Game HUD	
 	
 	

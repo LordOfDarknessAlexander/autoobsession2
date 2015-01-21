@@ -1,31 +1,11 @@
-var lifeObjects = new Array();
+var lifeOne = Object.create(LifeObjectClass);
+lifeOne.init(10, 1);
 
-var lifeOne = Object.create(LifeObject);
-lifeOne.baseInit = lifeOne.init;
-lifeOne.baseStart = lifeOne.start;
-lifeOne.start = function()
-{
-	this.baseStart();
-	this.yPos = 1;
-}
+var lifeTwo = Object.create(LifeObjectClass);
+lifeTwo.init(30, 1);
 
-var lifeTwo = Object.create(LifeObject);
-lifeTwo.baseInit = lifeTwo.init;
-lifeTwo.baseStart = lifeTwo.start;
-lifeTwo.start = function()
-{
-	this.baseStart();
-	this.xPos = 30;
-}
-
-var lifeThree = Object.create(LifeObject);
-lifeThree.baseInit = lifeThree.init;
-lifeThree.basStart = lifeThree.start;
-lifeThree.start = function()
-{
-	this.baseStart();
-	this.xPos = 60;
-}
+var lifeThree = Object.create(LifeObjectClass);
+lifeThree.init(50, 1);
 
 lifeObjects.push(lifeThree);
 lifeObjects.push(lifeTwo);
