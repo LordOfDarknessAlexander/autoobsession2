@@ -6,8 +6,17 @@ var Player =
 	vY: 0,
 	width: 0,
 	height: 0,
+	bombCount: 0,
+	projectileType: 0,
+	spreadShotCounter: 0,
+	pierceShotCounter: 0,
+	shieldCounter:0,
+	speedUpCounter: 0,
+	fireRateUpCounter:0,
 	Player: undefined,
 	isControlable: undefined,
+	
+	
 	create: function(x, y, vX, vY, player)
 	{
 		this.x = x;
