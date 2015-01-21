@@ -24,11 +24,6 @@ var LifeObjectClass =
 		}
 	},
 	
-	update : function()
-	{
-		//console.log("Pos: " + this.xPos + ", " + this.yPos);
-	},
-	
 	lifeClear : function(lifeToClear)
 	{
 		lifeObjects[lifeToClear].isDrawn = false;

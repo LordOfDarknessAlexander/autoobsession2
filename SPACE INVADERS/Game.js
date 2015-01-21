@@ -274,7 +274,6 @@ $(document).ready(function()
 			for(var i = 0; i < player.numLives; ++i)
 			{
 				lifeObjects[i].render(context, lifeImage);
-				lifeObjects[i].update();
 			}
 			
 			if(pBulletsArray.length != 0 && enemyArray != 0)
