@@ -165,6 +165,7 @@ $(document).ready(function()
 		player = Object.create(Player);
 		player.create(playerSpawnX, playerSpawnY, 0, 0, pImage);
 		player.isControlable = true;
+		player.numLives = 3;
 		
 		bG1 = Object.create(Background);
 			bG1.create(0, 0, 1);
@@ -269,6 +270,12 @@ $(document).ready(function()
 					
 				}
 			}
+			
+			for(var i = 0; i < player.numLives; ++i)
+			{
+				lifeObjects[i].render(context, lifeImage);
+			}
+			
 			if(pBulletsArray.length != 0 && enemyArray != 0)
 			{
 				eCollision(pBulletsArray, enemyArray);
@@ -291,6 +298,15 @@ $(document).ready(function()
 					enemySpawnX += 50;
 				}
 				enemySpawnX = 0;
+				
+				spawnBoss();
+				
+			}
+			
+			if(boss != undefined)
+			{
+				boss.render(context, bossImage);
+				boss.update();
 			}
 			
 			if(score >= 20000)
@@ -350,6 +366,14 @@ $(document).ready(function()
 		enemyArray.push(enemy);
 		//enemySpawnX + 5;
 	}
+	
+	function spawnBoss()
+	{
+		boss = Object.create(Boss);
+		boss.init(60, 60, 2, 1);
+		boss.drawBoss();
+	}
+	
 	function pShoot()
 	{
 		if(shotTimer <= 0)
@@ -383,8 +407,11 @@ $(document).ready(function()
 				if((bArray[i].y >= player.y || bArray[i].y + bArray[i].height >= player.y) && (bArray[i].y <= player.y + player.height || bArray[i].y + bArray[i].height <= player.y + player.height))
 				{
 					bArray.splice(i, 1);
-					gameOver();
-					
+					player.numLives--;
+					if(player.numLives <= 0)
+					{
+						gameOver();
+					}
 				}
 			}
 		}
