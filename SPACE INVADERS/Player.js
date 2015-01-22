@@ -6,6 +6,7 @@ var Player =
 	vY: 0,
 	width: 0,
 	height: 0,
+	numLives: 0,
 	bombCount: 0,
 	projectileType: 0,
 	spreadShotCounter: 0,
@@ -26,6 +27,7 @@ var Player =
 		this.Player = player;
 		this.width = 84;
 		this.height = 150;
+		this.numLives = 3;
 		isControlable = true;
 	},
 	
@@ -33,6 +35,7 @@ var Player =
 	{
 		this.x += this.vX;
 		this.y += this.vY;
+		//console.log("Num lives " + numLives);
 	},
 	
 	render: function(context, image)

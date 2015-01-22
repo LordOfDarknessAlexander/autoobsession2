@@ -6,15 +6,20 @@ var LifeObjectClass =
 	height : 0,
 	isDrawn : true,		//true = is drawn on the canvas
 
-	init : function()
+	init : function(x, y)
 	{
-	},
-
-	LifeObject.start = function()
-	{
-		this.xPos = 0;
-		this.yPos = 0;
+		this.xPos = x;
+		this.yPos = y;
 		this.width = 20;
 		this.height = 20;
+		this.isDrawn = true;
+	},
+
+	render : function(context, image)
+	{
+		if(this.isDrawn = true)
+		{
+			context.drawImage(image, this.xPos, this.yPos);
+		}
 	}
 };
