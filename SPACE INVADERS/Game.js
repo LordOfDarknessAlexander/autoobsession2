@@ -166,6 +166,7 @@ $(document).ready(function()
 		player.create(playerSpawnX, playerSpawnY, 0, 0, pImage);
 		player.isControlable = true;
 		player.numLives = 3;
+		numWaves = 0;
 		initBoss();
 		
 		bG1 = Object.create(Background);
@@ -220,6 +221,10 @@ $(document).ready(function()
 			{
 				eShoot();
 			}
+			if(boss.isDrawn)
+			{
+				bossShoot();
+			}
 			if(bG1.y >= 766)
 			{
 				bG1.y = bG2.y + -766;
@@ -269,34 +274,37 @@ $(document).ready(function()
 				//score += 20;
 			}
 			
+			if(pBulletsArray.length != 0 && boss.isDrawn)
+			{
+				bossCollision(pBulletsArray, boss);
+			}
+			
 			if(eBulletsArray.length != 0)
 			{
 				pCollision(eBulletsArray, player);
 			}
 			if(enemyArray.length <= 0)
 			{
-				if(numEnemies < 17)
+				if(numWaves < 3)
 				{
-					numEnemies += 1;
+					if(numEnemies < 17)
+					{
+						numEnemies += 1;
+						numWaves++;
+					}
+					for(var i = 0; i < numEnemies; i++)
+					{
+						spawnEnemy();
+						enemySpawnX += 50;
+					}
+					enemySpawnX = 0;
 				}
-				for(var i = 0; i < numEnemies; i++)
+				else
 				{
-					spawnEnemy();
-					enemySpawnX += 50;
-				}
-				enemySpawnX = 0;
-				
-				boss.drawBoss();
-				
-			}
-			
-			if(boss != undefined)
-			{
-				if(boss.isDrawn = true)
-				{
+					boss.drawBoss();
 					boss.render(context, bossImage);
 					boss.update();
-					checkWithinBounds(boss);
+					checkWithinBounds(boss)
 				}
 			}
 			
@@ -384,30 +392,41 @@ $(document).ready(function()
 	{
 		boss = Object.create(Boss);
 		boss.init(60, 60, 2, 1);
+		boss.numLives = 3;
 	}
 	
 	function pShoot()
 	{
 		if(shotTimer <= 0)
 		{
-		var bullet = Object.create(Projectile);
-		var bullet2 = Object.create(Projectile);
-		bullet.create(player.x , player.y, -3);
-		bullet2.create(player.x + 50 , player.y, -3);
-		pBulletsArray.push(bullet);
-		pBulletsArray.push(bullet2);
-		shotTimer = 50;
+			var bullet = Object.create(Projectile);
+			var bullet2 = Object.create(Projectile);
+			bullet.create(player.x , player.y, -3);
+			bullet2.create(player.x + 50 , player.y, -3);
+			pBulletsArray.push(bullet);
+			pBulletsArray.push(bullet2);
+			shotTimer = 50;
 		}
 	}
 	function eShoot()
 	{
 		if(eShotTimer <= 0)
 		{
-		var ran =  Math.floor(Math.random() * enemyArray.length);
-		var bullet = Object.create(Projectile);
-		bullet.create(enemyArray[ran].x , enemyArray[ran].y, 3);
-		eBulletsArray.push(bullet);
-		eShotTimer = 40;
+			var ran =  Math.floor(Math.random() * enemyArray.length);
+			var bullet = Object.create(Projectile);
+			bullet.create(enemyArray[ran].x , enemyArray[ran].y, 3);
+			eBulletsArray.push(bullet);
+			eShotTimer = 40;
+		}
+	}
+	function bossShoot()
+	{
+		if(eShotTimer <= 0)
+		{
+			var bullet = Object.create(Projectile);
+			bullet.create(boss.x, boss.y, 3);
+			eBulletsArray.push(bullet);
+			eShotTimer = 40;
 		}
 	}
 	function pCollision(bArray, player)
@@ -423,6 +442,26 @@ $(document).ready(function()
 					if(player.numLives <= 0)
 					{
 						gameOver();
+					}
+				}
+			}
+		}
+	}
+	function bossCollision(bArray, boss)
+	{
+		for(var i = 0; i < bArray.length; i++)
+		{
+			if((bArray[i].x >= boss.x || bArray[i].x + bArray[i].width >= boss.x) && (bArray[i].x <= boss.x + boss.wigth || bArray[i].x + bArray[i].width <= boss.x + boss.width))
+			{
+				if((bArray[i].y >= boss.y || bArray[i].y + bArray[i].height >= boss.y) && (bArray[i].y <= boss.y + boss.height || bArray[i].y + bArray[i].height <= boss.y + boss.height))
+				{
+					bArray.splice(i, 1);
+					boss.numLives--;
+					if(boss.numLives <= 0)
+					{
+						score += 1500;
+						boss = undefined;
+						winGame();
 					}
 				}
 			}

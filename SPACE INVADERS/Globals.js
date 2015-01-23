@@ -38,6 +38,8 @@ var bG2 = undefined;
 var shotTimer = undefined;
 var eShotTimer = undefined;
 var numEnemies = undefined;
+var numWaves = undefined;
+
 //var enemyTempVX = undefined; //placeholder for attempt at enemy based speed variance
 var pUp = false;
 

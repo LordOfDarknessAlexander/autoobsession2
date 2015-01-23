@@ -4,9 +4,10 @@ var Boss =
 	y : 0,
 	vX : 0,
 	vY : 0,
-	isDrawn : false,
 	width : 0,
 	height : 0,
+	numLives : 0,
+	isDrawn : false,
 	
 	init : function(x, y, vx, vy)
 	{
@@ -16,6 +17,7 @@ var Boss =
 		this.vY = vy;
 		this.width = 90;
 		this.height = 41;
+		this.numLives = 3;
 	},
 	
 	update : function()	
@@ -26,7 +28,7 @@ var Boss =
 	
 	render : function(context, image)
 	{
-		if(isDrawn)
+		if(this.isDrawn)
 		{
 			context.drawImage(image, this.x, this.y);
 		}
@@ -34,6 +36,11 @@ var Boss =
 	
 	drawBoss : function()
 	{
-		isDrawn = true;
+		this.isDrawn = true;
+	},
+	
+	die : function()
+	{
+		this.isDrawn = false;
 	}
 };
