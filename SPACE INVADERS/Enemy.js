@@ -22,6 +22,7 @@ var Enemy =
 			this.x += this.vX;
 			this.y += this.vY;
 		},
+		
 		render: function(context , image)
 		{
 			context.drawImage(image, this.x, this.y);

@@ -166,6 +166,7 @@ $(document).ready(function()
 		player.create(playerSpawnX, playerSpawnY, 0, 0, pImage);
 		player.isControlable = true;
 		player.numLives = 3;
+		initBoss();
 		
 		bG1 = Object.create(Background);
 			bG1.create(0, 0, 1);
@@ -229,26 +230,12 @@ $(document).ready(function()
 			}
 			for(var i = 0; i < enemyArray.length; i++)
 			{	
-				if(enemyArray[i].x + enemyArray[i].width > 768)
-				{
-					enemyArray[i].vX *= -1;
-				}
-				if(enemyArray[i].x < 0)
-				{
-					enemyArray[i].vX *= -1;
-				}
-				if(enemyArray[i].y < 0)
-				{
-					enemyArray[i].vY *= -1;
-				}
-				if(enemyArray[i].y + enemyArray[i].height >= 300)
-				{
-					enemyArray[i].vY *= -1;
-				}
+				checkWithinBounds(enemyArray[i]);
 				//enemyArray[i].vX = enemyTempVX / enemyArray.length; //adjusts speed based on number of enemies left
 				enemyArray[i].update();
 				enemyArray[i].render(context, eImage);
 			}
+			
 			player.update();
 			player.render(context, pImage);
 			for(var i = 0; i < pBulletsArray.length; i++)
@@ -299,14 +286,18 @@ $(document).ready(function()
 				}
 				enemySpawnX = 0;
 				
-				spawnBoss();
+				boss.drawBoss();
 				
 			}
 			
 			if(boss != undefined)
 			{
-				boss.render(context, bossImage);
-				boss.update();
+				if(boss.isDrawn = true)
+				{
+					boss.render(context, bossImage);
+					boss.update();
+					checkWithinBounds(boss);
+				}
 			}
 			
 			if(score >= 20000)
@@ -359,6 +350,28 @@ $(document).ready(function()
 			}
 		}
 	}
+	
+	//obj is the object you're checking is within bounds
+	function checkWithinBounds(obj)
+	{
+		if(obj.x + obj.width > 768)
+		{
+			obj.vX *= -1;
+		}
+		if(obj.x < 0)
+		{
+			obj.vX *= -1;
+		}
+		if(obj.y < 0)
+		{
+			obj.vY *= -1;
+		}
+		if(obj.y + obj.height >= 300)
+		{
+			obj.vY *= -1;
+		}	
+	}
+	
 	function spawnEnemy()
 	{
 		var enemy = Object.create(Enemy);
@@ -367,11 +380,10 @@ $(document).ready(function()
 		//enemySpawnX + 5;
 	}
 	
-	function spawnBoss()
+	function initBoss()
 	{
 		boss = Object.create(Boss);
 		boss.init(60, 60, 2, 1);
-		boss.drawBoss();
 	}
 	
 	function pShoot()
