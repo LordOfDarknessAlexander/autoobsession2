@@ -11,7 +11,7 @@ var slot3 = [];
 var slot1spin = true;
 var slot2spin = true;
 var slot3spin = true;
-var gamefinished = true;
+var gameFinished = true;
 var slot1curr = undefined;
 var slot2curr = undefined;
 var slot3curr = undefined;
@@ -19,17 +19,22 @@ var randSlot1 = 0;
 var randSlot2 = 0;
 var randSlot3 = 0;
 var div = document.getElementById("textDiv");
-var nestedDiv = document.getElementById("nextedDiv");
+var div2 = document.getElementById("textDiv2");
+var divWon = document.getElementById("wonDiv");
+var nestedDiv = document.getElementById("nestedDiv");
 
 var money = 0;
-var bet = 0;
+var bet = 10;
+var winnings = 0;
+
 var imageslot1 = new Image();
 var imageslot2 = new Image();
 var imageslot3 = new Image();
 	
 function init()
 {
-	money  = 100;
+	money  = 1000;
+	
 	//initialize the first slot
 	slot1.push(1);
 	slot1.push(2);
@@ -93,6 +98,8 @@ function init()
 	slot3.push(6);
 	slot3.push(6);
 	slot3.push(6);
+	
+	startGame();
 }
 
 
@@ -101,77 +108,77 @@ function update()
 	//slot 1
 	if(slot1curr == 1)
 	{
-		imageslot1.src = "Images/000.png";
+		imageslot1.src = "Images/lilredexpress.png";
 	}
 	else if(slot1curr == 2)
 	{
-		imageslot1.src = "Images/001.png";
+		imageslot1.src = "Images/38coupe.png";
 	}
 	else if(slot1curr == 3)
 	{
-		imageslot1.src = "Images/002.png";
+		imageslot1.src = "Images/baracuda.png";
 	}
 	else if(slot1curr == 4)
 	{
-		imageslot1.src = "Images/003.png";
+		imageslot1.src = "Images/charger.png";
 	}
 	else if(slot1curr == 5)
 	{
-		imageslot1.src = "Images/004.png";
+		imageslot1.src = "Images/cobra.png";
 	}
 	else if(slot1curr == 6)
 	{
-		imageslot1.src = "Images/005.png";
+		imageslot1.src = "Images/judgeGTO.png";
 	}
 	//slot two
 	if(slot2curr == 1)
 	{
-		imageslot2.src = "Images/000.png";
+		imageslot2.src = "Images/lilredexpress.png";
 	}
 	else if(slot2curr == 2)
 	{
-		imageslot2.src = "Images/001.png";
+		imageslot2.src = "Images/38coupe.png";
 	}
 	else if(slot2curr == 3)
 	{
-		imageslot2.src = "Images/002.png";
+		imageslot2.src = "Images/baracuda.png";
 	}
 	else if(slot2curr == 4)
 	{
-		imageslot2.src = "Images/003.png";
+		imageslot2.src = "Images/charger.png";
 	}
 	else if(slot2curr == 5)
 	{
-		imageslot2.src = "Images/004.png";
+		imageslot2.src = "Images/cobra.png";
 	}
 	else if(slot2curr == 6)
 	{
-		imageslot2.src = "Images/005.png";
+		imageslot2.src = "Images/judgeGTO.png";
 	}
 	//slot3
 	if(slot3curr == 1)
 	{
-		imageslot3.src = "Images/000.png";
+		imageslot3.src = "Images/lilredexpress.png";
 	}
 	else if(slot3curr == 2)
 	{
-		imageslot3.src = "Images/001.png";
+		imageslot3.src = "Images/38coupe.png";
 	}
 	else if(slot3curr == 3)
 	{
-		imageslot3.src = "Images/002.png";
+		imageslot3.src = "Images/baracuda.png";
 	}
 	else if(slot3curr == 4)
 	{
-		imageslot3.src = "Images/003.png";
+		imageslot3.src = "Images/charger.png";
 	}
 	else if(slot3curr == 5)
 	{
-		imageslot3.src = "Images/004.png";
+		imageslot3.src = "Images/cobra.png";
 	}
 	else if(slot3curr == 6)
 	{
-		imageslot3.src = "Images/005.png";
+		imageslot3.src = "Images/judgeGTO.png";
 	}
 	
 	
@@ -190,49 +197,6 @@ function update()
 		randSlot3 = Math.floor(Math.random() * slot3.length);
 		slot3curr = slot3[randSlot3];
 	}
-	if(gamefinished == true)
-	{
-		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1)
-		{
-			console.log("jackpot, press space to go again");
-				money += bet * 7;
-		}
-		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
-		{
-			console.log("almost jackpot, press space to go again");
-				money += bet * 4.75;
-		}
-		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
-		{
-			console.log("uhh pinapple, press space to go again");
-				money += bet * 3.75;
-		}
-		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
-		{
-			console.log("uhh pinata, press space to go again");
-				money += bet * 2.75;
-		}
-		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
-		{
-			console.log("not the best in fact not even close, press space to go again");
-				money += bet * 2;
-		}
-		else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
-		{
-			console.log("all cherries. best part of a fruit salad, press space to go again");
-			money += bet * 1.75;
-		}
-		else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
-		{
-			console.log("2 cherries, not very good, press space to go again");
-			money += bet * 1.5;
-		}
-		else //losing spin
-		{
-			console.log("you have lost, try again, press space to go again");
-		}
-	}
-
 }
 function stop()
 {
@@ -247,37 +211,93 @@ function stop()
 	else if(slot3spin == true/* && slot2spin == false && slot3.spin = false*/)
 	{
 		slot3spin = false;
-		gamefinished = true;
+		gameFinished= true;
+		checkForWin();
 	}
+}
+function checkForWin()
+{
+	if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1)
+	{
+		winnings = bet * 7;
+		div2.textContent = "Jackpot, press space to go again";
+					divWon.textContent = "You Won " + winnings;
+	}
+	else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
+	{
+		winnings = bet * 4.75;
+		div2.textContent = "Almost jackpot, press space to go again";
+					divWon.textContent = "You Won " + winnings;
+	}
+	else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
+	{
+		winnings = bet * 3.75;
+		divWon.textContent = "You Won " + winnings;
+					div2.textContent = "Uhh pinapple, press space to go again";
+	}
+	else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
+	{
+		winnings = bet * 2.75;
+		div2.textContent = "Uhh pinata, press space to go again";
+					divWon.textContent = "You Won " + winnings;
+	}
+	else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
+	{
+		winnings = bet * 2;
+		div2.textContent = "Not the best in fact not even close, press space to go again";
+					divWon.textContent = "You Won " + winnings;
+	}
+	else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
+	{
+		winnings = bet * 1.75;
+		div2.textContent = "All cherries. best part of a fruit salad, press space to go again";
+					divWon.textContent = "You Won " + winnings;
+	}
+	else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
+	{
+		winnings = bet * 1.5;
+		div2.textContent = "2 cherries, not very good, press space to go again";
+					divWon.textContent = "You Won " + winnings;
+	}
+	else //losing spin
+	{
+		div2.textContent = "You have lost, try again, press space to go again";
+		divWon.textContent = "You Won nothing";
+	}
+	money += winnings;
 }
 function startGame()
 {
-	document.addEventListener("keyup",keyUpHandler, false);	
-	init();
+	document.addEventListener("keyup",keyUpHandler, false);
+	
+	//if(money >= bet)
+	//{
+		if(gameFinished == true)
+		{
+			winnings = 0;
+			
+			money -= bet;
+			slot1spin = true;
+			slot2spin = true;
+			slot3spin = true;
+			gameFinished = false;
+		}
+		else
+		{
+			stop();
+		}
+	//}
 	gameLoop();
-	
-	//document.addEventListener("keydown",keyDownHandler, false);	
-	
 }
 function keyUpHandler(event)
 {
 	var keyPressed = event.keyCode;
-	if(money >= 10)
+
+	if (keyPressed == 32)
 	{
-		if (keyPressed == 32)
-		{	
-			if(gamefinished == true)
-			{
-				money -= 10;
-				slot1spin = true;
-				slot2spin = true;
-				slot3spin = true;
-				gamefinished = false;
-			}
-			else
-			{
-				stop();
-			}
+		if(money >= bet)
+		{
+			startGame();
 		}
 	}
 }
@@ -291,9 +311,9 @@ function drawReels()
 function gameLoop() 
 {
 	window.requestAnimationFrame(gameLoop, canvas);
-	if(money >= 10)
+	if(money >= bet)
 	{
-		div.textContent = "welcome to the slots. You have $" + money + " currently. it costs $10 to play";
+		div.textContent = "Welcome to the slots. You have $" + money + " currently. It costs $10 to play";
 	}
 	else
 	{
@@ -301,7 +321,6 @@ function gameLoop()
 	}
 	update();
 	drawReels();
-	console.log("slot1: " + slot1curr + " slot2: " + slot2curr + " slot3: " + slot3curr);
 }
-	startGame();
+	init();
 });
