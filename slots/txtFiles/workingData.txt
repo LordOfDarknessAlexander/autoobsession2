@@ -1,0 +1,15 @@
+spriteSheet size
+
+each image 278x158
+
+sheet 1 width 278
+		height 948
+
+		
+cars being used initially
+	lil red express-
+	38 coupe-
+	baracuda-
+	charger-
+	cobra
+	judgeGTO

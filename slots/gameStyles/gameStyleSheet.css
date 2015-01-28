@@ -1,21 +1,107 @@
-﻿#canvasdiv
+﻿div#canvasdiv
 {
 	position:relative;
 	width:100%;
 	height:100%;
-	max-height:768px;
-	max-width:1024px;
-	margin:auto;
+	background-color:black;
+	/*background-image: url('../images/Splash.png');*/
+	/*max-height:inherit;
+	/max-width:960px;*/
+	z-index:0;
+	/*margin:auto;*/
 }
 
-#myCanvas
+canvas#myCanvas
 {
 	left:135px;
-	top:0px;
-	width:896px;
-	height:768px;
+	top:125px;
+	width:900px;
+	height:300px;
 	position:absolute;
-	z-index:3;
-	visibility:hidden;
-	/*background-color:white;*/
+	z-index:1;
+	/*visibility:hidden;*/
+	background-color:white;
 }
+
+canvas#slot1
+{
+	border:25;
+	border-color:silver;
+	position:absolute;
+	left:140px;
+	top:125px;
+	width:278px;
+	height:300px;
+	z-index: 3;
+/*	background-image:url('../images/spritesheet1.png');*/
+}
+
+canvas#slot2
+{
+	border:10;
+	border-color:maroon;
+	position:absolute;
+	left:442px;
+	top:125px;
+	width:278px;
+	height:300px;
+	z-index: 3;
+/*	background-image:url('../images/spritesheet1.png');*/
+}
+
+canvas#slot3
+{
+	border:10;
+	border-color:maroon;
+	position:absolute;
+	left:744px;
+	top:125px;
+	width:278px;
+	height:300px;
+	z-index: 3;
+	/*background-image:url('../images/spritesheet1.png');*/
+}
+
+
+div#textDiv
+{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	background-color:aqua;
+	border:medium;
+	border-color:silver;
+	left:135px;
+	top: 20px;
+	width:900px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+
+div#textDiv2
+{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	background-color:aqua;
+	border:medium;
+	border-color:silver;
+	left:135px;
+	top:70px;
+	width:900px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+
+div#wonDiv
+{
+	font-family:Georgia, "Times New Roman", Times, serif;
+	background-color:aqua;
+	border:medium;
+	border-color:silver;
+	left:135px;
+	top:430px;
+	width:900px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+

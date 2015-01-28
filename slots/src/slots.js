@@ -1,10 +1,19 @@
 $(document).ready(function()
 {
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
+//var canvas = $('canvas#myCanvas');
+//var context = canvas.getContext('2d');
 
+/*var div = $("div#textDiv");
+var div2 = $("div#textDiv2");
+var divWon = $("div#wonDiv");
+var slot1Canvas = $("canvas#slot1");
+//var slot1Context = canvas.getContext('2d');
+var slot2Canvas = $("canvas#slot2");
+//var slot2Context = canvas.getContext('2d');
+var slot3Canvas = $("canvas#slot3");
+//var slot3Context = canvas.getContext('2d');*/
 
-
+var CarSheet = new SpriteSheet('images/spritesheet1.png', width = 278, height = 158);
 var slot1 = [];
 var slot2 = [];
 var slot3 = [];
@@ -18,10 +27,6 @@ var slot3curr = undefined;
 var randSlot1 = 0; 
 var randSlot2 = 0;
 var randSlot3 = 0;
-var div = document.getElementById("textDiv");
-var div2 = document.getElementById("textDiv2");
-var divWon = document.getElementById("wonDiv");
-var nestedDiv = document.getElementById("nestedDiv");
 
 var money = 0;
 var bet = 10;
@@ -36,7 +41,7 @@ function init()
 	money  = 1000;
 	
 	//initialize the first slot
-	slot1.push(1);
+	/*slot1.push(1);
 	slot1.push(2);
 	slot1.push(2);
 	slot1.push(3);
@@ -97,7 +102,7 @@ function init()
 	slot3.push(6);
 	slot3.push(6);
 	slot3.push(6);
-	slot3.push(6);
+	slot3.push(6);*/
 	
 	startGame();
 }
@@ -106,7 +111,7 @@ function init()
 function update()
 {
 	//slot 1
-	if(slot1curr == 1)
+	/*if(slot1curr == 1)
 	{
 		imageslot1.src = "Images/lilredexpress.png";
 	}
@@ -196,7 +201,7 @@ function update()
 	{
 		randSlot3 = Math.floor(Math.random() * slot3.length);
 		slot3curr = slot3[randSlot3];
-	}
+	}*/
 }
 function stop()
 {
@@ -220,49 +225,50 @@ function checkForWin()
 	if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1)
 	{
 		winnings = bet * 7;
-		div2.textContent = "Jackpot, press space to go again";
-					divWon.textContent = "You Won " + winnings;
+		$('textDiv2').text = "Jackpot, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
 	}
 	else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
 	{
 		winnings = bet * 4.75;
-		div2.textContent = "Almost jackpot, press space to go again";
-					divWon.textContent = "You Won " + winnings;
+		$('textDiv2').text = "Almost jackpot, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
 	}
 	else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
 	{
 		winnings = bet * 3.75;
-		divWon.textContent = "You Won " + winnings;
-					div2.textContent = "Uhh pinapple, press space to go again";
+		$('textDiv2').text = "Uhh pinapple, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
+					
 	}
 	else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 	{
 		winnings = bet * 2.75;
-		div2.textContent = "Uhh pinata, press space to go again";
-					divWon.textContent = "You Won " + winnings;
+		$('textDiv2').text = "Uhh pinata, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
 	}
 	else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
 	{
 		winnings = bet * 2;
-		div2.textContent = "Not the best in fact not even close, press space to go again";
-					divWon.textContent = "You Won " + winnings;
+		$('textDiv2').text = "Not the best in fact not even close, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
 	}
 	else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 	{
 		winnings = bet * 1.75;
-		div2.textContent = "All cherries. best part of a fruit salad, press space to go again";
-					divWon.textContent = "You Won " + winnings;
+		$('textDiv2').text = "All cherries. best part of a fruit salad, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
 	}
 	else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
 	{
 		winnings = bet * 1.5;
-		div2.textContent = "2 cherries, not very good, press space to go again";
-					divWon.textContent = "You Won " + winnings;
+		$('textDiv2').text = "2 cherries, not very good, press space to go again";
+					$('wonDiv').text = "You Won " + winnings;
 	}
 	else //losing spin
 	{
-		div2.textContent = "You have lost, try again, press space to go again";
-		divWon.textContent = "You Won nothing";
+		$('textDiv2').text = "You have lost, try again, press space to go again";
+					$('wonDiv').text = "You Won nothing";
 	}
 	money += winnings;
 }
@@ -301,26 +307,32 @@ function keyUpHandler(event)
 		}
 	}
 }
-function drawReels()
+function spinReels()
 {
-	context.clearRect(0,0, canvas.width, canvas.height);
-	context.drawImage(imageslot1, 0, 0);
+		
+	/*context.clearRect(0,0, canvas.width, canvas.height);
+	slot1Context.drawimage(imageslot1, 0, 0);
+	slot2Context.drawImage(imageslot2, 0, 0);
+	slot3Context.drawImage(imageslot3, 0, 0);
+	context.drawImage(imageslot1, 140, 197);
 	context.drawImage(imageslot2, 400, 0);
-	context.drawImage(imageslot3, 800, 0);
+	context.drawImage(imageslot3, 800, 0);*/
+	$('canvas#slot1').add(backgroundImage(CarSheet);
+	$('canvas#slot2').add(backgroundImage(CarSheet);
+	$('canvas#slot3').add(backgroundImage(CarSheet);
 }
 function gameLoop() 
 {
-	window.requestAnimationFrame(gameLoop, canvas);
+	window.requestAnimationFrame(gameLoop, $('canvas#myCanvas'));
 	if(money >= bet)
 	{
-		div.textContent = "Welcome to the slots. You have $" + money + " currently. It costs $10 to play";
+		$('div#textDiv').text("Welcome to the slots. You have $" + money + " currently. It costs $10 to play");
 	}
 	else
 	{
-		div.textContent = "You do not have enough money to spin";
+		$('div#textDiv').text("You do not have enough money to spin");
 	}
 	update();
-	drawReels();
 }
 	init();
 });

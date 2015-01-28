@@ -4,18 +4,31 @@
 		<title>Slots. </title>
 		<meta charset='utf-8'>
 		
-		
-		<script type='text/javascript' src='src/jquery.js'></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<!--script type='text/javascript' src='src/jquery.js'></script-->
 		<script type='text/javascript' src='src/slots.js'></script>
 		<script type='text/javascript' import java.utils.random></script>
-	</head>
+		
+		
+		<!-- The stylesheet -->
+		<link rel = 'stylesheet' href = 'gameStyles/gameStyleSheet.css'>
+		</head>
 	
 	<body>
+		<!--scripts needed for execution-->
+		<script type = 'text/javascript' src = 'src/SpriteSheet.js'></script>
+		<script type = 'text/javascript' src = 'src/Animation.js'></script>
+		
+		
+		<div id = 'canvasdiv'></div>
 		<div id ='textDiv'></div>
-		<canvas id='myCanvas' width='1200' height='660'>
-		</canvas>	
-		<div id='textDiv2'></div>
-		<div id='wonDiv'></div>
+		<div id ='textDiv2'></div>
+		<div id ='wonDiv'></div>-
+		<canvas id ='myCanvas'></canvas>
+		<canvas id = 'slot1'></canvas>
+		<canvas id = 'slot2'></canvas>
+		<canvas id = 'slot3'></canvas>
+		
 	</body>
 	
 </html>
