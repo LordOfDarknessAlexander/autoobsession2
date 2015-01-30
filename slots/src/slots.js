@@ -42,12 +42,19 @@ var minBet = 10;
 var maxBet = 100;
 var winnings = 0;
 
-//images for reels
+//Images
 var imageslot1 = new Image();
 var imageslot2 = new Image();
 var imageslot3 = new Image();
 
 var CarSheet = new SpriteSheet('images/spritesheet1.png', width = 278, height = 158);
+
+//Sounds
+var startSpin = document.getElementById('startSpin');
+var reelsSpinning = document.getElementById('reelSpinning');
+var noWin = document.getElementById('youLose');
+var youWin = document.getElementById('winSound');
+var betting = document.getElementById('betSound');
 
 function init()
 {
@@ -245,6 +252,7 @@ function stop()
 	{
 		slot3spin = false;
 		gameFinished = true;
+		reelsSpinning.pause();
 	}
 	
 	if(gameFinished == true/*slot1spin == false && slot2spin == false && slot3spin == false*/)
@@ -259,47 +267,71 @@ function checkForWin()
 		winnings = bet * 7;
 		$('div#textDiv2').text("Jackpot");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
 	{
 		winnings = bet * 4.75;
 		$('div#textDiv2').text("Almost jackpot");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
 	{
 		winnings = bet * 3.75;
 		$('div#textDiv2').text("Uhh pinapple");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 	{
 		winnings = bet * 2.75;
 		$('div#textDiv2').text("Uhh pinata");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
 	{
 		winnings = bet * 2;
 		$('div#textDiv2').text("Not the best in fact not even close");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 	{
 		winnings = bet * 1.75;
 		$('div#textDiv2').text("All cherries. best part of a fruit salad");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
 	{
 		winnings = bet * 1.5;
 		$('div#textDiv2').text("2 cherries, not very good");
 					$('div#wonDiv').text("You Won " + winnings);
+					//Set volume and play sound
+					youWin.volume = 0.5;
+					youWin.play();
 	}
 	else //losing spin
 	{
 		$('div#textDiv2').text("You have lost");
 					$('div#wonDiv').text("You Won nothing");
+					//set volume and play sound
+					noWin.volume = 0.1;
+					noWin.play();
 	}
 	money += winnings;
 		$('div#bankValue').text("You have $" + money);
@@ -316,6 +348,7 @@ function startGame()
 			
 			money -= bet;
 				$('div#bankValue').text("You have $" + money);
+			
 			slot1spin = true;
 			slot2spin = true;
 			slot3spin = true;
@@ -336,6 +369,13 @@ function keyUpHandler(event)
 	{
 		if(money >= bet)
 		{
+			//set volume and play sound
+			startSpin.volume = 0.5;
+			startSpin.play();
+			reelsSpinning.volume = 0.5;
+			reelsSpinning.play();
+			reelSpinning.loop = true;
+			
 			startGame();
 		}
 	}
@@ -343,11 +383,18 @@ function keyUpHandler(event)
 function spinButtonHandler(event)
 {
 	//startGame();
-	if(money >= minBet)
+	if(money >= bet)
 	{
 		if(gameFinished == true)
 		{
 			winnings = 0;
+			
+			//set volume and play sound
+			startSpin.volume = 0.5;
+			startSpin.play();
+			reelsSpinning.volume = 0.5;
+			reelsSpinning.play();
+			reelSpinning.loop = true;
 			
 			money -= bet;
 				$('div#bankValue').text("You have $" + money);
@@ -369,7 +416,10 @@ function betButtonHandler(event)
 	if(bet < maxBet)
 	{
 		bet += betVal;
-		$('div#betValue').text(bet);	
+		$('div#betValue').text(bet);
+		betting.volume = 1.0;
+		betting.play();
+		
 	}
 }
 function lowerBetButtonHandler(event)
@@ -384,6 +434,8 @@ function maxBetHandler(event)
 {
 	bet = maxBet;
 	$('div#betValue').text(bet);
+	betting.volume = 1.0;
+	betting.play();
 }
 function minBetButtonHandler(event)
 {
@@ -393,7 +445,14 @@ function minBetButtonHandler(event)
 
 function stopButtonHandler(event)
 {
-	stop();
+	if(gameFinished == false)
+	{
+		stop();
+	}
+	else
+	{
+		return;
+	}
 }
 function spinReels()
 {

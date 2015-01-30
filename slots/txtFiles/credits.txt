@@ -1,2 +1,6 @@
-http://opengameart.org/content/spinblade-pro-spinblades-set
-symbols for the machine were made by Chotkos
+Audio
+
+Car Brake Crash Sound -  Recorded by Cam Martinez - acquired from soundbible.com
+car_skid_and_crash - acquired from http://www.freesfx.co.uk
+single_race_car_passing_by_1 - acquired from http://www.freesfx.co.uk
+auto_car_pull_away_squealing_tyres - acquired from http://www.freesfx.co.uk

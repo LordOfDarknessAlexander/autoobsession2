@@ -7,16 +7,17 @@
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<!--script type='text/javascript' src='src/jquery.js'></script-->
 		<script type='text/javascript' src='src/slots.js'></script>
-		<script type='text/javascript' import java.utils.random></script>
-		
+		<!--script type='text/javascript' import java.utils.random></script-->
 		
 		<!-- The stylesheet -->
 		<link rel = 'stylesheet' href = 'gameStyles/gameStyleSheet.css'>
-		<style type="text/css">
-		.auto-style1 {
-			margin-right: 0px;
-		}
-		</style>
+		
+		<!--The Sound files-->
+		<audio id = 'youLose' src = 'sounds/car_skid_and_crash.mp3' type = 'audio/mpeg' prelaod = 'auto'></audio>
+		<audio id = 'reelSpinning' src = 'sounds/single_race_car_passing_by_1.mp3'  type = 'audio/mpeg' prelaod = 'auto'></audio>
+		<audio id = 'startSpin' src = 'sounds/auto_car_pull_away_squealing_tyres.mp3' type = 'audio/mpeg' prelaod = 'auto'></audio>
+		<audio id = 'betSound'	src = 'sounds/coin_drop.mp3'  type = 'audio/mpeg' prelaod = 'auto'></audio>
+		<audio id = 'winSound' src = 'sounds/gold_coins.mp3'  type = 'audio/mpeg' prelaod = 'auto'></audio>
 		</head>
 	
 	<body>
@@ -25,19 +26,21 @@
 		<script type = 'text/javascript' src = 'src/Animation.js'></script>
 		
 		
-		<div id = 'canvasdiv'>
+		<div id = 'canvasdiv'></div>
 		<div id = 'textDiv'></div>
 		<div id = 'textDiv2'></div>
 		<div id = 'bankValue'></div>
 		<div id = 'wonDiv'></div>
 		<div id = 'betText'></div>
 		<div id = 'betValue'></div>
+		
 		<button id = 'slotStop'></button>
 		<button id = 'spinButton'></button>
 		<button id = 'betButton'></button>
 		<button id = 'lowerBetButton'></button>
 		<button id = 'maxBetButton'></button>
 		<button id = 'minBetButton'></button>
+		
 		<canvas id = 'myCanvas'></canvas>
 		<canvas id = 'slot1'></canvas>
 		<canvas id = 'slot2'></canvas>

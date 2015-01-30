@@ -4,9 +4,10 @@
 	width:100%;
 	height:100%;
 	background-color:black;
-	/*background-image: url('../images/Splash.png');*/
-	/*max-height:inherit;
-	/max-width:960px;*/
+	/*background-image:url('../images/SlotMachineBackground.png');
+	background-repeat:no-repeat;*/
+	max-height:inherit;
+	max-width:inherit;
 	z-index:0;
 	/*margin:auto;*/
 }
@@ -18,6 +19,7 @@ canvas#myCanvas
 	width:900px;
 	height:300px;
 	position:absolute;
+	/*background-image:url('../images/SlotMachineBackground.png');*/
 	z-index:1;
 	/*visibility:hidden;*/
 	background-color:white;
