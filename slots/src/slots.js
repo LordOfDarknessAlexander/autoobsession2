@@ -253,6 +253,7 @@ function stop()
 		slot3spin = false;
 		gameFinished = true;
 		reelsSpinning.pause();
+		reelSpinning.currTeime == 0.0;
 	}
 	
 	if(gameFinished == true/*slot1spin == false && slot2spin == false && slot3spin == false*/)
@@ -369,10 +370,26 @@ function keyUpHandler(event)
 	{
 		if(money >= bet)
 		{
-			//set volume and play sound
+			//set volume and play sound, stop all other sound
+			//if(betting.play() == true)
+			//{
+				betting.pause();
+				betting.currTime == 0.0;
+			//}
+			//if(noWin.play() == true)
+			//{
+				noWin.pause();
+				noWin.currTime == 0.0;
+			//}
+			//if(youWin.play() == true)
+			//{
+				youWin.pause();
+				youWin.currTime = 0.0;
+			//}
 			startSpin.volume = 0.5;
 			startSpin.play();
 			reelsSpinning.volume = 0.5;
+			reelSpinng.currTime == 0.0;
 			reelsSpinning.play();
 			reelSpinning.loop = true;
 			
@@ -389,12 +406,28 @@ function spinButtonHandler(event)
 		{
 			winnings = 0;
 			
-			//set volume and play sound
+			//set volume and play sound, stop all other sound
+			//if(betting.play() == true)
+			//{
+				betting.pause();
+				betting.currTime == 0.0;
+			//}
+			//if(noWin.play() == true)
+			//{
+				noWin.pause();
+				noWin.currTime == 0.0;
+			//}
+			//if(youWin.play() == true)
+			//{
+				youWin.pause();
+				youWin.currTime = 0.0;
+			//}
 			startSpin.volume = 0.5;
 			startSpin.play();
 			reelsSpinning.volume = 0.5;
 			reelsSpinning.play();
 			reelSpinning.loop = true;
+			
 			
 			money -= bet;
 				$('div#bankValue').text("You have $" + money);
