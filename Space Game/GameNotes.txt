@@ -1,0 +1,78 @@
+Game Notes
+
+Axis Input
+	Horizontal = SideToSide
+		Negative Button - left
+		Positive Button = right
+		Alt Neg = a
+		Alt Pos = d
+		gravity 3
+		dead .001
+		Sensitivity 3
+		snap true
+		invert false
+		type Key or mouse
+		Axis Y
+		
+	Vertical = Forward
+		Negative Button = down
+		Positive Button = up
+		Alt Neg = s
+		Alt Pos = w
+		gravity 3
+		dead .001
+		Sensitivity 3
+		snap true
+		invert false
+		type Key or mouse
+		Axis Y
+	Fire = Fire
+		Negative Button = null
+		Positive Button = space
+		Alt Neg = null
+		Alt Pos = 0
+		gravity 3
+		dead .001
+		Sensitivity 3
+		snap = false
+		invert false
+		type Key or mouse
+		Axis Y
+	Pause
+		button P
+	
+Audio File needed
+	Background music
+	engine sounds????
+	
+UIs
+Win
+	Win Text
+	Display
+		Enemies Killed
+		Score Achieved
+		Power ups used?
+		
+	Restart button
+	Quit Button
+	
+Lose
+	Loss Text
+	Display
+		Enemies Killed
+		Score Achieved
+		Power ups used?
+	Restart Button
+	Quit Button
+	
+Credits
+
+Purchase?
+	
+Game UI
+	Life counter
+	Enemy counter?
+	Score display
+	Power ups Display
+	Health Indicator
+	
