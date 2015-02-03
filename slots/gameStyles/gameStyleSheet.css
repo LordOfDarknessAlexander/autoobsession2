@@ -53,15 +53,6 @@ canvas#slot3
 /*	background-image: url('../images/Splash.png');*/
 }
 
-div#lights
-{
-	background-image:url('../images/lights_SpriteSheet.png');
-	width:1426px;
-	height:136px;
-	position:absolute;
-	left:146px;
-	top:373px;
-}
 div#welcomeTextDiv
 {
 	font-family:Digifit;
@@ -247,5 +238,4 @@ button#slotStop
 	background-position:center;
 	background-repeat:no-repeat;
 	z-index: 3;
-
 }

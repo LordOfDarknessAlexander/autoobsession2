@@ -4,11 +4,11 @@ $(document).ready(function()
 //var context = canvas.getContext('2d');
 
 //Reels 
-var slot1Canvas = document.getElementById('slot1');//$('canvas#slot1');
+var slot1Canvas = document.getElementById('slot1');
 var slot1Context = slot1Canvas.getContext('2d');
-var slot2Canvas = document.getElementById('slot2');//$('canvas#slot2');
+var slot2Canvas = document.getElementById('slot2');
 var slot2Context = slot2Canvas.getContext('2d');
-var slot3Canvas = document.getElementById('slot3');//$('canvas#slot3');
+var slot3Canvas = document.getElementById('slot3');
 var slot3Context = slot3Canvas.getContext('2d');
 
 //Buttons
@@ -20,7 +20,7 @@ var slotStopButton = document.getElementById('slotStop');
 var spinButton = document.getElementById('spinButton');
 
 //lights
-var lights = document.getElementById('lights');
+//var lights = document.getElementById('lights');
 
 //Play data
 var slot1 = [];
@@ -30,12 +30,13 @@ var slot1spin = true;
 var slot2spin = true;
 var slot3spin = true;
 var gameFinished = true;
-var slot1curr = undefined;
-var slot2curr = undefined;
-var slot3curr = undefined;
+var slot1curr = currFrame;
+var slot2curr = currFrame;
+var slot3curr = currFrame;
 var randSlot1 = 0; 
 var randSlot2 = 0;
 var randSlot3 = 0;
+var currFrame = 0;
 
 //Values
 var money = 0;
@@ -46,11 +47,19 @@ var maxBet = 100;
 var winnings = 0;
 
 //Images
-var imageslot1 = new Image();
-var imageslot2 = new Image();
-var imageslot3 = new Image();
+var slotImage1 = new Image();
+var slotImage2 = new Image();
+var slotImage3 = new Image();
+//var slotImage = new Image('../images/SpriteSheets/spritesheet1.png');
+//var lights = new Image('../images/SpriteSheets/lights_SpriteSheet.png');
 
-var CarSheet = new SpriteSheet('images/spritesheet1.png', width = 278, height = 158);
+//SpriteSheets
+//var CarSheet = new SpriteSheet(slotImage, width = 278, height = 158);
+//var LightsSheet = new SpriteSheet(lights, width = 1426, height = 136);
+
+//Animations
+//var slotAnim = new Animation(CarSheet, 1, 0, 5);
+//var lightAnim = new Animation(LightsSheet, 1, 0, 1);
 
 //Sounds
 var startSpin = document.getElementById('startSpin');
@@ -79,6 +88,7 @@ function init()
 	document.addEventListener("keyup",keyUpHandler, false);
 	
 	//initialize the first slot
+	//slot1.push(CarSheet);
 	slot1.push(1);
 	slot1.push(2);
 	slot1.push(2);
@@ -100,6 +110,7 @@ function init()
 	slot1.push(6);
 	slot1.push(6);
 	//initialize the second slot
+	//slot2.push(CarSheet);
 	slot2.push(1);
 	slot2.push(2);
 	slot2.push(2);
@@ -121,6 +132,7 @@ function init()
 	slot2.push(6);
 	slot2.push(6);
 	//initialize third slot
+	//slot3.push(CarSheet);
 	slot3.push(1);
 	slot3.push(2);
 	slot3.push(2);
@@ -149,92 +161,95 @@ function update()
 	//slot 1
 	if(slot1curr == 1)
 	{
-		imageslot1.src = 'images/ReelImages/lilredexpress.png';
+		slotImage1.src = 'images/ReelImages/lilredexpress.png';
 	}
 	else if(slot1curr == 2)
 	{
-		imageslot1.src = 'images/ReelImages/38coupe.png';
+		slotImage1.src = 'images/ReelImages/38coupe.png';
 	}
 	else if(slot1curr == 3)
 	{
-		imageslot1.src = 'images/ReelImages/baracuda.png';
+		slotImage1.src = 'images/ReelImages/baracuda.png';
 	}
 	else if(slot1curr == 4)
 	{
-		imageslot1.src = 'images/ReelImages/charger.png';
+		slotImage1.src = 'images/ReelImages/charger.png';
 	}
 	else if(slot1curr == 5)
 	{
-		imageslot1.src = 'images/ReelImages/cobra.png';
+		slotImage1.src = 'images/ReelImages/cobra.png';
 	}
 	else if(slot1curr == 6)
 	{
-		imageslot1.src = 'images/ReelImages/judgeGTO.png';
+		slotImage1.src = 'images/ReelImages/judgeGTO.png';
 	}
 	//slot two
 	if(slot2curr == 1)
 	{
-		imageslot2.src = 'images/ReelImages/lilredexpress.png';
+		slotImage2.src = 'images/ReelImages/lilredexpress.png';
 	}
 	else if(slot2curr == 2)
 	{
-		imageslot2.src = 'images/ReelImages/38coupe.png';
+		slotImage2.src = 'images/ReelImages/38coupe.png';
 	}
 	else if(slot2curr == 3)
 	{
-		imageslot2.src = 'images/ReelImages/baracuda.png';
+		slotImage2.src = 'images/ReelImages/baracuda.png';
 	}
 	else if(slot2curr == 4)
 	{
-		imageslot2.src = 'images/ReelImages/charger.png';
+		slotImage2.src = 'images/ReelImages/charger.png';
 	}
 	else if(slot2curr == 5)
 	{
-		imageslot2.src = 'images/ReelImages/cobra.png';
+		slotImage2.src = 'images/ReelImages/cobra.png';
 	}
 	else if(slot2curr == 6)
 	{
-		imageslot2.src = 'images/ReelImages/judgeGTO.png';
+		slotImage2.src = 'images/ReelImages/judgeGTO.png';
 	}
 	//slot3
 	if(slot3curr == 1)
 	{
-		imageslot3.src = 'images/ReelImages/lilredexpress.png';
+		slotImage3.src = 'images/ReelImages/lilredexpress.png';
 	}
 	else if(slot3curr == 2)
 	{
-		imageslot3.src = 'images/ReelImages/38coupe.png';
+		slotImage3.src = 'images/ReelImages/38coupe.png';
 	}
 	else if(slot3curr == 3)
 	{
-		imageslot3.src = 'images/ReelImages/baracuda.png';
+		slotImage3.src = 'images/ReelImages/baracuda.png';
 	}
 	else if(slot3curr == 4)
 	{
-		imageslot3.src = 'images/ReelImages/charger.png';
+		slotImage3.src = 'images/ReelImages/charger.png';
 	}
 	else if(slot3curr == 5)
 	{
-		imageslot3.src = 'images/ReelImages/cobra.png';
+		slotImage3.src = 'images/ReelImages/cobra.png';
 	}
 	else if(slot3curr == 6)
 	{
-		imageslot3.src = 'images/ReelImages/judgeGTO.png';
+		slotImage3.src = 'images/ReelImages/judgeGTO.png';
 	}
 	
 	
 	if(slot1spin == true)
 	{
+		//spinReels();
 		randSlot1 = Math.floor(Math.random() * slot1.length);
 		slot1curr = slot1[randSlot1];
 	}
 	if(slot2spin == true)
 	{
+		//spinReels();
 		randSlot2 = Math.floor(Math.random() * slot2.length);
 		slot2curr = slot2[randSlot2];
 	}
 	if(slot3spin == true)
 	{
+		//spinReels();
 		randSlot3 = Math.floor(Math.random() * slot3.length);
 		slot3curr = slot3[randSlot3];
 	}
@@ -273,6 +288,8 @@ function checkForWin()
 					$('div#wonDiv').text("You Won " + winnings);
 					//Play sound
 					playWinSound();
+					//Play Animation
+					//lightAnim;
 	}
 	else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
 	{
@@ -281,7 +298,8 @@ function checkForWin()
 					$('div#wonDiv').text("You Won " + winnings);
 					//Play sound
 					playWinSound();
-
+					//Play Animation
+					//lightAnim;
 	}
 	else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
 	{
@@ -290,7 +308,8 @@ function checkForWin()
 					$('div#wonDiv').text("You Won " + winnings);
 					//Play sound
 					playWinSound();
-
+					//Play Animation
+					//lightAnim;
 	}
 	else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 	{
@@ -299,7 +318,8 @@ function checkForWin()
 					$('div#wonDiv').text("You Won " + winnings);
 					//Play sound
 					playWinSound();
-
+					//Play Animation
+					//lightAnim;
 	}
 	else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
 	{
@@ -308,7 +328,8 @@ function checkForWin()
 					$('div#wonDiv').text("You Won " + winnings);
 					//Play sound
 					playWinSound();
-
+					//Play Animation
+					//lightAnim;
 	}
 	else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 	{
@@ -317,7 +338,8 @@ function checkForWin()
 					$('div#wonDiv').text("You Won " + winnings);
 					//Play sound
 					playWinSound();
-
+					//Play Animation
+					//lightAnim;
 	}
 	else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
 	{
@@ -329,7 +351,8 @@ function checkForWin()
 					//youWin.volume = 0.5;
 					//youWin.play();
 					playWinSound();
-
+					//Play Animation
+					//lightAnim;
 	}
 	else //losing spin
 	{
@@ -343,30 +366,25 @@ function checkForWin()
 	}
 	money += winnings;
 		$('div#bankValue').text("You have $" + money);
-
 }
 function startGame()
 {
-	
-	//if(money >= bet)
-	//{
-		if(gameFinished == true)
-		{
-			winnings = 0;
-			
-			money -= bet;
-				$('div#bankValue').text("You have $" + money);
-			
-			slot1spin = true;
-			slot2spin = true;
-			slot3spin = true;
-			gameFinished = false;
-		}
-		else
-		{
-			stop();
-		}
-	//}
+	if(gameFinished == true)
+	{
+		winnings = 0;
+		
+		money -= bet;
+			$('div#bankValue').text("You have $" + money);
+		
+		slot1spin = true;
+		slot2spin = true;
+		slot3spin = true;
+		gameFinished = false;
+	}
+	else
+	{
+		stop();
+	}
 	gameLoop();
 }
 function keyUpHandler(event)
@@ -470,11 +488,18 @@ function stopButtonHandler(event)
 		return;
 	}
 }
+function drawReels()
+{
+	/*slot1Context.drawImage(CarSheet[0], 0, 0);
+	slot2Context.drawImage(CarSheet[0], 0, 0);
+	slot3Context.drawImage(CarSheet[0], 0, 0);*/
+}
 function spinReels()
 {
-	slot1Context.drawImage(imageslot1, 0, 0);
-	slot2Context.drawImage(imageslot2, 0, 0);
-	slot3Context.drawImage(imageslot3, 0, 0);
+	//Animation(CarSheet, 1, 0, 5);
+	slot1Context.drawImage(slotImage1, 0, 0);
+	slot2Context.drawImage(slotImage2, 0, 0);
+	slot3Context.drawImage(slotImage3, 0, 0);
 }
 function gameLoop() 
 {
@@ -531,6 +556,10 @@ function playBetSound()
 	betting.currTime = 0.0;
 	betting.volume = 1.0;
 	betting.play();
+}
+function animateLights()
+{
+	
 }
 	init();
 });
