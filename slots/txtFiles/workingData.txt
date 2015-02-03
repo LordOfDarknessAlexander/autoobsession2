@@ -13,3 +13,15 @@ cars being used initially
 	charger-
 	cobra
 	judgeGTO
+	
+background image size
+total height = 1064
+total width = 900
+
+myCanvas - height 300
+		 - width  900
+		 
+slots - height 158
+div   - height  50
+button - height 57 * 2
+

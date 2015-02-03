@@ -256,7 +256,7 @@ function stop()
 		reelSpinning.currTeime == 0.0;
 	}
 	
-	if(gameFinished == true/*slot1spin == false && slot2spin == false && slot3spin == false*/)
+	if(gameFinished == true)
 	{
 		checkForWin();
 	}
@@ -268,54 +268,53 @@ function checkForWin()
 		winnings = bet * 7;
 		$('div#textDiv2').text("Jackpot");
 					$('div#wonDiv').text("You Won " + winnings);
-					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//Play sound
+					playWinSound();
 	}
 	else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
 	{
 		winnings = bet * 4.75;
 		$('div#textDiv2').text("Almost jackpot");
 					$('div#wonDiv').text("You Won " + winnings);
-					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//Play sound
+					playWinSound();
+
 	}
 	else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
 	{
 		winnings = bet * 3.75;
 		$('div#textDiv2').text("Uhh pinapple");
 					$('div#wonDiv').text("You Won " + winnings);
-					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//Play sound
+					playWinSound();
+
 	}
 	else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 	{
 		winnings = bet * 2.75;
 		$('div#textDiv2').text("Uhh pinata");
 					$('div#wonDiv').text("You Won " + winnings);
-					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//Play sound
+					playWinSound();
+
 	}
 	else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
 	{
 		winnings = bet * 2;
 		$('div#textDiv2').text("Not the best in fact not even close");
 					$('div#wonDiv').text("You Won " + winnings);
-					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//Play sound
+					playWinSound();
+
 	}
 	else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 	{
 		winnings = bet * 1.75;
 		$('div#textDiv2').text("All cherries. best part of a fruit salad");
 					$('div#wonDiv').text("You Won " + winnings);
-					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//Play sound
+					playWinSound();
+
 	}
 	else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
 	{
@@ -323,16 +322,21 @@ function checkForWin()
 		$('div#textDiv2').text("2 cherries, not very good");
 					$('div#wonDiv').text("You Won " + winnings);
 					//Set volume and play sound
-					youWin.volume = 0.5;
-					youWin.play();
+					//youWin.currTime = 0.0;
+					//youWin.volume = 0.5;
+					//youWin.play();
+					playWinSound();
+
 	}
 	else //losing spin
 	{
 		$('div#textDiv2').text("You have lost");
 					$('div#wonDiv').text("You Won nothing");
 					//set volume and play sound
-					noWin.volume = 0.1;
-					noWin.play();
+					noWin.currTime = 0.0;
+					//noWin.volume = 0.1;
+					//noWin.play();
+					playLossSound();
 	}
 	money += winnings;
 		$('div#bankValue').text("You have $" + money);
@@ -370,29 +374,8 @@ function keyUpHandler(event)
 	{
 		if(money >= bet)
 		{
-			//set volume and play sound, stop all other sound
-			//if(betting.play() == true)
-			//{
-				betting.pause();
-				betting.currTime == 0.0;
-			//}
-			//if(noWin.play() == true)
-			//{
-				noWin.pause();
-				noWin.currTime == 0.0;
-			//}
-			//if(youWin.play() == true)
-			//{
-				youWin.pause();
-				youWin.currTime = 0.0;
-			//}
-			startSpin.volume = 0.5;
-			startSpin.play();
-			reelsSpinning.volume = 0.5;
-			reelSpinng.currTime == 0.0;
-			reelsSpinning.play();
-			reelSpinning.loop = true;
-			
+			playReelSpin();
+
 			startGame();
 		}
 	}
@@ -406,28 +389,7 @@ function spinButtonHandler(event)
 		{
 			winnings = 0;
 			
-			//set volume and play sound, stop all other sound
-			//if(betting.play() == true)
-			//{
-				betting.pause();
-				betting.currTime == 0.0;
-			//}
-			//if(noWin.play() == true)
-			//{
-				noWin.pause();
-				noWin.currTime == 0.0;
-			//}
-			//if(youWin.play() == true)
-			//{
-				youWin.pause();
-				youWin.currTime = 0.0;
-			//}
-			startSpin.volume = 0.5;
-			startSpin.play();
-			reelsSpinning.volume = 0.5;
-			reelsSpinning.play();
-			reelSpinning.loop = true;
-			
+			playReelSpin();
 			
 			money -= bet;
 				$('div#bankValue').text("You have $" + money);
@@ -450,30 +412,48 @@ function betButtonHandler(event)
 	{
 		bet += betVal;
 		$('div#betValue').text(bet);
-		betting.volume = 1.0;
-		betting.play();
-		
+		playBetSound();		
 	}
 }
 function lowerBetButtonHandler(event)
 {
-	if(bet > minBet)
+	if(gameFinished == true)
 	{
-		bet -= betVal;
-		$('div#betValue').text(bet);	
+		if(bet > minBet)
+		{
+			bet -= betVal;
+			$('div#betValue').text(bet);	
+		}
+	}
+	else
+	{
+		return;
 	}
 }
 function maxBetHandler(event)
 {
-	bet = maxBet;
-	$('div#betValue').text(bet);
-	betting.volume = 1.0;
-	betting.play();
+	if(gameFinished == true)
+	{
+		bet = maxBet;
+		$('div#betValue').text(bet);
+		playBetSound();
+	}
+	else
+	{
+		return;
+	}
 }
 function minBetButtonHandler(event)
 {
-	bet = minBet;
-	$('div#betValue').text(bet);
+	if(gameFinished == true)
+	{
+		bet = minBet;
+		$('div#betValue').text(bet);
+	}
+	else
+	{
+		return;
+	}
 }
 
 function stopButtonHandler(event)
@@ -492,27 +472,62 @@ function spinReels()
 	slot1Context.drawImage(imageslot1, 0, 0);
 	slot2Context.drawImage(imageslot2, 0, 0);
 	slot3Context.drawImage(imageslot3, 0, 0);
-	//context.drawImage(imageslot1, 140, 197);
-	//context.drawImage(imageslot2, 400, 0);
-	//context.drawImage(imageslot3, 800, 0);
-	//$('canvas#slot1').add(backgroundImage(CarSheet);
-	//$('canvas#slot2').add(backgroundImage(CarSheet);
-	//$('canvas#slot3').add(backgroundImage(CarSheet);
 }
 function gameLoop() 
 {
 	window.requestAnimationFrame(gameLoop, $('canvas#myCanvas'));
 
-	/*if(money >= bet)
-	{
-		$('div#bankValue').text("You have $" + money); 
-	}
-	else
-	{
-		$('div#textDiv').text("You do not have enough money to spin");
-	}*/
 	update();
 	spinReels();
+}
+function playWinSound()
+{
+	//stop other sounds
+	startSpin.pause();
+	reelSpinning.pause();
+
+	//Set volume and play sound
+	youWin.currTime = 0.0;
+	youWin.volume = 0.5;
+	youWin.play();
+}
+function playLossSound()
+{
+	//stop othe sounds
+	startSpin.pause();
+	reelSpinning.pause();
+	
+	//set volume and play sound
+	noWin.currTime = 0.0;
+	noWin.volume = 0.5;
+	noWin.play();
+}
+function playReelSpin()
+{
+	//stop all other sound
+	betting.pause();
+	betting.currTime == 0.0;
+	noWin.pause();
+	noWin.currTime == 0.0;
+	youWin.pause();
+	youWin.currTime = 0.0;
+
+	//set volume and play sound
+	startSpin.currTime = 0.0;
+	startSpin.volume = 0.5;
+	startSpin.play();
+	
+	reelSpinning.currTime == 0.0;
+	reelsSpinning.volume = 0.5;
+	reelsSpinning.play();
+	reelSpinning.loop = true;
+}
+function playBetSound()
+{
+	//set volume and play sound
+	betting.currTime = 0.0;
+	betting.volume = 1.0;
+	betting.play();
 }
 	init();
 });
