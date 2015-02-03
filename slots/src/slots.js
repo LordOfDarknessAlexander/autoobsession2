@@ -12,12 +12,15 @@ var slot3Canvas = document.getElementById('slot3');//$('canvas#slot3');
 var slot3Context = slot3Canvas.getContext('2d');
 
 //Buttons
-var betButton = document.getElementById('betButton');
 var lowerBetButton = document.getElementById('lowerBetButton');
+var raiseBetButton = document.getElementById('raiseBetButton');
 var maxBetButton = document.getElementById('maxBetButton');
 var minBetButton = document.getElementById('minBetButton');
 var slotStopButton = document.getElementById('slotStop');
 var spinButton = document.getElementById('spinButton');
+
+//lights
+var lights = document.getElementById('lights');
 
 //Play data
 var slot1 = [];
@@ -62,12 +65,12 @@ function init()
 	money  = 1000;
 	
 	//initialize text
-	$('div#textDiv').text("Welcome to the slots.");
+	$('div#welcomeTextDiv').text("Welcome to the Slots Pandamonium.");
 	$('div#bankValue').text("You have $" + money);
 	$('div#betValue').text(bet);
 	
 	//initialize handlers
-	betButton.addEventListener("mousedown", betButtonHandler, false);
+	raiseBetButton.addEventListener("mousedown", raiseBetButtonHandler, false);
 	lowerBetButton.addEventListener("mousedown", lowerBetButtonHandler, false);
 	maxBetButton.addEventListener("mousedown", maxBetHandler, false);
 	minBetButton.addEventListener("mousedown", minBetButtonHandler, false);
@@ -406,7 +409,7 @@ function spinButtonHandler(event)
 	gameLoop();
 
 }
-function betButtonHandler(event)
+function raiseBetButtonHandler(event)
 {
 	if(bet < maxBet)
 	{
