@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>a496fffb-88bf-4c05-a9e0-aaac7b6219ca</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0'">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <RequiredPlatformVersion>8.1</RequiredPlatformVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <PackageCertificateKeyFile>SlotsPandamonium_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="css\GameStylesheet.css" />
+    <Content Include="default.html" />
+    <Content Include="images\Backgrounds\slot body.png" />
+    <Content Include="images\Buttons\arrow-buttons.png" />
+    <Content Include="images\Buttons\BetButton.png" />
+    <Content Include="images\Buttons\betTxt.png" />
+    <Content Include="images\Buttons\down_Arrow.png" />
+    <Content Include="images\Buttons\MaxBetButton.png" />
+    <Content Include="images\Buttons\minBetButton.png" />
+    <Content Include="images\Buttons\SpinButton.png" />
+    <Content Include="images\Buttons\stopButton.png" />
+    <Content Include="images\Buttons\up_Arrow.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\ReelImages\38coupe.png" />
+    <Content Include="images\ReelImages\baracuda.png" />
+    <Content Include="images\ReelImages\charger.png" />
+    <Content Include="images\ReelImages\cobra.png" />
+    <Content Include="images\ReelImages\judgeGTO.png" />
+    <Content Include="images\ReelImages\lilredexpress.png" />
+    <Content Include="images\ReelImages\mustang.png" />
+    <Content Include="images\ReelImages\shelby500.png" />
+    <Content Include="images\ReelImages\superbee.png" />
+    <Content Include="images\ReelImages\torino.png" />
+    <Content Include="images\smalllogo.png" />
+    <Content Include="images\splashscreen.png" />
+    <Content Include="images\storelogo.png" />
+    <Content Include="css\default.css" />
+    <Content Include="Sounds\auto_car_pull_away_squealing_tyres.mp3" />
+    <Content Include="Sounds\car_brake_crash-Cam_Martinez-567114981.mp3" />
+    <Content Include="Sounds\car_skid_and_crash.mp3" />
+    <Content Include="Sounds\coin_drop.mp3" />
+    <Content Include="Sounds\gold_coins.mp3" />
+    <Content Include="Sounds\single_race_car_passing_by_1.mp3" />
+    <Content Include="src\game.js" />
+    <None Include="SlotsPandamonium_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.WinJS.2.0, Version=1.0" />
+  </ItemGroup>
+  <Import Project="..\SlotsPandamonium.Shared\SlotsPandamonium.Shared.projitems" Label="Shared" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below then uncomment
+       that target and the DisableFastUpToDateCheck PropertyGroup. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  -->
+</Project>

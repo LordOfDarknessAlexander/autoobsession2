@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Slots Pandamonium</title>
+
+        <!-- WinJS references -->
+        <link href="//Microsoft.WinJS.2.0/css/ui-dark.css" rel="stylesheet" />
+        <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+        <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+        <!-- SlotsPandamoniums references -->
+        <link href="css/GameStylesheet.css" rel="stylesheet" />
+        <script src="src/game.js"></script>
+
+    </head>
+        <body>
+            <!--The Sound files-->
+            <audio id = 'youLose' src = 'Sounds/car_skid_and_crash.mp3' type = 'audio/mpeg'></audio>
+            <audio id='reelSpinning' src = 'Sounds/single_race_car_passing_by_1.mp3'></audio>
+            <audio id='startSpin' src = 'Sounds/auto_car_pull_away_squealing_tyres.mp3'></audio>
+            <audio id='betSound' src = 'Sounds/coin_drop.mp3'></audio>
+            <audio id='winSound' src = 'Sounds/gold_coins.mp3'></audio>
+
+            <div id = 'backgroundDiv'></div>
+            <div id = 'welcomeTextDiv'></div>
+            <div id = 'textDiv2'></div>
+            <div id = 'bankValue'></div>
+            <div id = 'wonDiv'></div>
+            <div id = 'betText'></div>
+            <div id = 'betValue'></div>
+            <div id = 'placeBetText'></div>
+
+            <button id = 'slotStop'></button>
+            <button id = 'spinButton'></button>
+            <button id = 'raiseBetButton'></button>
+            <button id = 'lowerBetButton'></button>
+            <button id = 'maxBetButton'></button>
+            <button id = 'minBetButton'></button>
+
+            <canvas id = 'slot1'></canvas>
+            <canvas id = 'slot2'></canvas>
+            <canvas id = 'slot3'></canvas>
+        </body>
+</html>
