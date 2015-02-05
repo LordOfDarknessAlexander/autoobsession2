@@ -1,3 +1,0 @@
-slots 1 and 2 or 2 and 3 at 6
-
-all slots on same symbol

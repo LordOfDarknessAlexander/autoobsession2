@@ -1,0 +1,249 @@
+﻿div#maindiv
+{
+	display:none;
+	position:relative;
+	width:900px;
+	height:600px;
+	background-color:black;
+	background-repeat:no-repeat;
+	z-index:0;
+}
+
+canvas#slot1
+{
+	position:absolute;
+	left:390px;
+	top:75px;
+	width:278px;
+	height:158px;
+	z-index: 3;
+	background-color:gray;
+}
+
+canvas#slot2
+{
+	position:absolute;
+	left:723px;
+	top:75px;
+	width:278px;
+	height:158px;
+	z-index: 3;
+	background-color:gray;	
+}
+
+canvas#slot3
+{
+	position:absolute;
+	left:1051px;
+	top:75px;
+	width:278px;
+	height:158px;
+	z-index: 3;
+	background-color:gray;
+}
+
+div#welcomeTextDiv
+{
+	font-family:Digifit;
+	font-size:x-large;
+	text-align:center;
+	color:red;
+
+	left:400px;
+	width:900px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+
+div#resultsDiv
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;	
+	color:purple;
+	background-color:aqua;
+
+	left:675px;
+	top:320px;
+	
+	width:360px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+
+div#wonDiv
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	background-color:aqua;
+	color:purple;
+
+	left:605px;
+	top:380px;
+	
+	width:500px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+
+div#betText
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+	
+	width:111px;
+	height:57px;
+	position:absolute;
+	left:175px;
+	top:300px;
+	z-index: 3;
+
+}
+
+div#betValue
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	background-color:aqua;
+	text-align:center;
+
+	width:100px;
+	height:57px;
+	position:absolute;
+	left:287px;
+	top:300px;
+	z-index: 3;
+}
+
+div#bankValue
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+
+	width:300px;
+	height:50px;
+	position:absolute;
+	z-index: 3;
+}
+
+button#spinButton
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+
+	width:270px;
+	height:85px;
+	position:absolute;
+	left:1300px;
+	top:525px;
+	/*background-image:url('../images/Buttons/SpinButton.png');
+	background-repeat:no-repeat;
+	background-position:center;*/
+	z-index: 3;
+}
+
+div#placeBetText
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+
+	width:264px;
+	height:84px;
+	position:absolute;
+	left:125px;
+	top:525px;
+	/*background-image:url('../images/Buttons/BetButton.png');
+	background-repeat:no-repeat;*/
+	z-index: 3;
+}
+
+button#lowerBetButton
+{
+	width:42px;
+	height:42px;
+	position:absolute;
+	left:390px;
+	top:567px;
+	background-image:url('../images/Buttons/down_Arrow.png');
+	background-repeat:no-repeat;
+	z-index: 3;
+
+}
+
+button#raiseBetButton
+{
+	width:42px;
+	height:42px;
+	position:absolute;
+	left:390px;
+	top:525px;
+	background-image:url('../images/Buttons/up_Arrow.png');
+	background-repeat:no-repeat;
+	z-index: 3;
+
+}
+
+button#maxBetButton
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+
+	width:181px;
+	height:57px;
+	position:absolute;
+	left:458px;
+	top:509px;
+	/*background-image:url('../images/Buttons/MaxBetButton.png');
+	background-repeat:no-repeat;*/
+	z-index: 3;
+}
+
+button#minBetButton
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+
+	width:181px;
+	height:57px;
+	position:absolute;
+	left:458px;
+	top:567px;
+	/*background-image:url('../images/Buttons/minBetButton.png');
+	background-repeat:no-repeat;*/
+	z-index: 3;
+
+}
+
+button#slotStop
+{
+	font-family:Digifit;
+	font-size:xx-large;
+	text-align:center;
+	color:silver;
+
+	width:360px;
+	height:114px;
+	top:450px;
+	left:675px;
+	position:absolute;
+	/*background-image:url('../images/Buttons/stopButton.png');
+	background-position:center;
+	background-repeat:no-repeat;*/
+	z-index: 3;
+}
