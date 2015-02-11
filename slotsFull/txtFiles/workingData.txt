@@ -77,3 +77,37 @@ minBetButton width 181
 			 
 slotStopButton width 360
 			   height 114
+			   
+Light Positioning
+
+	left signal x = 140
+				y = 420
+	
+	left upperHeadLight x = 250
+						y = 390
+	
+	left lowerHeadLight x = 250
+						y = 470
+						
+	left upperRunningLight	x = 355
+							y = 390
+	
+	left lowerRunningLight	x = 355
+							y = 465
+	
+	right upperRunningLight	x = 1345
+							y = 395
+	
+	right lowerRunningLight	x = 1345
+							y = 460
+	
+	right upperHeadLight x = 1450
+						 y = 390
+	
+	right lowerHeadLight x = 1450
+						 y = 460
+						
+	right signal x = 1550
+				 y = 425
+	
+	
