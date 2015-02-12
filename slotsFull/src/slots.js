@@ -24,10 +24,10 @@ $(document).ready(function()
 	var rightLowerRunningLight = document.getElementById('lowerRightRunning');
 	
 	var leftSignalLight = document.getElementById('leftSignal');
-	var leftUpHeadLight = document.getElementById('upperleftHead');
+	var leftUpHeadLight = document.getElementById('upperLeftHead');
 	var leftLowerHeadLight = document.getElementById('lowerRightHead');
-	var leftUpRunningLight = document.getElementById('upperleftRunning');
-	var leftLowerRunningLight = document.getElementById('lowerleftRunning');
+	var leftUpRunningLight = document.getElementById('upperLeftRunning');
+	var leftLowerRunningLight = document.getElementById('lowerLeftRunning');
 	
 	//Play data
 	var slot1 = [];
@@ -59,14 +59,18 @@ $(document).ready(function()
 	var slotImage3 = new Image();
 	
 	//Sounds
-	var startSpin = document.getElementById('startSpin');
+	var startSpinSound = document.getElementById('startSpin');
 	var reelsSpinning = document.getElementById('reelSpinning');
 	var noWin = document.getElementById('youLose');
 	var youWin = document.getElementById('winSound');
 	var betting = document.getElementById('betSound');
 	
+	
+	
 	function init()
 	{
+		//LoadAssets();
+		
 		//initialize bank
 		money  = 1000;
 		
@@ -109,7 +113,7 @@ $(document).ready(function()
 		slot3.push(5);
 		slot3.push(6);
 		
-		turnOffLights();
+		//turnOffLights();
 	}
 	function update()
 	{
@@ -225,7 +229,7 @@ $(document).ready(function()
 		money += winnings;
 			$('div#bankValue').text("You have $" + money);
 	}
-	function startGame()
+	function startSpin()
 	{
 		if(gameFinished == true)
 		{
@@ -233,6 +237,9 @@ $(document).ready(function()
 			
 			money -= bet;
 				$('div#bankValue').text("You have $" + money);
+			$('div#resultsTextDiv').text("");
+			$('div#wonTextDiv').text("");
+				
 			
 			slot1spin = true;
 			slot2spin = true;
@@ -253,14 +260,11 @@ $(document).ready(function()
 		{
 			if(money >= bet)
 			{
-				if(rightSignal.style.visibility == true)
-				{
-					turnOffLights();
-				}
+				turnOffLights();
 				
 				playReelSpin();
 	
-				startGame();
+				startSpin();
 			}
 		}
 	}
@@ -272,15 +276,15 @@ $(document).ready(function()
 			{
 				winnings = 0;
 				
-				if(rightSignal.style.visibility == true)
-				{
-					turnOffLights();
-				}
-;
+				turnOffLights();
+
 				playReelSpin();
 				
 				money -= bet;
 					$('div#bankValue').text("You have $" + money);
+				$('div#resultsTextDiv').text("");
+				$('div#wonTextDiv').text("");
+				
 				slot1spin = true;
 				slot2spin = true;
 				slot3spin = true;
@@ -466,7 +470,7 @@ $(document).ready(function()
 	function playWinSound()
 	{
 		//stop other sounds
-		startSpin.pause();
+		startSpinSound .pause();
 		reelSpinning.pause();
 	
 		//Set volume and play sound
@@ -477,7 +481,7 @@ $(document).ready(function()
 	function playLossSound()
 	{
 		//stop othe sounds
-		startSpin.pause();
+		startSpinSound .pause();
 		reelSpinning.pause();
 		
 		//set volume and play sound
@@ -496,9 +500,9 @@ $(document).ready(function()
 		youWin.currTime = 0.0;
 	
 		//set volume and play sound
-		startSpin.currTime = 0.0;
-		startSpin.volume = 0.5;
-		startSpin.play();
+		startSpinSound .currTime = 0.0;
+		startSpinSound .volume = 0.5;
+		startSpinSound .play();
 		
 		reelSpinning.currTime == 0.0;
 		reelsSpinning.volume = 0.5;
@@ -514,31 +518,107 @@ $(document).ready(function()
 	}
 	function turnOnLights()
 	{
-		rightSignalLight.style.visability = true;
-		rightUpHeadLight.style.visability = true;
-		rightLowerHeadLight.style.visability = true;
-		rightUpRunningLight.style.visability = true;
-		rightLowerRunningLight.style.visability = true;
+		$('div#rightSignal').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
 		
-		leftSignalLight.style.visability = true;
-		leftUpHeadLight.style.visability = true;
-		leftLowerHeadLight.style.visability = true;
-		leftUpRunningLight.style.visability = true;
-		leftLowerRunningLight.style.visability = true;
+		$('div#upperRightHead').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+
+		$('div#lowerRightHead').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+
+		$('div#upperRightRunning').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+
+		$('div#lowerRightRunning').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+		
+		$('div#leftSignal').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+		
+		$('div#upperLeftHead').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+
+		$('div#lowerLeftHead').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+
+		$('div#upperLeftRunning').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
+
+		$('div#lowerLeftRunning').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'running',
+								'-ms-animation-play-state':'running',
+								'animation-play-state':'running'});
 	}
 	function turnOffLights()
-	{
-		rightSignalLight.style.visability = false;
-		rightUpHeadLight.style.visability = false;
-		rightLowerHeadLight.style.visability = false;
-		rightUpRunningLight.style.visability = false;
-		rightLowerRunningLight.style.visability = false;
+	{	
+		$('div#rightSignal').css({'moz-animation-play-state':'running',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
 		
-		leftSignalLight.style.visability = false;
-		leftUpHeadLight.style.visability = false;
-		leftLowerHeadLight.style.visability = false;
-		leftUpRunningLight.style.visability = false;
-		leftLowerRunningLight.style.visability = false;
+		$('div#upperRightHead').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+
+		$('div#lowerRightHead').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+
+		$('div#upperRightRunning').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+
+		$('div#lowerRightRunning').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+		
+		$('div#leftSignal').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+		
+		$('div#upperLeftHead').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+
+		$('div#lowerLeftHead').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+
+		$('div#upperLeftRunning').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
+
+		$('div#lowerLeftRunning').css({'moz-animation-play-state':'paused',
+								'-webkit-animation-play-state':'paused',
+								'-ms-animation-play-state':'paused',
+								'animation-play-state':'paused'});
 	}	
 
 	init();
