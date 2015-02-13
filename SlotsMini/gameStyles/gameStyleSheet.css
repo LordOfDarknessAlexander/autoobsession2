@@ -1,181 +1,190 @@
-﻿div#maindiv
+﻿body
 {
-	display:none;
-	position:relative;
-	width:900px;
-	height:600px;
-	background-color:black;
-	background-repeat:no-repeat;
-	z-index:0;
+	width:1024px;
+	height:768px;
+	max-width:100%;
+	max-height:inherit;
+	margin: 0px 0px 0px 0px;
+	overflow:hidden;
 }
 
+
+/*Canvas*/
+div#maindiv
+{
+	position:absolute;
+	left:0%;
+	top:0%;
+	width:100%;
+	height:100%;
+	/*background-position:center center;*/
+	overflow:hidden;
+}
+
+canvas#backgroundImage
+{
+	position:absolute;
+	left:0%;
+	top:0%;
+	width:100%;
+	height:100%;
+	background-image:url('../images/SlotMachine.png');
+	background-repeat:no-repeat;
+	background-position::center center;
+	background-color:black;
+	background-size:100%;
+	margin:0%;
+	z-index:0;
+}
 canvas#slot1
 {
 	position:absolute;
-	left:390px;
-	top:75px;
-	width:278px;
-	height:158px;
+	left:22.5%;
+	top:7%;
+	width:17%;
+	height:auto;
+	background-repeat:no-repeat;
 	z-index: 3;
-	background-color:gray;
 }
 
 canvas#slot2
 {
 	position:absolute;
-	left:723px;
-	top:75px;
-	width:278px;
-	height:158px;
+	left:41.5%;
+	top:7%;
+	width:17%;
+	height:auto;
 	z-index: 3;
-	background-color:gray;	
 }
 
 canvas#slot3
 {
 	position:absolute;
-	left:1051px;
-	top:75px;
-	width:278px;
-	height:158px;
+	left:60.5%;
+	top:7%;
+	width:17%;
+	height:auto;
 	z-index: 3;
-	background-color:gray;
 }
 
+/*Text Divs*/
 div#welcomeTextDiv
 {
+	position:absolute;
+	left:23%;
+	top: 0%;
+	width:50%;
+	height:2%;
 	font-family:Digifit;
 	font-size:x-large;
 	text-align:center;
 	color:red;
-
-	left:400px;
-	width:900px;
-	height:50px;
-	position:absolute;
 	z-index: 3;
 }
 
-div#resultsDiv
+div#resultsTextDiv
 {
+	position:absolute;
+	left:30%;
+	top:30%;
+	width:40%;
+	height:2%;
 	font-family:Digifit;
-	font-size:xx-large;
+	font-size:large;
 	text-align:center;	
-	color:purple;
-	background-color:aqua;
-
-	left:675px;
-	top:320px;
-	
-	width:360px;
-	height:50px;
-	position:absolute;
+	color:aqua;
 	z-index: 3;
 }
 
-div#wonDiv
+div#wonTextDiv
 {
+	position:absolute;
+	left:26%;
+	top:35%;
+	width:50%;
+	height:3%;
 	font-family:Digifit;
 	font-size:xx-large;
 	text-align:center;
-	background-color:aqua;
-	color:purple;
-
-	left:605px;
-	top:380px;
-	
-	width:500px;
-	height:50px;
-	position:absolute;
+	color:white;
 	z-index: 3;
 }
 
 div#betText
 {
-	font-family:Digifit;
-	font-size:xx-large;
-	text-align:center;
-	color:silver;
-	
-	width:111px;
-	height:57px;
 	position:absolute;
-	left:175px;
-	top:300px;
+	left:10%;
+	top:30%;
+	width:7%;
+	height:6%;
+	background-image:url('../images/Buttons/betTxt.png');
+	background-repeat:no-repeat;
 	z-index: 3;
 
 }
 
 div#betValue
 {
+	position:absolute;
+	left:17%;
+	top:30%;
+	width:4%;
+	height:5%;
 	font-family:Digifit;
 	font-size:xx-large;
-	background-color:aqua;
+	color:antiquewhite;
 	text-align:center;
-
-	width:100px;
-	height:57px;
-	position:absolute;
-	left:287px;
-	top:300px;
 	z-index: 3;
 }
 
 div#bankValue
 {
-	font-family:Digifit;
+	position:absolute;
+	left:0%;
+	top:2%;
+	width:20%;
+	height:5%;
+	font-family:Georgia, "Times New Roman", Times, serif;
 	font-size:xx-large;
 	text-align:center;
 	color:silver;
-
-	width:300px;
-	height:50px;
-	position:absolute;
 	z-index: 3;
 }
 
-button#spinButton
-{
-	font-family:Digifit;
-	font-size:xx-large;
-	text-align:center;
-	color:silver;
-
-	width:270px;
-	height:85px;
-	position:absolute;
-	left:1300px;
-	top:525px;
-	/*background-image:url('../images/Buttons/SpinButton.png');
-	background-repeat:no-repeat;
-	background-position:center;*/
-	z-index: 3;
-}
 
 div#placeBetText
 {
-	font-family:Digifit;
-	font-size:xx-large;
-	text-align:center;
-	color:silver;
-
-	width:264px;
-	height:84px;
 	position:absolute;
-	left:125px;
-	top:525px;
-	/*background-image:url('../images/Buttons/BetButton.png');
-	background-repeat:no-repeat;*/
+	left:7.5%;
+	top:58%;
+	width:20%;
+	height:10%;
+	background-image:url('../images/Buttons/BetButton.png');
+	background-repeat:no-repeat;
+	z-index: 3;
+}
+
+/*Buttons*/
+button#spinButton
+{
+	position:absolute;
+	left:75%;
+	top:58%;
+	width:16%;
+	height:9%;
+	background-image:url('../images/Buttons/SpinButton.png');
+	background-repeat:no-repeat;
+	background-position:center;
 	z-index: 3;
 }
 
 button#lowerBetButton
 {
-	width:42px;
-	height:42px;
 	position:absolute;
-	left:390px;
-	top:567px;
+	left:23.5%;
+	top:63%;
+	width:2.75%;
+	height:5%;
 	background-image:url('../images/Buttons/down_Arrow.png');
 	background-repeat:no-repeat;
 	z-index: 3;
@@ -184,66 +193,349 @@ button#lowerBetButton
 
 button#raiseBetButton
 {
-	width:42px;
-	height:42px;
 	position:absolute;
-	left:390px;
-	top:525px;
+	left:23.5%;
+	top:58%;
+	width:2.75%;
+	height:5%;
 	background-image:url('../images/Buttons/up_Arrow.png');
 	background-repeat:no-repeat;
 	z-index: 3;
-
 }
 
 button#maxBetButton
 {
-	font-family:Digifit;
-	font-size:xx-large;
-	text-align:center;
-	color:silver;
-
-	width:181px;
-	height:57px;
 	position:absolute;
-	left:458px;
-	top:509px;
-	/*background-image:url('../images/Buttons/MaxBetButton.png');
-	background-repeat:no-repeat;*/
+	left:27%;
+	top:56.5%;
+	width:11%;
+	height:6.75%;
+	background-image:url('../images/Buttons/MaxBetButton.png');
+	background-repeat:no-repeat;
 	z-index: 3;
 }
 
 button#minBetButton
 {
-	font-family:Digifit;
-	font-size:xx-large;
-	text-align:center;
-	color:silver;
-
-	width:181px;
-	height:57px;
 	position:absolute;
-	left:458px;
-	top:567px;
-	/*background-image:url('../images/Buttons/minBetButton.png');
-	background-repeat:no-repeat;*/
+	left:27%;
+	top:63%;
+	width:11%;
+	height:6.75%;
+	background-image:url('../images/Buttons/minBetButton.png');
+	background-repeat:no-repeat;
 	z-index: 3;
-
 }
 
 button#slotStop
 {
-	font-family:Digifit;
-	font-size:xx-large;
-	text-align:center;
-	color:silver;
-
-	width:360px;
-	height:114px;
-	top:450px;
-	left:675px;
 	position:absolute;
-	/*background-image:url('../images/Buttons/stopButton.png');
-	background-position:center;
-	background-repeat:no-repeat;*/
+	left:40%;
+	top:45%;
+	width:21%;
+	height:12.5%;
+	background-image:url('../images/Buttons/stopButton.png');
+	/*background-position:center;*/
+	background-repeat:no-repeat;
 	z-index: 3;
 }
+
+/*Lights*/
+/*Right*/
+div#rightSignal
+{
+	position:absolute;
+	width:2.5%;
+	height:15%;
+	right:9%;
+	top:40%;
+	
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+	
+	-moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+
+	/*background-image:url('../images/Lights/RightSignalOn.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#upperRightHead
+{
+	position:absolute;
+	width:10%;
+	height:15%;
+	right:10%;
+	top:40%;
+	
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+	
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/lowerRightHeadON.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#lowerRightHead
+{
+	position:absolute;
+	width:10%;
+	height:15%;
+	right:10%;
+	top:48%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/lowerRightHeadON.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#upperRightRunning
+{
+	position:absolute;
+	width:5%;
+	height:10%;
+	right:17.5%;
+	top:40.5%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/upperRightRunningOn.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#lowerRightRunning
+{
+	position:absolute;
+	width:5%;
+	height:15%;
+	right:17.5%;
+	top:48.5%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/upperRightRunningOn.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+
+/*Left*/
+div#leftSignal
+{
+	position:absolute;
+	width:10%;
+	height:15%;
+	left:10%;
+	top:41%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/leftsignalon.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#upperLeftHead
+{
+	position:absolute;
+	width:10%;
+	height:15%;
+	left:12%;
+	top:41%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/leftUpperHeadon.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#lowerLeftHead
+{
+	position:absolute;
+	width:10%;
+	height:15%;
+	left:12%;
+	top:49%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/leftUpperHeadon.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#upperLeftRunning
+{
+	position:absolute;
+	width:5%;
+	height:15%;
+	left:21%;
+	top:41%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/leftUpperRunningon.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+div#lowerLeftRunning
+{
+	position:absolute;
+	width:5%;
+	height:15%;
+	left:21%;
+	top:49%;
+
+	-moz-transition:all 0.25s ease-in-out;
+	-webkit-transition:all 0.25s ease-in-out;
+	-o-transition:all 0.25s ease-in-out;
+	-ms-transition:all 0.25s ease-in-out;
+	transition:all 0.25s ease-in-out;
+	
+	/* order: name, direction, duration, iteration-count, timing-function */  
+	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
+	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
+	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
+	animation:blink normal .5s infinite ease-in-out; /* Opera */
+
+    -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-ms-animation-play-state:paused;
+	animation-play-state:paused;
+	
+	/*background-image:url('../images/Lights/leftUpperRunningon.png');*/
+	background-repeat:no-repeat;
+	z-index:1;
+}
+
+@-moz-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Firefox */
+@-webkit-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Webkit */
+@-ms-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* IE */
+@keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Opera */

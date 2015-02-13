@@ -1,13 +1,22 @@
-﻿/*Canvas*/
-div#canvasdiv
+﻿body
 {
-	position:relative;
+	width:1024px;
+	height:768px;
+	max-width:100%;
+	max-height:inherit;
+	margin: 0px 0px 0px 0px;
+	overflow:hidden;
+}
+
+
+/*Canvas*/
+div#maindiv
+{
+	position:absolute;
+	left:0%;
+	top:0%;
 	width:100%;
 	height:100%;
-	max-width:inherit;
-	max-height:inherit;
-	margin:auto;
-	background-color:black;
 	overflow:hidden;
 }
 
@@ -20,8 +29,11 @@ canvas#backgroundImage
 	height:auto;
 	background-image:url('../images/slotbody.png');
 	background-repeat:no-repeat;
-	background-size:auto;
-	margin:auto;
+	background-position::center center;
+	background-color:black;
+	background-size:100%;
+	margin:0%;
+	z-index:0;
 }
 canvas#slot1
 {
@@ -142,7 +154,7 @@ div#placeBetText
 {
 	position:absolute;
 	left:7.5%;
-	top:58%;
+	top:63%;
 	width:20%;
 	height:10%;
 	background-image:url('../images/Buttons/BetButton.png');
@@ -155,7 +167,7 @@ button#spinButton
 {
 	position:absolute;
 	left:75%;
-	top:58%;
+	top:63%;
 	width:16%;
 	height:9%;
 	background-image:url('../images/Buttons/SpinButton.png');
@@ -168,7 +180,7 @@ button#lowerBetButton
 {
 	position:absolute;
 	left:23.5%;
-	top:63%;
+	top:68%;
 	width:2.75%;
 	height:5%;
 	background-image:url('../images/Buttons/down_Arrow.png');
@@ -181,7 +193,7 @@ button#raiseBetButton
 {
 	position:absolute;
 	left:23.5%;
-	top:58%;
+	top:63%;
 	width:2.75%;
 	height:5%;
 	background-image:url('../images/Buttons/up_Arrow.png');
@@ -193,7 +205,7 @@ button#maxBetButton
 {
 	position:absolute;
 	left:27%;
-	top:56.5%;
+	top:61.5%;
 	width:11%;
 	height:6.75%;
 	background-image:url('../images/Buttons/MaxBetButton.png');
@@ -205,7 +217,7 @@ button#minBetButton
 {
 	position:absolute;
 	left:27%;
-	top:63%;
+	top:68%;
 	width:11%;
 	height:6.75%;
 	background-image:url('../images/Buttons/minBetButton.png');
@@ -216,7 +228,7 @@ button#minBetButton
 button#slotStop
 {
 	position:absolute;
-	left:40%;
+	left:42%;
 	top:45%;
 	width:21%;
 	height:12.5%;
@@ -406,7 +418,6 @@ div#leftSignal
 	
 	background-image:url('../images/Lights/leftsignalon.png');
 	background-repeat:no-repeat;
-	opacity:0%;
 	z-index:3;
 }
 div#upperLeftHead

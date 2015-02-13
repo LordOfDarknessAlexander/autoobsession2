@@ -6,4 +6,4 @@ vti_modifiedby:SR|JIMCORRIGAN\\Jim
 vti_timecreated:TR|27 Jan 2015 16:28:49 -0000
 vti_cacheddtm:TX|27 Jan 2015 16:28:49 -0000
 vti_filesize:IR|985
-vti_backlinkinfo:VX|AutoObsessions/SlotsMini/game.html AutoObsessions/slots/game.html
+vti_backlinkinfo:VX|AutoObsessions/slots/game.html
