@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class UIControl : MonoBehaviour
 {
-    public Button m_Start;
-    public Button m_Quit;
     public GameObject m_Player; //The player game object
     public Slider m_PlayerHealth; //Slider for the player's current health
     public Text m_LivesText; //Text element for the current number of lives the player has
@@ -29,13 +27,5 @@ public class UIControl : MonoBehaviour
         m_ScoreText.text = m_Player.GetComponent<PlayerController>().m_Score.ToString();
     }
 
-   public void StartGame()
-    {
-        Application.LoadLevel("Main");
-    }
-
-    public void Quit()
-    {
-        Application.OpenURL("http://triosdevelopers.com/J.Corrigan/projects.html");
-    }
+   
 }

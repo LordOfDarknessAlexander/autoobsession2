@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     //public Canvas UI;
+    public Text m_LivesText;
     public Text m_WaveText;
     public Text m_RestartText;
     public Text m_GameOverText;
@@ -12,6 +14,7 @@ public class GameController : MonoBehaviour
 
     public Vector3 m_SpawnArea;
     public GameObject m_Enemy;
+    
     public float m_DefaultWaveSize;
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -23,7 +26,8 @@ public class GameController : MonoBehaviour
     private bool quit_;
 
     private float numEnemies_;
-    
+    //private GameObject[] enemy_;
+
      // Use this for initialization
     void Start()
     {
@@ -59,7 +63,7 @@ public class GameController : MonoBehaviour
 
             m_WaveText.text = m_WaveNum.ToString("F0");
 
-            numEnemies_ = m_DefaultWaveSize * m_WaveNum;
+            numEnemies_ = m_DefaultWaveSize * m_WaveNum;//enemy_.Length;
 
             for (int i = 0; i < numEnemies_; ++i)
             {
@@ -88,5 +92,8 @@ public class GameController : MonoBehaviour
         m_GameOverText.text = "Game Over!";
         m_RestartText.text = "Press 'R' for Restart";
         m_QuitToMenu.text = "Press 'Q' to return to Menu";
+       // Application.LoadLevel("Lose");
     }
+
+
 }
