@@ -45,7 +45,6 @@ public class BlasterProjectile : MonoBehaviour
 	void FixedUpdate () 
     {
         rigidbody.velocity = transform.up * m_ForwardAccel;
-        Debug.Log(rigidbody.velocity);
 	}
 
     void OnCollisionEnter(Collision collision)

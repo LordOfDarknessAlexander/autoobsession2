@@ -8,6 +8,7 @@ public class EnemyController : State
 
     public GameObject m_Target;
     public GameObject m_Explosion;
+    public float m_Health;
 
     public override void OnStateEntered()
     {

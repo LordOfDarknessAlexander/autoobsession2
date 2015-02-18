@@ -14,8 +14,6 @@ public class PlayerController : State
     public Weapon m_WeaponData;
 
     public float m_FireRate;
-    public int m_Lives = 3; //Number of lives the player has
-    public int m_Score = 0; //Player's current score
     public GameObject m_Shot;
     public Transform m_PlayerBlaster;
     public Boundary m_PlayerBoundary;

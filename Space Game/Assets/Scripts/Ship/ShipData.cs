@@ -7,17 +7,20 @@ public class ShipData : MonoBehaviour
 
     public EngineData[] m_Engines;
     public Weapon[] m_Weapons;
+
     public Weapon.WeaponStateData[] m_WeaponState;
-    public Rigidbody m_Rigidbody;
-    public List<GameObject> m_Inventory;
 
     public float m_CargoCapacity; //amount ship can hold in Kg
+
+    public List<GameObject> m_Inventory;
+
     public float m_CurrentMass;
-    public float m_ShipMass;
+
     public int m_HP;
-    public int m_Shield;
-    public int m_Damage;
-    public bool m_HasShield;
+
+    //public Rigidbody2D mRigidbody;
+    public Rigidbody m_Rigidbody;
+    public float m_ShipMass;
 
     public float GetTotalThrustAccel()
     {
