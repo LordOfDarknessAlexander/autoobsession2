@@ -31,7 +31,7 @@ canvas#backgroundImage
 	background-repeat:no-repeat;
 	background-position::center center;
 	background-color:black;
-	background-size:100%;
+	background-size:100% 100%;
 	margin:0%;
 	z-index:0;
 }
@@ -69,9 +69,9 @@ canvas#slot3
 div#welcomeTextDiv
 {
 	position:absolute;
-	left:23%;
+	left:0%;
 	top: 0%;
-	width:50%;
+	width:100%;
 	height:2%;
 	font-family:Digifit;
 	font-size:x-large;
@@ -112,11 +112,12 @@ div#betText
 {
 	position:absolute;
 	left:10%;
-	top:30%;
+	top:25%;
 	width:7%;
 	height:6%;
 	background-image:url('../images/Buttons/betTxt.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 
 }
@@ -125,7 +126,7 @@ div#betValue
 {
 	position:absolute;
 	left:17%;
-	top:30%;
+	top:25%;
 	width:4%;
 	height:5%;
 	font-family:Digifit;
@@ -138,8 +139,8 @@ div#betValue
 div#bankValue
 {
 	position:absolute;
-	left:0%;
-	top:2%;
+	left:1%;
+	top:3%;
 	width:20%;
 	height:5%;
 	font-family:Georgia, "Times New Roman", Times, serif;
@@ -155,10 +156,11 @@ div#placeBetText
 	position:absolute;
 	left:7.5%;
 	top:63%;
-	width:20%;
+	width:16%;
 	height:10%;
 	background-image:url('../images/Buttons/BetButton.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 }
 
@@ -173,6 +175,7 @@ button#spinButton
 	background-image:url('../images/Buttons/SpinButton.png');
 	background-repeat:no-repeat;
 	background-position:center;
+	background-size:100% 100%;
 	z-index: 3;
 }
 
@@ -185,6 +188,7 @@ button#lowerBetButton
 	height:5%;
 	background-image:url('../images/Buttons/down_Arrow.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 
 }
@@ -198,6 +202,7 @@ button#raiseBetButton
 	height:5%;
 	background-image:url('../images/Buttons/up_Arrow.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 }
 
@@ -210,6 +215,7 @@ button#maxBetButton
 	height:6.75%;
 	background-image:url('../images/Buttons/MaxBetButton.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 }
 
@@ -222,6 +228,7 @@ button#minBetButton
 	height:6.75%;
 	background-image:url('../images/Buttons/minBetButton.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 }
 
@@ -229,12 +236,13 @@ button#slotStop
 {
 	position:absolute;
 	left:42%;
-	top:45%;
+	top:42%;
 	width:21%;
 	height:12.5%;
 	background-image:url('../images/Buttons/stopButton.png');
 	/*background-position:center;*/
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index: 3;
 }
 
@@ -243,10 +251,10 @@ button#slotStop
 div#rightSignal
 {
 	position:absolute;
-	width:2.5%;
-	height:15%;
-	right:9%;
-	top:40%;
+	width:2%;
+	height:10%;
+	right:6%;
+	bottom:52.5%;
 	
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -258,7 +266,7 @@ div#rightSignal
 	-moz-animation:blink normal .5s infinite ease-in-out; /* Firefox */
 	-webkit-animation:blink normal .5s infinite ease-in-out; /* Webkit */
 	-ms-animation:blink normal .5s infinite ease-in-out; /* IE */
-	animation:blink normal .5s infinite ease-in-out; /* Opera */
+	animation:blink normal .5s infinite ease-in-out; /* Opera, Chrome */
 	
 	-moz-animation-play-state:paused;
 	-webkit-animation-play-state:paused;
@@ -267,15 +275,16 @@ div#rightSignal
 
 	background-image:url('../images/Lights/RightSignalOn.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#upperRightHead
 {
 	position:absolute;
-	width:10%;
-	height:15%;
-	right:10%;
-	top:40%;
+	width:8.5%;
+	height:5%;
+	right:8%;
+	bottom:58%;
 	
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -296,16 +305,16 @@ div#upperRightHead
 	
 	background-image:url('../images/Lights/lowerRightHeadON.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#lowerRightHead
 {
 	position:absolute;
-	width:10%;
-	height:15%;
-	right:10%;
-	top:48%;
+	width:8.5%;
+	height:5%;
+	right:8%;
+	bottom:52.5%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -326,16 +335,16 @@ div#lowerRightHead
 	
 	background-image:url('../images/Lights/lowerRightHeadON.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#upperRightRunning
 {
 	position:absolute;
-	width:5%;
-	height:10%;
-	right:17.5%;
-	top:40.5%;
+	width:2.5%;
+	height:5.5%;
+	right:17%;
+	bottom:57.5%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -356,16 +365,16 @@ div#upperRightRunning
 	
 	background-image:url('../images/Lights/upperRightRunningOn.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#lowerRightRunning
 {
 	position:absolute;
-	width:5%;
-	height:15%;
-	right:17.5%;
-	top:48.5%;
+	width:2.5%;
+	height:5.5%;
+	right:17%;
+	bottom:51.5%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -386,7 +395,7 @@ div#lowerRightRunning
 	
 	background-image:url('../images/Lights/upperRightRunningOn.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 
@@ -394,10 +403,10 @@ div#lowerRightRunning
 div#leftSignal
 {
 	position:absolute;
-	width:10%;
-	height:15%;
-	left:10%;
-	top:41%;
+	width:2%;
+	height:11%;
+	left:10.5%;
+	bottom:51.5%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -418,15 +427,16 @@ div#leftSignal
 	
 	background-image:url('../images/Lights/leftsignalon.png');
 	background-repeat:no-repeat;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#upperLeftHead
 {
 	position:absolute;
-	width:10%;
-	height:15%;
-	left:12%;
-	top:41%;
+	width:8.5%;
+	height:5%;
+	left:12.75%;
+	bottom:57.5%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -447,16 +457,16 @@ div#upperLeftHead
 	
 	background-image:url('../images/Lights/leftUpperHeadon.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#lowerLeftHead
 {
 	position:absolute;
-	width:10%;
-	height:15%;
-	left:12%;
-	top:49%;
+	width:8.5%;
+	height:5%;
+	left:12.75%;
+	bottom:51%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -477,16 +487,16 @@ div#lowerLeftHead
 	
 	background-image:url('../images/Lights/leftUpperHeadon.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#upperLeftRunning
 {
 	position:absolute;
-	width:5%;
-	height:15%;
-	left:21%;
-	top:41%;
+	width:2.5%;
+	height:5.5%;
+	left:22%;
+	bottom:57%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -507,16 +517,16 @@ div#upperLeftRunning
 	
 	background-image:url('../images/Lights/leftUpperRunningon.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 div#lowerLeftRunning
 {
 	position:absolute;
-	width:5%;
-	height:15%;
-	left:21%;
-	top:49%;
+	width:2.5%;
+	height:5.5%;
+	left:22%;
+	bottom:51%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -537,7 +547,7 @@ div#lowerLeftRunning
 	
 	background-image:url('../images/Lights/leftUpperRunningon.png');
 	background-repeat:no-repeat;
-	opacity:0%;
+	background-size:100% 100%;
 	z-index:3;
 }
 

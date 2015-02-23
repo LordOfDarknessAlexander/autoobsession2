@@ -75,7 +75,7 @@ $(document).ready(function()
 		money  = 1000;
 		
 		//initialize text
-		$('div#welcomeTextDiv').text("Welcome to the Slots Pandamonium.");
+		$('div#welcomeTextDiv').text("Welcome to the Auto Obsessions Slots");
 		$('div#bankValue').text("You have $" + money);
 		$('div#betValue').text(bet);
 		
@@ -493,11 +493,11 @@ $(document).ready(function()
 	{
 		//stop all other sound
 		betting.pause();
-		betting.currTime == 0.0;
+		//betting.currTime == 0.0;
 		noWin.pause();
-		noWin.currTime == 0.0;
+		//noWin.currTime == 0.0;
 		youWin.pause();
-		youWin.currTime = 0.0;
+		//youWin.currTime = 0.0;
 	
 		//set volume and play sound
 		startSpinSound .currTime = 0.0;
@@ -518,59 +518,59 @@ $(document).ready(function()
 	}
 	function turnOnLights()
 	{
-		$('div#rightSignal').css({'moz-animation-play-state':'running',
+		$('div#rightSignal').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 		
-		$('div#upperRightHead').css({'moz-animation-play-state':'running',
+		$('div#upperRightHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerRightHead').css({'moz-animation-play-state':'running',
+		$('div#lowerRightHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#upperRightRunning').css({'moz-animation-play-state':'running',
+		$('div#upperRightRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerRightRunning').css({'moz-animation-play-state':'running',
+		$('div#lowerRightRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 		
-		$('div#leftSignal').css({'moz-animation-play-state':'running',
+		$('div#leftSignal').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 		
-		$('div#upperLeftHead').css({'moz-animation-play-state':'running',
+		$('div#upperLeftHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerLeftHead').css({'moz-animation-play-state':'running',
+		$('div#lowerLeftHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#upperLeftRunning').css({'moz-animation-play-state':'running',
+		$('div#upperLeftRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerLeftRunning').css({'moz-animation-play-state':'running',
+		$('div#lowerLeftRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 	}
 	function turnOffLights()
 	{	
-		$('div#rightSignal').css({'moz-animation-play-state':'running',
+		$('div#rightSignal').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
@@ -580,42 +580,42 @@ $(document).ready(function()
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerRightHead').css({'moz-animation-play-state':'paused',
+		$('div#lowerRightHead').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#upperRightRunning').css({'moz-animation-play-state':'paused',
+		$('div#upperRightRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerRightRunning').css({'moz-animation-play-state':'paused',
+		$('div#lowerRightRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 		
-		$('div#leftSignal').css({'moz-animation-play-state':'paused',
+		$('div#leftSignal').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 		
-		$('div#upperLeftHead').css({'moz-animation-play-state':'paused',
+		$('div#upperLeftHead').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerLeftHead').css({'moz-animation-play-state':'paused',
+		$('div#lowerLeftHead').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#upperLeftRunning').css({'moz-animation-play-state':'paused',
+		$('div#upperLeftRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerLeftRunning').css({'moz-animation-play-state':'paused',
+		$('div#lowerLeftRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
