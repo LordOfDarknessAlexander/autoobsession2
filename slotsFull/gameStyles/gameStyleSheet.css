@@ -40,8 +40,9 @@ canvas#slot1
 	position:absolute;
 	left:25%;
 	top:10%;
-	width:17%;
-	height:auto;
+	width:10%;
+	height:15%;
+	background-position:center;
 	z-index: 3;
 }
 
@@ -50,8 +51,9 @@ canvas#slot2
 	position:absolute;
 	left:43%;
 	top:10%;
-	width:17%;
-	height:auto;
+	width:10%;
+	height:15%;
+	background-position:center;
 	z-index: 3;
 }
 
@@ -60,8 +62,9 @@ canvas#slot3
 	position:absolute;
 	left:61%;
 	top:10%;
-	width:17%;
-	height:auto;
+	width:10%;
+	height:15%;
+	background-position:center;
 	z-index: 3;
 }
 
@@ -72,7 +75,7 @@ div#welcomeTextDiv
 	left:0%;
 	top: 0%;
 	width:100%;
-	height:2%;
+	height:5%;
 	font-family:Digifit;
 	font-size:x-large;
 	text-align:center;
@@ -85,8 +88,8 @@ div#resultsTextDiv
 	position:absolute;
 	left:30%;
 	top:30%;
-	width:40%;
-	height:2%;
+	width:53%;
+	height:5%;
 	font-family:Digifit;
 	font-size:large;
 	text-align:center;	
@@ -99,8 +102,8 @@ div#wonTextDiv
 	position:absolute;
 	left:26%;
 	top:35%;
-	width:50%;
-	height:3%;
+	width:40%;
+	height:5%;
 	font-family:Digifit;
 	font-size:xx-large;
 	text-align:center;
@@ -113,8 +116,8 @@ div#betText
 	position:absolute;
 	left:10%;
 	top:25%;
-	width:7%;
-	height:6%;
+	width:10%;
+	height:5%;
 	background-image:url('../images/Buttons/betTxt.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -127,8 +130,8 @@ div#betValue
 	position:absolute;
 	left:17%;
 	top:25%;
-	width:4%;
-	height:5%;
+	width:7%;
+	height:10%;
 	font-family:Digifit;
 	font-size:xx-large;
 	color:antiquewhite;
@@ -141,8 +144,8 @@ div#bankValue
 	position:absolute;
 	left:1%;
 	top:3%;
-	width:20%;
-	height:5%;
+	width:13%;
+	height:10%;
 	font-family:Georgia, "Times New Roman", Times, serif;
 	font-size:xx-large;
 	text-align:center;
@@ -156,8 +159,8 @@ div#placeBetText
 	position:absolute;
 	left:7.5%;
 	top:63%;
-	width:16%;
-	height:10%;
+	width:17%;
+	height:5%;
 	background-image:url('../images/Buttons/BetButton.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -170,8 +173,8 @@ button#spinButton
 	position:absolute;
 	left:75%;
 	top:63%;
-	width:16%;
-	height:9%;
+	width:10%;
+	height:10%;
 	background-image:url('../images/Buttons/SpinButton.png');
 	background-repeat:no-repeat;
 	background-position:center;
@@ -184,8 +187,8 @@ button#lowerBetButton
 	position:absolute;
 	left:23.5%;
 	top:68%;
-	width:2.75%;
-	height:5%;
+	width:20%;
+	height:10%;
 	background-image:url('../images/Buttons/down_Arrow.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -198,8 +201,8 @@ button#raiseBetButton
 	position:absolute;
 	left:23.5%;
 	top:63%;
-	width:2.75%;
-	height:5%;
+	width:3%;
+	height:7.5%;
 	background-image:url('../images/Buttons/up_Arrow.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -211,8 +214,8 @@ button#maxBetButton
 	position:absolute;
 	left:27%;
 	top:61.5%;
-	width:11%;
-	height:6.75%;
+	width:3%;
+	height:7.5%;
 	background-image:url('../images/Buttons/MaxBetButton.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -224,8 +227,8 @@ button#minBetButton
 	position:absolute;
 	left:27%;
 	top:68%;
-	width:11%;
-	height:6.75%;
+	width:10%;
+	height:5%;
 	background-image:url('../images/Buttons/minBetButton.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -237,8 +240,8 @@ button#slotStop
 	position:absolute;
 	left:42%;
 	top:42%;
-	width:21%;
-	height:12.5%;
+	width:20%;
+	height:10%;
 	background-image:url('../images/Buttons/stopButton.png');
 	/*background-position:center;*/
 	background-repeat:no-repeat;

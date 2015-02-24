@@ -1,4 +1,4 @@
-$(document).ready(function()
+(document).ready(function()
 {
 	//Reels 
 	var slot1Canvas = document.getElementById('slot1');

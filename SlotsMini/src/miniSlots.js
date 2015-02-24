@@ -16,7 +16,7 @@ $(document).ready(function()
 	var slotStopButton = document.getElementById('slotStop');
 	var spinButton = document.getElementById('spinButton');
 	
-	//lights
+	/*//lights
 	var rightSignalLight = document.getElementById('rightSignal');
 	var rightUpHeadLight = document.getElementById('upperRightHead');
 	var rightLowerHeadLight = document.getElementById('lowerRightHead');
@@ -27,7 +27,7 @@ $(document).ready(function()
 	var leftUpHeadLight = document.getElementById('upperLeftHead');
 	var leftLowerHeadLight = document.getElementById('lowerRightHead');
 	var leftUpRunningLight = document.getElementById('upperLeftRunning');
-	var leftLowerRunningLight = document.getElementById('lowerLeftRunning');
+	var leftLowerRunningLight = document.getElementById('lowerLeftRunning');*/
 	
 	//Play data
 	var slot1 = [];
@@ -75,7 +75,7 @@ $(document).ready(function()
 		money  = 1000;
 		
 		//initialize text
-		$('div#welcomeTextDiv').text("Welcome to the Slots Pandamonium.");
+		$('div#welcomeTextDiv').text("Welcome to the Auto Obsessions Slots");
 		$('div#bankValue').text("You have $" + money);
 		$('div#betValue').text(bet);
 		
@@ -95,6 +95,7 @@ $(document).ready(function()
 		slot1.push(4);
 		slot1.push(5);
 		slot1.push(6);
+		slot1.push(6);
 		//initialize the second slot
 		slot2.push(1);
 		slot2.push(2);
@@ -102,11 +103,13 @@ $(document).ready(function()
 		slot2.push(4);
 		slot2.push(5);
 		slot2.push(6);
+		slot2.push(6);
 		//initialize third slot
 		slot3.push(1);
 		slot3.push(2);
 		slot3.push(3);
 		slot3.push(4);
+		slot3.push(5);
 		slot3.push(5);
 		slot3.push(6);
 		
@@ -153,7 +156,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
@@ -163,7 +166,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();	
 		}
 		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
@@ -173,7 +176,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
@@ -183,7 +186,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
@@ -193,7 +196,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
@@ -203,7 +206,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
@@ -213,7 +216,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Set volume and play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else //losing spin
@@ -233,7 +236,7 @@ $(document).ready(function()
 			winnings = 0;
 			
 			money -= bet;
-				$('div#bankValue').text("You have $" + money);
+			$('div#bankValue').text("You have $" + money);
 			$('div#resultsTextDiv').text("");
 			$('div#wonTextDiv').text("");
 				
@@ -278,7 +281,7 @@ $(document).ready(function()
 				playReelSpin();
 				
 				money -= bet;
-					$('div#bankValue').text("You have $" + money);
+				$('div#bankValue').text("You have $" + money);
 				$('div#resultsTextDiv').text("");
 				$('div#wonTextDiv').text("");
 				
@@ -361,85 +364,80 @@ $(document).ready(function()
 		//slot 1
 		if(slot1curr == 1)
 		{
-			slotImage1.src = 'images/SpriteSheets/sprites/num1.png';
+			slotImage1.src = 'images/ReelImages/carImage.png';
 		}
 		else if(slot1curr == 2)
 		{
-			slotImage1.src = 'images/SpriteSheets/sprites/num2.png';
+			slotImage1.src = 'images/ReelImages/sevenImage.png';
 		}
 		else if(slot1curr == 3)
 		{
-			slotImage1.src = 'images/SpriteSheets/sprites/num3.png';
+			slotImage1.src = 'images/ReelImages/tripleBar.png';
 		}
 		else if(slot1curr == 4)
 		{
-			slotImage1.src = 'images/SpriteSheets/sprites/num4.png';
+			slotImage1.src = 'images/ReelImages/doubleBar.png';
 		}
 		else if(slot1curr == 5)
 		{
-			slotImage1.src = 'images/SpriteSheets/sprites/num5.png';
+			slotImage1.src = 'images/ReelImages/singleBar.png';
 		}
 		else if(slot1curr == 6)
 		{
-			slotImage1.src = 'images/SpriteSheets/sprites/num6.png';
+			slotImage1.src = 'images/ReelImages/cherry.png';
 		}
 		
 		//slot two
 		if(slot2curr == 1)
 		{
-			slotImage2.src = 'images/SpriteSheets/sprites/num1.png';
+			slotImage2.src = 'images/ReelImages/carImage.png';
 		}
 		else if(slot2curr == 2)
 		{
-			slotImage2.src = 'images/SpriteSheets/sprites/num2.png';
+			slotImage2.src = 'images/ReelImages/sevenImage.png';
 		}
 		else if(slot2curr == 3)
 		{
-			slotImage2.src = 'images/SpriteSheets/sprites/num3.png';
+			slotImage2.src = 'images/ReelImages/tripleBar.png';
 		}
 		else if(slot2curr == 4)
 		{
-			slotImage2.src = 'images/SpriteSheets/sprites/num4.png';
+			slotImage2.src = 'images/ReelImages/doubleBar.png';
 		}
 		else if(slot2curr == 5)
 		{
-			slotImage2.src = 'images/SpriteSheets/sprites/num5.png';
+			slotImage2.src = 'images/ReelImages/singleBar.png';
 		}
 		else if(slot2curr == 6)
 		{
-			slotImage2.src = 'images/SpriteSheets/sprites/num6.png';
+			slotImage2.src = 'images/ReelImages/cherry.png';
 		}
 		
 		//slot3
 		if(slot3curr == 1)
 		{
-			slotImage3.src = 'images/SpriteSheets/sprites/num1.png';
+			slotImage3.src = 'images/ReelImages/carImage.png';
 		}
 		else if(slot3curr == 2)
 		{
-			slotImage3.src = 'images/SpriteSheets/sprites/num2.png';
+			slotImage3.src = 'images/ReelImages/sevenImage.png';
 		}
 		else if(slot3curr == 3)
 		{
-			slotImage3.src = 'images/SpriteSheets/sprites/num3.png';
+			slotImage3.src = 'images/ReelImages/tripleBar.png';
 		}
 		else if(slot3curr == 4)
 		{
-			slotImage3.src = 'images/SpriteSheets/sprites/num4.png';
+			slotImage3.src = 'images/ReelImages/doubleBar.png';
 		}
 		else if(slot3curr == 5)
 		{
-			slotImage3.src = 'images/SpriteSheets/sprites/num5.png';
+			slotImage3.src = 'images/ReelImages/singleBar.png';
 		}
 		else if(slot3curr == 6)
 		{
-			slotImage3.src = 'images/SpriteSheets/sprites/num6.png';
+			slotImage3.src = 'images/ReelImages/cherry.png';
 		}
-		
-		slot1Context.drawImage(slotImage1, 0, 0);
-		slot2Context.drawImage(slotImage2, 0, 0);
-		slot3Context.drawImage(slotImage3, 0, 0);
-	
 	}
 	function spinReels()
 	{
@@ -467,7 +465,7 @@ $(document).ready(function()
 	function playWinSound()
 	{
 		//stop other sounds
-		startSpinSound .pause();
+		startSpinSound.pause();
 		reelSpinning.pause();
 	
 		//Set volume and play sound
@@ -490,16 +488,13 @@ $(document).ready(function()
 	{
 		//stop all other sound
 		betting.pause();
-		betting.currTime == 0.0;
 		noWin.pause();
-		noWin.currTime == 0.0;
 		youWin.pause();
-		youWin.currTime = 0.0;
 	
 		//set volume and play sound
-		startSpinSound .currTime = 0.0;
-		startSpinSound .volume = 0.5;
-		startSpinSound .play();
+		startSpinSound.currTime = 0.0;
+		startSpinSound.volume = 0.5;
+		startSpinSound.play();
 		
 		reelSpinning.currTime == 0.0;
 		reelsSpinning.volume = 0.5;
@@ -515,59 +510,59 @@ $(document).ready(function()
 	}
 	function turnOnLights()
 	{
-		$('div#rightSignal').css({'moz-animation-play-state':'running',
+		$('div#rightSignal').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 		
-		$('div#upperRightHead').css({'moz-animation-play-state':'running',
+		$('div#upperRightHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerRightHead').css({'moz-animation-play-state':'running',
+		$('div#lowerRightHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#upperRightRunning').css({'moz-animation-play-state':'running',
+		$('div#upperRightRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerRightRunning').css({'moz-animation-play-state':'running',
+		$('div#lowerRightRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 		
-		$('div#leftSignal').css({'moz-animation-play-state':'running',
+		$('div#leftSignal').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 		
-		$('div#upperLeftHead').css({'moz-animation-play-state':'running',
+		$('div#upperLeftHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerLeftHead').css({'moz-animation-play-state':'running',
+		$('div#lowerLeftHead').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#upperLeftRunning').css({'moz-animation-play-state':'running',
+		$('div#upperLeftRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 
-		$('div#lowerLeftRunning').css({'moz-animation-play-state':'running',
+		$('div#lowerLeftRunning').css({'display':'block', 'moz-animation-play-state':'running',
 								'-webkit-animation-play-state':'running',
 								'-ms-animation-play-state':'running',
 								'animation-play-state':'running'});
 	}
 	function turnOffLights()
 	{	
-		$('div#rightSignal').css({'moz-animation-play-state':'running',
+		$('div#rightSignal').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
@@ -577,42 +572,42 @@ $(document).ready(function()
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerRightHead').css({'moz-animation-play-state':'paused',
+		$('div#lowerRightHead').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#upperRightRunning').css({'moz-animation-play-state':'paused',
+		$('div#upperRightRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerRightRunning').css({'moz-animation-play-state':'paused',
+		$('div#lowerRightRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 		
-		$('div#leftSignal').css({'moz-animation-play-state':'paused',
+		$('div#leftSignal').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 		
-		$('div#upperLeftHead').css({'moz-animation-play-state':'paused',
+		$('div#upperLeftHead').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerLeftHead').css({'moz-animation-play-state':'paused',
+		$('div#lowerLeftHead').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#upperLeftRunning').css({'moz-animation-play-state':'paused',
+		$('div#upperLeftRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});
 
-		$('div#lowerLeftRunning').css({'moz-animation-play-state':'paused',
+		$('div#lowerLeftRunning').css({'display':'none', 'moz-animation-play-state':'paused',
 								'-webkit-animation-play-state':'paused',
 								'-ms-animation-play-state':'paused',
 								'animation-play-state':'paused'});

@@ -16,7 +16,7 @@ $(document).ready(function()
 	var slotStopButton = document.getElementById('slotStop');
 	var spinButton = document.getElementById('spinButton');
 	
-	//lights
+	/*//lights
 	var rightSignalLight = document.getElementById('rightSignal');
 	var rightUpHeadLight = document.getElementById('upperRightHead');
 	var rightLowerHeadLight = document.getElementById('lowerRightHead');
@@ -27,7 +27,7 @@ $(document).ready(function()
 	var leftUpHeadLight = document.getElementById('upperLeftHead');
 	var leftLowerHeadLight = document.getElementById('lowerRightHead');
 	var leftUpRunningLight = document.getElementById('upperLeftRunning');
-	var leftLowerRunningLight = document.getElementById('lowerLeftRunning');
+	var leftLowerRunningLight = document.getElementById('lowerLeftRunning');*/
 	
 	//Play data
 	var slot1 = [];
@@ -156,7 +156,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
@@ -166,7 +166,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();	
 		}
 		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
@@ -176,7 +176,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
@@ -186,7 +186,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
@@ -196,7 +196,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
@@ -206,7 +206,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
@@ -216,7 +216,7 @@ $(document).ready(function()
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Set volume and play sound
 			playWinSound();
-			//Play Animation
+			//Play Lights
 			turnOnLights();
 		}
 		else //losing spin
@@ -236,7 +236,7 @@ $(document).ready(function()
 			winnings = 0;
 			
 			money -= bet;
-				$('div#bankValue').text("You have $" + money);
+			$('div#bankValue').text("You have $" + money);
 			$('div#resultsTextDiv').text("");
 			$('div#wonTextDiv').text("");
 				
@@ -281,7 +281,7 @@ $(document).ready(function()
 				playReelSpin();
 				
 				money -= bet;
-					$('div#bankValue').text("You have $" + money);
+				$('div#bankValue').text("You have $" + money);
 				$('div#resultsTextDiv').text("");
 				$('div#wonTextDiv').text("");
 				
@@ -438,11 +438,6 @@ $(document).ready(function()
 		{
 			slotImage3.src = 'images/ReelImages/judgeGTO.png';
 		}
-		
-		slot1Context.drawImage(slotImage1, 0, 0);
-		slot2Context.drawImage(slotImage2, 0, 0);
-		slot3Context.drawImage(slotImage3, 0, 0);
-	
 	}
 	function spinReels()
 	{
@@ -470,7 +465,7 @@ $(document).ready(function()
 	function playWinSound()
 	{
 		//stop other sounds
-		startSpinSound .pause();
+		startSpinSound.pause();
 		reelSpinning.pause();
 	
 		//Set volume and play sound
@@ -493,16 +488,13 @@ $(document).ready(function()
 	{
 		//stop all other sound
 		betting.pause();
-		//betting.currTime == 0.0;
 		noWin.pause();
-		//noWin.currTime == 0.0;
 		youWin.pause();
-		//youWin.currTime = 0.0;
 	
 		//set volume and play sound
-		startSpinSound .currTime = 0.0;
-		startSpinSound .volume = 0.5;
-		startSpinSound .play();
+		startSpinSound.currTime = 0.0;
+		startSpinSound.volume = 0.5;
+		startSpinSound.play();
 		
 		reelSpinning.currTime == 0.0;
 		reelsSpinning.volume = 0.5;
