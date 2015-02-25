@@ -3,7 +3,7 @@
 	width:1024px;
 	height:768px;
 	max-width:100%;
-	max-height:inherit;
+	max-height:100%;
 	margin: 0px 0px 0px 0px;
 	overflow:hidden;
 }
@@ -18,9 +18,8 @@ div#maindiv
 	height:100%;
 	max-width:600px;
 	max-height:400px;
-	min-width:200px;
-	min-height:133px;
 	background-position:center center;
+	background-size:100% 100%;
 	overflow:hidden;
 }
 
@@ -39,21 +38,6 @@ canvas#backgroundImage
 	margin:0%;
 	z-index:0;
 }
-div#backgroundImageD
-{
-	position:absolute;
-	left:0%;
-	top:0%;
-	width:100%;
-	height:100%;
-	background-image:url('../images/SlotMachine.png');
-	background-repeat:no-repeat;
-	background-position::center center;
-	background-color:black;
-	background-size:100% 100%;
-	margin:0%;
-	z-index:0;
-}
 
 canvas#slot1
 {
@@ -62,22 +46,18 @@ canvas#slot1
 	top:30%;
 	width:10%;
 	height:15%;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-size:100% 100%;
+	background-color:antiquewhite;
 	z-index: 3;
 }
 
 canvas#slot2
 {
 	position:absolute;
-	left:41.7%;
+	left:45%;
 	top:30%;
 	width:10%;
 	height:15%;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-size:100% 100%;
+	background-color:antiquewhite;
 	z-index: 3;
 }
 
@@ -88,9 +68,7 @@ canvas#slot3
 	top:30%;
 	width:10%;
 	height:15%;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-size:100% 100%;
+	background-color:antiquewhite;
 	z-index: 3;
 }
 
@@ -112,28 +90,28 @@ div#welcomeTextDiv
 div#resultsTextDiv
 {
 	position:absolute;
-	left:23.3%;
+	left:20%;
 	top:15%;
-	width:40%;
+	width:60%;
 	height:2%;
 	font-family:Digifit;
 	font-size:medium;
 	text-align:center;	
-	color:aqua;
+	color:teal;
 	z-index: 3;
 }
 
 div#wonTextDiv
 {
 	position:absolute;
-	left:30%;
-	top:20%;
+	left:25%;
+	top:45%;
 	width:50%;
 	height:3%;
 	font-family:Digifit;
 	font-size:medium;
 	text-align:center;
-	color:white;
+	color:darkviolet;
 	z-index: 3;
 }
 

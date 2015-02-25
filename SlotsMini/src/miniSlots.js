@@ -43,6 +43,7 @@ $(document).ready(function()
 	var randSlot1 = 0; 
 	var randSlot2 = 0;
 	var randSlot3 = 0;
+	var rand = 0;
 	var currFrame = 0;
 	
 	//Values
@@ -117,7 +118,11 @@ $(document).ready(function()
 	}
 	function update()
 	{
-		window.requestAnimationFrame(update, $('canvas#myCanvas'));
+		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
+		
+		slot1Context.clearRect ( 0 , 0 , slot1Canvas.width, slot1Canvas.height);
+		slot2Context.clearRect ( 0 , 0 , slot2Canvas.width, slot2Canvas.height);
+		slot3Context.clearRect ( 0 , 0 , slot3Canvas.width, slot3Canvas.height);
 		
 		drawReels();
  		spinReels();
@@ -387,6 +392,13 @@ $(document).ready(function()
 			slotImage1.src = 'images/ReelImages/cherry.png';
 		}
 		
+		slot1Context.drawImage(slotImage1, 
+					  (slot1Canvas.width / 2) - (slotImage1.width / 2), 
+					  (slot1Canvas.height / 2) - (slotImage1.height / 2), 
+					  slotImage1.width * 1.5, 
+					  slotImage1.height * 1.5);
+
+		
 		//slot two
 		if(slot2curr == 1)
 		{
@@ -413,6 +425,12 @@ $(document).ready(function()
 			slotImage2.src = 'images/ReelImages/cherry.png';
 		}
 		
+		slot2Context.drawImage(slotImage2, 
+					  (slot2Canvas.width / 2) - (slotImage2.width / 2), 
+					  (slot2Canvas.height / 2) - (slotImage2.height / 2), 
+					  slotImage2.width * 1.5, 
+					  slotImage2.height * 1.5);
+
 		//slot3
 		if(slot3curr == 1)
 		{
@@ -438,30 +456,61 @@ $(document).ready(function()
 		{
 			slotImage3.src = 'images/ReelImages/cherry.png';
 		}
+		
+		slot3Context.drawImage(slotImage3, 
+							  (slot3Canvas.width / 2) - (slotImage3.width / 2), 
+							  (slot3Canvas.height / 2) - (slotImage3.height / 2), 
+							  slotImage3.width * 1.5, 
+							  slotImage3.height * 1.5);
 	}
 	function spinReels()
 	{
+		
 		if(slot1spin == true)
 		{
-			randSlot1 = Math.floor(Math.random() * slot1.length);
-			slot1curr = slot1[randSlot1];
+			slot1curr = slot1[randomNum()];
 		}
 		if(slot2spin == true)
 		{
-			randSlot2 = Math.floor(Math.random() * slot2.length);
-			slot2curr = slot2[randSlot2];
+			slot2curr = slot2[randomNum()];
 		}
 		if(slot3spin == true)
 		{
-			randSlot3 = Math.floor(Math.random() * slot3.length);
-			slot3curr = slot3[randSlot3];
+			slot3curr = slot3[randomNum()];
 		}
-		
-		slot1Context.drawImage(slotImage1, 0, 0);
-		slot2Context.drawImage(slotImage2, 0, 0);
-		slot3Context.drawImage(slotImage3, 0, 0);
-	
 	}
+	function randomNum()
+	{
+		rand = Math.floor(Math.random() * 100);
+		var num = 0;
+		
+		if(rand <= 30)
+		{
+			num = 6;
+		}
+		else if(rand < 53 && rand > 30)
+		{
+			num = 5;
+		}
+		else if(rand < 71 && rand > 52)
+		{
+			num = 4;
+		}
+		else if(rand < 85 && rand > 70)
+		{
+			num = 3;
+		}
+		else if(rand < 95 && rand > 84)
+		{
+			num = 2;
+		}
+		else
+		{
+			num = 1;
+		}
+		return num;
+	}
+	
 	function playWinSound()
 	{
 		//stop other sounds
