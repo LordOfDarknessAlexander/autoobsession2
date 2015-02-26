@@ -43,7 +43,9 @@ $(document).ready(function()
 	var randSlot1 = 0; 
 	var randSlot2 = 0;
 	var randSlot3 = 0;
+	var randNum = 0;
 	var currFrame = 0;
+	
 	
 	//Values
 	var money = 0;
@@ -95,14 +97,12 @@ $(document).ready(function()
 		slot1.push(4);
 		slot1.push(5);
 		slot1.push(6);
-		slot1.push(6);
 		//initialize the second slot
 		slot2.push(1);
 		slot2.push(2);
 		slot2.push(3);
 		slot2.push(4);
 		slot2.push(5);
-		slot2.push(6);
 		slot2.push(6);
 		//initialize third slot
 		slot3.push(1);
@@ -113,11 +113,15 @@ $(document).ready(function()
 		slot3.push(5);
 		slot3.push(6);
 		
-		//turnOffLights();
+		turnOffLights();
 	}
 	function update()
 	{
 		window.requestAnimationFrame(update, $('canvas#myCanvas'));
+		
+		slot1Context.clearRect ( 0 , 0 , slot1Canvas.width, slot1Canvas.height);
+		slot2Context.clearRect ( 0 , 0 , slot2Canvas.width, slot2Canvas.height);
+		slot3Context.clearRect ( 0 , 0 , slot3Canvas.width, slot3Canvas.height);
 		
 		drawReels();
  		spinReels();
@@ -144,6 +148,9 @@ $(document).ready(function()
 		
 		if(gameFinished == true)
 		{
+			console.log(slot1curr, slot2curr, slot3curr);
+			console.log(slotImage1, slotImage2, slotImage3);
+
 			checkForWin();
 		}
 	}
@@ -151,7 +158,7 @@ $(document).ready(function()
 	{
 		if(slot1curr == 1 && slot2curr == 1 && slot3curr == 1)
 		{
-			winnings = bet * 7;
+			winnings = bet * 10;
 			$('div#resultsTextDiv').text("Jackpot");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
@@ -161,8 +168,8 @@ $(document).ready(function()
 		}
 		else if(slot1curr == 2 && slot2curr == 2 && slot3curr == 2)
 		{
-			winnings = bet * 4.75;
-			$('div#resultsTextDiv').text("Almost jackpot");
+			winnings = bet * 7.5;
+			$('div#resultsTextDiv').text("Congratulations, You win!");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
@@ -171,8 +178,8 @@ $(document).ready(function()
 		}
 		else if(slot1curr == 3 && slot2curr == 3 && slot3curr == 3)
 		{
-			winnings = bet * 3.75;
-			$('div#resultsTextDiv').text("Uhh pinapple");
+			winnings = bet * 5;
+			$('div#resultsTextDiv').text("Congratulations, You win!");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
@@ -181,7 +188,7 @@ $(document).ready(function()
 		}
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 		{
-			winnings = bet * 2.75;
+			winnings = bet * 3;
 			$('div#resultsTextDiv').text("Uhh pinata");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
@@ -191,33 +198,46 @@ $(document).ready(function()
 		}
 		else if(slot1curr == 5 && slot2curr == 5 && slot3curr == 5)
 		{
-			winnings = bet * 2;
-			$('div#resultsTextDiv').text("Not the best in fact not even close");
+			winnings = bet * 2.5;
+			$('div#resultsTextDiv').text("Congratulations, You win!");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
+		else if(slot1curr == 5 && slot2curr == 5 && slot3curr != 5 || 
+				slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
+		{
+			winnings = bet * 2;
+			$('div#resultsTextDiv').text("Congratulations, You win!");
+			$('div#wonTextDiv').text("You Won " + winnings);
+			//Play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+		}
+		else if(slot1curr == 5 && slot2curr != 5 && slot3curr != 5 || 
+				slot1curr == 6 && slot2curr == 6)
 		{
 			winnings = bet * 1.75;
-			$('div#resultsTextDiv').text("All cherries. best part of a fruit salad");
-			$('div#wonTextDiv').text("You Won " + winnings);
-			//Play sound
-			playWinSound();
-			//Play Lights
-			turnOnLights();
-		}
-		else if(slot1curr == 6 && slot2curr == 6 || slot2curr == 6 && slot3curr == 6)
-		{
-			winnings = bet * 1.5;
-			$('div#resultsTextDiv').text("2 cherries, not very good");
+			$('div#resultsTextDiv').text("Congratulations, You win!");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Set volume and play sound
 			playWinSound();
 			//Play Lights
 			turnOnLights();
+		}
+		else if(slot1curr == 6)
+		{
+			winnings = bet * 1.5;
+			$('div#resultsTextDiv').text("Congratulations, You win!");
+			$('div#wonTextDiv').text("You Won " + winnings);
+			//Set volume and play sound
+			playWinSound();
+			//Play Lights
+			turnOnLights();
+
 		}
 		else //losing spin
 		{
@@ -228,6 +248,7 @@ $(document).ready(function()
 		}
 		money += winnings;
 			$('div#bankValue').text("You have $" + money);
+		console.log(winnings);
 	}
 	function startSpin()
 	{
@@ -387,6 +408,13 @@ $(document).ready(function()
 			slotImage1.src = 'images/ReelImages/judgeGTO.png';
 		}
 		
+		slot1Context.drawImage(slotImage1, 
+							  (slot1Canvas.width / 2) - (slotImage1.width / 2), 
+							  (slot1Canvas.height / 2) - (slotImage1.height / 2), 
+							  slotImage1.width, 
+							  slotImage1.height);
+
+
 		//slot two
 		if(slot2curr == 1)
 		{
@@ -413,6 +441,12 @@ $(document).ready(function()
 			slotImage2.src = 'images/ReelImages/judgeGTO.png';
 		}
 		
+		slot2Context.drawImage(slotImage2, 
+							  (slot2Canvas.width / 2) - (slotImage2.width / 2), 
+							  (slot2Canvas.height / 2) - (slotImage2.height / 2), 
+							  slotImage2.width, 
+							  slotImage2.height);
+
 		//slot3
 		if(slot3curr == 1)
 		{
@@ -438,30 +472,110 @@ $(document).ready(function()
 		{
 			slotImage3.src = 'images/ReelImages/judgeGTO.png';
 		}
+		
+		slot3Context.drawImage(slotImage3, 
+							  (slot3Canvas.width / 2) - (slotImage3.width / 2), 
+							  (slot3Canvas.height / 2) - (slotImage3.height / 2), 
+							  slotImage3.width, 
+							  slotImage3.height);
+		
+
 	}
 	function spinReels()
 	{
+		
 		if(slot1spin == true)
 		{
-			randSlot1 = Math.floor(Math.random() * slot1.length);
-			slot1curr = slot1[randSlot1];
+			slot1curr = slot1[randomNum()];
 		}
 		if(slot2spin == true)
 		{
-			randSlot2 = Math.floor(Math.random() * slot2.length);
-			slot2curr = slot2[randSlot2];
+			slot2curr = slot2[randomNum()];
 		}
 		if(slot3spin == true)
 		{
-			randSlot3 = Math.floor(Math.random() * slot3.length);
-			slot3curr = slot3[randSlot3];
+			slot3curr = slot3[randomNum()];
 		}
-		
-		slot1Context.drawImage(slotImage1, 0, 0);
-		slot2Context.drawImage(slotImage2, 0, 0);
-		slot3Context.drawImage(slotImage3, 0, 0);
-	
 	}
+	function randomNum()
+	{
+		var rand = Math.floor(Math.random() * 100);
+		var num = 0;
+		
+		if(rand <= 30)
+		{
+			num = 6;
+		}
+		else if(rand < 53 && rand > 30)
+		{
+			num = 5;
+		}
+		else if(rand < 71 && rand > 52)
+		{
+			num = 4;
+		}
+		else if(rand < 85 && rand > 70)
+		{
+			num = 3;
+		}
+		else if(rand < 95 && rand > 84)
+		{
+			num = 2;
+		}
+		else
+		{
+			num = 1;
+		}
+		return num;
+	}
+	/*function spinReels()
+	{
+		if(slot1spin == true)
+		{
+			slot1curr = slot1[randomNum()];
+		}
+		if(slot2spin == true)
+		{
+			slot2curr = slot2[randomNum()];
+		}
+		if(slot3spin == true)
+		{
+			slot3curr = slot3[randomNum()];
+		}
+	}
+	
+	function randomNum()
+	{
+		randNum = Math.floor(Math.random() * 100);
+		winNum = 0;
+		
+		if(randNum <= 30)
+		{
+			winNum = 6;
+		}
+		else if(randNum < 53 && randNum > 30)
+		{
+			winNum = 5;
+		}
+		else if(randNum < 71 && randNum > 52)
+		{
+			winNum = 4;
+		}
+		else if(randNum < 85 && randNum > 70)
+		{
+			winNum = 3;
+		}
+		else if(randNum < 95 && randNum > 84)
+		{
+			winNum = 2;
+		}
+		else
+		{
+			winNum = 1;
+		}
+		return winNum ;
+	}*/
+
 	function playWinSound()
 	{
 		//stop other sounds

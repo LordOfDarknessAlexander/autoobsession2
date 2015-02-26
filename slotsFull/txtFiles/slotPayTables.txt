@@ -1,0 +1,34 @@
+Slot pay tables
+
+mini guaranteed win
+any any any	= 100
+6 any any = 250
+6 6  any = 500
+6 6 6 = 750
+5 5 5 = 1000
+4 4 4 = 1500
+3 3 3 = 2500
+2 2 2 = 5000
+1 1 1 = Jackpot
+
+Mini non-guarantee
+any any any	= 0
+6 any any = bet times 1.5
+6 6  any = bet times 2.5
+6 6 6 = bet times 5
+5 5 5 = bet times 
+4 4 4 = bet times
+3 3 3 = bet times
+2 2 2 = bet times
+1 1 1 = Jackpot / bet times
+
+Full version
+any any any	= 0
+6 any any = bet times 1.5
+6 6  any = bet times 1.75
+6 6 6 = bet times 2
+5 5 5 = bet times 2.5
+4 4 4 = bet times 3
+3 3 3 = bet times 5
+2 2 2 = bet times 7.5
+1 1 1 = bet times 10

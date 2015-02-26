@@ -3,30 +3,33 @@
 	width:1024px;
 	height:768px;
 	max-width:100%;
-	max-height:inherit;
+	max-height:100%;
 	margin: 0px 0px 0px 0px;
 	overflow:hidden;
 }
-
 
 /*Canvas*/
 div#maindiv
 {
 	position:absolute;
-	left:0%;
-	top:0%;
+	left:14%;
+	top:10%;
 	width:100%;
 	height:100%;
+	max-width:1000px;
+	max-height:600px;
+	background-position:center center;
+	background-size:100% 100%;
 	overflow:hidden;
 }
 
 canvas#backgroundImage
 {
 	position:relative;
-	left:2.5%;
-	top:3%;
+	left:0%;
+	top:0%;
 	width:100%;
-	height:auto;
+	height:100%;
 	background-image:url('../images/slotbody.png');
 	background-repeat:no-repeat;
 	background-position::center center;
@@ -38,33 +41,30 @@ canvas#backgroundImage
 canvas#slot1
 {
 	position:absolute;
-	left:25%;
-	top:10%;
-	width:10%;
-	height:15%;
-	background-position:center;
+	left:24%;
+	top:33.3%;
+	width:17.5%;
+	height:25%;
 	z-index: 3;
 }
 
 canvas#slot2
 {
 	position:absolute;
-	left:43%;
-	top:10%;
-	width:10%;
-	height:15%;
-	background-position:center;
+	left:42%;
+	top:33.3%;
+	width:17.5%;
+	height:25%;
 	z-index: 3;
 }
 
 canvas#slot3
 {
 	position:absolute;
-	left:61%;
-	top:10%;
-	width:10%;
-	height:15%;
-	background-position:center;
+	left:60%;
+	top:33.3%;
+	width:17.5%;
+	height:25%;
 	z-index: 3;
 }
 
@@ -72,10 +72,10 @@ canvas#slot3
 div#welcomeTextDiv
 {
 	position:absolute;
-	left:0%;
+	left:4%;
 	top: 0%;
-	width:100%;
-	height:5%;
+	width:92%;
+	height:6.67%;
 	font-family:Digifit;
 	font-size:x-large;
 	text-align:center;
@@ -86,10 +86,10 @@ div#welcomeTextDiv
 div#resultsTextDiv
 {
 	position:absolute;
-	left:30%;
-	top:30%;
-	width:53%;
-	height:5%;
+	left:26%;
+	top:10%;
+	width:50%;
+	height:6.67%;
 	font-family:Digifit;
 	font-size:large;
 	text-align:center;	
@@ -100,12 +100,12 @@ div#resultsTextDiv
 div#wonTextDiv
 {
 	position:absolute;
-	left:26%;
-	top:35%;
-	width:40%;
-	height:5%;
+	left:30%;
+	top:23.3%;
+	width:42%;
+	height:6.67%;
 	font-family:Digifit;
-	font-size:xx-large;
+	font-size:large;
 	text-align:center;
 	color:white;
 	z-index: 3;
@@ -114,10 +114,10 @@ div#wonTextDiv
 div#betText
 {
 	position:absolute;
-	left:10%;
-	top:25%;
+	left:0%;
+	top:23.3%;
 	width:10%;
-	height:5%;
+	height:6.67%;
 	background-image:url('../images/Buttons/betTxt.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -128,9 +128,9 @@ div#betText
 div#betValue
 {
 	position:absolute;
-	left:17%;
-	top:25%;
-	width:7%;
+	left:10%;
+	top:21.67%;
+	width:6%;
 	height:10%;
 	font-family:Digifit;
 	font-size:xx-large;
@@ -143,11 +143,11 @@ div#bankValue
 {
 	position:absolute;
 	left:1%;
-	top:3%;
-	width:13%;
-	height:10%;
+	top:10%;
+	width:18%;
+	height:6.67%;
 	font-family:Georgia, "Times New Roman", Times, serif;
-	font-size:xx-large;
+	font-size:large;
 	text-align:center;
 	color:silver;
 	z-index: 3;
@@ -157,10 +157,10 @@ div#bankValue
 div#placeBetText
 {
 	position:absolute;
-	left:7.5%;
-	top:63%;
-	width:17%;
-	height:5%;
+	left:0%;
+	top:83.3%;
+	width:20%;
+	height:6.67%;
 	background-image:url('../images/Buttons/BetButton.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -171,9 +171,9 @@ div#placeBetText
 button#spinButton
 {
 	position:absolute;
-	left:75%;
-	top:63%;
-	width:10%;
+	left:72%;
+	top:86.67%;
+	width:26%;
 	height:10%;
 	background-image:url('../images/Buttons/SpinButton.png');
 	background-repeat:no-repeat;
@@ -185,10 +185,10 @@ button#spinButton
 button#lowerBetButton
 {
 	position:absolute;
-	left:23.5%;
-	top:68%;
-	width:20%;
-	height:10%;
+	left:20%;
+	top:86.67%;
+	width:4%;
+	height:6.67%;
 	background-image:url('../images/Buttons/down_Arrow.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -199,10 +199,10 @@ button#lowerBetButton
 button#raiseBetButton
 {
 	position:absolute;
-	left:23.5%;
-	top:63%;
-	width:3%;
-	height:7.5%;
+	left:20%;
+	top:80%;
+	width:4%;
+	height:6.67%;
 	background-image:url('../images/Buttons/up_Arrow.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -212,10 +212,10 @@ button#raiseBetButton
 button#maxBetButton
 {
 	position:absolute;
-	left:27%;
-	top:61.5%;
-	width:3%;
-	height:7.5%;
+	left:30%;
+	top:80%;
+	width:20%;
+	height:6.67%;
 	background-image:url('../images/Buttons/MaxBetButton.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -225,10 +225,10 @@ button#maxBetButton
 button#minBetButton
 {
 	position:absolute;
-	left:27%;
-	top:68%;
-	width:10%;
-	height:5%;
+	left:30%;
+	top:86.67%;
+	width:20%;
+	height:6.67%;
 	background-image:url('../images/Buttons/minBetButton.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
@@ -238,9 +238,9 @@ button#minBetButton
 button#slotStop
 {
 	position:absolute;
-	left:42%;
-	top:42%;
-	width:20%;
+	left:40%;
+	top:63.3%;
+	width:22%;
 	height:10%;
 	background-image:url('../images/Buttons/stopButton.png');
 	/*background-position:center;*/
@@ -256,8 +256,8 @@ div#rightSignal
 	position:absolute;
 	width:2%;
 	height:10%;
-	right:6%;
-	bottom:52.5%;
+	left:89.5%;
+	top:37.5%;
 	
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -276,7 +276,7 @@ div#rightSignal
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 
-	background-image:url('../images/Lights/RightSignalOn.png');
+	background-image:url('../images/Lights/rightSignal.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -284,10 +284,10 @@ div#rightSignal
 div#upperRightHead
 {
 	position:absolute;
-	width:8.5%;
-	height:5%;
-	right:8%;
-	bottom:58%;
+	width:8.4%;
+	height:6%;
+	left:81%;
+	top:37%;
 	
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -306,7 +306,7 @@ div#upperRightHead
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/lowerRightHeadON.png');
+	background-image:url('../images/Lights/headLight.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -314,10 +314,10 @@ div#upperRightHead
 div#lowerRightHead
 {
 	position:absolute;
-	width:8.5%;
-	height:5%;
-	right:8%;
-	bottom:52.5%;
+	width:8.4%;
+	height:6%;
+	left:81%;
+	top:43.3%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -336,7 +336,7 @@ div#lowerRightHead
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/lowerRightHeadON.png');
+	background-image:url('../images/Lights/headLight.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -344,10 +344,10 @@ div#lowerRightHead
 div#upperRightRunning
 {
 	position:absolute;
-	width:2.5%;
-	height:5.5%;
-	right:17%;
-	bottom:57.5%;
+	width:2%;
+	height:6%;
+	left:78%;
+	top:37%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -366,7 +366,7 @@ div#upperRightRunning
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/upperRightRunningOn.png');
+	background-image:url('../images/Lights/RightRunning.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -374,10 +374,10 @@ div#upperRightRunning
 div#lowerRightRunning
 {
 	position:absolute;
-	width:2.5%;
-	height:5.5%;
-	right:17%;
-	bottom:51.5%;
+	width:2%;
+	height:6%;
+	left:78%;
+	top:43.3%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -396,7 +396,7 @@ div#lowerRightRunning
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/upperRightRunningOn.png');
+	background-image:url('../images/Lights/RightRunning.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -406,10 +406,10 @@ div#lowerRightRunning
 div#leftSignal
 {
 	position:absolute;
-	width:2%;
-	height:11%;
-	left:10.5%;
-	bottom:51.5%;
+	width:1.9%;
+	height:12.33%;
+	left:8%;
+	top:37%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -428,7 +428,7 @@ div#leftSignal
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/leftsignalon.png');
+	background-image:url('../images/Lights/leftSignal.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -436,10 +436,10 @@ div#leftSignal
 div#upperLeftHead
 {
 	position:absolute;
-	width:8.5%;
-	height:5%;
-	left:12.75%;
-	bottom:57.5%;
+	width:8.4%;
+	height:6%;
+	left:10.5%;
+	top:37%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -458,7 +458,7 @@ div#upperLeftHead
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/leftUpperHeadon.png');
+	background-image:url('../images/Lights/headLight.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -466,10 +466,10 @@ div#upperLeftHead
 div#lowerLeftHead
 {
 	position:absolute;
-	width:8.5%;
-	height:5%;
-	left:12.75%;
-	bottom:51%;
+	width:8.4%;
+	height:6%;
+	left:10.5%;
+	top:44.17%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -488,7 +488,7 @@ div#lowerLeftHead
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/leftUpperHeadon.png');
+	background-image:url('../images/Lights/headLight.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -496,10 +496,10 @@ div#lowerLeftHead
 div#upperLeftRunning
 {
 	position:absolute;
-	width:2.5%;
-	height:5.5%;
-	left:22%;
-	bottom:57%;
+	width:2%;
+	height:6%;
+	left:19.5%;
+	top:37%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -518,7 +518,7 @@ div#upperLeftRunning
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/leftUpperRunningon.png');
+	background-image:url('../images/Lights/leftRunning.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
@@ -526,10 +526,10 @@ div#upperLeftRunning
 div#lowerLeftRunning
 {
 	position:absolute;
-	width:2.5%;
-	height:5.5%;
-	left:22%;
-	bottom:51%;
+	width:2%;
+	height:6%;
+	left:19.5%;
+	top:44.17%;
 
 	-moz-transition:all 0.25s ease-in-out;
 	-webkit-transition:all 0.25s ease-in-out;
@@ -548,7 +548,7 @@ div#lowerLeftRunning
 	-ms-animation-play-state:paused;
 	animation-play-state:paused;
 	
-	background-image:url('../images/Lights/leftUpperRunningon.png');
+	background-image:url('../images/Lights/leftRunning.png');
 	background-repeat:no-repeat;
 	background-size:100% 100%;
 	z-index:3;
