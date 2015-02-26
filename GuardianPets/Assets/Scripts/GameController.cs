@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour
 {
     public bool m_FirstTimePlayer = false; //Bool to determine whether or not we need to run the initial play segment
-    public int m_Points; //Player's current points
-    public int m_Shields; //Player's current shields
     public List<GameObject> m_Pets = new List<GameObject>(); //List of possible pets -- this needs to stay here in case they decide to buy more pets
+    public PlayerData m_PlayerData; //The player data
 
     private string currPetName_; //Name of the current pet, used to find the right pet in the list
-    private int maxPetsAllowed_ = 6;
+    private float saveTimer_; //Timer between autosaves
+    private float maxSaveTime_; //Max time between autosaves
     private GameObject pet_;
     private List<string> storedPets_ = new List<string>();
 
@@ -54,8 +54,8 @@ public class GameController : MonoBehaviour
 
     public void SetUpGame()
     {
-        PlayerPrefs.GetInt("Points", m_Points);
-        PlayerPrefs.GetInt("Shields", m_Shields);
+        //Call all load functions
+        m_PlayerData.Load();
 
         //currPetName_ = Camera.main.GetComponent<UIController>().m_SelectedPet;
         for (int i = 0; i < m_Pets.Count; ++i)
@@ -65,5 +65,19 @@ public class GameController : MonoBehaviour
                pet_ = (GameObject)Instantiate(m_Pets[i]);
             }
         }
+    }
+
+    //When this Save function is called, all other save functions get called. No where else should save.
+    public void Save()
+    {
+        PlayerPrefs.SetString("CurrPet", currPetName_);
+        pet_.GetComponent<Pet>().Save();
+        m_PlayerData.Save();
+    }
+
+    //When this Load function is called, all other load functions get called. No where else should load.
+    public void Load()
+    {
+
     }
 }
