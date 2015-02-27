@@ -11,9 +11,9 @@
 /*Canvas*/
 div#maindiv
 {
-	position:relative;
-	left:40%;
-	top:30%;
+	position:absolute;
+	left:21%;
+	top:24%;
 	width:100%;
 	height:100%;
 	max-width:600px;
@@ -39,6 +39,7 @@ canvas#backgroundImage
 	z-index:0;
 }
 
+/*SoltCanvases*/
 canvas#slot1
 {
 	position:absolute;
@@ -251,8 +252,22 @@ button#slotStop
 	background-size:100% 100%;
 	z-index: 3;
 }
+button#payPalButton
+{
+	position:absolute;
+	left:0%;
+	top:20%;
+	width:17.3%;
+	height:7.6%;
+	background-image:url('../images/Buttons/TempPayPalButton.png');
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	z-index: 3;
 
-/*Lights*/
+}
+
+
+/*Light Anim*/
 /*Right*/
 div#rightHead
 {

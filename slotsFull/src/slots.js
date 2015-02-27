@@ -16,19 +16,6 @@ $(document).ready(function()
 	var slotStopButton = document.getElementById('slotStop');
 	var spinButton = document.getElementById('spinButton');
 	
-	/*//lights
-	var rightSignalLight = document.getElementById('rightSignal');
-	var rightUpHeadLight = document.getElementById('upperRightHead');
-	var rightLowerHeadLight = document.getElementById('lowerRightHead');
-	var rightUpRunningLight = document.getElementById('upperRightRunning');
-	var rightLowerRunningLight = document.getElementById('lowerRightRunning');
-	
-	var leftSignalLight = document.getElementById('leftSignal');
-	var leftUpHeadLight = document.getElementById('upperLeftHead');
-	var leftLowerHeadLight = document.getElementById('lowerRightHead');
-	var leftUpRunningLight = document.getElementById('upperLeftRunning');
-	var leftLowerRunningLight = document.getElementById('lowerLeftRunning');*/
-	
 	//Play data
 	var slot1 = [];
 	var slot2 = [];
@@ -43,9 +30,8 @@ $(document).ready(function()
 	var randSlot1 = 0; 
 	var randSlot2 = 0;
 	var randSlot3 = 0;
-	var randNum = 0;
+	var rand = 0;
 	var currFrame = 0;
-	
 	
 	//Values
 	var money = 0;
@@ -67,14 +53,11 @@ $(document).ready(function()
 	var youWin = document.getElementById('winSound');
 	var betting = document.getElementById('betSound');
 	
-	
-	
 	function init()
 	{
-		//LoadAssets();
-		
 		//initialize bank
-		money  = 1000;
+		//will need accsess to the mamber datbase so that this can be set according to the clients information
+		money  = 1000;//for testing
 		
 		//initialize text
 		$('div#welcomeTextDiv').text("Welcome to the Auto Obsessions Slots");
@@ -90,34 +73,11 @@ $(document).ready(function()
 		spinButton.addEventListener("mousedown", spinButtonHandler, false);
 		document.addEventListener("keyup",keyUpHandler, false);
 		
-		//initialize the first slot
-		slot1.push(1);
-		slot1.push(2);
-		slot1.push(3);
-		slot1.push(4);
-		slot1.push(5);
-		slot1.push(6);
-		//initialize the second slot
-		slot2.push(1);
-		slot2.push(2);
-		slot2.push(3);
-		slot2.push(4);
-		slot2.push(5);
-		slot2.push(6);
-		//initialize third slot
-		slot3.push(1);
-		slot3.push(2);
-		slot3.push(3);
-		slot3.push(4);
-		slot3.push(5);
-		slot3.push(5);
-		slot3.push(6);
-		
 		turnOffLights();
 	}
 	function update()
 	{
-		window.requestAnimationFrame(update, $('canvas#myCanvas'));
+		window.requestAnimationFrame(update, $('canvas#slot1Canvas'));
 		
 		slot1Context.clearRect ( 0 , 0 , slot1Canvas.width, slot1Canvas.height);
 		slot2Context.clearRect ( 0 , 0 , slot2Canvas.width, slot2Canvas.height);
@@ -206,7 +166,7 @@ $(document).ready(function()
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 && slot2curr == 5 && slot3curr != 5 || 
+		else if(slot1curr == 5 && slot2curr == 5 || 
 				slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 		{
 			winnings = bet * 2;
@@ -217,7 +177,7 @@ $(document).ready(function()
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 && slot2curr != 5 && slot3curr != 5 || 
+		else if(slot1curr == 5 || 
 				slot1curr == 6 && slot2curr == 6)
 		{
 			winnings = bet * 1.75;
@@ -486,21 +446,21 @@ $(document).ready(function()
 		
 		if(slot1spin == true)
 		{
-			slot1curr = slot1[randomNum()];
+			slot1curr = randomNum();
 		}
 		if(slot2spin == true)
 		{
-			slot2curr = slot2[randomNum()];
+			slot2curr = randomNum();
 		}
 		if(slot3spin == true)
 		{
-			slot3curr = slot3[randomNum()];
+			slot3curr = randomNum();
 		}
 	}
 	function randomNum()
 	{
-		var rand = Math.floor(Math.random() * 100);
-		var num = 0;
+		rand = Math.floor(Math.random() * 101);
+		num = 0;
 		
 		if(rand <= 30)
 		{
@@ -528,54 +488,6 @@ $(document).ready(function()
 		}
 		return num;
 	}
-	/*function spinReels()
-	{
-		if(slot1spin == true)
-		{
-			slot1curr = slot1[randomNum()];
-		}
-		if(slot2spin == true)
-		{
-			slot2curr = slot2[randomNum()];
-		}
-		if(slot3spin == true)
-		{
-			slot3curr = slot3[randomNum()];
-		}
-	}
-	
-	function randomNum()
-	{
-		randNum = Math.floor(Math.random() * 100);
-		winNum = 0;
-		
-		if(randNum <= 30)
-		{
-			winNum = 6;
-		}
-		else if(randNum < 53 && randNum > 30)
-		{
-			winNum = 5;
-		}
-		else if(randNum < 71 && randNum > 52)
-		{
-			winNum = 4;
-		}
-		else if(randNum < 85 && randNum > 70)
-		{
-			winNum = 3;
-		}
-		else if(randNum < 95 && randNum > 84)
-		{
-			winNum = 2;
-		}
-		else
-		{
-			winNum = 1;
-		}
-		return winNum ;
-	}*/
-
 	function playWinSound()
 	{
 		//stop other sounds

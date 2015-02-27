@@ -32,12 +32,13 @@ canvas#backgroundImage
 	height:100%;
 	background-image:url('../images/slotbody.png');
 	background-repeat:no-repeat;
-	background-position::center center;
+	background-position:center center;
 	background-color:black;
 	background-size:100% 100%;
 	margin:0%;
 	z-index:0;
 }
+/*Slot Canvases*/
 canvas#slot1
 {
 	position:absolute;
@@ -249,7 +250,22 @@ button#slotStop
 	z-index: 3;
 }
 
-/*Lights*/
+button#payPalButton
+{
+	position:absolute;
+	left:5%;
+	top:15%;
+	width:10.4%;
+	height:5.8%;
+	background-image:url('../images/Buttons/TempPayPalButton.png');
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	z-index: 3;
+
+}
+
+
+/*Light Anims*/
 /*Right*/
 div#rightSignal
 {
