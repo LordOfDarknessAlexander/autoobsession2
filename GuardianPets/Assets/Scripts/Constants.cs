@@ -11,4 +11,6 @@ public class Constants : MonoBehaviour
     public const int CLEAN_AMOUNT = 5; //Amount to decrease cleanliness by
     public const int MAX_PET_STAT = 100; //Highest any of the pet stats - hunger, boredom, cleanliness - can go
     public const int MIN_PET_STAT = 0; //Lowest any of the pet stats - hunger, boredom, cleanliness - can go
+    public const int DEFAULT_START_POINTS = 500; //Amount of points a new player will start with
+    public const int DEFAULT_START_SHIELDS = 100; //Amount of shields a new player will start with
 }

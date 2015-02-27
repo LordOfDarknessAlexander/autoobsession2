@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     public GameObject m_FearPanel; //Panel for the fear prompt
     public InputField m_NicknameIF; //Input field for the nickname prompt
     public InputField m_FearIF; //Input field for the fear prompt
+    public PlayerData m_PlayerData; //Player data
 
     public Text m_NicknameText;
     public Text m_PointsText; //Player's current points - UI element
@@ -17,16 +18,16 @@ public class UIController : MonoBehaviour
     public string m_SelectedPet;
 
     private GameObject currPet_;
-    private PlayerData pData_; //Player data
+    
     private GameController gc_; //Game Controller script for easier access
-    private bool newPlayer_;
+    private bool isNewPlayer_;
 
 	void Start () 
     {
         gc_ = Camera.main.GetComponent<GameController>();
-        newPlayer_ = gc_.m_FirstTimePlayer;
+        isNewPlayer_ = gc_.m_FirstTimePlayer;
 
-        if(newPlayer_)
+        if (isNewPlayer_)
         {
             m_GameUI.SetActive(false);
             m_NewPlayerUI.SetActive(true);
@@ -43,8 +44,8 @@ public class UIController : MonoBehaviour
         if (currPet_ != null)
         {
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
-            m_PointsText.text = pData_.m_Points.ToString();
-            m_ShieldsText.text = pData_.m_Shields.ToString();
+            m_PointsText.text = m_PlayerData.m_Points.ToString();
+            m_ShieldsText.text = m_PlayerData.m_Shields.ToString();
         }
 	}
 
@@ -62,12 +63,14 @@ public class UIController : MonoBehaviour
         PlayerPrefs.SetString("CurrPet", m_SelectedPet);
         m_NicknamePanel.SetActive(true);
         gc_.SetUpGame();
+        gc_.Save();
     }
 
     //Button function -- When the player presses the "Done" button after typing in a nickname, this function fires
     //                -- The function will set the pet's nickname and activate the fear panel
     public void GiveNickname()
     {
+        //gc_.Save();
         if(!string.IsNullOrEmpty(m_NicknameIF.text) && currPet_ != null)
         {
             currPet_.GetComponent<Pet>().m_Nickname = m_NicknameIF.text;

@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
         if (currPetName_ == null)
         {
             m_FirstTimePlayer = true;
+            m_PlayerData.m_Points = Constants.DEFAULT_START_POINTS;
+            m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
         }
         else
         {
@@ -62,7 +64,7 @@ public class GameController : MonoBehaviour
         {
             if (m_Pets[i].name == currPetName_)
             {
-               pet_ = (GameObject)Instantiate(m_Pets[i]);
+                pet_ = (GameObject)Instantiate(m_Pets[i]);
             }
         }
     }
