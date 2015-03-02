@@ -11,9 +11,11 @@ public class Pet : MonoBehaviour
     public string m_FearOne; //The fear the player chose when they picked the pet
     public string m_FearTwo; //This fear is only used if the player pays for a second fear slot
 
+    private GameController gc_;
+
 	void Start ()
     {
-        
+        gc_ = Camera.main.GetComponent<GameController>();
 	}
 	
 	void Update () 
@@ -39,32 +41,5 @@ public class Pet : MonoBehaviour
         PlayerPrefs.GetInt(m_PetName + "Boredom", m_Bored);
         PlayerPrefs.GetString(m_PetName + "FearOne", m_FearOne);
         PlayerPrefs.GetString(m_PetName + "FearTwo", m_FearTwo);
-    }
-
-    //Button function -- When the player presses the feed button on the UI it will call this function
-    //                -- This function will decrease the hunger level of the pet, remove the appropriate points from the player, and award them shields
-    public void Feed()
-    {
-        m_Hunger -= Constants.FEED_AMOUNT;
-        if(m_Hunger >= Constants.MAX_PET_STAT)
-        {
-            m_Hunger = Constants.MAX_PET_STAT;
-        }
-
-        
-    }
-
-    //Button function -- When the player presses the play button on the UI it will call this function
-    //                -- This function will decrease the boredom level of the pet, remove the appropriate points from the player, and award them shields
-    public void Play()
-    {
-
-    }
-
-    //Button function -- When the player presses the clean button on the UI it will call this function
-    //                -- This function will decrease the cleanliness level of the pet, remove the appropriate points from the player, and award them shields
-    public void Clean()
-    {
-
     }
 }

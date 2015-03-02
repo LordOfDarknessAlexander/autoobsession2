@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
     {
         if (pet_ != null)
         {
-            pet_.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+            pet_.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 5.0f));
         }
 	}
 

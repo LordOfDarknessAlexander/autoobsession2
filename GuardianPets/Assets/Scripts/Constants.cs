@@ -13,4 +13,7 @@ public class Constants : MonoBehaviour
     public const int MIN_PET_STAT = 0; //Lowest any of the pet stats - hunger, boredom, cleanliness - can go
     public const int DEFAULT_START_POINTS = 500; //Amount of points a new player will start with
     public const int DEFAULT_START_SHIELDS = 100; //Amount of shields a new player will start with
+    public const int POINTS_TIMER = 300; //Amount of time to wait to get more points
+    public const int COUNTER_MAX = 10; //This is as far as the counter in PlayerData.cs can go before being reset and giving the player shields
+    public const int ACTION_COST = 20; //Cost per action - play, wash, feed.
 }
