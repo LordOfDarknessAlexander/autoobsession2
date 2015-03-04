@@ -9,7 +9,7 @@ public class Gameover : MonoBehaviour
 
     public void Restart()
     {
-        Application.LoadLevel("Main");
+        //Application.LoadLevel("Main");
     }
 
     public void Quit()
