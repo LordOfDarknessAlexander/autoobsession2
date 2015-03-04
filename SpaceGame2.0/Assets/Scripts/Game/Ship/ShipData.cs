@@ -12,8 +12,8 @@ public class ShipData : MonoBehaviour
     public List<GameObject> m_Inventory;
 
     public float m_CargoCapacity; //amount ship can hold in Kg
-    public float m_CurrentMass;
-    public float m_ShipMass;
+    public float m_CurrentMass; //total mass of ship
+    public float m_ShipMass;// mass of ship without cargo, weapons
     public int m_HP;
     public int m_Shield;
     public bool m_HasShield;
@@ -49,8 +49,8 @@ public class ShipData : MonoBehaviour
         {
             item.transform.position = gameObject.transform.position;
             item.transform.parent = gameObject.transform;
-            item.renderer.enabled = false;
-            item.collider2D.enabled = false;
+            item.GetComponent<Renderer>().enabled = false;
+            item.GetComponent<Collider2D>().enabled = false;
             m_CurrentMass = newMass;
             m_Rigidbody.mass = m_ShipMass +  m_CurrentMass;
         }

@@ -25,7 +25,7 @@ public class BackgroundMusic : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if(!audio.isPlaying)
+	    if(!GetComponent<AudioSource>().isPlaying)
         {
             //if no audio or current track is done
             ChooseRandomMusicTrack();
@@ -120,7 +120,7 @@ public class BackgroundMusic : MonoBehaviour
     private void MakeSound(AudioClip originalClip)
     {
         //audio clips fire and forget themselves, so in order to keep track on whether or not it is playing this function will assign the audio to the clip giving to it
-        audio.clip = originalClip;
-        audio.Play();
+        GetComponent<AudioSource>().clip = originalClip;
+        GetComponent<AudioSource>().Play();
     }
 }

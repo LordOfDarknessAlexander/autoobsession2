@@ -3,18 +3,32 @@ using System.Collections;
 
 public class EnemyController : Enemy 
 {
-    public float m_DropChance = 0.5f;
+    
+    public override void OnStateEntered()
+    {
+        //Set target for all enemies
+        if (m_Target == null)
+        {
+            m_Target = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
 
-    public EnemyShip m_Eship;
+    public override void OnStateExit()
+    {
+        if (m_ShipData.transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public override void StateUpdate()
     {
         //to move enemy around scene
-        rigidbody.AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
+        GetComponent<Rigidbody>().AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
 
         if (m_Target != null)
         {
-          m_Eship.FireWeapons("EnemyProjectile");
+            m_ShipController.FireWeapons("EnemyProjectile");
         }
         else
         {
@@ -26,7 +40,7 @@ public class EnemyController : Enemy
     {
         if (other.collider.tag == "Player")
         {
-            Instantiate(m_Explosion, transform.position, transform.rotation);
+            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
        }

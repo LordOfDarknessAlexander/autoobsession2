@@ -9,8 +9,6 @@ public class Boundary
 
 public class PlayerController : State 
 {
-    public ShipData m_Ship;
-    public Ship m_ShipController;
     public Weapon m_WeaponData;
 
     public float m_FireRate;
@@ -39,11 +37,11 @@ public class PlayerController : State
 
         Vector3 moveShip = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        rigidbody.velocity = moveShip * m_Ship.GetTotalThrustAccel();
+        GetComponent<Rigidbody>().velocity = moveShip * m_Ship.GetTotalThrustAccel();
 
         //to keep player from leaving play area
-        rigidbody.position = new Vector3(Mathf.Clamp(rigidbody.position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
-                                         Mathf.Clamp(rigidbody.position.y, m_PlayerBoundary.yMin, m_PlayerBoundary.yMax),
+        GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
+                                         Mathf.Clamp(GetComponent<Rigidbody>().position.y, m_PlayerBoundary.yMin, m_PlayerBoundary.yMax),
                                          0.0f);
 
         //to fire weapons
