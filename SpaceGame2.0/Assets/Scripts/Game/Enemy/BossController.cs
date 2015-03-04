@@ -2,9 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BossController : Enemy 
+public class BossController : State 
 {
     public Slider m_HealthValue;
+
+    public GameObject m_Target;
 
     public override void OnStateEntered()
     {
@@ -43,7 +45,7 @@ public class BossController : Enemy
     {
         if (other.collider.tag == "Player")
         {
-            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
+            Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }

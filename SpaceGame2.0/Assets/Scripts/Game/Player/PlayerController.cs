@@ -12,8 +12,6 @@ public class PlayerController : State
     public Weapon m_WeaponData;
 
     public float m_FireRate;
-    public GameObject m_Shot;
-    public Transform m_PlayerBlaster;
     public Boundary m_PlayerBoundary;
 
     private float nextShot_;
@@ -37,7 +35,7 @@ public class PlayerController : State
 
         Vector3 moveShip = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        GetComponent<Rigidbody>().velocity = moveShip * m_Ship.GetTotalThrustAccel();
+        GetComponent<Rigidbody>().velocity = moveShip * m_ShipData.GetTotalThrustAccel();
 
         //to keep player from leaving play area
         GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
@@ -51,7 +49,7 @@ public class PlayerController : State
 
             if(nextShot_ <= 0.0f)
             {
-                Instantiate(m_Shot, m_PlayerBlaster.position, m_PlayerBlaster.rotation);
+                Instantiate(m_WeaponData.m_Shot, m_WeaponData.m_Blaster.position, m_WeaponData.m_Blaster.rotation);
                 nextShot_ = m_FireRate;
             }
         }

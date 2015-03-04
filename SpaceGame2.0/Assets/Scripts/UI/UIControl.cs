@@ -18,14 +18,14 @@ public class UIControl : MonoBehaviour
     private int currScore_;
     void Start()
     {
-        maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_Ship.m_HP;
+        maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_ShipData.m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
         m_PlayerHealth.minValue = minHealth_;
     }
 
     void Update()
     {
-        currHealth_ = m_Player.GetComponent<PlayerController>().m_Ship.m_HP;
+        currHealth_ = m_Player.GetComponent<PlayerController>().m_ShipData.m_HP;
         currLives_ = m_GameControl.GetComponent<GameController>().m_Lives;
         currScore_ = m_GameControl.GetComponent<GameController>().m_Score;
 

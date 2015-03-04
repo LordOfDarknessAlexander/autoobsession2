@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : Enemy 
+public class EnemyController : State 
 {
-    
+
+    public GameObject m_Target;
+
     public override void OnStateEntered()
     {
         //Set target for all enemies
@@ -40,7 +42,7 @@ public class EnemyController : Enemy
     {
         if (other.collider.tag == "Player")
         {
-            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
+            Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
        }

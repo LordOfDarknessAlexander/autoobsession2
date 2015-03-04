@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
 
     public Vector3 m_SpawnArea;
     public Vector3 m_PlayerSpawnArea;
-    public GameObject m_Enemy;
+    public GameObject[] m_Enemy;
     public GameObject m_Player;
     
     public float m_DefaultWaveSize;
@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
                 Quaternion spawnRotation = Quaternion.identity;
-                Instantiate(m_Enemy, spawnPosition, spawnRotation);
+                Instantiate(m_Enemy[i], spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(m_SpawnDelay);
             }
             yield return new WaitForSeconds(m_WaveDelay);
