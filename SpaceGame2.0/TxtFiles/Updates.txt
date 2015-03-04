@@ -1,0 +1,4 @@
+Updates for Space Shooter
+
+Player and Enemy prefabs have been changed to PlayerShip and EnemyShip.
+ 

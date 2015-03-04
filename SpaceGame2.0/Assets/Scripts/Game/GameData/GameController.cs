@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -9,26 +12,16 @@ public class GameController : MonoBehaviour
     public Canvas m_Lose;
 
     public Text m_LivesText;
-    public Text m_WaveText;
-    public Text m_RestartText;
-    public Text m_GameOverText;
-    public Text m_QuitToMenu;
 
-    public Vector3 m_SpawnArea;
     public GameObject[] m_Enemy;
     public GameObject m_Player;
     
-    public float m_DefaultWaveSize;
-    public float m_SpawnDelay;
-    public float m_StartDelay;
-    public float m_WaveDelay;
-    public int m_WaveNum;
     public int m_Lives = 3; //Number of lives the player has
     public int m_Score = 0; //Player's current score
 
-    private bool restart_;
-    private bool gameOver_;
-    private bool quit_;
+    public bool restart_;
+    public bool gameOver_;
+    public bool quit_;
 
     private float numEnemies_;
     private GameObject[] enemy_;
@@ -114,6 +107,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+
         m_Lose.enabled = true;
         m_Lives--;
         //restart_ = true;
@@ -127,4 +121,37 @@ public class GameController : MonoBehaviour
     {
         SpawnPlayer();
     }
+	
+	public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+        Debug.Log(Application.persistentDataPath);
+
+        PlayerData pData = new PlayerData();
+
+        pData.m_ShipData = m_Player.GetComponent<PlayerController>().m_ShipData;
+
+        bf.Serialize(file, pData);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+            PlayerData pData = (PlayerData)bf.Deserialize(file);
+            file.Close();
+
+            m_Player.GetComponent<PlayerController>().m_ShipData = pData.m_ShipData;
+        }
+    }
+}
+
+[Serializable]
+class PlayerData
+{
+    public ShipData m_ShipData;
 }
