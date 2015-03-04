@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -128,4 +131,37 @@ public class GameController : MonoBehaviour
     {
         SpawnPlayer();
     }
+
+    public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+        Debug.Log(Application.persistentDataPath);
+
+        PlayerData pData = new PlayerData();
+
+        pData.m_ShipData = m_Player.GetComponent<PlayerController>().m_ShipData;
+
+        bf.Serialize(file, pData);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+            PlayerData pData = (PlayerData)bf.Deserialize(file);
+            file.Close();
+
+            m_Player.GetComponent<PlayerController>().m_ShipData = pData.m_ShipData;
+        }
+    }
+}
+
+[Serializable]
+class PlayerData
+{
+    public ShipData m_ShipData;
 }
