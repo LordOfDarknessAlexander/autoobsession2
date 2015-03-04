@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour
     public Text m_QuitToMenu;
 
     public Vector3 m_SpawnArea;
-    public Vector3 m_PlayerSpawnArea;
     public GameObject[] m_Enemy;
     public GameObject m_Player;
     
@@ -38,7 +37,7 @@ public class GameController : MonoBehaviour
         gameOver_ = false;
         quit_ = false;
         SpawnPlayer();
-        StartCoroutine(WaveSpawner());
+        //StartCoroutine(WaveSpawner());
     }
 
     void Update()
@@ -56,7 +55,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    IEnumerator WaveSpawner()
+    /*IEnumerator WaveSpawner()
     {
         yield return new WaitForSeconds(m_StartDelay);
 
@@ -88,40 +87,41 @@ public class GameController : MonoBehaviour
                 break;
             }
         }
-    }
+    }*/
 
     public void SpawnPlayer()
     {
-        if(!gameOver_)
-        {
+        //if(!gameOver_)
+        //{
             if(m_Lives > 0)
             {
                 m_Lives--;
 
                 m_LivesText.text = m_Lives.ToString();
 
-                Vector3 playerSpawn_ = new Vector3(Random.Range(-m_PlayerSpawnArea.x, m_PlayerSpawnArea.x), m_PlayerSpawnArea.y, m_PlayerSpawnArea.z);
+                Vector3 playerSpawn_ = new Vector3(0.0f, -5.0f, 0.0f);
                 Quaternion spawnPlayerRotation = Quaternion.identity;
                 Instantiate(m_Player, playerSpawn_, spawnPlayerRotation);
             }
             else if(m_Lives == 0)
             {
                 gameOver_ = true;
+                GameOver();
             } 
-        }
+        /*}
         else
         {
             GameOver();
-        }
+        }*/
     }
 
     public void GameOver()
     {
         //restart_ = true;
-        m_GameOverText.text = "Game Over!";
-        m_RestartText.text = "Press 'R' for Restart";
-        m_QuitToMenu.text = "Press 'Q' to return to Menu";
-       // Application.LoadLevel("GameOver");
+        //m_GameOverText.text = "Game Over!";
+        //m_RestartText.text = "Press 'R' for Restart";
+        //m_QuitToMenu.text = "Press 'Q' to return to Menu";
+        Application.LoadLevel("GameOver");
     }
    
     private void Respawn()

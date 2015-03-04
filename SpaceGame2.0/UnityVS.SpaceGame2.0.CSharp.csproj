@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Game\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\EnemyShip.cs" />
     <Compile Include="Assets\Scripts\Game\GameData\DestroyByTime.cs" />
+    <Compile Include="Assets\Scripts\Game\GameData\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Game\GameData\GameBoundary.cs" />
     <Compile Include="Assets\Scripts\Game\GameData\GameController.cs" />
     <Compile Include="Assets\Scripts\Game\Player\PickupItem.cs" />

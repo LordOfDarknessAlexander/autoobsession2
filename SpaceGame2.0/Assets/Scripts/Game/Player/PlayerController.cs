@@ -7,27 +7,23 @@ public class Boundary
     public float xMin, xMax, yMin, yMax;
 }
 
-public class PlayerController : State 
+public class PlayerController : MonoBehaviour 
 {
     public Weapon m_WeaponData;
-
-    public float m_FireRate;
+    public ShipController m_ShipController;
+    public ShipData m_ShipData;
     public Boundary m_PlayerBoundary;
 
-    private float nextShot_;
-    
+    public float m_FireRate;
 
-    public override void OnStateEntered()
+    private float nextShot_;
+
+    public void Start()
     {
         nextShot_ = 0.0f;
     }
 
-    public override void OnStateExit()
-    {
-
-    }
-
-    public override void StateUpdate()
+    public void Update()
     {
         //to move player around scene
         float moveHorizontal = Input.GetAxis("SideToSide");
@@ -53,11 +49,5 @@ public class PlayerController : State
                 nextShot_ = m_FireRate;
             }
         }
-    }
-
- 
-    public override void StateGUI()
-    {
-
     }
 }

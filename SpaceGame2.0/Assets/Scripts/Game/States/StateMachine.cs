@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StateMachine : MonoBehaviour 
 {
-    public State mStartState;
+    /*public State mStartState;
     private State currState_;
 
     public State CurrState
@@ -43,6 +43,6 @@ public class StateMachine : MonoBehaviour
         currState_.OnStateExit();
         currState_ = newState;
         currState_.OnStateEntered();
-    }
+    }*/
 
 }

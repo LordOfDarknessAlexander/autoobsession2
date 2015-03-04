@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Paused : State
+public class Paused : MonoBehaviour
 {
 
-    public Default mDefaultState;
+    /*public Default mDefaultState;
 
     bool isUnPausable_;
 
@@ -37,5 +37,5 @@ public class Paused : State
     public override void StateGUI()
     {
         GUI.Label(new Rect(10.0f, 10.0f, 200.0f, 50.0f), "Paused");
-    }
+    }*/
 }

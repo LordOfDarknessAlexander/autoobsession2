@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class Gameover : MonoBehaviour {
+public class Gameover : MonoBehaviour 
+{
+    public Button m_Restart;
+    public Button m_Quit;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void Restart()
+    {
+        Application.LoadLevel("Main");
+    }
+
+    public void Quit()
+    {
+    }
 }

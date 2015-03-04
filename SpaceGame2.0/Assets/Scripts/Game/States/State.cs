@@ -4,11 +4,6 @@ using System.Collections;
 
 public abstract class State : MonoBehaviour 
 {
-    public StateMachine m_StateMachine;
-    public ShipController m_ShipController;
-    public ShipData m_ShipData;
-
-
     public abstract void OnStateEntered();
     public abstract void OnStateExit();
     public abstract void StateUpdate();

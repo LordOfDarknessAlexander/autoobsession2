@@ -2,13 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BossController : State 
+public class BossController : Enemy 
 {
     public Slider m_HealthValue;
 
     public GameObject m_Target;
 
-    public override void OnStateEntered()
+    public override void OnEnter()
     {
         //Set target for all enemies
         if (m_Target == null)
@@ -16,7 +16,7 @@ public class BossController : State
             m_Target = GameObject.FindGameObjectWithTag("Player");
         }
     }
-    public override void OnStateExit()
+    public override void OnExit()
     {
         if (m_ShipData.transform.position.y < -10)
         {
@@ -25,7 +25,7 @@ public class BossController : State
     }
 	
     // Use this for initialization
-    public override void StateUpdate()
+    public override void Update()
     {
         //Boss will stay at top of play area until Destroyed moving only side to side
         GetComponent<Rigidbody>().AddForce(transform.right * m_ShipData.GetTotalVertAccel());
@@ -50,9 +50,4 @@ public class BossController : State
             Destroy(gameObject);
         }
     }
-
-    public override void StateGUI()
-    {
-    }
-
 }

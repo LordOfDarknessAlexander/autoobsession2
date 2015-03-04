@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : State 
+public class EnemyController : Enemy 
 {
 
     public GameObject m_Target;
 
-    public override void OnStateEntered()
+    public override void OnEnter()
     {
         //Set target for all enemies
         if (m_Target == null)
@@ -15,7 +15,7 @@ public class EnemyController : State
         }
     }
 
-    public override void OnStateExit()
+    public override void OnExit()
     {
         if (m_ShipData.transform.position.y < -10)
         {
@@ -23,7 +23,7 @@ public class EnemyController : State
         }
     }
 
-    public override void StateUpdate()
+    public override void Update()
     {
         //to move enemy around scene
         GetComponent<Rigidbody>().AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
@@ -47,10 +47,4 @@ public class EnemyController : State
             Destroy(gameObject);
        }
     }
-
-    public override void StateGUI()
-    {
-    }
-
-   
 }

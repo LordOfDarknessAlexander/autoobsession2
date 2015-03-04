@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Default : State 
+public class Default : MonoBehaviour 
 {
-    private float gameTimer_;
+    /*private float gameTimer_;
 
     public Paused mPausedState;
 
@@ -31,5 +31,5 @@ public class Default : State
     public override void StateGUI()
     {
        // GUI.Label(new Rect(10.0f, 10.0f, 200.0f, 50.0f), gameTimer_.ToString());
-    }
+    }*/
 }
