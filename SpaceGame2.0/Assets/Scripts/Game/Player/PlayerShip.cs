@@ -13,7 +13,7 @@ public class PlayerShip : Ship
     private int engineUpgradeCounter_ = 1; //Amount of upgrades in the engines by the player
     private int damageUpgradeCounter_ = 1; //Amount of upgrades in the damage by the player
     private int healthUpgradeCounter_ = 1; //Amount of upgrades in the health by the player
-
+    
     public int ShieldUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_; } }
     public int EngineUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_; } }
     public int DamageUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_; } }
@@ -26,6 +26,7 @@ public class PlayerShip : Ship
         {
             if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
             {
+                m_PController.m_Salvage -= upgradeCost_;
                 damageUpgradeCounter_++;
             }
         }
@@ -38,6 +39,7 @@ public class PlayerShip : Ship
         {
             if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
             {
+                m_PController.m_Salvage -= upgradeCost_;
                 engineUpgradeCounter_++;
             }
         }
@@ -50,6 +52,7 @@ public class PlayerShip : Ship
         {
             if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
             {
+                m_PController.m_Salvage -= upgradeCost_;
                 healthUpgradeCounter_++;
                 m_Data.m_HP += Constants.DEFAULT_UPGRADE_AMT;
             }
@@ -64,6 +67,7 @@ public class PlayerShip : Ship
         {
             if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
             {
+                m_PController.m_Salvage -= upgradeCost_;
                 shieldUpgradeCounter_++;
                 m_Data.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
             }
