@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour
 
         PlayerData pData = new PlayerData();
 
-        pData.m_ShipData = m_Player.GetComponent<PlayerController>().m_ShipData;
+        pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
 
         bf.Serialize(file, pData);
         file.Close();
@@ -145,7 +145,7 @@ public class GameController : MonoBehaviour
             PlayerData pData = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            m_Player.GetComponent<PlayerController>().m_ShipData = pData.m_ShipData;
+            m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
         }
     }
 }
@@ -153,5 +153,5 @@ public class GameController : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-    public ShipData m_ShipData;
+    public PlayerShip m_PlayerShipData;
 }
