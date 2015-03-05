@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 {
     public Canvas m_Win;
     public Canvas m_Lose;
-
+    public UIControl m_UIControl;
     public Text m_LivesText;
 
     public GameObject[] m_Enemy;
@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     
     public int m_Lives = 3; //Number of lives the player has
     public int m_Score = 0; //Player's current score
+    public int m_TotalScore;
 
     public bool restart_;
     public bool gameOver_;
@@ -131,6 +132,8 @@ public class GameController : MonoBehaviour
         PlayerData pData = new PlayerData();
 
         pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
+        pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
+        pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
 
         bf.Serialize(file, pData);
         file.Close();
@@ -144,8 +147,10 @@ public class GameController : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerData pData = (PlayerData)bf.Deserialize(file);
             file.Close();
-
+            
             m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
+            m_UIControl.m_EnemiesKilledLifetime = pData.m_EnemiesKilledLifetime;
+            m_UIControl.m_WavesCompleted = pData.m_WavesCompleted;
         }
     }
 }
@@ -154,4 +159,7 @@ public class GameController : MonoBehaviour
 class PlayerData
 {
     public PlayerShip m_PlayerShipData;
+    public int m_EnemiesKilledLifetime;
+    public int m_TotalScore;
+    public int m_WavesCompleted;
 }

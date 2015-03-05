@@ -16,6 +16,11 @@ public class UIControl : MonoBehaviour
     private int currHealth_;
     private int currLives_;
     private int currScore_;
+
+    //Stats UI code
+    public int m_EnemiesKilledLifetime;
+    public int m_WavesCompleted;
+
     void Start()
     {
         maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_Data.m_HP;
