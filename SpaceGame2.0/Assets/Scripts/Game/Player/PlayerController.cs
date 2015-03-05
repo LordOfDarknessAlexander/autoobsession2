@@ -11,10 +11,11 @@ public class PlayerController : MonoBehaviour
 {
     public Weapon m_WeaponData;
     public ShipController m_ShipController;
-    public ShipData m_ShipData;
+    public PlayerShip m_PlayerShip;
     public Boundary m_PlayerBoundary;
 
     public float m_FireRate;
+    public int m_Salvage;
 
     private float nextShot_;
 
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveShip = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        GetComponent<Rigidbody>().velocity = moveShip * m_ShipData.GetTotalThrustAccel();
+        GetComponent<Rigidbody>().velocity = moveShip * m_PlayerShip.m_Data.GetTotalThrustAccel();
 
         //to keep player from leaving play area
         GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
