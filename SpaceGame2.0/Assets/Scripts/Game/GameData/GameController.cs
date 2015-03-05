@@ -10,22 +10,21 @@ public class GameController : MonoBehaviour
 {
     public Canvas m_Win;
     public Canvas m_Lose;
+
     public UIControl m_UIControl;
     public Text m_LivesText;
 
-    public GameObject[] m_Enemy;
+    //public GameObject[] m_Enemy;
     public GameObject m_Player;
+    public GameObject m_Spawner;
     
     public int m_Lives = 3; //Number of lives the player has
     public int m_Score = 0; //Player's current score
-    public int m_TotalScore;
+    public int m_TotalScore; //For stat pruposes
 
     public bool restart_;
     public bool gameOver_;
     public bool quit_;
-
-    private float numEnemies_;
-    private GameObject[] enemy_;
 
      // Use this for initialization
     void Start()
@@ -36,8 +35,12 @@ public class GameController : MonoBehaviour
         restart_ = false;
         gameOver_ = false;
         quit_ = false;
+
+        m_Spawner.GetComponent<Waves>().m_WaveNum = 1;
+
         SpawnPlayer();
-        //StartCoroutine(WaveSpawner());
+        m_Spawner.GetComponent<Waves>().AISpawn();
+         
     }
 
     void Update()
@@ -65,7 +68,7 @@ public class GameController : MonoBehaviour
 
             m_WaveText.text = m_WaveNum.ToString("F0");
 
-            numEnemies_ = m_DefaultWaveSize; //* m_WaveNum;//enemy_.Length;
+            numEnemies_ = enemy_.Length;
 
             for (int i = 0; i < numEnemies_; ++i)
             {
@@ -111,11 +114,11 @@ public class GameController : MonoBehaviour
 
         m_Lose.enabled = true;
         m_Lives--;
-        //restart_ = true;
-        //m_GameOverText.text = "Game Over!";
-        //m_RestartText.text = "Press 'R' for Restart";
-        //m_QuitToMenu.text = "Press 'Q' to return to Menu";
-        //Application.LoadLevel("GameOver");
+    }
+
+    public void Win()
+    {
+        m_Win.enabled = true;
     }
    
     private void Respawn()
@@ -131,9 +134,10 @@ public class GameController : MonoBehaviour
 
         PlayerData pData = new PlayerData();
 
-        pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
         pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
         pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
+
+        pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
 
         bf.Serialize(file, pData);
         file.Close();
@@ -147,10 +151,8 @@ public class GameController : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerData pData = (PlayerData)bf.Deserialize(file);
             file.Close();
-            
+
             m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
-            m_UIControl.m_EnemiesKilledLifetime = pData.m_EnemiesKilledLifetime;
-            m_UIControl.m_WavesCompleted = pData.m_WavesCompleted;
         }
     }
 }

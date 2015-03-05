@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ShipController : MonoBehaviour
 {
     public ShipData m_Data;
-    public GameObject m_Explosion;
+    public Ship m_Ship;
 
     public float m_DropChance = 0.5f;
 
@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour
 
         if (m_Data.m_HP <= 0)
         {
-            Instantiate(m_Explosion, transform.position, transform.rotation);
+            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
             Destroy(gameObject);
             DropLoot();
         }

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class BossController : Enemy 
 {
     public Slider m_HealthValue;
+    public Slider m_ShieldSlider;
 
-    public GameObject m_Target;
+    public BossShip m_Ship;
 
     public override void OnEnter()
     {
@@ -38,16 +39,6 @@ public class BossController : Enemy
         else
         {
             return;
-        }
-    }
-
-    public void OnCollisionEnter(Collision other)
-    {
-        if (other.collider.tag == "Player")
-        {
-            Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
-            Destroy(other.gameObject);
-            Destroy(gameObject);
         }
     }
 }

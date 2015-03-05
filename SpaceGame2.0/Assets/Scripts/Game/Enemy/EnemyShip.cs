@@ -3,14 +3,23 @@ using System.Collections;
 
 public class EnemyShip : Ship
 {
-    public float m_DropChance = 0.5f;
+
+    public enum EnemyShipType
+    {
+        BOSS,
+        MINIBOSS,
+        TYPE3,
+        TYPE2,
+        TYPE1
+    };
+    public EnemyShipType m_EnemyShipType = EnemyShipType.TYPE1;
 
     private void DropLoot()
     {
         //go through engines, drop if random number > mDropChance
         foreach (EngineData engine in m_Data.m_Engines)
         {
-            if (Random.value >= m_DropChance)
+            if (Random.value >= Constants.DROP_CHANCE)
             {
                 Debug.Log("You dropped an item from the engines");
             }
@@ -19,7 +28,7 @@ public class EnemyShip : Ship
         //go through weapons, drop if random number > mDropChance
         foreach (Weapon weapon in m_Data.m_Weapons)
         {
-            if (Random.value >= m_DropChance)
+            if (Random.value >= Constants.DROP_CHANCE)
             {
                 Debug.Log("You dropped an item from the Weapons");
             }

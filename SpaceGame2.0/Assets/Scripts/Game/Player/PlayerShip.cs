@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerShip : Ship 
 {
-    public int m_Tier = 1; //Tier of the ship for upgrades
     public PlayerController m_PController;
     public Sprite m_ShipType;
 
@@ -13,16 +11,16 @@ public class PlayerShip : Ship
     private int engineUpgradeCounter_ = 1; //Amount of upgrades in the engines by the player
     private int damageUpgradeCounter_ = 1; //Amount of upgrades in the damage by the player
     private int healthUpgradeCounter_ = 1; //Amount of upgrades in the health by the player
-    
-    public int ShieldUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_; } }
-    public int EngineUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_; } }
-    public int DamageUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_; } }
-    public int HealthUpgradeCost { get { return (Constants.BASE_UPGRADE_COST * m_Tier) * healthUpgradeCounter_; } }
+
+    public int ShieldUpgradeCost{ get{return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_;}}
+    public int EngineUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_;}}
+    public int DamageUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_;}}
+    public int HealthUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * healthUpgradeCounter_;}}
 
     public void UpgradeDamage()
     {
         upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_;
-        if(m_PController.m_Salvage >= upgradeCost_)
+        if (m_PController.m_Salvage >= upgradeCost_)
         {
             if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
             {
@@ -73,4 +71,16 @@ public class PlayerShip : Ship
             }
         }
     }
+
+    public enum PlayerShipType
+    {
+        TYPE1,
+        TYPE2,
+        TYPE3,
+        TYPE4,
+        TYPE5
+    }
+    public PlayerShipType m_PlayerShipType = PlayerShipType.TYPE1;
+    
+   
 }

@@ -44,7 +44,7 @@ public class ShipData : MonoBehaviour
 
     public void AddItem(GameObject item)
     {
-        float newMass = m_CurrentMass + item.GetComponent<PickupItem>().mMass;
+        float newMass = m_CurrentMass + item.GetComponent<PickupItem>().m_Mass;
         if (newMass <= m_CargoCapacity)
         {
             item.transform.position = gameObject.transform.position;

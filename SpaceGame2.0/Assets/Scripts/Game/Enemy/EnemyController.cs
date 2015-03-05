@@ -3,8 +3,7 @@ using System.Collections;
 
 public class EnemyController : Enemy 
 {
-
-    public GameObject m_Target;
+    public EnemyShip m_Ship;
 
     public override void OnEnter()
     {
@@ -42,7 +41,7 @@ public class EnemyController : Enemy
     {
         if (other.collider.tag == "Player")
         {
-            Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
+            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
             Destroy(gameObject);
        }
