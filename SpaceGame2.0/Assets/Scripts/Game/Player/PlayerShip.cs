@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[System.Serializable]
 public class PlayerShip : Ship 
 {
     public PlayerController m_PController;
-    public Sprite m_ShipType;
+    //public int m_ShipType;
 
     private int upgradeCost_;
     private int shieldUpgradeCounter_ = 1; //Amount of upgrades in the shield by the player
@@ -82,6 +81,4 @@ public class PlayerShip : Ship
         TYPE5
     }
     public PlayerShipType m_PlayerShipType = PlayerShipType.TYPE1;
-    
-   
 }

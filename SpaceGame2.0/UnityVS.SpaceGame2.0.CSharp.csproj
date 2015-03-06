@@ -58,11 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Constants.cs" />
+    <Compile Include="Assets\Scripts\EnemyObjectPool.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\BossController.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\BossShip.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\EnemyShip.cs" />
+    <Compile Include="Assets\Scripts\Game\Enemy\EnemySpawn.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\MiniBossController.cs" />
     <Compile Include="Assets\Scripts\Game\Enemy\MiniBossShip.cs" />
     <Compile Include="Assets\Scripts\Game\GameData\DestroyByTime.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Assets\Scripts\Game\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Game\Player\PlayerShip.cs" />
     <Compile Include="Assets\Scripts\Game\Player\PlayerState.cs" />
+    <Compile Include="Assets\Scripts\Game\Player\SpawnPlayer.cs" />
     <Compile Include="Assets\Scripts\Game\PowerUps\Items.cs" />
     <Compile Include="Assets\Scripts\Game\PowerUps\LootTable.cs" />
     <Compile Include="Assets\Scripts\Game\Ship\EngineData.cs" />
@@ -89,7 +92,6 @@
     <Compile Include="Assets\Scripts\Game\States\Waves.cs" />
     <Compile Include="Assets\Scripts\Game\States\Win.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\ParticleController.cs" />
     <Compile Include="Assets\Scripts\Sound\BackgroundMusic.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
     <Compile Include="Assets\Scripts\Sound\SoundFX.cs" />
@@ -97,7 +99,6 @@
     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\Splash.cs" />
     <Compile Include="Assets\Scripts\UI\UIControl.cs" />
-    <Compile Include="Assets\Scripts\UI\UIController.cs" />
     <Compile Include="Assets\Scripts\UI\WinUI.cs" />
   </ItemGroup>
   <ItemGroup>

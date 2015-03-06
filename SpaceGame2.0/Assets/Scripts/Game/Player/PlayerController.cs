@@ -46,7 +46,15 @@ public class PlayerController : MonoBehaviour
 
             if(nextShot_ <= 0.0f)
             {
-                Instantiate(m_WeaponData.m_Shot, m_WeaponData.m_Blaster.position, m_WeaponData.m_Blaster.rotation);
+                m_ShipController.FireWeapons("PlayerShot");
+
+                //Instantiate(m_WeaponData.m_Shot, m_WeaponData.m_Blaster.position, m_WeaponData.m_Blaster.rotation);
+                /*m_WeaponData.m_Shot = ObjectPool.m_Current.GetPooledObject();
+
+                m_WeaponData.m_Shot.transform.position = transform.position;
+                m_WeaponData.m_Shot.transform.rotation = transform.rotation;
+                m_WeaponData.m_Shot.SetActive(true);*/
+
                 nextShot_ = m_FireRate;
             }
         }

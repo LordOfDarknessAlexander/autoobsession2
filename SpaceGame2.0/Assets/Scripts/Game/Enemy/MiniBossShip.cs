@@ -3,16 +3,6 @@ using System.Collections;
 
 public class MiniBossShip : Ship
 {
-    public enum EnemyShipType
-    {
-        BOSS,
-        MINIBOSS,
-        TYPE3,
-        TYPE2,
-        TYPE1
-    };
-    public EnemyShipType m_EnemyShipType = EnemyShipType.MINIBOSS;
-
     private void DropLoot()
     {
         //go through engines, drop if random number > mDropChance

@@ -7,7 +7,7 @@ public class ShipController : MonoBehaviour
     public ShipData m_Data;
     public Ship m_Ship;
 
-    public float m_DropChance = 0.5f;
+    public GameObject m_Explosion;
 
     public void FireWeapons(string collisionLayerName)
     {
@@ -26,14 +26,23 @@ public class ShipController : MonoBehaviour
 
         if (m_Data.m_HP <= 0)
         {
-            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
-            Destroy(gameObject);
-            DropLoot();
+
+            if (ship.tag == "Player")
+            {
+                Camera.main.GetComponent<SpawnPlayer>().m_PooledAmt -= 1;
+                Camera.main.GetComponent<SpawnPlayer>().Respawn();
+            }
+
+            if (ship.tag == "Enemy")
+            {
+                Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
+                DropLoot();
+                gameObject.SetActive(false);
+            }
+
+            Instantiate(m_Explosion, transform.position, transform.rotation);
         }
-        else
-        {
-            m_Data.m_HP -= damage;
-        }
+
     }
 
     private void DropLoot()
@@ -41,12 +50,19 @@ public class ShipController : MonoBehaviour
         //go through engines, drop if random number > mDropChance
         foreach (EngineData engine in m_Data.m_Engines)
         {
-            if (Random.value >= m_DropChance)
+            if (Random.value >= Constants.DROP_CHANCE)
             {
-                GameObject newEngine = ObjectPool.Instance.GetObjectForType(engine.name, false);
-                newEngine.transform.position = transform.position;
+                Debug.Log("You dropped an item from the engines");
             }
         }
+
         //go through weapons, drop if random number > mDropChance
+        foreach (Weapon weapon in m_Data.m_Weapons)
+        {
+            if (Random.value >= Constants.DROP_CHANCE)
+            {
+                Debug.Log("You dropped an item from the Weapons");
+            }
+        }
     }
 }

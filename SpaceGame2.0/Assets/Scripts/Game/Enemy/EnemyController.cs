@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyController : Enemy 
 {
-    public EnemyShip m_Ship;
+    public ShipController m_Ship;
 
     public override void OnEnter()
     {
@@ -16,10 +16,10 @@ public class EnemyController : Enemy
 
     public override void OnExit()
     {
-        if (m_ShipData.transform.position.y < -10)
+        /*if (m_ShipData.transform.position.y < -30)
         {
-            Destroy(gameObject);
-        }
+            gameObject.SetActive(false);
+        }*/
     }
 
     public override void Update()
@@ -43,7 +43,7 @@ public class EnemyController : Enemy
         {
             Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour
 {
@@ -30,22 +31,16 @@ public class Weapon : MonoBehaviour
     public float m_Cooldown;
     public int m_MaxAmmo;
 
-    // Use this for initialization
-    void Start()
-    {
+    private float lifetime_ = 0.5f;
 
-    }
+    public int m_PooledAmt = 20;
+    List<GameObject> shots_;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void Fire(WeaponStateData stateData, GameObject parentShip, string collisionLayerName)
     {
         Instantiate(m_Shot, m_Blaster.position, m_Blaster.rotation);
-
+       
         stateData.m_CooldownTimer = m_Cooldown;
     }
 }

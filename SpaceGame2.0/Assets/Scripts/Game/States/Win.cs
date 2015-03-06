@@ -12,10 +12,14 @@ public class Win : MonoBehaviour
     public void Continue()
     {
         //save progress and let player continue playing
+        m_GameController.Save();
+        //Application.LoadLevel();
     }
 
     public void SaveAndQuit()
     {
         //save player progress and quit application
+        m_GameController.Save();
+        Application.Quit();
     }
 }

@@ -4,15 +4,6 @@ using UnityEngine.UI;
 
 public class BossShip : Ship 
 {
-    public enum EnemyShipType
-    {
-        BOSS,
-        MINIBOSS,
-        TYPE3,
-        TYPE2,
-        TYPE1
-    };
-    public EnemyShipType m_EnemyShipType = EnemyShipType.BOSS;
 
     private void DropLoot()
     {

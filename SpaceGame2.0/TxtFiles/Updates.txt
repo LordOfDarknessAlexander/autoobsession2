@@ -1,4 +1,5 @@
 Updates for Space Shooter
 
 Player and Enemy prefabs have been changed to PlayerShip and EnemyShip.
- 
+Removed unused and duplicate script from the main proj
+Implementing object pooling

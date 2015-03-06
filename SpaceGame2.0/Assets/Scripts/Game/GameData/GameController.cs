@@ -8,16 +8,15 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public SpawnPlayer m_PSpawn;
+    public EnemySpawn m_ESpawn;
+
     public Canvas m_Win;
     public Canvas m_Lose;
 
     public UIControl m_UIControl;
     public Text m_LivesText;
 
-    //public GameObject[] m_Enemy;
-    public GameObject m_Player;
-    public GameObject m_Spawner;
-    
     public int m_Lives = 3; //Number of lives the player has
     public int m_Score = 0; //Player's current score
     public int m_TotalScore; //For stat pruposes
@@ -26,10 +25,9 @@ public class GameController : MonoBehaviour
     public bool gameOver_;
     public bool quit_;
 
-     // Use this for initialization
+    // Use this for initialization
     void Start()
     {
-        Load();
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
@@ -37,19 +35,12 @@ public class GameController : MonoBehaviour
         gameOver_ = false;
         quit_ = false;
 
-        m_Spawner.GetComponent<Waves>().m_WaveNum = 1;
-
-        SpawnPlayer();
-        m_Spawner.GetComponent<Waves>().AISpawn();
-         
+        m_PSpawn.Spawn();
+        m_ESpawn.AISpawn();
     }
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Return))
-        {
-            Save();
-        }
         if(restart_)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -63,60 +54,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    /*IEnumerator WaveSpawner()
-    {
-        yield return new WaitForSeconds(m_StartDelay);
-
-        while (!gameOver_)
-        {
-            m_WaveNum++;
-
-            m_WaveText.text = m_WaveNum.ToString("F0");
-
-            numEnemies_ = enemy_.Length;
-
-            for (int i = 0; i < numEnemies_; ++i)
-            {
-                Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
-                Quaternion spawnRotation = Quaternion.identity;
-                Instantiate(m_Enemy[i], spawnPosition, spawnRotation);
-                yield return new WaitForSeconds(m_SpawnDelay);
-            }
-            yield return new WaitForSeconds(m_WaveDelay);
-
-            if(GameObject.FindGameObjectWithTag("Player") == null)
-            {
-                gameOver_ = true;
-            }
-            if(gameOver_)
-            {
-                restart_ = true;
-                GameOver();
-                break;
-            }
-        }
-    }*/
-
-    public void SpawnPlayer()
-    {
-        if(m_Lives > 0)
-        {
-            m_LivesText.text = m_Lives.ToString();
-
-            Vector3 playerSpawn_ = new Vector3(0.0f, -5.0f, 0.0f);
-            Quaternion spawnPlayerRotation = Quaternion.identity;
-            Instantiate(m_Player, playerSpawn_, spawnPlayerRotation);
-        }
-        else if(m_Lives == 0)
-        {
-            gameOver_ = true;
-            GameOver();
-        } 
-    }
 
     public void GameOver()
     {
-
         m_Lose.enabled = true;
         m_Lives--;
     }
@@ -126,60 +66,33 @@ public class GameController : MonoBehaviour
         m_Win.enabled = true;
     }
    
-    private void Respawn()
-    {
-        SpawnPlayer();
-    }
-	
 	public void Save()
     {
-        if (!File.Exists(Application.persistentDataPath + "/playerData.dat"))
-        {
-            Debug.Log("Creating file");
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
-            PlayerData pData = new PlayerData();
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+        Debug.Log(Application.persistentDataPath);
 
-            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
-            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
+        PlayerData pData = new PlayerData();
 
-            pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
+        pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
+        pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
 
-            bf.Serialize(file, pData);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("Saving to " + Application.persistentDataPath);
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+        pData.m_PlayerShipData = m_PSpawn.m_Player.GetComponent<PlayerController>().m_PlayerShip;
 
-            PlayerData pData = new PlayerData();
-            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
-            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
-
-            pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
-
-            bf.Serialize(file, pData);
-            file.Close();
-        }
+        bf.Serialize(file, pData);
+        file.Close();
     }
 
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
         {
-            Debug.Log("Loading");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerData pData = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
-        }
-        else
-        {
-            Debug.Log("Loading failed, file does not exist");
+            m_PSpawn.m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
         }
     }
 }
