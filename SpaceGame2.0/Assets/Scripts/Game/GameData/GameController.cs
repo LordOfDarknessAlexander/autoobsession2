@@ -26,8 +26,9 @@ public class GameController : MonoBehaviour
     public bool quit_;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        Load();
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
@@ -41,6 +42,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.Return))
+        {
+            Save();
+        }
         if(restart_)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -68,31 +73,63 @@ public class GameController : MonoBehaviour
    
 	public void Save()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
-        Debug.Log(Application.persistentDataPath);
+        if (!File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            Debug.Log("Creating file");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
+            PlayerData pData = new PlayerData();
 
-        PlayerData pData = new PlayerData();
+            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
+            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
 
-        pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
-        pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
+            bf.Serialize(file, pData);
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Saving to " + Application.persistentDataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+            PlayerData pData = new PlayerData();
 
-        pData.m_PlayerShipData = m_PSpawn.m_Player.GetComponent<PlayerController>().m_PlayerShip;
+            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
+            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
+            pData.m_Salvage = m_PSpawn.m_Player.GetComponent<PlayerController>().m_Salvage;
+            pData.m_ShipTier = m_PSpawn.m_Player.GetComponent<Ship>().m_Tier;
+            pData.m_EngineUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().EngineLevel;
+            pData.m_ShieldUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().ShieldLevel;
+            pData.m_HealthUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().HealthLevel;
+            pData.m_DamageUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().DamageLevel;
 
-        bf.Serialize(file, pData);
-        file.Close();
+            bf.Serialize(file, pData);
+            file.Close();
+        }
     }
 
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
         {
+            Debug.Log("Loading");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerData pData = (PlayerData)bf.Deserialize(file);
-            file.Close();
 
-            m_PSpawn.m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
+            m_UIControl.m_EnemiesKilledLifetime = pData.m_EnemiesKilledLifetime;
+            m_UIControl.m_WavesCompleted = pData.m_WavesCompleted;
+            m_PSpawn.m_Player.GetComponent<PlayerController>().m_Salvage = pData.m_Salvage;
+            m_PSpawn.m_Player.GetComponent<Ship>().m_Tier = pData.m_ShipTier;
+            m_PSpawn.m_Player.GetComponent<PlayerShip>().EngineLevel = pData.m_EngineUpgrade;
+            m_PSpawn.m_Player.GetComponent<PlayerShip>().ShieldLevel = pData.m_ShieldUpgrade;
+            m_PSpawn.m_Player.GetComponent<PlayerShip>().HealthLevel = pData.m_HealthUpgrade;
+            m_PSpawn.m_Player.GetComponent<PlayerShip>().DamageLevel = pData.m_DamageUpgrade;
+
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Failed to load, file doesn't exist");
         }
     }
 }
@@ -100,8 +137,13 @@ public class GameController : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-    public PlayerShip m_PlayerShipData;
     public int m_EnemiesKilledLifetime;
     public int m_TotalScore;
     public int m_WavesCompleted;
+    public int m_Salvage;
+    public int m_ShipTier;
+    public int m_EngineUpgrade;
+    public int m_DamageUpgrade;
+    public int m_HealthUpgrade;
+    public int m_ShieldUpgrade;
 }

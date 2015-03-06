@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
+        m_PlayerShip = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerShip>();
         nextShot_ = 0.0f;
     }
 

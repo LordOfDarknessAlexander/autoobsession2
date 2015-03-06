@@ -23,6 +23,7 @@ public class UIControl : MonoBehaviour
 
     void Start()
     {
+        m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
         maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_Data.m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
         m_PlayerHealth.minValue = minHealth_;

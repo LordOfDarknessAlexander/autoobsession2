@@ -12,10 +12,15 @@ public class PlayerShip : Ship
     private int damageUpgradeCounter_ = 1; //Amount of upgrades in the damage by the player
     private int healthUpgradeCounter_ = 1; //Amount of upgrades in the health by the player
 
-    public int ShieldUpgradeCost{ get{return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_;}}
+    public int ShieldUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_;}}
     public int EngineUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_;}}
     public int DamageUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_;}}
     public int HealthUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * healthUpgradeCounter_;}}
+
+    public int EngineLevel { get { return engineUpgradeCounter_; } set { engineUpgradeCounter_ = value; } }
+    public int ShieldLevel { get { return shieldUpgradeCounter_; } set { shieldUpgradeCounter_ = value; } }
+    public int DamageLevel { get { return damageUpgradeCounter_; } set { damageUpgradeCounter_ = value; } }
+    public int HealthLevel { get { return healthUpgradeCounter_; } set { healthUpgradeCounter_ = value; } }
 
     public void UpgradeDamage()
     {
@@ -72,7 +77,7 @@ public class PlayerShip : Ship
         }
     }
 
-    public enum PlayerShipType
+    public enum PlayerShipLevel
     {
         TYPE1,
         TYPE2,
@@ -80,5 +85,5 @@ public class PlayerShip : Ship
         TYPE4,
         TYPE5
     }
-    public PlayerShipType m_PlayerShipType = PlayerShipType.TYPE1;
+    public PlayerShipLevel m_PlayerShipType = PlayerShipLevel.TYPE1;
 }
