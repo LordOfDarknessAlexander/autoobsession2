@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class PlayerShip : Ship 
 {
     public PlayerController m_PController;

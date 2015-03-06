@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
      // Use this for initialization
     void Start()
     {
+        Load();
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
@@ -45,6 +46,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.Return))
+        {
+            Save();
+        }
         if(restart_)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -128,31 +133,53 @@ public class GameController : MonoBehaviour
 	
 	public void Save()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
-        Debug.Log(Application.persistentDataPath);
+        if (!File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            Debug.Log("Creating file");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
+            PlayerData pData = new PlayerData();
 
-        PlayerData pData = new PlayerData();
+            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
+            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
 
-        pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
-        pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
+            pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
 
-        pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
+            bf.Serialize(file, pData);
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Saving to " + Application.persistentDataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
 
-        bf.Serialize(file, pData);
-        file.Close();
+            PlayerData pData = new PlayerData();
+            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
+            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
+
+            pData.m_PlayerShipData = m_Player.GetComponent<PlayerController>().m_PlayerShip;
+
+            bf.Serialize(file, pData);
+            file.Close();
+        }
     }
 
     public void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
         {
+            Debug.Log("Loading");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerData pData = (PlayerData)bf.Deserialize(file);
             file.Close();
 
             m_Player.GetComponent<PlayerController>().m_PlayerShip = pData.m_PlayerShipData;
+        }
+        else
+        {
+            Debug.Log("Loading failed, file does not exist");
         }
     }
 }
