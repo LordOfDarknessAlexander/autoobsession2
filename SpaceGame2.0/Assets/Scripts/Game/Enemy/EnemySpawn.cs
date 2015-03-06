@@ -15,11 +15,11 @@ public class EnemySpawn : MonoBehaviour
     public int m_RequiredKills;
     public int m_WaveNum;
 
-    List<GameObject> enemyPool_ = new List<GameObject>();
+    public List<GameObject> enemyPool_ = new List<GameObject>();
 
     public Vector3 m_SpawnArea;
 
-    public GameController m_Controller;
+    //public GameController m_Controller;
 
     public void AISpawn()
     {
@@ -45,7 +45,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -71,7 +71,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -98,7 +98,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -125,7 +125,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -148,14 +148,10 @@ public class EnemySpawn : MonoBehaviour
                     enemyPool_.Add(obj);
                 }
             }
-
-            //set MiniBoss to spawn
-            SpawnMiniBoss();
-
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -178,10 +174,15 @@ public class EnemySpawn : MonoBehaviour
                     enemyPool_.Add(obj);
                 }
             }
+
+            //set MiniBoss to spawn
+            SpawnMiniBoss();
+
+
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -208,7 +209,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -235,7 +236,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -262,7 +263,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -291,7 +292,7 @@ public class EnemySpawn : MonoBehaviour
             //if play is active start spawning
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                StartCoroutine(WaveSpawner());
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
             }
             //else do nothing
             else
@@ -304,6 +305,7 @@ public class EnemySpawn : MonoBehaviour
     public void SpawnBoss()
     {
         Debug.Log("Time to code that MiniBoss guys!");
+
     }
 
     public void SpawnMiniBoss()
@@ -311,13 +313,13 @@ public class EnemySpawn : MonoBehaviour
         Debug.Log("Time to code that Boss guys!");
     }
 
-    IEnumerator WaveSpawner()
+    /*IEnumerator WaveSpawner()
     {
         yield return new WaitForSeconds(m_StartDelay);
 
 
 
-        while (m_RequiredKills > 0)
+        while (m_RequiredKills > 0 && GameObject.FindGameObjectWithTag("Player") != null)
         {
             for (int i = 0; i < m_RequiredKills; ++i)
             {
@@ -343,15 +345,15 @@ public class EnemySpawn : MonoBehaviour
 
             if (GameObject.FindGameObjectWithTag("Player") == null)
             {
-                m_Controller.gameOver_ = true;
+                Camera.main.GetComponent<GameController>().Load();
             }
 
-            if (m_Controller.gameOver_)
+            if (Camera.main.GetComponent<GameController>().gameOver_)
             {
-                m_Controller.restart_ = true;
-                m_Controller.GameOver();
+                Camera.main.GetComponent<GameController>().restart_ = true;
+                Camera.main.GetComponent<GameController>().GameOver();
                 break;
             }
         }
-    }
+    }*/
 }

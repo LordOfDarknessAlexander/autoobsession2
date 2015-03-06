@@ -6,6 +6,7 @@ public class ShipController : MonoBehaviour
 {
     public ShipData m_Data;
     public Ship m_Ship;
+    //public GameController m_Controller;
 
     public GameObject m_Explosion;
 
@@ -29,8 +30,8 @@ public class ShipController : MonoBehaviour
 
             if (ship.tag == "Player")
             {
-                Camera.main.GetComponent<SpawnPlayer>().m_PooledAmt -= 1;
-                Camera.main.GetComponent<SpawnPlayer>().Respawn();
+                Camera.main.GetComponent<GameController>().Respawn();
+                //Destroy(gameObject);
             }
 
             if (ship.tag == "Enemy")

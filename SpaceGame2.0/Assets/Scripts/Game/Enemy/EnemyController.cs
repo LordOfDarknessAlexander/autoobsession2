@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyController : Enemy 
 {
     public ShipController m_Ship;
+    public GameController m_Controller;
 
     public override void OnEnter()
     {
@@ -42,8 +43,10 @@ public class EnemyController : Enemy
         if (other.collider.tag == "Player")
         {
             Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
-            Destroy(other.gameObject);
+            Camera.main.GetComponent<GameController>().Respawn();
+            //Destroy(other.gameObject);
             gameObject.SetActive(false);
+
        }
     }
 }

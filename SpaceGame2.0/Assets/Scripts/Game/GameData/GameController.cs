@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public SpawnPlayer m_PSpawn;
+    public GameObject m_Player;
     public EnemySpawn m_ESpawn;
 
     public Canvas m_Win;
@@ -36,7 +36,6 @@ public class GameController : MonoBehaviour
         gameOver_ = false;
         quit_ = false;
 
-        m_PSpawn.Spawn();
         m_ESpawn.AISpawn();
     }
 
@@ -95,12 +94,12 @@ public class GameController : MonoBehaviour
 
             pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
             pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
-            pData.m_Salvage = m_PSpawn.m_Player.GetComponent<PlayerController>().m_Salvage;
-            pData.m_ShipTier = m_PSpawn.m_Player.GetComponent<Ship>().m_Tier;
-            pData.m_EngineUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().EngineLevel;
-            pData.m_ShieldUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().ShieldLevel;
-            pData.m_HealthUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().HealthLevel;
-            pData.m_DamageUpgrade = m_PSpawn.m_Player.GetComponent<PlayerShip>().DamageLevel;
+            pData.m_Salvage = m_Player.GetComponent<PlayerController>().m_Salvage;
+            pData.m_ShipTier = m_Player.GetComponent<Ship>().m_Tier;
+            pData.m_EngineUpgrade = m_Player.GetComponent<PlayerShip>().EngineLevel;
+            pData.m_ShieldUpgrade = m_Player.GetComponent<PlayerShip>().ShieldLevel;
+            pData.m_HealthUpgrade = m_Player.GetComponent<PlayerShip>().HealthLevel;
+            pData.m_DamageUpgrade = m_Player.GetComponent<PlayerShip>().DamageLevel;
 
             bf.Serialize(file, pData);
             file.Close();
@@ -118,12 +117,12 @@ public class GameController : MonoBehaviour
 
             m_UIControl.m_EnemiesKilledLifetime = pData.m_EnemiesKilledLifetime;
             m_UIControl.m_WavesCompleted = pData.m_WavesCompleted;
-            m_PSpawn.m_Player.GetComponent<PlayerController>().m_Salvage = pData.m_Salvage;
-            m_PSpawn.m_Player.GetComponent<Ship>().m_Tier = pData.m_ShipTier;
-            m_PSpawn.m_Player.GetComponent<PlayerShip>().EngineLevel = pData.m_EngineUpgrade;
-            m_PSpawn.m_Player.GetComponent<PlayerShip>().ShieldLevel = pData.m_ShieldUpgrade;
-            m_PSpawn.m_Player.GetComponent<PlayerShip>().HealthLevel = pData.m_HealthUpgrade;
-            m_PSpawn.m_Player.GetComponent<PlayerShip>().DamageLevel = pData.m_DamageUpgrade;
+            m_Player.GetComponent<PlayerController>().m_Salvage = pData.m_Salvage;
+            m_Player.GetComponent<Ship>().m_Tier = pData.m_ShipTier;
+            m_Player.GetComponent<PlayerShip>().EngineLevel = pData.m_EngineUpgrade;
+            m_Player.GetComponent<PlayerShip>().ShieldLevel = pData.m_ShieldUpgrade;
+            m_Player.GetComponent<PlayerShip>().HealthLevel = pData.m_HealthUpgrade;
+            m_Player.GetComponent<PlayerShip>().DamageLevel = pData.m_DamageUpgrade;
 
             file.Close();
         }
@@ -132,6 +131,18 @@ public class GameController : MonoBehaviour
             Debug.Log("Failed to load, file doesn't exist");
         }
     }
+
+    public void SoftSave()
+    {
+
+    }
+	
+	public void Respawn()
+    {
+        Camera.main.GetComponent<Waves>().m_CurrentWave = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
+        Camera.main.GetComponent<Waves>().RestartCurrentWave();
+    }
+
 }
 
 [Serializable]
