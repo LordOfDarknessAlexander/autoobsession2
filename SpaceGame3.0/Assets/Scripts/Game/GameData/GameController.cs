@@ -21,6 +21,11 @@ public class GameController : MonoBehaviour
     public int m_Score = 0; //Player's current score
     public int m_TotalScore; //For stat pruposes
 
+    public int m_TempKills;
+    public int m_TempScore;
+    public int m_TempSalvage;
+    
+
     public bool restart_;
     public bool gameOver_;
     public bool quit_;

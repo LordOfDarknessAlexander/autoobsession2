@@ -37,6 +37,7 @@ public class ShipController : MonoBehaviour
             if (ship.tag == "Enemy")
             {
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
+                Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 DropLoot();
                 gameObject.SetActive(false);
             }

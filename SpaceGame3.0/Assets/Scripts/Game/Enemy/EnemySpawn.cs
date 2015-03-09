@@ -7,6 +7,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] m_Enemies;
     public Text m_WaveText;
+    public Text m_ReqKillText;
 
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -19,8 +20,6 @@ public class EnemySpawn : MonoBehaviour
 
     public Vector3 m_SpawnArea;
 
-    //public GameController m_Controller;
-
     public void AISpawn()
     {
 
@@ -30,6 +29,7 @@ public class EnemySpawn : MonoBehaviour
             m_WaveText.text = m_WaveNum.ToString("F0");
 
             m_RequiredKills = 10;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             //populate enemy array
             for (int e = 0; e < m_Enemies.Length - 2; e++)
@@ -58,6 +58,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_RequiredKills = 10;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length - 2; e++)
             {
@@ -83,7 +84,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 2)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 15;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length - 2; e++)
             {
@@ -110,7 +112,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 3)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 20;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length - 1; e++)
             {
@@ -137,7 +140,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 4)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 25;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length - 1; e++)
             {
@@ -163,7 +167,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 5)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            /*m_RequiredKills = 10;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length; e++)
             {
@@ -173,7 +178,7 @@ public class EnemySpawn : MonoBehaviour
                     obj.SetActive(false);
                     enemyPool_.Add(obj);
                 }
-            }
+            }*/
 
             //set MiniBoss to spawn
             SpawnMiniBoss();
@@ -194,7 +199,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 6)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 30;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length; e++)
             {
@@ -221,7 +227,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 7)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 35;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length; e++)
             {
@@ -248,7 +255,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 8)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 40;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length; e++)
             {
@@ -275,7 +283,8 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 9)
         {
             //populate enemy array
-            m_RequiredKills = 10;
+            m_RequiredKills = 45;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
             for (int e = 0; e < m_Enemies.Length; e++)
             {
@@ -300,17 +309,64 @@ public class EnemySpawn : MonoBehaviour
                 return;
             }
         }
+
+        if (m_WaveNum == 10)
+        {
+            //populate enemy array
+            /*m_RequiredKills = 45;
+            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+
+            for (int e = 0; e < m_Enemies.Length; e++)
+            {
+                for (int i = 0; i < m_RequiredKills; i++)
+                {
+                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                    obj.SetActive(false);
+                    enemyPool_.Add(obj);
+                }
+            }*/
+
+            //Set Boss to Spawn
+            SpawnBoss();
+            //if play is active start spawning
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+            }
+            //else do nothing
+            else
+            {
+                return;
+            }
+        }
     }
 
     public void SpawnBoss()
     {
         Debug.Log("Time to code that MiniBoss guys!");
-
+        for (int e = 0; e < m_Enemies.Length; e++)
+        {
+            for (int i = 0; i < m_RequiredKills; i++)
+            {
+                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                obj.SetActive(false);
+                enemyPool_.Add(obj);
+            }
+        }
     }
 
     public void SpawnMiniBoss()
     {
         Debug.Log("Time to code that Boss guys!");
+        for (int e = 0; e < m_Enemies.Length; e++)
+        {
+            for (int i = 0; i < m_RequiredKills; i++)
+            {
+                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                obj.SetActive(false);
+                enemyPool_.Add(obj);
+            }
+        }
     }
 
     /*IEnumerator WaveSpawner()

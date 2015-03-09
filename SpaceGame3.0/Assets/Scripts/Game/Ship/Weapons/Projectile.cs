@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
 
     public void OnExit()
     {
-        if (gameObject.transform.position.y < -10 || gameObject.transform.position.y > 10)
+        if (gameObject.transform.position.y < -20 || gameObject.transform.position.y > 20)
         {
             Destroy(gameObject);
         }

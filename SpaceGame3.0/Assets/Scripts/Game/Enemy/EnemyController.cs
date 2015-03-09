@@ -17,10 +17,10 @@ public class EnemyController : Enemy
 
     public override void OnExit()
     {
-        /*if (m_ShipData.transform.position.y < -30)
+        if (m_ShipData.transform.position.y < -30)
         {
             gameObject.SetActive(false);
-        }*/
+        }
     }
 
     public override void Update()
@@ -43,8 +43,9 @@ public class EnemyController : Enemy
         if (other.collider.tag == "Player")
         {
             Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
+            Destroy(other.gameObject);
             Camera.main.GetComponent<GameController>().Respawn();
-            //Destroy(other.gameObject);
+            
             gameObject.SetActive(false);
 
        }
