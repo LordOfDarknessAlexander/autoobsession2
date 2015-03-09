@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameController : MonoBehaviour
 {
     public bool m_FirstTimePlayer = false; //Bool to determine whether or not we need to run the initial play segment
-    public List<GameObject> m_Pets = new List<GameObject>(); //List of possible pets -- this needs to stay here in case they decide to buy more pets
+    public List<GameObject> m_PetChoices = new List<GameObject>(); //List of possible pets -- this needs to stay here in case they decide to buy more pets
     public PlayerData m_PlayerData; //The player data
 
     private string currPetName_; //Name of the current pet, used to find the right pet in the list
     private float saveTimer_; //Timer between autosaves
     private float maxSaveTime_; //Max time between autosaves
     private GameObject pet_;
-    private List<string> storedPets_ = new List<string>();
 
     public string CurrentPet
     {
@@ -26,24 +28,7 @@ public class GameController : MonoBehaviour
 
 	void Awake ()
     {
-        PlayerPrefs.GetString("CurrPet", currPetName_);
-        
-
-        if (currPetName_ == null)
-        {
-            m_FirstTimePlayer = true;
-            m_PlayerData.m_Points = Constants.DEFAULT_START_POINTS;
-            m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
-        }
-        else
-        {
-            SetUpGame();
-            //Below is storage stuff for later
-            /*for (int i = 0; i < maxPetsAllowed_; ++i)
-            {
-                PlayerPrefs.GetString("StoredPet" + i, storedPets_[i].Insert(i, "Hi"));
-            }*/
-        }
+        Load();
 	}
 	
 	void Update ()
@@ -52,19 +37,22 @@ public class GameController : MonoBehaviour
         {
             pet_.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 5.0f));
         }
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Save();
+            Application.Quit();
+        }
 	}
 
     public void SetUpGame()
     {
-        //Call all load functions
-        m_PlayerData.Load();
-
         //currPetName_ = Camera.main.GetComponent<UIController>().m_SelectedPet;
-        for (int i = 0; i < m_Pets.Count; ++i)
+        for (int i = 0; i < m_PetChoices.Count; ++i)
         {
-            if (m_Pets[i].name == currPetName_)
+            if (m_PetChoices[i].name == currPetName_)
             {
-                pet_ = (GameObject)Instantiate(m_Pets[i]);
+                pet_ = (GameObject)Instantiate(m_PetChoices[i]);
             }
         }
     }
@@ -72,14 +60,91 @@ public class GameController : MonoBehaviour
     //When this Save function is called, all other save functions get called. No where else should save.
     public void Save()
     {
-        PlayerPrefs.SetString("CurrPet", currPetName_);
-        pet_.GetComponent<Pet>().Save();
-        m_PlayerData.Save();
+        if (!File.Exists(Application.persistentDataPath + "/gpSaveData.dat"))
+        {
+            Debug.Log("Creating file");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/gpSaveData.dat");
+            SaveData sData = new SaveData();
+
+            //Insert save data here
+            for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
+            {
+                sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
+            }
+            sData.m_Points = m_PlayerData.m_Points;
+            sData.m_Shields = m_PlayerData.m_Shields;
+            sData.m_CloseDate = DateTime.Now;
+
+            bf.Serialize(file, sData);
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Saving to " + Application.persistentDataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gpSaveData.dat", FileMode.Open);
+            SaveData sData = new SaveData();
+
+            //Insert save data here
+            for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
+            {
+                sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
+            }
+            sData.m_Points = m_PlayerData.m_Points;
+            sData.m_Shields = m_PlayerData.m_Shields;
+            sData.m_CloseDate = DateTime.Now;
+
+            bf.Serialize(file, sData);
+            file.Close();
+        }
     }
 
-    //When this Load function is called, all other load functions get called. No where else should load.
     public void Load()
     {
+        if (File.Exists(Application.persistentDataPath + "/gpSaveData.dat"))
+        {
+            Debug.Log("Loading");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gpSaveData.dat", FileMode.Open);
+            SaveData sData = (SaveData)bf.Deserialize(file);
+            m_FirstTimePlayer = false;
 
+            //Insert load data here
+            for (int i = 0; i < sData.m_Pets.Count; ++i)
+            {
+                for(int j = 0; j < m_PetChoices.Count; ++i)
+                {
+                    if(sData.m_Pets[i] == m_PetChoices[i].name)
+                    {
+                        m_PlayerData.m_Pets.Add(m_PetChoices[i]);
+                    }
+                }
+            }
+            m_PlayerData.m_Shields = sData.m_Shields;
+            DateTime now = DateTime.Now;
+            TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
+            float pointsToAdd = (float)ts.TotalMinutes / 5;
+            m_PlayerData.m_Points = sData.m_Points + (int)pointsToAdd;
+
+            SetUpGame();
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Failed to load, file doesn't exist");
+            m_FirstTimePlayer = true;
+            m_PlayerData.m_Points = Constants.DEFAULT_START_POINTS;
+            m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
+        }
     }
+}
+
+[Serializable]
+class SaveData
+{
+    public List<string> m_Pets = new List<string>();
+    public int m_Shields;
+    public int m_Points;
+    public DateTime m_CloseDate;
 }

@@ -22,24 +22,4 @@ public class Pet : MonoBehaviour
     {
 	    
 	}
-
-    public void Save()
-    {
-        PlayerPrefs.SetString(m_PetName + "Nickname", m_Nickname);
-        PlayerPrefs.SetInt(m_PetName + "Hunger", m_Hunger);
-        PlayerPrefs.SetInt(m_PetName + "Cleanliness", m_Cleanliness);
-        PlayerPrefs.SetInt(m_PetName + "Boredom", m_Bored);
-        PlayerPrefs.SetString(m_PetName + "FearOne", m_FearOne);
-        PlayerPrefs.SetString(m_PetName + "FearTwo", m_FearTwo);
-    }
-
-    public void Load()
-    {
-        PlayerPrefs.GetString(m_PetName + "Nickname", m_Nickname);
-        PlayerPrefs.GetInt(m_PetName + "Hunger", m_Hunger);
-        PlayerPrefs.GetInt(m_PetName + "Cleanliness", m_Cleanliness);
-        PlayerPrefs.GetInt(m_PetName + "Boredom", m_Bored);
-        PlayerPrefs.GetString(m_PetName + "FearOne", m_FearOne);
-        PlayerPrefs.GetString(m_PetName + "FearTwo", m_FearTwo);
-    }
 }

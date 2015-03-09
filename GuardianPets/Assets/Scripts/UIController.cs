@@ -82,7 +82,6 @@ public class UIController : MonoBehaviour
     {
         m_SelectedPet = btn.name;
         gc_.CurrentPet = m_SelectedPet;
-        PlayerPrefs.SetString("CurrPet", m_SelectedPet);
         m_NicknamePanel.SetActive(true);
         gc_.SetUpGame();
         gc_.Save();

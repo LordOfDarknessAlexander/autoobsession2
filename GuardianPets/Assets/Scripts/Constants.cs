@@ -16,4 +16,5 @@ public class Constants : MonoBehaviour
     public const int POINTS_TIMER = 300; //Amount of time to wait to get more points
     public const int COUNTER_MAX = 10; //This is as far as the counter in PlayerData.cs can go before being reset and giving the player shields
     public const int ACTION_COST = 20; //Cost per action - play, wash, feed.
+    public const int POINTS_REWARDED = 20;
 }
