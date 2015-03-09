@@ -6,9 +6,7 @@ public class SpawnPlayer : MonoBehaviour
 {
     public GameController m_Control;
     public GameObject m_Player;
-
-    public int m_PooledAmt = 3;
-    List<GameObject> lives_ = new List<GameObject>();
+    public UIControl m_UIControl;
 
     void Start()
     {
@@ -17,22 +15,10 @@ public class SpawnPlayer : MonoBehaviour
 
     public void Spawn()
     {
-        for (int i = 0; i < m_PooledAmt; i++)
-        {
-            GameObject obj = (GameObject)Instantiate(m_Player);
-            obj.SetActive(false);
-            lives_.Add(obj);
-        }
-
-        m_Player = lives_[0];
-
-        m_Control.m_Lives = m_PooledAmt;
-
-       //m_Player = lives_[0];
 
         if (m_Control.m_Lives > 0)
         {
-            m_Control.m_LivesText.text = m_Control.m_Lives.ToString();
+            //m_UIControl.m_LivesText.text = m_Control.m_Lives.ToString();
 
             Vector3 playerSpawn_ = new Vector3(0.0f, -5.0f, 0.0f);
             Quaternion spawnPlayerRotation = Quaternion.identity;
@@ -48,10 +34,4 @@ public class SpawnPlayer : MonoBehaviour
             m_Control.GameOver();
         } 
     }
-
-    public void Respawn()
-    {
-        Spawn();
-    }
-        
 }

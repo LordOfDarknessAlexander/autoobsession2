@@ -15,11 +15,12 @@ public class GameController : MonoBehaviour
     public Canvas m_Lose;
 
     public UIControl m_UIControl;
-    public Text m_LivesText;
 
     public int m_Lives = 3; //Number of lives the player has
     public int m_Score = 0; //Player's current score
     public int m_TotalScore; //For stat pruposes
+    public int m_Kills;
+    public int m_Salvage;
 
     public int m_TempKills;
     public int m_TempScore;
@@ -67,7 +68,6 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         m_Lose.enabled = true;
-        m_Lives--;
     }
 
     public void Win()
@@ -139,15 +139,33 @@ public class GameController : MonoBehaviour
 
     public void SoftSave()
     {
+        m_TempScore = m_Score;
+        m_TempKills = m_Kills;
+        m_TempSalvage = m_Salvage;
+    }
 
+    public void LoadSoftSave()
+    {
+        m_Score = m_TempScore;
+        m_TempKills = m_Kills;
+        m_TempSalvage = m_Salvage;
     }
 	
 	public void Respawn()
     {
-        Camera.main.GetComponent<Waves>().m_CurrentWave = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
-        Camera.main.GetComponent<Waves>().RestartCurrentWave();
-    }
+        if(m_Lives != 0)
+        {
+            restart_ = true;
 
+            Camera.main.GetComponent<Waves>().m_CurrentWave = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
+            LoadSoftSave();
+            Camera.main.GetComponent<Waves>().RestartCurrentWave();
+        }
+        else
+        {
+            gameOver_ = true;
+        }
+    }
 }
 
 [Serializable]

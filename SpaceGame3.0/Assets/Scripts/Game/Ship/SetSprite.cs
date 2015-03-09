@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SetSprite : MonoBehaviour 
 {
-    private GameObject sprite_;
+    private Sprite sprite_;
 
     private int tier_;
 
@@ -12,13 +12,36 @@ public class SetSprite : MonoBehaviour
 
     public void GetSpriteImage(Ship ship)
     {
-
+        //sprite_ = GetComponent<SpriteRenderer>();
     }
+
+    public enum SpriteType
+    {
+        TYPE1,
+        TYPE2,
+        TYPE3,
+        TYPE4
+    }
+    private SpriteType type_ = SpriteType.TYPE1;
+
 
     public void SetSpriteImage(Ship ship, Sprite sprite)
     {
-        tier_ = ship.GetComponent<Ship>().m_Tier;
+        switch(type_)
+        {
+            case SpriteType.TYPE1:
+                break;
+            case SpriteType.TYPE2:
+                break;
+            case SpriteType.TYPE3:
+                break;
+            case SpriteType.TYPE4:
+                break;
+        }
+
+        ship.GetComponent<Ship>().m_Tier = tier_;
         ship.GetComponent<SpriteRenderer>().sprite = sprite;
     }
+
 
 }

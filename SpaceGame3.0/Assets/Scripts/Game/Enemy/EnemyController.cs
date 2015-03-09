@@ -6,6 +6,9 @@ public class EnemyController : Enemy
     public ShipController m_Ship;
     public GameController m_Controller;
 
+    public float m_MaxVel;
+    public Vector3 m_CurrVel;
+
     public override void OnEnter()
     {
         //Set target for all enemies
@@ -27,6 +30,10 @@ public class EnemyController : Enemy
     {
         //to move enemy around scene
         GetComponent<Rigidbody>().AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
+
+        GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, m_MaxVel);
+
+        m_CurrVel = GetComponent<Rigidbody>().velocity;
 
         if (m_Target != null)
         {

@@ -30,14 +30,16 @@ public class ShipController : MonoBehaviour
 
             if (ship.tag == "Player")
             {
+                Destroy(gameObject);
                 Camera.main.GetComponent<GameController>().Respawn();
-                //Destroy(gameObject);
+                
             }
 
             if (ship.tag == "Enemy")
             {
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
+                Camera.main.GetComponent<GameController>().m_Score += 100;
                 DropLoot();
                 gameObject.SetActive(false);
             }
