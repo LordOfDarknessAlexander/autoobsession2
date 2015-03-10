@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour
             if (m_PetChoices[i].name == currPetName_)
             {
                 pet_ = (GameObject)Instantiate(m_PetChoices[i]);
+                pet_.name = m_PetChoices[i].name;
             }
         }
     }
@@ -75,6 +76,7 @@ public class GameController : MonoBehaviour
             sData.m_Points = m_PlayerData.m_Points;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
+            sData.m_CurrPet = pet_.name;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -94,6 +96,7 @@ public class GameController : MonoBehaviour
             sData.m_Points = m_PlayerData.m_Points;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
+            sData.m_CurrPet = pet_.name;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -104,20 +107,27 @@ public class GameController : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + "/gpSaveData.dat"))
         {
-            Debug.Log("Loading");
+            Debug.Log("Loading from " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/gpSaveData.dat", FileMode.Open);
             SaveData sData = (SaveData)bf.Deserialize(file);
-            m_FirstTimePlayer = false;
 
             //Insert load data here
-            for (int i = 0; i < sData.m_Pets.Count; ++i)
+            for (int i = 0; i < m_PetChoices.Count; ++i)
             {
-                for(int j = 0; j < m_PetChoices.Count; ++i)
+                for (int j = 0; j < sData.m_Pets.Count; ++j)
                 {
-                    if(sData.m_Pets[i] == m_PetChoices[i].name)
+                    if(sData.m_Pets[j] == m_PetChoices[i].name)
                     {
-                        m_PlayerData.m_Pets.Add(m_PetChoices[i]);
+                        if(m_PetChoices[i].name == sData.m_CurrPet)
+                        {
+                            pet_ = (GameObject)Instantiate(m_PetChoices[i]);
+                            pet_.name = m_PetChoices[i].name;
+                        }
+                        else
+                        {
+                            m_PlayerData.m_Pets.Add(m_PetChoices[i]);
+                        }
                     }
                 }
             }
@@ -129,6 +139,7 @@ public class GameController : MonoBehaviour
 
             SetUpGame();
             file.Close();
+            m_FirstTimePlayer = false;
         }
         else
         {
@@ -143,8 +154,9 @@ public class GameController : MonoBehaviour
 [Serializable]
 class SaveData
 {
-    public List<string> m_Pets = new List<string>();
-    public int m_Shields;
-    public int m_Points;
-    public DateTime m_CloseDate;
+    public List<string> m_Pets = new List<string>(); //List of pets the player owns
+    public string m_CurrPet; //Player's currently active pet
+    public int m_Shields; //Player's current shields
+    public int m_Points; //Player's points at the time of the save
+    public DateTime m_CloseDate; //Date the player stopped playing
 }
