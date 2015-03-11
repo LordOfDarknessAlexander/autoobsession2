@@ -31,10 +31,7 @@ public class Weapon : MonoBehaviour
     public float m_Cooldown;
     public int m_MaxAmmo;
 
-    private float lifetime_ = 0.5f;
-
     public int m_PooledAmt = 20;
-    List<GameObject> shots_;
 
 
     public void Fire(WeaponStateData stateData, GameObject parentShip, string collisionLayerName)

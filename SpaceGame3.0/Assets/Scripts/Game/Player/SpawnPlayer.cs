@@ -18,7 +18,7 @@ public class SpawnPlayer : MonoBehaviour
 
         if (m_Control.m_Lives > 0)
         {
-            //m_UIControl.m_LivesText.text = m_Control.m_Lives.ToString();
+            //m_Player = PoolManager.Spawn("PlayerShip");
 
             Vector3 playerSpawn_ = new Vector3(0.0f, -5.0f, 0.0f);
             Quaternion spawnPlayerRotation = Quaternion.identity;

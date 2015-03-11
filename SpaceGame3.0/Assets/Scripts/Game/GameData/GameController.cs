@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public Text m_RestartText;
+
     public GameObject m_Player;
     public EnemySpawn m_ESpawn;
 
@@ -25,7 +27,7 @@ public class GameController : MonoBehaviour
     public int m_TempKills;
     public int m_TempScore;
     public int m_TempSalvage;
-    
+    public int m_TempWaveNum;
 
     public bool restart_;
     public bool gameOver_;
@@ -51,6 +53,12 @@ public class GameController : MonoBehaviour
         {
             Save();
         }
+
+        if(Input.GetKey(KeyCode.C))
+        {
+            SoftSave();
+        }
+
         if(restart_)
         {
             if (Input.GetKeyDown(KeyCode.R))
@@ -140,8 +148,21 @@ public class GameController : MonoBehaviour
     public void SoftSave()
     {
         m_TempScore = m_Score;
+        Debug.Log("Saved Score = " + m_TempScore);
         m_TempKills = m_Kills;
+        Debug.Log("Saved Kills = " + m_TempKills);
         m_TempSalvage = m_Salvage;
+        Debug.Log("Saved Salvage = " + m_TempSalvage);
+        m_TempWaveNum = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
+        Debug.Log("Saved Wave =" + m_TempWaveNum);
+    }
+
+    public void ClearSoftSave()
+    {
+        m_TempScore = 0;
+        m_TempKills = 0;
+        m_TempSalvage = 0;
+        m_TempWaveNum = 0;
     }
 
     public void LoadSoftSave()
@@ -149,6 +170,7 @@ public class GameController : MonoBehaviour
         m_Score = m_TempScore;
         m_TempKills = m_Kills;
         m_TempSalvage = m_Salvage;
+        Camera.main.GetComponent<Waves>().m_CurrentWave = m_TempWaveNum;
     }
 	
 	public void Respawn()
@@ -157,9 +179,19 @@ public class GameController : MonoBehaviour
         {
             restart_ = true;
 
-            Camera.main.GetComponent<Waves>().m_CurrentWave = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
-            LoadSoftSave();
-            Camera.main.GetComponent<Waves>().RestartCurrentWave();
+            m_RestartText.text = "Press 'R' for Restart";
+
+            if(restart_)
+            {
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Camera.main.GetComponent<Waves>().RestartCurrentWave();
+                }
+            }
+            else
+            {
+                Save();
+            }
         }
         else
         {

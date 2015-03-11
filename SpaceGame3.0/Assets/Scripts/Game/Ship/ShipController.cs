@@ -9,6 +9,7 @@ public class ShipController : MonoBehaviour
     //public GameController m_Controller;
 
     public GameObject m_Explosion;
+    public GameObject m_PlayerShip;
 
     public void FireWeapons(string collisionLayerName)
     {
@@ -31,8 +32,8 @@ public class ShipController : MonoBehaviour
             if (ship.tag == "Player")
             {
                 Destroy(gameObject);
+                //PoolManager.Despawn(m_PlayerShip);
                 Camera.main.GetComponent<GameController>().Respawn();
-                
             }
 
             if (ship.tag == "Enemy")

@@ -37,11 +37,11 @@ public class UIControl : MonoBehaviour
         if(m_Player != null)
         {
             m_PlayerHealth.value = currHealth_;//m_Player.GetComponent<PlayerController>().m_Ship.m_HP;
-            Debug.Log(currHealth_);
+            //Debug.Log(currHealth_);
             m_LivesText.text = currLives_.ToString();//m_GameControl.GetComponent<GameController>().m_Lives.ToString();
-            Debug.Log(currLives_);
+            //Debug.Log(currLives_);
             m_ScoreText.text = currScore_.ToString();//m_GameControl.GetComponent<GameController>().m_Score.ToString();
-            Debug.Log(currScore_);
+            //Debug.Log(currScore_);
         }
     }
 }

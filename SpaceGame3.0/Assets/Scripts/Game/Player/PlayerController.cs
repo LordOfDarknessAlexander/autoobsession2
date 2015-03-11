@@ -28,16 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         //to move player around scene
         float moveHorizontal = Input.GetAxis("Horizontal");
-        if(moveHorizontal > 0.1)
-        {
-            Debug.Log("You have pressed the Horizontal Key");
-
-        }
         float moveVertical = Input.GetAxis("Vertical");
-        if(moveVertical > 0.1)
-        {
-             Debug.Log("You have pressed the Vertical Key");
-        }
 
         Vector3 moveShip = new Vector3(moveHorizontal, moveVertical, 0.0f);
 

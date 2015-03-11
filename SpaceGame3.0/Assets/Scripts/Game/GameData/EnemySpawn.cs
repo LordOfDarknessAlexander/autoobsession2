@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public GameObject[] m_Enemies;
+    public List<GameObject> m_Enemies;
+    public List<GameObject> enemyPool_ = new List<GameObject>();
     public Text m_WaveText;
     public Text m_ReqKillText;
+    public GameObject m_Type1Ememy;
+    public GameObject m_Type2Ememy;
+    public GameObject m_Type3Ememy;
 
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -15,18 +19,22 @@ public class EnemySpawn : MonoBehaviour
 
     public int m_RequiredKills;
     public int m_WaveNum;
-
-    public List<GameObject> enemyPool_ = new List<GameObject>();
+    public int numEnenmiesInPool_;
+    public int maxPoolSize_;
 
     public Vector3 m_SpawnArea;
 
-
     public void AISpawn()
     {
+        //m_Enemies = EnemyObjectPool.m_Current;
+
         if (m_WaveNum == 0)
         {
             m_WaveNum++;
             m_WaveText.text = m_WaveNum.ToString("F0");
+
+            //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
 
             WaveSetup(10);
         }
@@ -34,53 +42,77 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 1)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            
             WaveSetup(10);
         }
 
         if (m_WaveNum == 2)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(15);
         }
 
         if (m_WaveNum == 3)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(20);
         }
 
         if (m_WaveNum == 4)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(25);
         }
 
         if (m_WaveNum == 5)
         {
             //Set Boss to Spawn
-            SpawnBoss();
+            SpawnMiniBoss();
         }
 
         if (m_WaveNum == 6)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(30);
         }
 
         if (m_WaveNum == 7)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(35);
         }
 
         if (m_WaveNum == 8)
         {
+            //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(40);
         }
 
         if (m_WaveNum == 9)
         {
             //populate enemy array
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
+
             WaveSetup(45);
         }
 
@@ -93,13 +125,19 @@ public class EnemySpawn : MonoBehaviour
 
     public void SpawnBoss()
     {
-        m_RequiredKills = 45;
-        m_ReqKillText.text = m_RequiredKills.ToString("F0");
+        //m_RequiredKills = 45;
+        m_ReqKillText.text = "BossShip";//m_RequiredKills.ToString("F0");
+
+        //populate enemy array
+        m_Enemies.Add(m_Type1Ememy);
+        m_Enemies.Add(m_Type2Ememy);
+
+        numEnenmiesInPool_ = 20;
 
         Debug.Log("Time to code that MiniBoss guys!");
-        for (int e = 0; e < m_Enemies.Length; e++)
+        for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < m_RequiredKills; i++)
+            for (int i = 0; i < numEnenmiesInPool_; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
@@ -115,13 +153,22 @@ public class EnemySpawn : MonoBehaviour
 
     public void SpawnMiniBoss()
     {
-        m_RequiredKills = 45;
-        m_ReqKillText.text = m_RequiredKills.ToString("F0");
+        //m_RequiredKills = 45;
+        m_ReqKillText.text = "MiniBossShip";//m_RequiredKills.ToString("F0");
 
-        Debug.Log("Time to code that Boss guys!");
-        for (int e = 0; e < m_Enemies.Length; e++)
+        //populate enemy array
+        m_Enemies.Add(m_Type1Ememy);
+        m_Enemies.Add(m_Type2Ememy);
+
+
+        numEnenmiesInPool_ = 15;
+
+
+
+        //Debug.Log("Time to code that Boss guys!");
+        for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < m_RequiredKills; i++)
+            for (int i = 0; i < numEnenmiesInPool_; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
@@ -137,12 +184,16 @@ public class EnemySpawn : MonoBehaviour
 
     public void WaveSetup(int kills)
     {
+        Camera.main.GetComponent<GameController>().SoftSave();
+
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
-        for (int e = 0; e < m_Enemies.Length; e++)
+        numEnenmiesInPool_ = 10;
+
+        for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < m_RequiredKills; i++)
+            for (int i = 0; i < numEnenmiesInPool_; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
@@ -154,6 +205,10 @@ public class EnemySpawn : MonoBehaviour
         {
             StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
         }
+    }
 
+    public void PopulateEnemyArray()
+    {
+        
     }
 }

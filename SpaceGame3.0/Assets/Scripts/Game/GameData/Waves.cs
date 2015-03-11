@@ -30,9 +30,9 @@ public class Waves : MonoBehaviour
         {
             yield return new WaitForSeconds(m_StartDelay);
        
-             if(Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0)
+             if(Camera.main.GetComponent<EnemySpawn>().numEnenmiesInPool_ > 0)
             {
-                for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_RequiredKills; ++i)
+                for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().numEnenmiesInPool_; ++i)
                 {
                     Vector3 spawnPosition = new Vector3(Random.Range(-Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x, 
                                                                       Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x),
@@ -72,9 +72,9 @@ public class Waves : MonoBehaviour
     {
         yield return new WaitForSeconds(m_StartDelay);
 
-        while (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0 && GameObject.FindGameObjectWithTag("Player") != null)
+        while (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_RequiredKills; ++i)
+            for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().numEnenmiesInPool_; ++i)
             {
                 Vector3 spawnPosition = new Vector3(Random.Range(-Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x,
                                                                   Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x),
@@ -118,6 +118,10 @@ public class Waves : MonoBehaviour
 
     public void RestartCurrentWave()
     {
+        Camera.main.GetComponent<SpawnPlayer>().Spawn();
+
+        Camera.main.GetComponent<GameController>().LoadSoftSave();
+
         Camera.main.GetComponent<EnemySpawn>().m_WaveNum = m_CurrentWave;
 
         Camera.main.GetComponent<EnemySpawn>().AISpawn();
