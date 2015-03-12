@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public GameObject[] m_Enemies;
+    public List<GameObject> m_Enemies;
+    public List<GameObject> enemyPool_ = new List<GameObject>();
     public Text m_WaveText;
     public Text m_ReqKillText;
+    public GameObject m_Type1Ememy;
+    public GameObject m_Type2Ememy;
+    public GameObject m_Type3Ememy;
 
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -15,401 +19,194 @@ public class EnemySpawn : MonoBehaviour
 
     public int m_RequiredKills;
     public int m_WaveNum;
-
-    public List<GameObject> enemyPool_ = new List<GameObject>();
+    public int m_NumEnemiesInPool;
+    public int maxPoolSize_;
 
     public Vector3 m_SpawnArea;
 
     public void AISpawn()
     {
-
         if (m_WaveNum == 0)
         {
             m_WaveNum++;
             m_WaveText.text = m_WaveNum.ToString("F0");
 
-            m_RequiredKills = 10;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
-
             //populate enemy array
-            for (int e = 0; e < m_Enemies.Length - 2; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
+            m_Enemies.Add(m_Type1Ememy);
 
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(10);
         }
 
         if (m_WaveNum == 1)
         {
             //populate enemy array
-            m_RequiredKills = 10;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
-
-            for (int e = 0; e < m_Enemies.Length - 2; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            m_Enemies.Add(m_Type1Ememy);
+            
+            WaveSetup(10);
         }
 
         if (m_WaveNum == 2)
         {
             //populate enemy array
-            m_RequiredKills = 15;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length - 2; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(15);
         }
 
         if (m_WaveNum == 3)
         {
             //populate enemy array
-            m_RequiredKills = 20;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length - 1; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(20);
         }
 
         if (m_WaveNum == 4)
         {
             //populate enemy array
-            m_RequiredKills = 25;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length - 1; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(25);
         }
 
         if (m_WaveNum == 5)
         {
-            //populate enemy array
-            /*m_RequiredKills = 10;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
-
-            for (int e = 0; e < m_Enemies.Length; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }*/
-
-            //set MiniBoss to spawn
+            //Set Boss to Spawn
             SpawnMiniBoss();
-
-
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
         }
 
         if (m_WaveNum == 6)
         {
             //populate enemy array
-            m_RequiredKills = 30;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(30);
         }
 
         if (m_WaveNum == 7)
         {
             //populate enemy array
-            m_RequiredKills = 35;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(35);
         }
 
         if (m_WaveNum == 8)
         {
             //populate enemy array
-            m_RequiredKills = 40;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(40);
         }
 
         if (m_WaveNum == 9)
         {
             //populate enemy array
-            m_RequiredKills = 45;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
+            m_Enemies.Add(m_Type1Ememy);
+            m_Enemies.Add(m_Type2Ememy);
 
-            for (int e = 0; e < m_Enemies.Length; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }
-
-            //Set Boss to Spawn
-            SpawnBoss();
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
+            WaveSetup(45);
         }
 
         if (m_WaveNum == 10)
         {
-            //populate enemy array
-            /*m_RequiredKills = 45;
-            m_ReqKillText.text = m_RequiredKills.ToString("F0");
-
-            for (int e = 0; e < m_Enemies.Length; e++)
-            {
-                for (int i = 0; i < m_RequiredKills; i++)
-                {
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                    obj.SetActive(false);
-                    enemyPool_.Add(obj);
-                }
-            }*/
-
             //Set Boss to Spawn
             SpawnBoss();
-            //if play is active start spawning
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
-            }
-            //else do nothing
-            else
-            {
-                return;
-            }
         }
     }
 
     public void SpawnBoss()
     {
+        //m_RequiredKills = 45;
+        m_ReqKillText.text = "BossShip";//m_RequiredKills.ToString("F0");
+
+        //populate enemy array
+        m_Enemies.Add(m_Type1Ememy);
+        m_Enemies.Add(m_Type2Ememy);
+
+        m_NumEnemiesInPool = 20;
+
         Debug.Log("Time to code that MiniBoss guys!");
-        for (int e = 0; e < m_Enemies.Length; e++)
+        for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < m_RequiredKills; i++)
+            for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
                 enemyPool_.Add(obj);
             }
+        }
+
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            StartCoroutine(Camera.main.GetComponent<Waves>().BossSpawner());
         }
     }
 
     public void SpawnMiniBoss()
     {
-        Debug.Log("Time to code that Boss guys!");
-        for (int e = 0; e < m_Enemies.Length; e++)
+        //m_RequiredKills = 45;
+        m_ReqKillText.text = "MiniBossShip";//m_RequiredKills.ToString("F0");
+
+        //populate enemy array
+        m_Enemies.Add(m_Type1Ememy);
+        m_Enemies.Add(m_Type2Ememy);
+
+
+        m_NumEnemiesInPool = 15;
+
+
+
+        //Debug.Log("Time to code that Boss guys!");
+        for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < m_RequiredKills; i++)
+            for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
                 enemyPool_.Add(obj);
             }
         }
+
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            StartCoroutine(Camera.main.GetComponent<Waves>().BossSpawner());
+        }
     }
 
-    /*IEnumerator WaveSpawner()
+    public void WaveSetup(int kills)
     {
-        yield return new WaitForSeconds(m_StartDelay);
+        Camera.main.GetComponent<GameController>().SoftSave();
 
+        m_RequiredKills = kills;
+        m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
+        m_NumEnemiesInPool = 10;
 
-        while (m_RequiredKills > 0 && GameObject.FindGameObjectWithTag("Player") != null)
+        for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < m_RequiredKills; ++i)
+            for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
-                Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
-                Quaternion spawnRotation = Quaternion.identity;
-
-                for (int j = 0; j < enemyPool_.Count; ++j)
-                {
-                    enemyPool_[i].SetActive(true);
-                    enemyPool_[i].transform.position = spawnPosition;
-                    enemyPool_[i].transform.rotation = spawnRotation;
-                }
-                yield return new WaitForSeconds(m_SpawnDelay);
-            }
-            yield return new WaitForSeconds(m_WaveDelay);
-
-            if (m_RequiredKills == 0)
-            {
-                m_WaveNum++;
-                m_WaveText.text = m_WaveNum.ToString("F0");
-                AISpawn();
-            }
-
-            if (GameObject.FindGameObjectWithTag("Player") == null)
-            {
-                Camera.main.GetComponent<GameController>().Load();
-            }
-
-            if (Camera.main.GetComponent<GameController>().gameOver_)
-            {
-                Camera.main.GetComponent<GameController>().restart_ = true;
-                Camera.main.GetComponent<GameController>().GameOver();
-                break;
+                GameObject obj = (GameObject)Instantiate(m_Enemies[i]);
+                obj.SetActive(false);
+                enemyPool_.Add(obj);
             }
         }
-    }*/
+
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+        }
+    }
+
+    public void PopulateEnemyArray()
+    {
+        
+    }
 }
