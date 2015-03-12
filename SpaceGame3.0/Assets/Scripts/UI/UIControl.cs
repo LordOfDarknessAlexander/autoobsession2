@@ -32,14 +32,14 @@ public class UIControl : MonoBehaviour
 
     void Update()
     {
-        currHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_Data.m_HP;
+        currHealth_ = m_Player.GetComponent<ShipData>().m_HP;
         currLives_ = m_GameControl.GetComponent<GameController>().m_Lives;
         currScore_ = m_GameControl.GetComponent<GameController>().m_Score;
         currSalvage_ = m_GameControl.GetComponent<GameController>().m_Salvage;
 
         if(m_Player != null)
         {
-            m_PlayerHealth.value = currHealth_;//m_Player.GetComponent<PlayerController>().m_Ship.m_HP;
+            m_PlayerHealth.value = m_Player.GetComponent<ShipData>().m_HP;
             //Debug.Log(currHealth_);
             m_LivesVal.text = currLives_.ToString();//m_GameControl.GetComponent<GameController>().m_Lives.ToString();
             //Debug.Log(currLives_);

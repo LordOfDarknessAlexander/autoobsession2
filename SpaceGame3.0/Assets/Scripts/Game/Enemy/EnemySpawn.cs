@@ -193,7 +193,7 @@ public class EnemySpawn : MonoBehaviour
         {
             for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
-                GameObject obj = (GameObject)Instantiate(m_Enemies[i]);
+                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
                 enemyPool_.Add(obj);
             }
