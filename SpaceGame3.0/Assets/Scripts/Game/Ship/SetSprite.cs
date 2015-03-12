@@ -3,43 +3,36 @@ using System.Collections;
 
 public class SetSprite : MonoBehaviour 
 {
-    private Sprite sprite_;
+    public Sprite[] m_SpritesToUse;
 
     private int tier_;
 
-    //private Sprite currSprite_;
-    //private Sprite newSprite_;
+    private Sprite currSprite_;
+    private Sprite newSprite_;
+
+    private int type_;
+
+    public void Awake()
+    {
+        // load all sprites in Sprites to Load array
+        m_SpritesToUse = Resources.LoadAll<Sprite>("Sprites");
+    }
 
     public void GetSpriteImage(Ship ship)
     {
-        //sprite_ = GetComponent<SpriteRenderer>();
+        ship.GetComponent<SpriteRenderer>().sprite = currSprite_;
     }
 
-    public enum SpriteType
+    public void Sprites(Ship ship)
     {
-        TYPE1,
-        TYPE2,
-        TYPE3,
-        TYPE4
+        tier_ = ship.GetComponent<Ship>().m_Tier;
+        type_ = ship.GetComponent<Ship>().m_Type;
+        newSprite_ = m_SpritesToUse[tier_ * type_];
     }
-    private SpriteType type_ = SpriteType.TYPE1;
-
 
     public void SetSpriteImage(Ship ship, Sprite sprite)
     {
-        switch(type_)
-        {
-            case SpriteType.TYPE1:
-                break;
-            case SpriteType.TYPE2:
-                break;
-            case SpriteType.TYPE3:
-                break;
-            case SpriteType.TYPE4:
-                break;
-        }
-
-        ship.GetComponent<Ship>().m_Tier = tier_;
+        sprite = newSprite_;
         ship.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 

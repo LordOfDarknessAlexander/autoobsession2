@@ -19,15 +19,13 @@ public class EnemySpawn : MonoBehaviour
 
     public int m_RequiredKills;
     public int m_WaveNum;
-    public int numEnenmiesInPool_;
+    public int m_NumEnemiesInPool;
     public int maxPoolSize_;
 
     public Vector3 m_SpawnArea;
 
     public void AISpawn()
     {
-        //m_Enemies = EnemyObjectPool.m_Current;
-
         if (m_WaveNum == 0)
         {
             m_WaveNum++;
@@ -132,12 +130,12 @@ public class EnemySpawn : MonoBehaviour
         m_Enemies.Add(m_Type1Ememy);
         m_Enemies.Add(m_Type2Ememy);
 
-        numEnenmiesInPool_ = 20;
+        m_NumEnemiesInPool = 20;
 
         Debug.Log("Time to code that MiniBoss guys!");
         for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < numEnenmiesInPool_; i++)
+            for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
@@ -161,14 +159,14 @@ public class EnemySpawn : MonoBehaviour
         m_Enemies.Add(m_Type2Ememy);
 
 
-        numEnenmiesInPool_ = 15;
+        m_NumEnemiesInPool = 15;
 
 
 
         //Debug.Log("Time to code that Boss guys!");
         for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < numEnenmiesInPool_; i++)
+            for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
                 obj.SetActive(false);
@@ -189,13 +187,13 @@ public class EnemySpawn : MonoBehaviour
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
-        numEnenmiesInPool_ = 10;
+        m_NumEnemiesInPool = 10;
 
         for (int e = 0; e < m_Enemies.Count; e++)
         {
-            for (int i = 0; i < numEnenmiesInPool_; i++)
+            for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
-                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                GameObject obj = (GameObject)Instantiate(m_Enemies[i]);
                 obj.SetActive(false);
                 enemyPool_.Add(obj);
             }

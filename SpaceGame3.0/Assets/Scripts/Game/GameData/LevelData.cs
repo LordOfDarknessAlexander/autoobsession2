@@ -5,43 +5,20 @@ using UnityEngine.UI;
 
 public class LevelData : MonoBehaviour 
 {
-    public int m_SalavageCollected;
-    public int m_EnemiesKilled;
-    public int m_Socre;
-    public int m_WavesCompleted;
-
-    enum Enemies
-    {
-        LEVEL1 = 0,
-        LEVEL2 = 1,
-        LEVEL3 = 2,
-        LEVEL4 = 3,
-        LEVEL5 = 4
-    }
+    public int m_CurrLevel;
 
     public enum Levels
     {
-        LEVEL1 = 0,
-        LEVEL2 = 1,
-        LEVEL3 = 2,
-        LEVEL4 = 3,
-        LEVEL5 = 4
+        LEVEL1,
+        LEVEL2,
+        LEVEL3,
+        LEVEL4,
+        LEVEL5
     }
     public Levels m_Level = Levels.LEVEL1;
 
-	// Use this for initialization
-	void Start () 
-    {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-	
-	}
 
-    public void SetLevelData()
+    public void SetLevelData(Ship ship)
     {
         switch(m_Level)
         {
@@ -56,5 +33,10 @@ public class LevelData : MonoBehaviour
             case Levels.LEVEL5:
                 break;
         };
+    }
+
+    public void SetLevelData()
+    {
+        m_CurrLevel = (int)m_Level;
     }
 }

@@ -3,6 +3,13 @@ using System.Collections;
 
 public class EnemyShip : Ship
 {
+    public void SetBaseStats(LevelData level)
+    {
+        m_Type = 1;
+        m_Tier = 1 * level.m_CurrLevel;
+        
+        gameObject.GetComponent<ShipData>().m_HP = 5;
+    }
 
     private void DropLoot()
     {

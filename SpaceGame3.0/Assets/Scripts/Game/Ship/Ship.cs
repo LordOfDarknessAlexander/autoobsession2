@@ -5,8 +5,17 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour
 {
     public ShipData m_Data;
-    public ShipController m_ShipController;
+    private ShipController m_ShipController;
 
-    public int m_DamageMultiplier = 1;
+    public int m_DamageMultiplier;
     public int m_Tier = 1;
+    public int m_Type = 1;
+
+    public void SetBaseStats()
+    {
+        m_Tier = 1;
+        m_Type = 1;
+        gameObject.GetComponent<ShipData>().m_HP = 5;
+    }
+
 }

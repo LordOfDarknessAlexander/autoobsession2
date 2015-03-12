@@ -6,7 +6,6 @@ public class ShipController : MonoBehaviour
 {
     public ShipData m_Data;
     public Ship m_Ship;
-    //public GameController m_Controller;
 
     public GameObject m_Explosion;
     public GameObject m_PlayerShip;
@@ -28,11 +27,11 @@ public class ShipController : MonoBehaviour
 
         if (m_Data.m_HP <= 0)
         {
+            Instantiate(m_Explosion, transform.position, transform.rotation);
 
             if (ship.tag == "Player")
             {
                 Destroy(gameObject);
-                //PoolManager.Despawn(m_PlayerShip);
                 Camera.main.GetComponent<GameController>().Respawn();
             }
 
@@ -41,13 +40,12 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
+                Camera.main.GetComponent<GameController>().m_Salvage += 50 * ship.GetComponent<Ship>().m_Tier;
                 DropLoot();
-                gameObject.SetActive(false);
+                Destroy(gameObject);
+                //gameObject.SetActive(false);
             }
-
-            Instantiate(m_Explosion, transform.position, transform.rotation);
         }
-
     }
 
     private void DropLoot()

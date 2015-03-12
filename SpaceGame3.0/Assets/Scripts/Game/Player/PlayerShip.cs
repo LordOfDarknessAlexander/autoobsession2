@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerShip : Ship 
 {
     public PlayerController m_PController;
-    //public int m_ShipType;
 
     private int upgradeCost_;
     private int shieldUpgradeCounter_ = 1; //Amount of upgrades in the shield by the player
@@ -76,14 +75,4 @@ public class PlayerShip : Ship
             }
         }
     }
-
-    public enum PlayerShipLevel
-    {
-        TYPE1,
-        TYPE2,
-        TYPE3,
-        TYPE4,
-        TYPE5
-    }
-    public PlayerShipLevel m_PlayerShipType = PlayerShipLevel.TYPE1;
 }

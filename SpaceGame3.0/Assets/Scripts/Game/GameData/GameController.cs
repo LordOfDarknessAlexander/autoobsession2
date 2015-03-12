@@ -72,6 +72,10 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void Dead()
+    {
+
+    }
 
     public void GameOver()
     {
