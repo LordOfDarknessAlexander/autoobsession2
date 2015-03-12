@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class LevelData : MonoBehaviour 
+public class StarMapUI : MonoBehaviour
 {
+    public Button Level1;
+    public Button Level2;
+    public Button Level3;
+    public Button Level4;
+    public Button Level5;
+    public Button SpaceStation;
+
     public int m_CurrLevel;
 
     public enum Levels
@@ -20,7 +26,7 @@ public class LevelData : MonoBehaviour
 
     public void SetLevelData()
     {
-        switch(m_Level)
+        switch (m_Level)
         {
             case Levels.LEVEL1:
                 break;
@@ -33,5 +39,10 @@ public class LevelData : MonoBehaviour
             case Levels.LEVEL5:
                 break;
         };
+    }
+
+    public void SetLevel()
+    {
+        Camera.main.GetComponent<LevelData>().m_CurrLevel = 0;
     }
 }
