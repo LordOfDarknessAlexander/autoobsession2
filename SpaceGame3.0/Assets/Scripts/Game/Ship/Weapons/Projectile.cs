@@ -7,14 +7,14 @@ public class Projectile : MonoBehaviour
     public float m_ForwardAccel;
     public int m_Damage = 1;
 
-    private int shipMultiplier_;
+    private int levelMultiplier_;
     private float lifeTime_ = 0.5f;
 
     // Use this for initialization
     void Start()
     {
-        //shipMultiplier_ = 2;
-        //m_Damage = 1 * shipMultiplier_;
+        levelMultiplier_ = Camera.main.GetComponent<LevelData>().m_CurrLevel;
+        m_Damage = 1 * levelMultiplier_;
     }
 
     // Update is called once per frame

@@ -12,12 +12,11 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        Application.LoadLevel("Main");
+        Application.LoadLevel("StarMap");
     }
 
     public void Quit()
     {
-        //Application.OpenURL("http://triosdevelopers.com/J.Corrigan/projects.html");
     }
 
     public void OptionsMenu()

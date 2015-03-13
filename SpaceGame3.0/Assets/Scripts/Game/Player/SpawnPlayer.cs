@@ -16,9 +16,10 @@ public class SpawnPlayer : MonoBehaviour
     public void Spawn()
     {
 
-        if (m_Control.m_Lives > 0)
+        if (Camera.main.GetComponent<GameController>().m_Lives > 0)
         {
-            
+            //m_Control.m_Lives--;
+            Camera.main.GetComponent<GameController>().m_Lives--;
 
             Vector3 playerSpawn_ = new Vector3(0.0f, -5.0f, 0.0f);
             Quaternion spawnPlayerRotation = Quaternion.identity;

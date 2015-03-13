@@ -12,6 +12,8 @@ public class EnemySpawn : MonoBehaviour
     public GameObject m_Type1Ememy;
     public GameObject m_Type2Ememy;
     public GameObject m_Type3Ememy;
+    public GameObject m_MiniBoss;
+    public GameObject m_Boss;
 
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -22,7 +24,6 @@ public class EnemySpawn : MonoBehaviour
     public int m_NumEnemiesInPool;
     public int maxPoolSize_;
 
-    public Vector3 m_SpawnArea;
 
     public void AISpawn()
     {
@@ -33,6 +34,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
 
             WaveSetup(10);
         }
@@ -41,7 +43,8 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+
             WaveSetup(10);
         }
 
@@ -49,6 +52,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(15);
@@ -58,6 +62,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(20);
@@ -67,6 +72,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(25);
@@ -82,6 +88,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(30);
@@ -91,6 +98,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(35);
@@ -100,6 +108,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(40);
@@ -109,6 +118,7 @@ public class EnemySpawn : MonoBehaviour
         {
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(45);
@@ -128,11 +138,14 @@ public class EnemySpawn : MonoBehaviour
 
         //populate enemy array
         m_Enemies.Add(m_Type1Ememy);
+        m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
         m_Enemies.Add(m_Type2Ememy);
+
+        m_Boss.GetComponent<BossShip>().ChangeSpirte();
+        m_Boss.SetActive(true);
 
         m_NumEnemiesInPool = 20;
 
-        Debug.Log("Time to code that MiniBoss guys!");
         for (int e = 0; e < m_Enemies.Count; e++)
         {
             for (int i = 0; i < m_NumEnemiesInPool; i++)
@@ -156,14 +169,14 @@ public class EnemySpawn : MonoBehaviour
 
         //populate enemy array
         m_Enemies.Add(m_Type1Ememy);
+        m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
         m_Enemies.Add(m_Type2Ememy);
 
+        m_MiniBoss.GetComponent<MiniBossShip>().ChangeSpirte();
+        m_MiniBoss.SetActive(true);
 
         m_NumEnemiesInPool = 15;
 
-
-
-        //Debug.Log("Time to code that Boss guys!");
         for (int e = 0; e < m_Enemies.Count; e++)
         {
             for (int i = 0; i < m_NumEnemiesInPool; i++)
@@ -184,6 +197,8 @@ public class EnemySpawn : MonoBehaviour
     {
         Camera.main.GetComponent<GameController>().SoftSave();
 
+        
+
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
@@ -203,10 +218,5 @@ public class EnemySpawn : MonoBehaviour
         {
             StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
         }
-    }
-
-    public void PopulateEnemyArray()
-    {
-        
     }
 }

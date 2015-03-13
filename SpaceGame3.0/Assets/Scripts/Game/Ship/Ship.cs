@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Ship : MonoBehaviour
 {
     public ShipData m_Data;
     private ShipController m_ShipController;
+
+    public List<Sprite> m_Sprites;
 
     public int m_DamageMultiplier;
     public int m_Tier = 1;

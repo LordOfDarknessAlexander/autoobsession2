@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+public class SpawnArea
+{
+    public float xMin, xMax, yMin, yMax;
+}
 public class Waves : MonoBehaviour 
 {
     public GameObject m_Player;
+    public SpawnArea m_SpawnBoundry;
 
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -11,10 +17,12 @@ public class Waves : MonoBehaviour
 
     public int m_CurrentWave;
 
+    //public Vector3 m_SpawnArea;
+
 	// Use this for initialization
 	void Start () 
     {
-        m_Player.GetComponent<SpriteRenderer>().enabled = true;
+        //m_Player.GetComponent<SpriteRenderer>().enabled = true;
         Camera.main.GetComponent<EnemySpawn>().AISpawn();
 	}
 	
@@ -30,14 +38,11 @@ public class Waves : MonoBehaviour
         {
             yield return new WaitForSeconds(m_StartDelay);
        
-            if(Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool > 0)
+            if(Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0)
             {
                 for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
                 {
-                    Vector3 spawnPosition = new Vector3(Random.Range(-Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x, 
-                                                                      Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x),
-                                                                      Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.y,
-                                                                      Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.z);
+                    Vector3 spawnPosition = new Vector3(Random.Range(m_SpawnBoundry.xMin, m_SpawnBoundry.xMax), Random.Range(m_SpawnBoundry.yMin, m_SpawnBoundry.yMax), 0.0f);
                     Quaternion spawnRotation = Quaternion.identity;
 
                     for (int j = 0; j < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++j)
@@ -75,13 +80,11 @@ public class Waves : MonoBehaviour
         {
             yield return new WaitForSeconds(m_StartDelay);
 
+            if (GameObject.FindGameObjectWithTag("Player") == null)
             {
                 for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
                 {
-                    Vector3 spawnPosition = new Vector3(Random.Range(-Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x,
-                                                                      Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.x),
-                                                                      Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.y,
-                                                                      Camera.main.GetComponent<EnemySpawn>().m_SpawnArea.z);
+                    Vector3 spawnPosition = new Vector3(Random.Range(m_SpawnBoundry.xMin, m_SpawnBoundry.xMax), m_SpawnBoundry.yMax, 0.0f);
                     Quaternion spawnRotation = Quaternion.identity;
 
                     for (int j = 0; j < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++j)
@@ -104,6 +107,7 @@ public class Waves : MonoBehaviour
 
                 if (GameObject.FindGameObjectWithTag("Player") == null)
                 {
+                    StopAllCoroutines();
                     Camera.main.GetComponent<GameController>().Respawn();
                     break;
                 }
@@ -128,6 +132,5 @@ public class Waves : MonoBehaviour
         Camera.main.GetComponent<EnemySpawn>().m_WaveNum = m_CurrentWave;
 
         Camera.main.GetComponent<EnemySpawn>().AISpawn();
-
     }
 }

@@ -10,11 +10,13 @@ public class PlayerShip : Ship
     private int engineUpgradeCounter_ = 1; //Amount of upgrades in the engines by the player
     private int damageUpgradeCounter_ = 1; //Amount of upgrades in the damage by the player
     private int healthUpgradeCounter_ = 1; //Amount of upgrades in the health by the player
+    private int tierUpgradeCounter_ = 1; //Level of PlayerShip
 
     public int ShieldUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_;}}
     public int EngineUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_;}}
     public int DamageUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_;}}
     public int HealthUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * healthUpgradeCounter_;}}
+    public int TierUpgradeCost{ get{ return (Constants.BASE_SHIP_COST * m_Tier) * tierUpgradeCounter_;}}
 
     public int EngineLevel { get { return engineUpgradeCounter_; } set { engineUpgradeCounter_ = value; } }
     public int ShieldLevel { get { return shieldUpgradeCounter_; } set { shieldUpgradeCounter_ = value; } }
@@ -74,5 +76,24 @@ public class PlayerShip : Ship
                 m_Data.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
             }
         }
+    }
+
+    public void UpgradeTier()
+    {
+        upgradeCost_ = (Constants.BASE_SHIP_COST * m_Tier) * tierUpgradeCounter_;
+        if(m_PController.m_Salvage >= upgradeCost_)
+        {
+            if(tierUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+            {
+                m_PController.m_Salvage -= upgradeCost_;
+                tierUpgradeCounter_++;
+                m_Tier++;
+            }
+        }
+    }
+
+    public void ChangeSpirte()
+    {
+        m_PController.m_PlayerShip.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier - 1];
     }
 }

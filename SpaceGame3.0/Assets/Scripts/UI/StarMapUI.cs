@@ -10,6 +10,15 @@ public class StarMapUI : MonoBehaviour
     public Text m_DamageText; //Text UI element for the damage cost and upgrade level
     public Text m_EngineText; //Text UI element for the engine cost and upgrade level
 
+    public Button m_Level1;
+    public Button m_Level2;
+    public Button m_Level3;
+    public Button m_Level4;
+    public Button m_Level5;
+
+    public GameController m_Control;
+    public LevelData m_Level;
+
     //--------TEMP CODE----------
     public GameObject m_TestObj; //Test object
 
@@ -21,9 +30,9 @@ public class StarMapUI : MonoBehaviour
         m_EngineText.text = "Cost: " + m_TestObj.GetComponent<PlayerShip>().EngineUpgradeCost.ToString() + "\nCurrent Level: " + m_TestObj.GetComponent<PlayerShip>().EngineLevel;
     }
 
-    public void SetLevel()
+    public void SetLevel(int level)
     {
-        Camera.main.GetComponent<LevelData>().m_CurrLevel = 0;
+
     }
 
     //Button function -- If the user presses the spaceship this function will fire
@@ -36,5 +45,38 @@ public class StarMapUI : MonoBehaviour
     public void CloseMenu()
     {
         m_UpgradePanel.SetActive(false);
+    }
+
+    public void OnClick()
+    {
+        if(m_Level1)
+        {
+            m_Control.m_Level = 1;
+            Application.LoadLevel("Main");
+        }
+
+        if (m_Level2)
+        {
+            m_Control.m_Level = 2;
+            Application.LoadLevel("Main");
+        }
+
+        if (m_Level3)
+        {
+            m_Control.m_Level = 3;
+            Application.LoadLevel("Main");
+        }
+
+        if (m_Level4)
+        {
+            m_Control.m_Level = 4;
+            Application.LoadLevel("Main");
+        }
+
+        if (m_Level5)
+        {
+            m_Control.m_Level = 5;
+            Application.LoadLevel("Main");
+        }
     }
 }

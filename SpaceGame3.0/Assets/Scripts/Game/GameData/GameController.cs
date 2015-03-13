@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
 
     public UIControl m_UIControl;
 
+    public int m_Level;
+
     public int m_Lives = 3; //Number of lives the player has
     public int m_Score = 0; //Player's current score
     public int m_TotalScore; //For stat pruposes
@@ -44,6 +46,7 @@ public class GameController : MonoBehaviour
         gameOver_ = false;
         quit_ = false;
 
+        m_Player.GetComponent<PlayerShip>().ChangeSpirte();
         m_ESpawn.AISpawn();
     }
 
@@ -69,6 +72,12 @@ public class GameController : MonoBehaviour
             {
                 Application.LoadLevel("Start");
             }
+        }
+
+        if(Input.GetKey(KeyCode.X))
+        {
+            m_Player.GetComponent<ShipController>().ApplyDamage(m_Player, 100);
+            Respawn();
         }
     }
 
@@ -183,7 +192,8 @@ public class GameController : MonoBehaviour
         {
             restart_ = true;
 
-            m_RestartText.text = "Press 'R' for Restart";
+            m_RestartText.text = "Press 'R' for Restart or 'Q' to Quit";
+
 
             if(restart_)
             {
@@ -191,10 +201,10 @@ public class GameController : MonoBehaviour
                 {
                     Camera.main.GetComponent<Waves>().RestartCurrentWave();
                 }
-            }
-            else
-            {
-                Save();
+                if(Input.GetKeyDown(KeyCode.Q))
+                {
+                    Application.LoadLevel("StarMap");
+                }
             }
         }
         else

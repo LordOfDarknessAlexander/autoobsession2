@@ -31,7 +31,8 @@ public class ShipController : MonoBehaviour
 
             if (ship.tag == "Player")
             {
-                Destroy(gameObject);
+                m_PlayerShip.SetActive(false);
+                Camera.main.GetComponent<GameController>().SoftSave();
                 Camera.main.GetComponent<GameController>().Respawn();
             }
 
