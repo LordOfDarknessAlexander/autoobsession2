@@ -7,6 +7,10 @@ public class EnemySpawn : MonoBehaviour
 {
     public List<GameObject> m_Enemies;
     public List<GameObject> enemyPool_ = new List<GameObject>();
+
+    public CanvasGroup m_KillsPanel;
+    public CanvasGroup m_BossStatCanvas;
+
     public Text m_WaveText;
     public Text m_ReqKillText;
     public GameObject m_Type1Ememy;
@@ -24,13 +28,16 @@ public class EnemySpawn : MonoBehaviour
     public int m_NumEnemiesInPool;
     public int maxPoolSize_;
 
-
     public void AISpawn()
     {
         if (m_WaveNum == 0)
         {
             m_WaveNum++;
             m_WaveText.text = m_WaveNum.ToString("F0");
+
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
@@ -41,6 +48,11 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 1)
         {
+
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -50,6 +62,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 2)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -60,6 +76,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 3)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -70,6 +90,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 4)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -86,6 +110,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 6)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -96,6 +124,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 7)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -106,6 +138,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 8)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -116,6 +152,10 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 9)
         {
+            //clear enemy array
+            m_Enemies.Clear();
+            enemyPool_.Clear();
+
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
             m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
@@ -133,8 +173,15 @@ public class EnemySpawn : MonoBehaviour
 
     public void SpawnBoss()
     {
-        //m_RequiredKills = 45;
-        m_ReqKillText.text = "BossShip";//m_RequiredKills.ToString("F0");
+        //Turn on the Boss UI
+        m_BossStatCanvas.alpha = 1;
+
+        //turn off kills required panel
+        m_KillsPanel.alpha = 0;
+
+        //clear enemy array
+        m_Enemies.Clear();
+        enemyPool_.Clear();
 
         //populate enemy array
         m_Enemies.Add(m_Type1Ememy);
@@ -164,8 +211,15 @@ public class EnemySpawn : MonoBehaviour
 
     public void SpawnMiniBoss()
     {
-        //m_RequiredKills = 45;
-        m_ReqKillText.text = "MiniBossShip";//m_RequiredKills.ToString("F0");
+        //Turn on the Boss UI
+        m_BossStatCanvas.alpha = 1;
+
+        //turn off kills required panel
+        m_KillsPanel.alpha = 0;
+
+        //clear enemy array
+        m_Enemies.Clear();
+        enemyPool_.Clear();
 
         //populate enemy array
         m_Enemies.Add(m_Type1Ememy);
@@ -196,8 +250,6 @@ public class EnemySpawn : MonoBehaviour
     public void WaveSetup(int kills)
     {
         Camera.main.GetComponent<GameController>().SoftSave();
-
-        
 
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");

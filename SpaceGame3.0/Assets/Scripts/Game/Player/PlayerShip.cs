@@ -4,6 +4,8 @@ using System.Collections;
 public class PlayerShip : Ship 
 {
     public PlayerController m_PController;
+    public GameController m_GControl;
+    public PlayerData m_PData;
 
     private int upgradeCost_;
     private int shieldUpgradeCounter_ = 1; //Amount of upgrades in the shield by the player
@@ -22,78 +24,23 @@ public class PlayerShip : Ship
     public int ShieldLevel { get { return shieldUpgradeCounter_; } set { shieldUpgradeCounter_ = value; } }
     public int DamageLevel { get { return damageUpgradeCounter_; } set { damageUpgradeCounter_ = value; } }
     public int HealthLevel { get { return healthUpgradeCounter_; } set { healthUpgradeCounter_ = value; } }
+    public int Tier { get { return tierUpgradeCounter_; } set { tierUpgradeCounter_ = value; } }
 
-    public void UpgradeDamage()
+    public void Start()
     {
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_;
-        if (m_PController.m_Salvage >= upgradeCost_)
-        {
-            if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-            {
-                m_PController.m_Salvage -= upgradeCost_;
-                damageUpgradeCounter_++;
-            }
-        }
-    }
-    //Button function
-    public void UpgradeEngine()
-    {
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_;
-        if (m_PController.m_Salvage >= upgradeCost_)
-        {
-            if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-            {
-                m_PController.m_Salvage -= upgradeCost_;
-                engineUpgradeCounter_++;
-            }
-        }
-    }
-    //Button function
-    public void UpgradeHealth()
-    {
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_Tier) * healthUpgradeCounter_;
-        if (m_PController.m_Salvage >= upgradeCost_)
-        {
-            if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-            {
-                m_PController.m_Salvage -= upgradeCost_;
-                healthUpgradeCounter_++;
-                m_Data.m_HP += Constants.DEFAULT_UPGRADE_AMT;
-            }
-        }
-    }
-    //Button function
-    public void UpgradeShield()
-    {
-        m_Data.m_HasShield = true;
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_;
-        if (m_PController.m_Salvage >= upgradeCost_)
-        {
-            if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-            {
-                m_PController.m_Salvage -= upgradeCost_;
-                shieldUpgradeCounter_++;
-                m_Data.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
-            }
-        }
-    }
+        m_Tier = 1 * tierUpgradeCounter_;
+        m_PController = m_GControl.GetComponent<GameController>().m_Player.GetComponent<PlayerController>();
 
-    public void UpgradeTier()
-    {
-        upgradeCost_ = (Constants.BASE_SHIP_COST * m_Tier) * tierUpgradeCounter_;
-        if(m_PController.m_Salvage >= upgradeCost_)
-        {
-            if(tierUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-            {
-                m_PController.m_Salvage -= upgradeCost_;
-                tierUpgradeCounter_++;
-                m_Tier++;
-            }
-        }
+        shieldUpgradeCounter_ = m_PData.m_ShieldUpgrade;
+        healthUpgradeCounter_ = m_PData.m_HealthUpgrade;
+        damageUpgradeCounter_ = m_PData.m_DamageUpgrade;
+        engineUpgradeCounter_ = m_PData.m_EngineUpgrade;
+        tierUpgradeCounter_ = m_PData.m_ShipTier;
+
     }
 
     public void ChangeSpirte()
     {
-        m_PController.m_PlayerShip.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier - 1];
+       m_PController.m_PlayerShip.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier];
     }
 }

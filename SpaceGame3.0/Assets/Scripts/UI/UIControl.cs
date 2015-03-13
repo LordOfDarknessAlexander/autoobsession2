@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class UIControl : MonoBehaviour
 {
+    public GameData m_GData;
+    public PlayerData m_PData;
+
     public GameObject m_GameControl;
     public GameObject m_Player; //The player game object
     public Slider m_PlayerHealth; //Slider for the player's current health
@@ -25,6 +28,11 @@ public class UIControl : MonoBehaviour
 
     void Start()
     {
+        m_Player = m_GameControl.GetComponent<GameController>().m_Player;
+
+        m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
+        m_WavesCompleted = m_PData.m_WavesCompleted;
+
         maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_Data.m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
         m_PlayerHealth.minValue = minHealth_;

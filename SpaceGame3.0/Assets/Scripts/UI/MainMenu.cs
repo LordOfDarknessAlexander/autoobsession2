@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour 
 {
+    public GameData m_GData;
+
     public Button m_Start;
     public Button m_Quit;
     public Slider m_MasterVolControl;
@@ -21,6 +23,8 @@ public class MainMenu : MonoBehaviour
 
     public void OptionsMenu()
     {
-
+        m_GData.m_MasterVol = m_MasterVolControl.value;
+        m_GData.m_MusicVol = m_MusicVolControl.value;
+        m_GData.m_SFXVol = m_SFXVolControl.value;
     }
 }

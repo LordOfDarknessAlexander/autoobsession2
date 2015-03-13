@@ -9,7 +9,6 @@ public class EnemyController : Enemy
     public float m_MaxVel;
     public Vector3 m_CurrVel;
 
-    public int m_SalvageVal;
 
     public override void OnEnter()
     {

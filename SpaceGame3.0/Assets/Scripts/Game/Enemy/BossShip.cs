@@ -10,7 +10,6 @@ public class BossShip : Ship
         this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier - 1];
     }
 
-
     private void DropLoot()
     {
         //go through engines, drop if random number > mDropChance

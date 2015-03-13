@@ -8,9 +8,15 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Text m_RestartText;
+    public Text m_ControlText;
+
+    public GameData m_GData;
+    public PlayerData m_PData;
+
+    public List<GameObject> playerPool = new List<GameObject>();
 
     public GameObject m_Player;
+    public SpawnPlayer m_PSpawn;
     public EnemySpawn m_ESpawn;
 
     public Canvas m_Win;
@@ -31,30 +37,29 @@ public class GameController : MonoBehaviour
     public int m_TempSalvage;
     public int m_TempWaveNum;
 
-    public bool restart_;
-    public bool gameOver_;
-    public bool quit_;
+    public bool m_Restart;
+    public bool m_GameOver;
+    public bool m_Play;
 
     // Use this for initialization
     void Awake()
     {
-        Load();
+        m_PData.Load();
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
-        restart_ = false;
-        gameOver_ = false;
-        quit_ = false;
+        m_Restart = false;
+        m_GameOver = false;
+        m_Play = false;
 
-        m_Player.GetComponent<PlayerShip>().ChangeSpirte();
-        m_ESpawn.AISpawn();
+        m_PSpawn.Spawn();
     }
 
     void Update()
     {
         if(Input.GetKey(KeyCode.Return))
         {
-            Save();
+            m_PData.Save();
         }
 
         if(Input.GetKey(KeyCode.C))
@@ -62,7 +67,18 @@ public class GameController : MonoBehaviour
             SoftSave();
         }
 
-        if(restart_)
+        if(!m_Play)
+        {
+            m_ControlText.text = "Press 'S' to begin";
+
+            if(Input.GetKey(KeyCode.S))
+            {
+                m_Play = true;
+                Play();
+            }
+        }
+
+        if(m_Restart)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -79,11 +95,24 @@ public class GameController : MonoBehaviour
             m_Player.GetComponent<ShipController>().ApplyDamage(m_Player, 100);
             Respawn();
         }
+
+        Debug.Log("Lives = " + m_Lives);
+        Debug.Log("Salvage = " + m_Salvage);
+        Debug.Log("Lifetime Kills = " + m_UIControl.m_EnemiesKilledLifetime);
+        Debug.Log("Waves Completed = " + m_UIControl.m_WavesCompleted);
+        Debug.Log("Shield Level = " + m_Player.GetComponent<PlayerShip>().ShieldLevel);
+        Debug.Log("Engine Level =" + m_Player.GetComponent<PlayerShip>().EngineLevel);
+        Debug.Log("Health Level =" + m_Player.GetComponent<PlayerShip>().HealthLevel);
+        Debug.Log("Damage Level = " + m_Player.GetComponent<PlayerShip>().DamageLevel);
     }
 
-    public void Dead()
+    public void Play()
     {
-
+        if(m_Play)
+        {
+            m_ControlText.text = "";
+            m_ESpawn.AISpawn();
+        }
     }
 
     public void GameOver()
@@ -96,68 +125,6 @@ public class GameController : MonoBehaviour
         m_Win.enabled = true;
     }
    
-	public void Save()
-    {
-        if (!File.Exists(Application.persistentDataPath + "/playerData.dat"))
-        {
-            Debug.Log("Creating file");
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
-            PlayerData pData = new PlayerData();
-
-            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
-            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
-
-            bf.Serialize(file, pData);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("Saving to " + Application.persistentDataPath);
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
-            PlayerData pData = new PlayerData();
-
-            pData.m_EnemiesKilledLifetime = m_UIControl.m_EnemiesKilledLifetime;
-            pData.m_WavesCompleted = m_UIControl.m_WavesCompleted;
-            pData.m_Salvage = m_Player.GetComponent<PlayerController>().m_Salvage;
-            pData.m_ShipTier = m_Player.GetComponent<Ship>().m_Tier;
-            pData.m_EngineUpgrade = m_Player.GetComponent<PlayerShip>().EngineLevel;
-            pData.m_ShieldUpgrade = m_Player.GetComponent<PlayerShip>().ShieldLevel;
-            pData.m_HealthUpgrade = m_Player.GetComponent<PlayerShip>().HealthLevel;
-            pData.m_DamageUpgrade = m_Player.GetComponent<PlayerShip>().DamageLevel;
-
-            bf.Serialize(file, pData);
-            file.Close();
-        }
-    }
-
-    public void Load()
-    {
-        if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
-        {
-            Debug.Log("Loading");
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
-            PlayerData pData = (PlayerData)bf.Deserialize(file);
-
-            m_UIControl.m_EnemiesKilledLifetime = pData.m_EnemiesKilledLifetime;
-            m_UIControl.m_WavesCompleted = pData.m_WavesCompleted;
-            m_Player.GetComponent<PlayerController>().m_Salvage = pData.m_Salvage;
-            m_Player.GetComponent<Ship>().m_Tier = pData.m_ShipTier;
-            m_Player.GetComponent<PlayerShip>().EngineLevel = pData.m_EngineUpgrade;
-            m_Player.GetComponent<PlayerShip>().ShieldLevel = pData.m_ShieldUpgrade;
-            m_Player.GetComponent<PlayerShip>().HealthLevel = pData.m_HealthUpgrade;
-            m_Player.GetComponent<PlayerShip>().DamageLevel = pData.m_DamageUpgrade;
-
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("Failed to load, file doesn't exist");
-        }
-    }
-
     public void SoftSave()
     {
         m_TempScore = m_Score;
@@ -190,12 +157,12 @@ public class GameController : MonoBehaviour
     {
         if(m_Lives != 0)
         {
-            restart_ = true;
+            m_Restart = true;
 
-            m_RestartText.text = "Press 'R' for Restart or 'Q' to Quit";
+            m_ControlText.text = "Press 'R' for Restart or 'Q' to Quit";
 
 
-            if(restart_)
+            if(m_Restart)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
@@ -209,21 +176,16 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            gameOver_ = true;
+            m_GameOver = true;
         }
     }
-}
 
-[Serializable]
-class PlayerData
-{
-    public int m_EnemiesKilledLifetime;
-    public int m_TotalScore;
-    public int m_WavesCompleted;
-    public int m_Salvage;
-    public int m_ShipTier;
-    public int m_EngineUpgrade;
-    public int m_DamageUpgrade;
-    public int m_HealthUpgrade;
-    public int m_ShieldUpgrade;
+    public void Player()
+    {
+
+        GameObject obj = (GameObject)Instantiate(m_Player);
+        obj.SetActive(false);
+        playerPool.Add(obj);
+
+    }
 }

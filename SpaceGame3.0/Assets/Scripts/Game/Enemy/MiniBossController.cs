@@ -20,7 +20,7 @@ public class MiniBossController : Enemy
     }
     public override void OnExit()
     {
-        if (m_ShipData.transform.position.y < -10)
+        if (m_ShipData.transform.position.y < -20)
         {
             Destroy(gameObject);
         }

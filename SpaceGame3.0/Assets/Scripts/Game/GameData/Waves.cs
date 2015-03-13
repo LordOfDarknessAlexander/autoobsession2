@@ -1,40 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 [System.Serializable]
-public class SpawnArea
-{
-    public float xMin, xMax, yMin, yMax;
-}
 public class Waves : MonoBehaviour 
 {
-    public GameObject m_Player;
-    public SpawnArea m_SpawnBoundry;
-
     public float m_SpawnDelay;
     public float m_StartDelay;
     public float m_WaveDelay;
-
+    
     public int m_CurrentWave;
 
-    //public Vector3 m_SpawnArea;
+    private int sPoint_;
+    private int numKills_;
+    private int numEnemies_;
+    private GameObject player_;
+
+    public GameObject m_SpawnPoints;
+    public List<GameObject> m_SpawnPoint = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () 
     {
-        //m_Player.GetComponent<SpriteRenderer>().enabled = true;
+        //for testing
+        numEnemies_ = Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool;
+        numKills_ = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills;
+        player_ = GameObject.FindGameObjectWithTag("Player");
+
         Camera.main.GetComponent<EnemySpawn>().AISpawn();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-	    
+        RandomSpawnPoint();
 	}
+
+    public void RandomSpawnPoint()
+    {
+        sPoint_ = Random.Range(0, m_SpawnPoint.Count);
+    }
 
     public IEnumerator WaveSpawner()
     {
-        while(GameObject.FindGameObjectWithTag("Player") != null)
+        while (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0)
         {
             yield return new WaitForSeconds(m_StartDelay);
        
@@ -42,20 +52,28 @@ public class Waves : MonoBehaviour
             {
                 for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
                 {
-                    Vector3 spawnPosition = new Vector3(Random.Range(m_SpawnBoundry.xMin, m_SpawnBoundry.xMax), Random.Range(m_SpawnBoundry.yMin, m_SpawnBoundry.yMax), 0.0f);
+                    Vector3 spawnPosition = new Vector3(0, 12, 0/*m_SpawnPoint[sPoint_].transform.position.x, 
+                                                        m_SpawnPoint[sPoint_].transform.position.y,     
+                                                        m_SpawnPoint[sPoint_].transform.position.z*/);
                     Quaternion spawnRotation = Quaternion.identity;
 
                     for (int j = 0; j < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++j)
                     {
-                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].SetActive(true);
-                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.position = spawnPosition;
-                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.rotation = spawnRotation;
+                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[j].SetActive(true);
+                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[j].transform.position = spawnPosition;
+                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[j].transform.rotation = spawnRotation;
                     }
                     yield return new WaitForSeconds(m_SpawnDelay);
                 }
                 yield return new WaitForSeconds(m_WaveDelay);
             }
-        
+
+            if (GameObject.FindGameObjectWithTag("Player") == null)
+            {
+                Camera.main.GetComponent<GameController>().Respawn();
+                break;
+            }
+
             if (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills == 0)
             {
                 Camera.main.GetComponent<EnemySpawn>().m_WaveNum++;
@@ -64,9 +82,9 @@ public class Waves : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().AISpawn();
             }
 
-            if (Camera.main.GetComponent<GameController>().gameOver_)
+            if (Camera.main.GetComponent<GameController>().m_GameOver)
             {
-                Camera.main.GetComponent<GameController>().restart_ = true;
+                Camera.main.GetComponent<GameController>().m_Restart = true;
                 Camera.main.GetComponent<GameController>().GameOver();
                 break;
             }
@@ -76,7 +94,7 @@ public class Waves : MonoBehaviour
     public IEnumerator BossSpawner()
     {
 
-         while(GameObject.FindGameObjectWithTag("Boss") != null)
+        while(GameObject.FindGameObjectWithTag("Boss") != null)
         {
             yield return new WaitForSeconds(m_StartDelay);
 
@@ -84,7 +102,9 @@ public class Waves : MonoBehaviour
             {
                 for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
                 {
-                    Vector3 spawnPosition = new Vector3(Random.Range(m_SpawnBoundry.xMin, m_SpawnBoundry.xMax), m_SpawnBoundry.yMax, 0.0f);
+                    Vector3 spawnPosition = new Vector3(m_SpawnPoint[sPoint_].transform.position.x, 
+                                                        m_SpawnPoint[sPoint_].transform.position.y,     
+                                                        m_SpawnPoint[sPoint_].transform.position.z);
                     Quaternion spawnRotation = Quaternion.identity;
 
                     for (int j = 0; j < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++j)
@@ -97,11 +117,13 @@ public class Waves : MonoBehaviour
                 }
                 yield return new WaitForSeconds(m_WaveDelay);
 
-                if (GameObject.FindGameObjectWithTag("Boss") != null)
+                if (GameObject.FindGameObjectWithTag("Boss") == null)
                 {
                     Camera.main.GetComponent<EnemySpawn>().m_WaveNum++;
                     Camera.main.GetComponent<EnemySpawn>().m_WaveText.text = Camera.main.GetComponent<EnemySpawn>().m_WaveNum.ToString("F0");
                     Camera.main.GetComponent<GameController>().SoftSave();
+                    Camera.main.GetComponent<EnemySpawn>().m_BossStatCanvas.alpha = 0;
+                    Camera.main.GetComponent<EnemySpawn>().m_KillsPanel.alpha = 1;
                     Camera.main.GetComponent<EnemySpawn>().AISpawn();
                 }
 
@@ -112,7 +134,7 @@ public class Waves : MonoBehaviour
                     break;
                 }
 
-                if (Camera.main.GetComponent<GameController>().gameOver_)
+                if (Camera.main.GetComponent<GameController>().m_GameOver)
                 {
                     Camera.main.GetComponent<GameController>().GameOver();
                     break;
@@ -125,9 +147,9 @@ public class Waves : MonoBehaviour
 
     public void RestartCurrentWave()
     {
-        Camera.main.GetComponent<SpawnPlayer>().Spawn();
-
         Camera.main.GetComponent<GameController>().LoadSoftSave();
+
+        Camera.main.GetComponent<SpawnPlayer>().Spawn();
 
         Camera.main.GetComponent<EnemySpawn>().m_WaveNum = m_CurrentWave;
 
