@@ -41,7 +41,14 @@ public class GameController : MonoBehaviour
         if(Input.GetKey(KeyCode.Escape))
         {
             Save();
-            Application.Quit();
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                Application.Quit();
+            }
+            else
+            {
+                Application.Quit();
+            }
         }
 	}
 
@@ -61,11 +68,11 @@ public class GameController : MonoBehaviour
     //When this Save function is called, all other save functions get called. No where else should save.
     public void Save()
     {
-        if (!File.Exists(Application.persistentDataPath + "/gpSaveData.dat"))
+        if (!File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
             Debug.Log("Creating file");
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/gpSaveData.dat");
+            FileStream file = File.Create(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat");
             SaveData sData = new SaveData();
 
             //Insert save data here
@@ -77,6 +84,7 @@ public class GameController : MonoBehaviour
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
+            sData.m_CurrPetNickname = "Temp";
 
             bf.Serialize(file, sData);
             file.Close();
@@ -85,7 +93,7 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Saving to " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gpSaveData.dat", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = new SaveData();
 
             //Insert save data here
@@ -97,6 +105,7 @@ public class GameController : MonoBehaviour
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
+            sData.m_CurrPetNickname = "Temp";
 
             bf.Serialize(file, sData);
             file.Close();
@@ -105,11 +114,11 @@ public class GameController : MonoBehaviour
 
     public void Load()
     {
-        if (File.Exists(Application.persistentDataPath + "/gpSaveData.dat"))
+        if (File.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat"))
         {
             Debug.Log("Loading from " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gpSaveData.dat", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = (SaveData)bf.Deserialize(file);
 
             //Insert load data here
@@ -156,6 +165,7 @@ class SaveData
 {
     public List<string> m_Pets = new List<string>(); //List of pets the player owns
     public string m_CurrPet; //Player's currently active pet
+    public string m_CurrPetNickname; //Player's currently active pet's nickname
     public int m_Shields; //Player's current shields
     public int m_Points; //Player's points at the time of the save
     public DateTime m_CloseDate; //Date the player stopped playing
