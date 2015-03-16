@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour
 {
     public ShipData m_Data;
-    private ShipController m_ShipController;
 
     public List<Sprite> m_Sprites;
 
     public int m_DamageMultiplier;
-    public int m_Tier = 1;
-    public int m_Type = 1;
+    public int m_Tier;
+    public int m_Type;
 
     public void SetBaseStats()
     {

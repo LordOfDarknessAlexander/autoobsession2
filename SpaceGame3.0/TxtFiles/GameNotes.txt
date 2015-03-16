@@ -104,6 +104,16 @@ Game Controller
 Abstract Ship
 
 PlayerShip(ship)
+	Persistent Data
+		HP
+		Shields(amount)
+		All Upgrades
+	
+	Data to set on load
+		HP
+		Shields
+		Upgrades
+		
 
 EnemyShip(ship)
 

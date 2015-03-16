@@ -8,7 +8,6 @@ public class Projectile : MonoBehaviour
     public int m_Damage = 1;
 
     private int levelMultiplier_;
-    private float lifeTime_ = 0.5f;
 
     // Use this for initialization
     void Start()

@@ -23,7 +23,7 @@ public class PlayerData : MonoBehaviour
 
     public bool m_HasShield;
 
-    public int m_HP;
+    public int m_HP = 5;
     public int m_Shield;
 
     // Use this for initialization
@@ -37,6 +37,30 @@ public class PlayerData : MonoBehaviour
         else if(m_PData != null)
         {
             Destroy(gameObject);
+        }
+
+        m_EnemiesKilledLifetime = 0;
+        m_TotalScore = 0;
+        m_WavesCompleted = 0;
+        m_Salvage = 0;
+        m_ShipTier = 0;
+        m_EngineUpgrade = 1;
+        m_DamageUpgrade = 1;
+        m_HealthUpgrade = 1;
+        m_ShieldUpgrade = 0;
+
+        m_HasShield = false;
+
+        m_HP = 5;
+        m_Shield = 10;
+
+    }
+
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Save();
         }
     }
 
@@ -54,6 +78,8 @@ public class PlayerData : MonoBehaviour
             pData.m_WavesCompleted = m_PData.m_WavesCompleted;
             pData.m_Salvage = m_PData.GetComponent<PlayerController>().m_Salvage;
             pData.m_ShipTier = m_PData.GetComponent<Ship>().m_Tier;
+            pData.m_Shield = m_PData.m_Shield;
+            pData.m_HP = m_PData.m_HP;
             pData.m_EngineUpgrade = m_PData.GetComponent<PlayerShip>().EngineLevel;
             pData.m_ShieldUpgrade = m_PData.GetComponent<PlayerShip>().ShieldLevel;
             pData.m_HealthUpgrade = m_PData.GetComponent<PlayerShip>().HealthLevel;
@@ -73,6 +99,8 @@ public class PlayerData : MonoBehaviour
             pData.m_WavesCompleted = m_PData.m_WavesCompleted;
             pData.m_Salvage = m_PData.GetComponent<PlayerController>().m_Salvage;
             pData.m_ShipTier = m_PData.GetComponent<Ship>().m_Tier;
+            pData.m_Shield = m_PData.m_Shield;
+            pData.m_HP = m_PData.m_HP;
             pData.m_EngineUpgrade = m_PData.GetComponent<PlayerShip>().EngineLevel;
             pData.m_ShieldUpgrade = m_PData.GetComponent<PlayerShip>().ShieldLevel;
             pData.m_HealthUpgrade = m_PData.GetComponent<PlayerShip>().HealthLevel;
@@ -96,6 +124,8 @@ public class PlayerData : MonoBehaviour
             m_PData.m_WavesCompleted = pData.m_WavesCompleted;
             m_PData.m_Salvage = pData.m_Salvage;
             m_PData.m_ShipTier = pData.m_ShipTier;
+            m_PData.m_HP = pData.m_HP;
+            m_PData.m_Shield = pData.m_Shield;
             m_PData.m_EngineUpgrade = pData.m_EngineUpgrade;
             m_PData.m_ShieldUpgrade = pData.m_ShieldUpgrade;
             m_PData.m_HealthUpgrade = pData.m_HealthUpgrade;

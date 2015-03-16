@@ -7,8 +7,8 @@ public class EnemyShip : Ship
 
     public void SetStats(LevelData level)
     {
-        m_Type = level.m_CurrLevel;
-        m_Tier = level.m_CurrLevel;
+        //m_Type = level.m_CurrLevel;
+        //m_Tier = level.m_CurrLevel;
         
         gameObject.GetComponent<ShipData>().m_HP = 5;
     }

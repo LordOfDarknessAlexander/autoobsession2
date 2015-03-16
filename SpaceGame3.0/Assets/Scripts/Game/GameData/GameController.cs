@@ -44,7 +44,6 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_PData.Load();
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
@@ -96,14 +95,14 @@ public class GameController : MonoBehaviour
             Respawn();
         }
 
-        Debug.Log("Lives = " + m_Lives);
+        /*Debug.Log("Lives = " + m_Lives);
         Debug.Log("Salvage = " + m_Salvage);
         Debug.Log("Lifetime Kills = " + m_UIControl.m_EnemiesKilledLifetime);
         Debug.Log("Waves Completed = " + m_UIControl.m_WavesCompleted);
         Debug.Log("Shield Level = " + m_Player.GetComponent<PlayerShip>().ShieldLevel);
         Debug.Log("Engine Level =" + m_Player.GetComponent<PlayerShip>().EngineLevel);
         Debug.Log("Health Level =" + m_Player.GetComponent<PlayerShip>().HealthLevel);
-        Debug.Log("Damage Level = " + m_Player.GetComponent<PlayerShip>().DamageLevel);
+        Debug.Log("Damage Level = " + m_Player.GetComponent<PlayerShip>().DamageLevel);*/
     }
 
     public void Play()
@@ -128,13 +127,13 @@ public class GameController : MonoBehaviour
     public void SoftSave()
     {
         m_TempScore = m_Score;
-        Debug.Log("Saved Score = " + m_TempScore);
+        //Debug.Log("Saved Score = " + m_TempScore);
         m_TempKills = m_Kills;
-        Debug.Log("Saved Kills = " + m_TempKills);
+        //Debug.Log("Saved Kills = " + m_TempKills);
         m_TempSalvage = m_Salvage;
-        Debug.Log("Saved Salvage = " + m_TempSalvage);
+        //Debug.Log("Saved Salvage = " + m_TempSalvage);
         m_TempWaveNum = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
-        Debug.Log("Saved Wave =" + m_TempWaveNum);
+        //Debug.Log("Saved Wave =" + m_TempWaveNum);
     }
 
     public void ClearSoftSave()
@@ -182,6 +181,8 @@ public class GameController : MonoBehaviour
 
     public void Player()
     {
+        m_Player.GetComponent<Ship>().m_Tier = m_PData.m_ShipTier;
+        
 
         GameObject obj = (GameObject)Instantiate(m_Player);
         obj.SetActive(false);

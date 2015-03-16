@@ -44,7 +44,6 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<GameController>().m_Salvage += 50 * ship.GetComponent<Ship>().m_Tier;
                 DropLoot();
                 Destroy(gameObject);
-                //gameObject.SetActive(false);
             }
         }
     }

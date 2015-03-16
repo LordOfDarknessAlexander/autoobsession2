@@ -7,18 +7,11 @@ public class PlayerShip : Ship
     public GameController m_GControl;
     public PlayerData m_PData;
 
-    private int upgradeCost_;
     private int shieldUpgradeCounter_ = 1; //Amount of upgrades in the shield by the player
     private int engineUpgradeCounter_ = 1; //Amount of upgrades in the engines by the player
     private int damageUpgradeCounter_ = 1; //Amount of upgrades in the damage by the player
     private int healthUpgradeCounter_ = 1; //Amount of upgrades in the health by the player
     private int tierUpgradeCounter_ = 1; //Level of PlayerShip
-
-    public int ShieldUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * shieldUpgradeCounter_;}}
-    public int EngineUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * engineUpgradeCounter_;}}
-    public int DamageUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * damageUpgradeCounter_;}}
-    public int HealthUpgradeCost{ get{ return (Constants.BASE_UPGRADE_COST * m_Tier) * healthUpgradeCounter_;}}
-    public int TierUpgradeCost{ get{ return (Constants.BASE_SHIP_COST * m_Tier) * tierUpgradeCounter_;}}
 
     public int EngineLevel { get { return engineUpgradeCounter_; } set { engineUpgradeCounter_ = value; } }
     public int ShieldLevel { get { return shieldUpgradeCounter_; } set { shieldUpgradeCounter_ = value; } }
@@ -36,7 +29,6 @@ public class PlayerShip : Ship
         damageUpgradeCounter_ = m_PData.m_DamageUpgrade;
         engineUpgradeCounter_ = m_PData.m_EngineUpgrade;
         tierUpgradeCounter_ = m_PData.m_ShipTier;
-
     }
 
     public void ChangeSpirte()

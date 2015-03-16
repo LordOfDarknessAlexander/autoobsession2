@@ -5,12 +5,22 @@ using UnityEngine.UI;
 
 public class LevelData : MonoBehaviour 
 {
+    public GameData m_GData;
+
     public int m_CurrLevel;
 
-    public int SetLevelData(int level)
-    {
-        m_CurrLevel = level;
+    public int m_EnemyTier;
+    public int m_EnemyType;
 
-        return m_CurrLevel;
+    public void SetLevelData(int level)
+    {
+        m_GData.m_CurrLevel = level;
+        m_GData.m_EnemyType = level;
+    }
+
+    public void LoadLevelData()
+    {
+        m_CurrLevel = m_GData.m_CurrLevel;
+        m_EnemyType = m_GData.m_EnemyType;
     }
 }

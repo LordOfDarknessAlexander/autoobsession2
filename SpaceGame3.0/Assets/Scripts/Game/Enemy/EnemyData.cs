@@ -5,5 +5,6 @@ public class EnemyData : ShipData
 {
     private GameObject[] enemyTypes_;
 
+
  
 }

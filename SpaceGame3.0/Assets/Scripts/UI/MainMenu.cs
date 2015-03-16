@@ -14,6 +14,10 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        m_GData.m_MasterVol = m_MasterVolControl.value;
+        m_GData.m_MusicVol = m_MusicVolControl.value;
+        m_GData.m_SFXVol = m_SFXVolControl.value;
+
         Application.LoadLevel("StarMap");
     }
 
@@ -23,8 +27,8 @@ public class MainMenu : MonoBehaviour
 
     public void OptionsMenu()
     {
-        m_GData.m_MasterVol = m_MasterVolControl.value;
-        m_GData.m_MusicVol = m_MusicVolControl.value;
-        m_GData.m_SFXVol = m_SFXVolControl.value;
+        m_MasterVolControl.value = m_GData.m_MasterVol;
+        m_MusicVolControl.value = m_GData.m_MusicVol; 
+        m_SFXVolControl.value = m_GData.m_SFXVol;
     }
 }
