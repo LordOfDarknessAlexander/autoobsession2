@@ -4,7 +4,9 @@ using System.Collections;
 public class EngineData : MonoBehaviour 
 {
 
-    public float mForwardAccel;
-    public float mFuelConsumption;
-    public float mVerticalAccel;
+    public float m_ForwardAccel;
+    public float m_FuelConsumption;
+    public float m_VerticalAccel;
+
+    public float m_CargoCap;
 }

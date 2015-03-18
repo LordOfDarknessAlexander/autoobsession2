@@ -3,19 +3,25 @@ using System.Collections;
 
 public class EnemyShip : Ship
 {
-    public EnemyController m_EController;
+    public GameData m_GData;
 
-    public void SetStats(LevelData level)
+    public Sprite[] m_Sprites;
+
+    public EnemyController m_EController;
+    public LevelData m_LData;
+
+    public void SetStats()
     {
-        //m_Type = level.m_CurrLevel;
-        //m_Tier = level.m_CurrLevel;
-        
-        gameObject.GetComponent<ShipData>().m_HP = 5;
+        m_Type = m_GData.m_EnemyType;
+        m_Tier = m_GData.m_EnemyTier;
+
+        this.m_DamageModifier = 1 * m_Type * m_Tier;
+        this.m_Data.m_HP = 5 * m_Type * m_Tier;        
     }
 
-    public void ChangeSpirte()
+    public void ChangeShip()
     {
-       this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier * m_Type - 1];
+       //this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier * m_Type - 1];
     }
 
     private void DropLoot()

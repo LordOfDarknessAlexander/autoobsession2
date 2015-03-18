@@ -13,8 +13,6 @@ public class GameController : MonoBehaviour
     public GameData m_GData;
     public PlayerData m_PData;
 
-    public List<GameObject> playerPool = new List<GameObject>();
-
     public GameObject m_Player;
     public SpawnPlayer m_PSpawn;
     public EnemySpawn m_ESpawn;
@@ -50,8 +48,9 @@ public class GameController : MonoBehaviour
         m_Restart = false;
         m_GameOver = false;
         m_Play = false;
-
+        
         m_PSpawn.Spawn();
+        m_Player = m_PSpawn.m_Player;
     }
 
     void Update()
@@ -147,8 +146,8 @@ public class GameController : MonoBehaviour
     public void LoadSoftSave()
     {
         m_Score = m_TempScore;
-        m_TempKills = m_Kills;
-        m_TempSalvage = m_Salvage;
+        m_Kills = m_TempKills;
+        m_Salvage = m_TempSalvage;
         Camera.main.GetComponent<Waves>().m_CurrentWave = m_TempWaveNum;
     }
 	
@@ -179,14 +178,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void Player()
+    public void SetPlayerSave()
     {
-        m_Player.GetComponent<Ship>().m_Tier = m_PData.m_ShipTier;
-        
+        LoadSoftSave();
 
-        GameObject obj = (GameObject)Instantiate(m_Player);
-        obj.SetActive(false);
-        playerPool.Add(obj);
+        m_PData.m_EnemiesKilledLifetime += m_Kills;
+        m_PData.m_TotalScore += m_Score;
+        m_PData.m_Salvage += m_Salvage;
+        m_PData.m_Items = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory;
 
+        m_PData.Save();
     }
 }

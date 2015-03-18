@@ -11,7 +11,7 @@ public class ShipData : MonoBehaviour
     public Rigidbody m_Rigidbody;
     public List<GameObject> m_Inventory;
 
-    public float m_CargoCapacity; //amount ship can hold in Kg
+    public float m_MaxCargoCapacity; //amount ship can hold in Kg
     public float m_CurrentMass; //total mass of ship
     public float m_ShipMass;// mass of ship without cargo, weapons
     public int m_HP;
@@ -24,7 +24,7 @@ public class ShipData : MonoBehaviour
 
         foreach(EngineData engine in m_Engines)
         {
-            retval += engine.mForwardAccel;
+            retval += engine.m_ForwardAccel;
         }
 
         return retval;
@@ -36,7 +36,19 @@ public class ShipData : MonoBehaviour
 
         foreach (EngineData engine in m_Engines)
         {
-            retval += engine.mVerticalAccel;
+            retval += engine.m_VerticalAccel;
+        }
+
+        return retval;
+    }
+
+    public float SetCargoCapacity()
+    {
+        float retval = 0.0f;
+
+        foreach(EngineData engine in m_Engines)
+        {
+            retval += engine.m_CargoCap;
         }
 
         return retval;
@@ -45,12 +57,12 @@ public class ShipData : MonoBehaviour
     public void AddItem(GameObject item)
     {
         float newMass = m_CurrentMass + item.GetComponent<PickupItem>().m_Mass;
-        if (newMass <= m_CargoCapacity)
+        if (newMass <= m_MaxCargoCapacity)
         {
             item.transform.position = gameObject.transform.position;
             item.transform.parent = gameObject.transform;
             item.GetComponent<Renderer>().enabled = false;
-            item.GetComponent<Collider2D>().enabled = false;
+            item.GetComponent<Collider>().enabled = false;
             m_CurrentMass = newMass;
             m_Rigidbody.mass = m_ShipMass +  m_CurrentMass;
         }

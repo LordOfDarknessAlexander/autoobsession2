@@ -7,9 +7,9 @@ public class Ship : MonoBehaviour
 {
     public ShipData m_Data;
 
-    public List<Sprite> m_Sprites;
+    //public List<Sprite> m_Sprites;
 
-    public int m_DamageMultiplier;
+    public int m_DamageModifier;
     public int m_Tier;
     public int m_Type;
 

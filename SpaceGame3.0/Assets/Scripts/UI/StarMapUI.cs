@@ -33,7 +33,7 @@ public class StarMapUI : MonoBehaviour
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier + 1));
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier));
         }
     }
 
@@ -41,35 +41,35 @@ public class StarMapUI : MonoBehaviour
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier + 1)) * shieldUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * shieldUpgradeCounter_;
         }
     }
     public int EngineUpgradeCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier + 1)) * engineUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * engineUpgradeCounter_;
         }
     }
     public int DamageUpgradeCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier + 1)) * damageUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * damageUpgradeCounter_;
         }
     }
     public int HealthUpgradeCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier + 1)) * healthUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * healthUpgradeCounter_;
         }
     }
     public int TierUpgradeCost
     {
         get
         {
-            return (Constants.BASE_SHIP_COST * (m_PData.m_ShipTier + 1)) * tierUpgradeCounter_;
+            return (Constants.BASE_SHIP_COST * (m_PData.m_ShipTier)) * tierUpgradeCounter_;
         }
     }
 
@@ -129,13 +129,17 @@ public class StarMapUI : MonoBehaviour
         }
     }
 
+    public void Awake()
+    {
+        m_PData.Load();
+    }
     void Update()
     {
-        shieldUpgradeCounter_ = m_PData.m_ShieldUpgrade;
-        healthUpgradeCounter_ = m_PData.m_HealthUpgrade;
-        damageUpgradeCounter_ = m_PData.m_DamageUpgrade;
-        engineUpgradeCounter_ = m_PData.m_EngineUpgrade;
-        tierUpgradeCounter_ = m_PData.m_ShipTier + 1;
+        shieldUpgradeCounter_ = m_PData.m_ShieldLevel;
+        healthUpgradeCounter_ = m_PData.m_HealthLevel;
+        damageUpgradeCounter_ = m_PData.m_DamageLevel;
+        engineUpgradeCounter_ = m_PData.m_EngineLevel;
+        tierUpgradeCounter_ = m_PData.m_ShipTier;
 
         m_Salvage.text = "You have " + m_PData.m_Salvage.ToString() + " Salvage";
         m_HealthText.text = "Cost: " + HealthUpgradeCost.ToString() + "\nCurrent Level: " + HealthLevel;
@@ -150,31 +154,33 @@ public class StarMapUI : MonoBehaviour
         m_DamageText.text = "Cost: " + DamageUpgradeCost.ToString() + "\nCurrent Level: " + DamageLevel;
         m_EngineText.text = "Cost: " + EngineUpgradeCost.ToString() + "\nCurrent Level: " + EngineLevel;
         m_TierText.text = "Cost: " + TierUpgradeCost.ToString() + "\nCurrent Level: " + Tier;
-
     }
 
     public void SetPlayerData()
     {
         m_PData.m_ShipTier = Tier;
-        m_PData.m_HealthUpgrade = HealthLevel;
-        m_PData.m_EngineUpgrade = EngineLevel;
-        m_PData.m_ShieldUpgrade = ShieldLevel;
-        m_PData.m_DamageUpgrade = DamageLevel;
+        m_PData.m_HealthLevel = HealthLevel;
+        m_PData.m_EngineLevel = EngineLevel;
+        m_PData.m_ShieldLevel = ShieldLevel;
+        m_PData.m_DamageLevel = DamageLevel;
     }
 
     public void LoadLevel(int level)
     {
+        m_Control.text = "";
         m_LData.SetLevelData(level);
         SetPlayerData();
+        m_PData.Save();
 
         //set level requirements
-        if((m_PData.m_ShipTier + 1) < level)
+        if((m_PData.m_ShipTier) < level)
         {
             m_Control.text = "Your Ship needs to be Level" + level + " to access this area";
        }
         else
         {
-            //Application.LoadLevel("Main");
+            m_Control.text = "";
+            Application.LoadLevel("Main");
         }
     }
 
@@ -182,16 +188,19 @@ public class StarMapUI : MonoBehaviour
     //                -- The function opens up the Upgrade menu, where they can then upgrade their ship or upgrade to a higher tier ship entirely
     public void UpgradeMenu()
     {
+        m_Control.text = "";
         m_UpgradePanel.SetActive(true);
     }
     //Button function
     public void CloseMenu()
     {
+        m_Control.text = "";
         m_UpgradePanel.SetActive(false);
     }
     //Button function
     public void UpgradeDamage()
     {
+        m_Control.text = "";
         upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * damageUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
@@ -199,13 +208,18 @@ public class StarMapUI : MonoBehaviour
             {
                 m_PData.m_Salvage -= upgradeCost_;
                 damageUpgradeCounter_++;
-                m_PData.m_DamageUpgrade = DamageLevel;
+                m_PData.m_DamageLevel = DamageLevel;
             }
+        }
+        else
+        {
+            m_Control.text = "You don't have enough Salvage";
         }
     }
     //Button function
     public void UpgradeEngine()
     {
+        m_Control.text = "";
         upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * engineUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
@@ -213,13 +227,18 @@ public class StarMapUI : MonoBehaviour
             {
                 m_PData.m_Salvage -= upgradeCost_;
                 engineUpgradeCounter_++;
-                m_PData.m_EngineUpgrade = EngineLevel;
+                m_PData.m_EngineLevel = EngineLevel;
             }
+        }
+        else
+        {
+            m_Control.text = "You don't have enough Salvage";
         }
     }
     //Button function
     public void UpgradeHealth()
     {
+        m_Control.text = "";
         upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * healthUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
@@ -228,13 +247,18 @@ public class StarMapUI : MonoBehaviour
                 m_PData.m_Salvage -= upgradeCost_;
                 healthUpgradeCounter_++;
                 m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
-                m_PData.m_HealthUpgrade = HealthLevel;
+                m_PData.m_HealthLevel = HealthLevel;
             }
+        }
+        else
+        {
+            m_Control.text = "You don't have enough Salvage";
         }
     }
     //Button function
     public void UpgradeShield()
     {
+        m_Control.text = "";
         if(!m_PData.m_HasShield)
         {
             upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier + 1;
@@ -243,9 +267,14 @@ public class StarMapUI : MonoBehaviour
                 m_PData.m_HasShield = true;
                 shieldUpgradeCounter_++;
             }
+            else
+            {
+                m_Control.text = "You don't have enough Salvage";
+            }
         }
         else
         {
+            m_Control.text = "";
             upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * shieldUpgradeCounter_;
             if (m_PData.m_Salvage >= upgradeCost_)
             {
@@ -254,14 +283,19 @@ public class StarMapUI : MonoBehaviour
                     m_PData.m_Salvage -= upgradeCost_;
                     shieldUpgradeCounter_++;
                     m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
-                    m_PData.m_ShieldUpgrade = ShieldLevel;
+                    m_PData.m_ShieldLevel = ShieldLevel;
                 }
+            }
+            else
+            {
+                m_Control.text = "You don't have enough Salvage";
             }
         }
     }
     //Button function
     public void UpgradeShip()
     {
+        m_Control.text = "";
         upgradeCost_ = (Constants.BASE_SHIP_COST * m_PData.m_ShipTier) * tierUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
@@ -271,6 +305,10 @@ public class StarMapUI : MonoBehaviour
                 tierUpgradeCounter_++;
                 m_PData.m_ShipTier = Tier;
             }
+        }
+        else
+        {
+            m_Control.text = "You don't have enough Salvage";
         }
     }
 }

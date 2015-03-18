@@ -8,7 +8,9 @@ public class ShipController : MonoBehaviour
     public Ship m_Ship;
 
     public GameObject m_Explosion;
-    public GameObject m_PlayerShip;
+    //public GameObject m_PlayerShip;
+
+    private int totalDamage_;
 
     public void FireWeapons(string collisionLayerName)
     {
@@ -23,6 +25,8 @@ public class ShipController : MonoBehaviour
 
     public void ApplyDamage(GameObject ship, int damage)
     {
+        totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
+
         m_Data.m_HP -= damage;
 
         if (m_Data.m_HP <= 0)
@@ -31,7 +35,7 @@ public class ShipController : MonoBehaviour
 
             if (ship.tag == "Player")
             {
-                m_PlayerShip.SetActive(false);
+                ship.GetComponent<SpawnPlayer>().m_Player.SetActive(false);
                 Camera.main.GetComponent<GameController>().SoftSave();
                 Camera.main.GetComponent<GameController>().Respawn();
             }

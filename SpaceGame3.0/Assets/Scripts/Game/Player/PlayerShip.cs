@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerShip : Ship 
 {
     public PlayerController m_PController;
-    public GameController m_GControl;
     public PlayerData m_PData;
 
     private int shieldUpgradeCounter_ = 1; //Amount of upgrades in the shield by the player
@@ -22,17 +21,14 @@ public class PlayerShip : Ship
     public void Start()
     {
         m_Tier = 1 * tierUpgradeCounter_;
-        m_PController = m_GControl.GetComponent<GameController>().m_Player.GetComponent<PlayerController>();
+        m_PController =  Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerController>();
 
-        shieldUpgradeCounter_ = m_PData.m_ShieldUpgrade;
-        healthUpgradeCounter_ = m_PData.m_HealthUpgrade;
-        damageUpgradeCounter_ = m_PData.m_DamageUpgrade;
-        engineUpgradeCounter_ = m_PData.m_EngineUpgrade;
+        m_DamageModifier = DamageLevel;
+
+        shieldUpgradeCounter_ = m_PData.m_ShieldLevel;
+        healthUpgradeCounter_ = m_PData.m_HealthLevel;
+        damageUpgradeCounter_ = m_PData.m_DamageLevel;
+        engineUpgradeCounter_ = m_PData.m_EngineLevel;
         tierUpgradeCounter_ = m_PData.m_ShipTier;
-    }
-
-    public void ChangeSpirte()
-    {
-       m_PController.m_PlayerShip.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier];
     }
 }

@@ -5,7 +5,7 @@ public class MiniBossShip : Ship
 {
     public void ChangeSpirte()
     {
-        this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier - 1];
+        //this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier - 1];
     }
 
     private void DropLoot()

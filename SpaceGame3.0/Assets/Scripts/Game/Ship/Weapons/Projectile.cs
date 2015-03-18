@@ -3,17 +3,19 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
+    public GameData m_GData;
+    public PlayerData m_PData;
 
     public float m_ForwardAccel;
     public int m_Damage = 1;
 
-    private int levelMultiplier_;
+    private int damageModifier_;
 
     // Use this for initialization
     void Start()
     {
-        levelMultiplier_ = Camera.main.GetComponent<LevelData>().m_CurrLevel;
-        m_Damage = 1 * levelMultiplier_;
+        damageModifier_ = 1;
+        m_Damage = 1 * damageModifier_;
     }
 
     // Update is called once per frame

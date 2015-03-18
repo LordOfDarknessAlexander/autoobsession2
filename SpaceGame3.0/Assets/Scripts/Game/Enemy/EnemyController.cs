@@ -4,18 +4,16 @@ using System.Collections;
 public class EnemyController : Enemy 
 {
     public ShipController m_Ship;
-    public GameController m_Controller;
 
     public float m_MaxVel;
     public Vector3 m_CurrVel;
-
 
     public override void OnEnter()
     {
         //Set target for all enemies
         if (m_Target == null)
         {
-            m_Target = GameObject.FindGameObjectWithTag("Player");
+            m_Target = Camera.main.GetComponent<SpawnPlayer>().m_Player;
         }
     }
 

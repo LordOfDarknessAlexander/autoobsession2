@@ -41,7 +41,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
 
             WaveSetup(10);
         }
@@ -55,7 +55,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
 
             WaveSetup(10);
         }
@@ -68,7 +68,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(15);
@@ -82,7 +82,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(20);
@@ -96,7 +96,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(25);
@@ -116,7 +116,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(30);
@@ -130,7 +130,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(35);
@@ -144,7 +144,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(40);
@@ -158,7 +158,7 @@ public class EnemySpawn : MonoBehaviour
 
             //populate enemy array
             m_Enemies.Add(m_Type1Ememy);
-            m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+            m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
             m_Enemies.Add(m_Type2Ememy);
 
             WaveSetup(45);
@@ -185,7 +185,7 @@ public class EnemySpawn : MonoBehaviour
 
         //populate enemy array
         m_Enemies.Add(m_Type1Ememy);
-        m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+        m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
         m_Enemies.Add(m_Type2Ememy);
 
         m_Boss.GetComponent<BossShip>().ChangeSpirte();
@@ -223,8 +223,9 @@ public class EnemySpawn : MonoBehaviour
 
         //populate enemy array
         m_Enemies.Add(m_Type1Ememy);
-        m_Type1Ememy.GetComponent<EnemyShip>().ChangeSpirte();
+        m_Type1Ememy.GetComponent<EnemyShip>().ChangeShip();
         m_Enemies.Add(m_Type2Ememy);
+        m_Type2Ememy.GetComponent<EnemyShip>().ChangeShip();
 
         m_MiniBoss.GetComponent<MiniBossShip>().ChangeSpirte();
         m_MiniBoss.SetActive(true);

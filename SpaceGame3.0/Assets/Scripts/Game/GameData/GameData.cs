@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
 
-[Serializable]
+[System.Serializable]
 public class GameData : MonoBehaviour 
 {
     public static GameData m_GData;
@@ -42,7 +42,6 @@ public class GameData : MonoBehaviour
 
         //Enemy Data
         m_EnemyType = 0;
-        m_EnemyTier = 0;
-
+        m_EnemyTier = 1;
 	}
 }

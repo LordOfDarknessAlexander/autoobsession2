@@ -9,7 +9,6 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour 
 {
-    public GameController m_GControl;
 
     public Weapon m_WeaponData;
     public ShipController m_ShipController;
@@ -24,8 +23,8 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         nextShot_ = 0.0f;
-        m_PlayerShip = m_GControl.GetComponent<GameController>().m_Player.GetComponent<PlayerShip>();
-        m_ShipController = m_GControl.GetComponent<GameController>().m_Player.GetComponent<ShipController>();
+        m_PlayerShip = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerShip>();
+        m_ShipController = Camera.main.GetComponent<GameController>().m_Player.GetComponent<ShipController>();
     }
 
     public void Update()

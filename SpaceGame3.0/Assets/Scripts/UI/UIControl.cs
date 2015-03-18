@@ -28,7 +28,7 @@ public class UIControl : MonoBehaviour
 
     void Start()
     {
-        m_Player = m_GameControl.GetComponent<GameController>().m_Player;
+        m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
 
         m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
         m_WavesCompleted = m_PData.m_WavesCompleted;

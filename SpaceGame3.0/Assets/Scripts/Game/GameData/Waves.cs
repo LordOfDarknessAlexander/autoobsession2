@@ -20,17 +20,6 @@ public class Waves : MonoBehaviour
     public GameObject m_SpawnPoints;
     public List<GameObject> m_SpawnPoint = new List<GameObject>();
 
-	// Use this for initialization
-	void Start () 
-    {
-        //for testing
-        numEnemies_ = Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool;
-        numKills_ = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills;
-        player_ = GameObject.FindGameObjectWithTag("Player");
-
-        Camera.main.GetComponent<EnemySpawn>().AISpawn();
-	}
-	
 	// Update is called once per frame
 	void Update () 
     {
@@ -52,9 +41,9 @@ public class Waves : MonoBehaviour
             {
                 for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
                 {
-                    Vector3 spawnPosition = new Vector3(0, 12, 0/*m_SpawnPoint[sPoint_].transform.position.x, 
+                    Vector3 spawnPosition = new Vector3(m_SpawnPoint[sPoint_].transform.position.x, 
                                                         m_SpawnPoint[sPoint_].transform.position.y,     
-                                                        m_SpawnPoint[sPoint_].transform.position.z*/);
+                                                        m_SpawnPoint[sPoint_].transform.position.z);
                     Quaternion spawnRotation = Quaternion.identity;
 
                     for (int j = 0; j < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++j)
