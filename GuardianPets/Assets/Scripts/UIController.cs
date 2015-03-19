@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     public GameObject m_NicknamePanel; //Panel for nickname prompt
     public GameObject m_FearPanel; //Panel for the fear prompt
     public GameObject m_CurrentPet; //UI Element for the current pet
+    public GameObject m_UpgradePanel; //Panel for the upgrades
     public InputField m_NicknameIF; //Input field for the nickname prompt
     public InputField m_FearIF; //Input field for the fear prompt
     public PlayerData m_PlayerData; //Player data
@@ -122,7 +123,7 @@ public class UIController : MonoBehaviour
     //                -- This function will give a visual display of the Upgrades available to them
     public void Upgrades()
     {
-
+        m_UpgradePanel.SetActive(true);
     }
 
     //Button function -- When the player presses the feed button on the UI it will call this function
@@ -168,5 +169,13 @@ public class UIController : MonoBehaviour
             }
             gc_.m_PlayerData.RemovePoints();
         }
+    }
+
+    //Button function -- When the player presses the 'X' button on the UI it will call this function
+    //                -- This function will close the currently active window
+    //                -- As of right now it's only being used for the upgrade panel
+    public void CloseMenu()
+    {
+        m_UpgradePanel.SetActive(false);
     }
 }
