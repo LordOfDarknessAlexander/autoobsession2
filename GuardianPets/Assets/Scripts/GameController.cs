@@ -132,6 +132,7 @@ public class GameController : MonoBehaviour
                         {
                             pet_ = (GameObject)Instantiate(m_PetChoices[i]);
                             pet_.name = m_PetChoices[i].name;
+                            m_PlayerData.m_Pets.Add(pet_);
                         }
                         else
                         {
