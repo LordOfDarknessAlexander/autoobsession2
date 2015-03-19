@@ -165,10 +165,11 @@ public class StarMapUI : MonoBehaviour
         m_PData.m_DamageLevel = DamageLevel;
     }
 
-    public void LoadLevel(int level)
+
+    public void LoadLevel(int level/*, int tier*/)
     {
         m_Control.text = "";
-        m_LData.SetLevelData(level);
+        m_LData.SetLevelData(level/*, tier*/);
         SetPlayerData();
         m_PData.Save();
 

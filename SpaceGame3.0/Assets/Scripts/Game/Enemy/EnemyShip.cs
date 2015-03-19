@@ -1,33 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyShip : Ship
 {
     public GameData m_GData;
 
-    public Sprite[] m_Sprites;
+    public int m_SalvageVal;
 
-    public EnemyController m_EController;
-    public LevelData m_LData;
-
-    public void SetStats()
+    public void Awake()
     {
-        m_Type = m_GData.m_EnemyType;
-        m_Tier = m_GData.m_EnemyTier;
-
-        this.m_DamageModifier = 1 * m_Type * m_Tier;
-        this.m_Data.m_HP = 5 * m_Type * m_Tier;        
+        SetBaseStats();
     }
 
-    public void ChangeShip()
+    public void SetBaseStats()
     {
-       //this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier * m_Type - 1];
+        this.m_Level = m_GData.m_Level;
+        this.m_Tier = m_GData.m_EnemyTier;
+
+        this.m_SData.m_HasShield = m_GData.m_HasShield;
+
+        this.m_SData.m_HP = m_GData.m_EnemyHP;
+        this.m_SData.m_Shield = m_GData.m_EnemyShield;
+        this.m_DamageModifier = m_DamageLevel * Constants.DEFAULT_UPGRADE_MODIFIER;
+
+        this.m_EngineLevel = m_GData.m_EnemyEngineLevel;
+        this.m_DamageLevel = m_GData.m_EnemyDamageLevel;
+        this.m_HealthLevel = m_GData.m_EnemyHealthLevel;
+        this.m_ShieldLevel = m_GData.m_EnemyShield;
+        this.m_SalvageVal = m_GData.m_SalvageVal * m_Tier;
     }
 
     private void DropLoot()
     {
         //go through engines, drop if random number > mDropChance
-        foreach (EngineData engine in m_Data.m_Engines)
+        foreach (EngineData engine in m_SData.m_Engines)
         {
             if (Random.value >= Constants.DROP_CHANCE)
             {
@@ -36,7 +43,7 @@ public class EnemyShip : Ship
         }
 
         //go through weapons, drop if random number > mDropChance
-        foreach (Weapon weapon in m_Data.m_Weapons)
+        foreach (Weapon weapon in m_SData.m_Weapons)
         {
             if (Random.value >= Constants.DROP_CHANCE)
             {

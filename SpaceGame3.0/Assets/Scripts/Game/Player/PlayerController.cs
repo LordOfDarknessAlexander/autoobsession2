@@ -9,7 +9,6 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour 
 {
-
     public Weapon m_WeaponData;
     public ShipController m_ShipController;
     public PlayerShip m_PlayerShip;
@@ -24,21 +23,31 @@ public class PlayerController : MonoBehaviour
     {
         nextShot_ = 0.0f;
         m_PlayerShip = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerShip>();
-        m_ShipController = Camera.main.GetComponent<GameController>().m_Player.GetComponent<ShipController>();
+        m_ShipController = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<ShipController>();
     }
 
     public void Update()
     {
         //to move player around scene
         float moveHorizontal = Input.GetAxis("Horizontal");
+        /*if(moveHorizontal > 0.1f || moveHorizontal < -0.1f)
+        {
+            Debug.Log("Horizontal Has been pressed is true" + moveHorizontal);
+        }*/
+
         float moveVertical = Input.GetAxis("Vertical");
+        /*if(moveVertical > 0.1f || moveVertical < -0.1f)
+        {
+            Debug.Log("Vertical has been pressed  is true" + moveVertical);
+        }*/
+        
 
         Vector3 moveShip = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        GetComponent<Rigidbody>().velocity = moveShip * m_PlayerShip.m_Data.GetTotalThrustAccel();
+        this.GetComponent<Rigidbody>().velocity = moveShip * m_PlayerShip.m_SData.GetTotalThrustAccel();
 
         //to keep player from leaving play area
-        GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
+        this.GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
                                          Mathf.Clamp(GetComponent<Rigidbody>().position.y, m_PlayerBoundary.yMin, m_PlayerBoundary.yMax),
                                          0.0f);
 

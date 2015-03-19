@@ -4,12 +4,8 @@ using UnityEngine.UI;
 
 public class BossController : Enemy 
 {
-    public Slider m_HealthValue;
-    public Slider m_ShieldSlider;
 
-    public BossShip m_Ship;
-
-    public override void OnEnter()
+    public override void Awake()
     {
         //Set target for all enemies
         if (m_Target == null)

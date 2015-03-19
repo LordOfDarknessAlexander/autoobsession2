@@ -26,7 +26,7 @@ public class SetSprite : MonoBehaviour
     public void Sprites(Ship ship)
     {
         tier_ = ship.GetComponent<Ship>().m_Tier;
-        type_ = ship.GetComponent<Ship>().m_Type;
+        type_ = ship.GetComponent<Ship>().m_Level;
         newSprite_ = m_SpritesToUse[tier_ * type_];
     }
 

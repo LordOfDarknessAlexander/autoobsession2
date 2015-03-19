@@ -118,7 +118,7 @@ PlayerShip(ship)
 
 EnemyShip(ship)
 	Enemy Data
-	Type1
+	Type1()
 		Tier 1(0)
 			HP = (Base)
 			Shield = Null
@@ -252,99 +252,6 @@ EnemyShip(ship)
 			Shield = Level 4
 			Engines = (Base) + level 4 upgrade
 			Damage = (Base) + level 4 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health					
-					+ 2
-	Type4
-		Tier 1(0)
-			HP = (Base * 2)
-			Shield = Level 1
-			Engines = (Base)
-			Damage = (Base) * 2
-			Drops = Shield Boost
-					MultiShot
-					Health
-					+ 1
-		Tier 2(1)
-			HP = (Base * 2) + level 1 upgrade
-			Shield = Level 1
-			Engines = (Base) + level 1 upgrade
-			Damage = (Base * 2) + level 1 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health				
-					
-		Tier 3(2)
-			HP = (Base * 2) + level 2 upgrade
-			Shield = Level 2
-			Engines = (Base) + level 2 upgrade
-			Damage = (Base * 2) + level 2 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health
-					+ 1
-		
-		Tier 4(3)
-			HP = (Base * 2) + level 3 upgrade
-			Shield = Level 3
-			Engines = (Base) + level 3 upgrade
-			Damage = (Base * 2) + level 3 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health					
-					+ 1
-		Tier 5(4)
-			HP = (Base * 2) + level 4 upgrade
-			Shield = Level 4
-			Engines = (Base) + level 4 upgrade
-			Damage = (Base * 2) + level 4 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health					
-					+ 2
-	Type5
-		Tier 1(0)
-			HP = (Base * 3)
-			Shield = Level 1
-			Engines = (Base)
-			Damage = (Base * 2)
-			Drops = Shield Boost
-					MultiShot
-					Health					
-		Tier 2(1)
-			HP = (Base * 3) + level 1 upgrade
-			Shield = Level 2
-			Engines = (Base) + level 1 upgrade
-			Damage = (Base * 2) + level 1 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health				
-					
-		Tier 3(2)
-			HP = (Base * 3) + level 2 upgrade
-			Shield = Level 3
-			Engines = (Base) + level 2 upgrade
-			Damage = (Base * 2) + level 2 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health
-					+ 1
-		
-		Tier 4(3)
-			HP = (Base * 3) + level 3 upgrade
-			Shield = Level 4
-			Engines = (Base) + level 3 upgrade
-			Damage = (Base * 2) + level 3 upgrade
-			Drops = Shield Boost
-					MultiShot
-					Health					
-					+ 1
-		Tier 5(4)
-			HP = (Base * 3) + level 4 upgrade
-			Shield = Level 5
-			Engines = (Base) + level 4 upgrade
-			Damage = (Base * 2) + level 4 upgrade
 			Drops = Shield Boost
 					MultiShot
 					Health					

@@ -42,6 +42,8 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        m_ESpawn.m_BossStatCanvas.enabled = false;
+
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
@@ -50,11 +52,13 @@ public class GameController : MonoBehaviour
         m_Play = false;
         
         m_PSpawn.Spawn();
-        m_Player = m_PSpawn.m_Player;
+        
     }
 
     void Update()
     {
+        m_Player = m_PSpawn.m_Player;
+
         if(Input.GetKey(KeyCode.Return))
         {
             m_PData.Save();
@@ -67,9 +71,9 @@ public class GameController : MonoBehaviour
 
         if(!m_Play)
         {
-            m_ControlText.text = "Press 'S' to begin";
+            m_ControlText.text = "Press 'Z' to begin";
 
-            if(Input.GetKey(KeyCode.S))
+            if(Input.GetKey(KeyCode.Z))
             {
                 m_Play = true;
                 Play();

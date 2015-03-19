@@ -31,9 +31,6 @@ public class Weapon : MonoBehaviour
     public float m_Cooldown;
     public int m_MaxAmmo;
 
-    public int m_PooledAmt = 20;
-
-
     public void Fire(WeaponStateData stateData, GameObject parentShip, string collisionLayerName)
     {
         Instantiate(m_Shot, m_Blaster.position, m_Blaster.rotation);

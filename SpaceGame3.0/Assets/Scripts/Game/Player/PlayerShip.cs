@@ -23,7 +23,7 @@ public class PlayerShip : Ship
         m_Tier = 1 * tierUpgradeCounter_;
         m_PController =  Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerController>();
 
-        m_DamageModifier = DamageLevel;
+        m_DamageModifier = DamageLevel * Constants.DEFAULT_UPGRADE_MODIFIER;
 
         shieldUpgradeCounter_ = m_PData.m_ShieldLevel;
         healthUpgradeCounter_ = m_PData.m_HealthLevel;

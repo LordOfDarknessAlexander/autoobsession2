@@ -8,7 +8,6 @@ public class ShipController : MonoBehaviour
     public Ship m_Ship;
 
     public GameObject m_Explosion;
-    //public GameObject m_PlayerShip;
 
     private int totalDamage_;
 

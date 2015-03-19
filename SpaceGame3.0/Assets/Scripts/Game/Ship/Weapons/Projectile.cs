@@ -9,13 +9,10 @@ public class Projectile : MonoBehaviour
     public float m_ForwardAccel;
     public int m_Damage = 1;
 
-    private int damageModifier_;
-
     // Use this for initialization
     void Start()
     {
-        damageModifier_ = 1;
-        m_Damage = 1 * damageModifier_;
+        m_Damage = 1;
     }
 
     // Update is called once per frame
@@ -38,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     public void OnExit()
     {
-        if (gameObject.transform.position.y < -20 || gameObject.transform.position.y > 20)
+        if (gameObject.transform.position.y < -30 || gameObject.transform.position.y > 30)
         {
             Destroy(gameObject);
         }

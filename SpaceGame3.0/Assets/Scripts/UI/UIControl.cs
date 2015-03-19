@@ -33,7 +33,7 @@ public class UIControl : MonoBehaviour
         m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
         m_WavesCompleted = m_PData.m_WavesCompleted;
 
-        maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_Data.m_HP;
+        maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_SData.m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
         m_PlayerHealth.minValue = minHealth_;
     }

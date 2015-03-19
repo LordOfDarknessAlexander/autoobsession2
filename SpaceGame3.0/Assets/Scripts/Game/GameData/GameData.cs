@@ -18,10 +18,19 @@ public class GameData : MonoBehaviour
     public float m_SFXVol;
 
     //Enemy Data
-    public int m_EnemyType;
+    public bool m_HasShield;
+
+    public int m_Level;
     public int m_EnemyTier;
+    public int m_EnemyHP;
+    public int m_EnemyShield;
+
+    public int m_EnemyEngineLevel;
+    public int m_EnemyDamageLevel;
+    public int m_EnemyHealthLevel;
+    public int m_EnemyShieldLevel;
+    public int m_SalvageVal;
     
-	// Use this for initialization
 	void Start () 
     {
 	    if(m_GData == null)
@@ -34,14 +43,23 @@ public class GameData : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //initalizing data
-        m_CurrLevel = 0;
+        //Initalizing Default Game Values
         m_MasterVol = 100;
         m_MusicVol = 100;
         m_SFXVol = 100;
 
-        //Enemy Data
-        m_EnemyType = 0;
+        //Initalize Enemy Data
+        m_HasShield = false;
+
+        m_Level = m_CurrLevel;
         m_EnemyTier = 1;
+        m_EnemyHP = 5;
+        m_EnemyShield = 5;
+
+        m_EnemyEngineLevel = 1 * m_EnemyTier;
+        m_EnemyDamageLevel = 1 * m_EnemyTier;
+        m_EnemyHealthLevel = 1 * m_EnemyTier;
+        m_EnemyShieldLevel = 1 * m_EnemyTier;
+        m_SalvageVal = 100 * (m_Level * m_EnemyTier);
 	}
 }

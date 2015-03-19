@@ -3,17 +3,16 @@ using System.Collections;
 
 public class EnemyController : Enemy 
 {
-    public ShipController m_Ship;
 
     public float m_MaxVel;
     public Vector3 m_CurrVel;
 
-    public override void OnEnter()
+    public override void Awake()
     {
         //Set target for all enemies
         if (m_Target == null)
         {
-            m_Target = Camera.main.GetComponent<SpawnPlayer>().m_Player;
+            m_Target = GameObject.FindGameObjectWithTag("Player");//Camera.main.GetComponent<SpawnPlayer>().m_Player;
         }
     }
 
@@ -28,15 +27,16 @@ public class EnemyController : Enemy
     public override void Update()
     {
         //to move enemy around scene
-        GetComponent<Rigidbody>().AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
-
-        GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, m_MaxVel);
-
-        m_CurrVel = GetComponent<Rigidbody>().velocity;
 
         if (m_Target != null)
         {
-            m_ShipController.FireWeapons("EnemyProjectile");
+            this.GetComponent<Rigidbody>().AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
+
+            this.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, m_MaxVel);
+
+            m_CurrVel = GetComponent<Rigidbody>().velocity;
+
+            //m_ShipController.FireWeapons("EnemyProjectile");
         }
         else
         {
@@ -48,8 +48,8 @@ public class EnemyController : Enemy
     {
         if (other.collider.tag == "Player")
         {
-            Instantiate(m_Ship.m_Explosion, transform.position, transform.rotation);
-            Destroy(other.gameObject);
+            Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
+            other.gameObject.SetActive(false);
             Camera.main.GetComponent<GameController>().Respawn();
             
             gameObject.SetActive(false);

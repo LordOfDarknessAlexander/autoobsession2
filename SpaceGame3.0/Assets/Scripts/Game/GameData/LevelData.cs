@@ -9,18 +9,17 @@ public class LevelData : MonoBehaviour
 
     public int m_CurrLevel;
 
-    public int m_EnemyTier;
-    public int m_EnemyType;
+    public int m_Tier;
 
-    public void SetLevelData(int level)
+    public void SetLevelData(int level/*, int tier*/)
     {
         m_GData.m_CurrLevel = level;
-        m_GData.m_EnemyType = level;
+        //m_GData.m_Tier = tier;
     }
 
     public void LoadLevelData()
     {
         m_CurrLevel = m_GData.m_CurrLevel;
-        m_EnemyType = m_GData.m_EnemyType;
+        m_Tier = m_GData.m_EnemyTier;
     }
 }

@@ -2,18 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BossShip : Ship 
+public class BossShip : EnemyShip 
 {
-
-    public void ChangeSpirte()
-    {
-        //this.GetComponent<SpriteRenderer>().sprite = m_Sprites[m_Tier - 1];
-    }
 
     private void DropLoot()
     {
         //go through engines, drop if random number > mDropChance
-        foreach (EngineData engine in m_Data.m_Engines)
+        foreach (EngineData engine in m_SData.m_Engines)
         {
             if (Random.value >= Constants.DROP_CHANCE)
             {
@@ -22,7 +17,7 @@ public class BossShip : Ship
         }
 
         //go through weapons, drop if random number > mDropChance
-        foreach (Weapon weapon in m_Data.m_Weapons)
+        foreach (Weapon weapon in m_SData.m_Weapons)
         {
             if (Random.value >= Constants.DROP_CHANCE)
             {
