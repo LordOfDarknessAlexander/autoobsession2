@@ -24,27 +24,24 @@ public class Waves : MonoBehaviour
 
     public IEnumerator WaveSpawner()
     {
+        yield return new WaitForSeconds(m_StartDelay);
+
         while (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0)
         {
-            yield return new WaitForSeconds(m_StartDelay);
-       
-            if(Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0)
+            for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
             {
-                for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
-                {
-                    Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
-                    Quaternion spawnRotation = Quaternion.identity;
+                Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
+                Quaternion spawnRotation = Quaternion.identity;
 
-                    for (int j = 0; j < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++j)
-                    {
-                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[j].SetActive(true);
-                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[j].transform.position = spawnPosition;
-                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[j].transform.rotation = spawnRotation;
-                    }
-                    yield return new WaitForSeconds(m_SpawnDelay);
-                }
-                yield return new WaitForSeconds(m_WaveDelay);
+                Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].SetActive(true);
+                Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.position = spawnPosition;
+                Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.rotation = spawnRotation;
+
+                yield return new WaitForSeconds(m_SpawnDelay);
+
             }
+            yield return new WaitForSeconds(m_WaveDelay);
+
 
             if (player_ == null)
             {

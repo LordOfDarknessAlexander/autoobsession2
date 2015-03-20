@@ -3,17 +3,8 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
-    public GameData m_GData;
-    public PlayerData m_PData;
-
     public float m_ForwardAccel;
     public int m_Damage = 1;
-
-    // Use this for initialization
-    void Start()
-    {
-        m_Damage = 1;
-    }
 
     // Update is called once per frame
     void FixedUpdate()

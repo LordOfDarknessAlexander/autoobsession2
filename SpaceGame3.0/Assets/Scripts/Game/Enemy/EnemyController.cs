@@ -12,7 +12,7 @@ public class EnemyController : Enemy
         //Set target for all enemies
         if (m_Target == null)
         {
-            m_Target = GameObject.FindGameObjectWithTag("Player");//Camera.main.GetComponent<SpawnPlayer>().m_Player;
+            m_Target = GameObject.FindGameObjectWithTag("Player");
         }
     }
 
@@ -27,16 +27,19 @@ public class EnemyController : Enemy
     public override void Update()
     {
         //to move enemy around scene
+        float moveVertical = -this.m_ShipData.GetTotalThrustAccel();
 
         if (m_Target != null)
         {
-            this.GetComponent<Rigidbody>().AddForce(-transform.up * m_ShipData.GetTotalThrustAccel());
+            Vector3 moveShip = new Vector3(0.0f, moveVertical, 0.0f);
+
+            this.GetComponent<Rigidbody>().velocity = moveShip;
 
             this.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, m_MaxVel);
 
             m_CurrVel = GetComponent<Rigidbody>().velocity;
 
-        m_ShipController.FireWeapons("EnemyProjectile");
+            m_ShipController.FireWeapons("EnemyProjectile");
         }
         else
         {
