@@ -29,6 +29,6 @@ public class PlayerShip : Ship
         healthUpgradeCounter_ = m_PData.m_HealthLevel;
         damageUpgradeCounter_ = m_PData.m_DamageLevel;
         engineUpgradeCounter_ = m_PData.m_EngineLevel;
-        tierUpgradeCounter_ = m_PData.m_ShipTier;
+        tierUpgradeCounter_ = m_PData.m_ShipLevel;
     }
 }

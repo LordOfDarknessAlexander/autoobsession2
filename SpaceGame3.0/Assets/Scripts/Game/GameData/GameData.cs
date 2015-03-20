@@ -12,10 +12,12 @@ public class GameData : MonoBehaviour
     public static GameData m_GData;
 
     //Game Data
-    public int m_CurrLevel;
     public float m_MasterVol;
     public float m_MusicVol;
     public float m_SFXVol;
+
+    //Player Data
+    public PlayerData m_PData;
 
     //Enemy Data
     public bool m_HasShield;
@@ -31,7 +33,7 @@ public class GameData : MonoBehaviour
     public int m_EnemyShieldLevel;
     public int m_SalvageVal;
     
-	void Start () 
+	void Awake () 
     {
 	    if(m_GData == null)
         {
@@ -41,6 +43,7 @@ public class GameData : MonoBehaviour
         else if(m_GData != null)
         {
             Destroy(gameObject);
+            Debug.Log("Self Destructed due to another one existing");
         }
 
         //Initalizing Default Game Values
@@ -48,10 +51,9 @@ public class GameData : MonoBehaviour
         m_MusicVol = 100;
         m_SFXVol = 100;
 
-        //Initalize Enemy Data
+        //Initalize Default Enemy Data
         m_HasShield = false;
 
-        m_Level = m_CurrLevel;
         m_EnemyTier = 1;
         m_EnemyHP = 5;
         m_EnemyShield = 5;
@@ -61,5 +63,88 @@ public class GameData : MonoBehaviour
         m_EnemyHealthLevel = 1 * m_EnemyTier;
         m_EnemyShieldLevel = 1 * m_EnemyTier;
         m_SalvageVal = 100 * (m_Level * m_EnemyTier);
+
+        Load();
 	}
+
+    public void Save()
+    {
+        if (!File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            Debug.Log("Creating file");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
+            PlayerSave pData = new PlayerSave();
+
+            pData.m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
+            pData.m_WavesCompleted = m_PData.m_WavesCompleted;
+            pData.m_TotalScore = m_PData.m_TotalScore;
+            pData.m_Salvage = m_PData.m_Salvage;
+            pData.m_ShipTier = m_PData.m_ShipLevel;
+            pData.m_Shield = m_PData.m_Shield;
+            pData.m_HP = m_PData.m_HP;
+            pData.m_EngineLevel = m_PData.m_EngineLevel;
+            pData.m_ShieldLevel = m_PData.m_ShieldLevel;
+            pData.m_HealthLevel = m_PData.m_HealthLevel;
+            pData.m_DamageLevel = m_PData.m_DamageLevel;
+            pData.m_Items = m_PData.m_Items;
+
+            bf.Serialize(file, pData);
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Saving to " + Application.persistentDataPath);
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+            PlayerSave pData = new PlayerSave();
+
+            pData.m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
+            pData.m_WavesCompleted = m_PData.m_WavesCompleted;
+            pData.m_TotalScore = m_PData.m_TotalScore;
+            pData.m_Salvage = m_PData.m_Salvage;
+            pData.m_ShipTier = m_PData.m_ShipLevel;
+            pData.m_Shield = m_PData.m_Shield;
+            pData.m_HP = m_PData.m_HP;
+            pData.m_EngineLevel = m_PData.m_EngineLevel;
+            pData.m_ShieldLevel = m_PData.m_ShieldLevel;
+            pData.m_HealthLevel = m_PData.m_HealthLevel;
+            pData.m_DamageLevel = m_PData.m_DamageLevel;
+            pData.m_Items = m_PData.m_Items;
+
+            bf.Serialize(file, pData);
+            file.Close();
+        }
+    }
+
+    public void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            Debug.Log("Loading");
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+            PlayerSave pData = (PlayerSave)bf.Deserialize(file);
+
+            m_PData.m_EnemiesKilledLifetime = pData.m_EnemiesKilledLifetime;
+            m_PData.m_WavesCompleted = pData.m_WavesCompleted;
+            m_PData.m_TotalScore = pData.m_TotalScore;
+            m_PData.m_Salvage = pData.m_Salvage;
+            m_PData.m_ShipLevel = pData.m_ShipTier;
+            m_PData.m_HP = pData.m_HP;
+            m_PData.m_Shield = pData.m_Shield;
+            m_PData.m_EngineLevel = pData.m_EngineLevel;
+            m_PData.m_ShieldLevel = pData.m_ShieldLevel;
+            m_PData.m_HealthLevel = pData.m_HealthLevel;
+            m_PData.m_DamageLevel = pData.m_DamageLevel;
+            m_PData.m_Items = pData.m_Items;
+
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Failed to load, file doesn't exist");
+        }
+    }
+
 }

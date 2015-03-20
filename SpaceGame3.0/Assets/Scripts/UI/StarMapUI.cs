@@ -22,18 +22,19 @@ public class StarMapUI : MonoBehaviour
     public GameData m_GData;
     public LevelData m_LData;
 
+    private int level;
     private int upgradeCost_;
     private int shieldUpgradeCounter_; //Amount of upgrades in the shield by the player
     private int engineUpgradeCounter_; //Amount of upgrades in the engines by the player
     private int damageUpgradeCounter_; //Amount of upgrades in the damage by the player
     private int healthUpgradeCounter_; //Amount of upgrades in the health by the player
-    private int tierUpgradeCounter_; //Level of PlayerShip
+    private int levelUpgradeCounter_; //Level of PlayerShip
 
     public int BuyShieldCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier));
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipLevel));
         }
     }
 
@@ -41,35 +42,35 @@ public class StarMapUI : MonoBehaviour
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * shieldUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipLevel)) * shieldUpgradeCounter_;
         }
     }
     public int EngineUpgradeCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * engineUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipLevel)) * engineUpgradeCounter_;
         }
     }
     public int DamageUpgradeCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * damageUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipLevel)) * damageUpgradeCounter_;
         }
     }
     public int HealthUpgradeCost
     {
         get
         {
-            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipTier)) * healthUpgradeCounter_;
+            return (Constants.BASE_UPGRADE_COST * (m_PData.m_ShipLevel)) * healthUpgradeCounter_;
         }
     }
     public int TierUpgradeCost
     {
         get
         {
-            return (Constants.BASE_SHIP_COST * (m_PData.m_ShipTier)) * tierUpgradeCounter_;
+            return (Constants.BASE_SHIP_COST * (m_PData.m_ShipLevel)) * levelUpgradeCounter_;
         }
     }
 
@@ -117,31 +118,36 @@ public class StarMapUI : MonoBehaviour
             healthUpgradeCounter_ = value;
         }
     }
-    public int Tier
+    public int PlayerShipLevel
     {
         get
         {
-            return tierUpgradeCounter_;
+            return levelUpgradeCounter_;
         }
         set
         {
-            tierUpgradeCounter_ = value;
+            levelUpgradeCounter_ = value;
         }
     }
 
     public void Awake()
     {
-        m_PData.Load();
-    }
+        shieldUpgradeCounter_ = 1;
+        engineUpgradeCounter_ = 1;
+        damageUpgradeCounter_ = 1;
+        healthUpgradeCounter_ = 1;
+        levelUpgradeCounter_ = 1;
+   }
     void Update()
     {
         shieldUpgradeCounter_ = m_PData.m_ShieldLevel;
         healthUpgradeCounter_ = m_PData.m_HealthLevel;
         damageUpgradeCounter_ = m_PData.m_DamageLevel;
         engineUpgradeCounter_ = m_PData.m_EngineLevel;
-        tierUpgradeCounter_ = m_PData.m_ShipTier;
+        levelUpgradeCounter_ = m_PData.m_ShipLevel;
 
         m_Salvage.text = "You have " + m_PData.m_Salvage.ToString() + " Salvage";
+
         m_HealthText.text = "Cost: " + HealthUpgradeCost.ToString() + "\nCurrent Level: " + HealthLevel;
         if(!m_PData.m_HasShield)
         {
@@ -153,12 +159,12 @@ public class StarMapUI : MonoBehaviour
         }
         m_DamageText.text = "Cost: " + DamageUpgradeCost.ToString() + "\nCurrent Level: " + DamageLevel;
         m_EngineText.text = "Cost: " + EngineUpgradeCost.ToString() + "\nCurrent Level: " + EngineLevel;
-        m_TierText.text = "Cost: " + TierUpgradeCost.ToString() + "\nCurrent Level: " + Tier;
+        m_TierText.text = "Cost: " + TierUpgradeCost.ToString() + "\nCurrent Level: " + PlayerShipLevel;
     }
 
     public void SetPlayerData()
     {
-        m_PData.m_ShipTier = Tier;
+        m_PData.m_ShipLevel = PlayerShipLevel;
         m_PData.m_HealthLevel = HealthLevel;
         m_PData.m_EngineLevel = EngineLevel;
         m_PData.m_ShieldLevel = ShieldLevel;
@@ -166,17 +172,17 @@ public class StarMapUI : MonoBehaviour
     }
 
 
-    public void LoadLevel(int level/*, int tier*/)
+    public void LoadLevel(int level_)
     {
         m_Control.text = "";
-        m_LData.SetLevelData(level/*, tier*/);
+        m_LData.LoadLevelData();
         SetPlayerData();
-        m_PData.Save();
+        m_GData.Save();
 
         //set level requirements
-        if((m_PData.m_ShipTier) < level)
+        if ((m_PData.m_ShipLevel) < level_)
         {
-            m_Control.text = "Your Ship needs to be Level" + level + " to access this area";
+            m_Control.text = "Your Ship needs to be Level " + level_ + " to access this area";
        }
         else
         {
@@ -202,7 +208,7 @@ public class StarMapUI : MonoBehaviour
     public void UpgradeDamage()
     {
         m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * damageUpgradeCounter_;
+        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * damageUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
             if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
@@ -221,7 +227,7 @@ public class StarMapUI : MonoBehaviour
     public void UpgradeEngine()
     {
         m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * engineUpgradeCounter_;
+        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * engineUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
             if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
@@ -240,7 +246,7 @@ public class StarMapUI : MonoBehaviour
     public void UpgradeHealth()
     {
         m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * healthUpgradeCounter_;
+        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * healthUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
             if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
@@ -262,7 +268,7 @@ public class StarMapUI : MonoBehaviour
         m_Control.text = "";
         if(!m_PData.m_HasShield)
         {
-            upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier + 1;
+            upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel + 1;
             if (m_PData.m_Salvage >= upgradeCost_)
             {
                 m_PData.m_HasShield = true;
@@ -276,7 +282,7 @@ public class StarMapUI : MonoBehaviour
         else
         {
             m_Control.text = "";
-            upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipTier) * shieldUpgradeCounter_;
+            upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * shieldUpgradeCounter_;
             if (m_PData.m_Salvage >= upgradeCost_)
             {
                 if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
@@ -297,14 +303,14 @@ public class StarMapUI : MonoBehaviour
     public void UpgradeShip()
     {
         m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_SHIP_COST * m_PData.m_ShipTier) * tierUpgradeCounter_;
+        upgradeCost_ = (Constants.BASE_SHIP_COST * m_PData.m_ShipLevel) * levelUpgradeCounter_;
         if (m_PData.m_Salvage >= upgradeCost_)
         {
-            if (tierUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+            if (levelUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
             {
                 m_PData.m_Salvage -= upgradeCost_;
-                tierUpgradeCounter_++;
-                m_PData.m_ShipTier = Tier;
+                levelUpgradeCounter_++;
+                m_PData.m_ShipLevel = PlayerShipLevel;
             }
         }
         else

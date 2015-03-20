@@ -13,13 +13,10 @@ public class SpawnPlayer : MonoBehaviour
     public GameObject m_Player;
     private GameObject playerObj_;
 
-    void Start()
-    {
-    }
 
     public void SetStats(GameObject player)
     {
-        m_PData.Load();
+        //m_GData.Load();
 
         m_Player.GetComponent<PlayerShip>().m_DamageModifier = m_PData.m_DamageModifer;
         m_Player.GetComponent<PlayerController>().m_Salvage = m_PData.m_Salvage;
@@ -39,7 +36,7 @@ public class SpawnPlayer : MonoBehaviour
 
             Camera.main.GetComponent<GameController>().m_Lives--;
 
-            playerObj_ = m_PlayerPrefab[m_PData.m_ShipTier - 1];
+            playerObj_ = m_PlayerPrefab[m_PData.m_ShipLevel - 1];
             GameObject obj = (GameObject)Instantiate(playerObj_);
             playerPool.Add(obj);
 

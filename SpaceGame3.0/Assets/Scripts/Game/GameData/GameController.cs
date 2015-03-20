@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         m_ESpawn.m_BossStatCanvas.enabled = false;
+        m_ESpawn.SetShipPrefab();
 
         m_Lose.enabled = false;
         m_Win.enabled = false;
@@ -61,7 +62,7 @@ public class GameController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Return))
         {
-            m_PData.Save();
+            m_GData.Save();
         }
 
         if(Input.GetKey(KeyCode.C))
@@ -191,6 +192,6 @@ public class GameController : MonoBehaviour
         m_PData.m_Salvage += m_Salvage;
         m_PData.m_Items = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory;
 
-        m_PData.Save();
+        m_GData.Save();
     }
 }
