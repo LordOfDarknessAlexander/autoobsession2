@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class EnemyShip : Ship
 {
+    public int m_Tier;
+
     public GameData m_GData;
 
     public int m_SalvageVal;

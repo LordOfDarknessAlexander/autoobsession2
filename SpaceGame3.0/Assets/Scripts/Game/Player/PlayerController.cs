@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public PlayerShip m_PlayerShip;
     public Boundary m_PlayerBoundary;
 
+    public float m_MaxVel;
     public float m_FireRate;
     public int m_Salvage;
 
@@ -40,11 +41,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Vertical has been pressed  is true" + moveVertical);
         }*/
-        
 
-        Vector3 moveShip = new Vector3(moveHorizontal, moveVertical, 0.0f);
+        Vector3 moveShip = new Vector3((moveHorizontal * m_PlayerShip.m_SData.GetTotalThrustAccel()), (moveVertical * m_PlayerShip.m_SData.GetTotalVertAccel()), 0.0f);
 
-        this.GetComponent<Rigidbody>().velocity = moveShip * m_PlayerShip.m_SData.GetTotalThrustAccel();
+        this.GetComponent<Rigidbody>().velocity = moveShip;
+
+        this.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity, m_MaxVel);
 
         //to keep player from leaving play area
         this.GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),

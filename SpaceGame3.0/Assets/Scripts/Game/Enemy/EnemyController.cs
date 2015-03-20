@@ -36,7 +36,7 @@ public class EnemyController : Enemy
 
             m_CurrVel = GetComponent<Rigidbody>().velocity;
 
-            //m_ShipController.FireWeapons("EnemyProjectile");
+        m_ShipController.FireWeapons("EnemyProjectile");
         }
         else
         {

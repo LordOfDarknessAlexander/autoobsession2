@@ -11,6 +11,9 @@ public class ShipData : MonoBehaviour
     public Rigidbody m_Rigidbody;
     public List<GameObject> m_Inventory;
 
+    public float m_ForwardAccel;
+    public float m_VerticalAccel;
+
     public float m_MaxCargoCapacity; //amount ship can hold in Kg
     public float m_CurrentMass; //total mass of ship
     public float m_ShipMass;// mass of ship without cargo, weapons
@@ -22,10 +25,7 @@ public class ShipData : MonoBehaviour
     {
         float retval = 0.0f;
 
-        foreach(EngineData engine in m_Engines)
-        {
-            retval += engine.m_ForwardAccel;
-        }
+        retval += m_ForwardAccel;
 
         return retval;
     }
@@ -34,10 +34,7 @@ public class ShipData : MonoBehaviour
     {
         float retval = 0.0f;
 
-        foreach (EngineData engine in m_Engines)
-        {
-            retval += engine.m_VerticalAccel;
-        }
+        retval += m_VerticalAccel;
 
         return retval;
     }

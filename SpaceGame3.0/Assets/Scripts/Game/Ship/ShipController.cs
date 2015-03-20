@@ -44,7 +44,7 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
-                Camera.main.GetComponent<GameController>().m_Salvage += 50 * ship.GetComponent<Ship>().m_Tier;
+                Camera.main.GetComponent<GameController>().m_Salvage += 50 * ship.GetComponent<EnemyShip>().m_Tier;
                 DropLoot();
                 Destroy(gameObject);
             }

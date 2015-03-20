@@ -8,7 +8,6 @@ public class Ship : MonoBehaviour
     public ShipData m_SData;
 
     public int m_DamageModifier;
-    public int m_Tier;
     public int m_Level;
 
     public int m_EngineLevel;
