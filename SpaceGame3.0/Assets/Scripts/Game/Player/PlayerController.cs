@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Vertical has been pressed  is true" + moveVertical);
         }*/
 
-        Vector3 moveShip = new Vector3((moveHorizontal * m_PlayerShip.m_SData.GetTotalThrustAccel()), (moveVertical * m_PlayerShip.m_SData.GetTotalVertAccel()), 0.0f);
+        Vector3 moveShip = new Vector3((moveHorizontal * m_PlayerShip.m_SData.GetTotalVertAccel()), (moveVertical * m_PlayerShip.m_SData.GetTotalThrustAccel()), 0.0f);
 
         this.GetComponent<Rigidbody>().velocity = moveShip;
 
