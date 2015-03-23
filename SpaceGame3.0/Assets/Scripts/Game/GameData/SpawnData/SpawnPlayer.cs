@@ -36,23 +36,27 @@ public class SpawnPlayer : MonoBehaviour
 
             Camera.main.GetComponent<GameController>().m_Lives--;
 
-            playerObj_ = m_PlayerPrefab[m_PData.m_ShipLevel - 1];
-            GameObject obj = (GameObject)Instantiate(playerObj_);
-            playerPool.Add(obj);
+            for (int i = 0; i < Camera.main.GetComponent<GameController>().m_Lives + 1; ++i)
+            {
+                playerObj_ = m_PlayerPrefab[m_PData.m_ShipLevel - 1];
+                GameObject obj = (GameObject)Instantiate(playerObj_);
+                obj.SetActive(false);
+                playerPool.Add(obj);
+            }
 
             m_Player = playerPool[0];
             SetStats(m_Player);
 
-            for(int i = 0; i < playerPool.Count; i++)
-            {
-                Vector3 playerSpawn_ = new Vector3(0.0f, -5.0f, 0.0f);
+            //for(int i = 0; i < playerPool.Count; i++)
+            //{
+                Vector3 playerSpawn = new Vector3(0.0f, -5.0f, 0.0f);
                 Quaternion spawnPlayerRotation = Quaternion.identity;
 
                 m_Player.SetActive(true);
-                m_Player.transform.position = playerSpawn_;
+                m_Player.transform.position = playerSpawn;
                 m_Player.transform.rotation = spawnPlayerRotation;
 
-            }
+            //}
         }
         else if (Camera.main.GetComponent<GameController>().m_Lives == 0)
         {

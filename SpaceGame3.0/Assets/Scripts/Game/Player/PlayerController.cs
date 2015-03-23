@@ -31,16 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         //to move player around scene
         float moveHorizontal = Input.GetAxis("Horizontal");
-        /*if(moveHorizontal > 0.1f || moveHorizontal < -0.1f)
-        {
-            Debug.Log("Horizontal Has been pressed is true" + moveHorizontal);
-        }*/
-
         float moveVertical = Input.GetAxis("Vertical");
-        /*if(moveVertical > 0.1f || moveVertical < -0.1f)
-        {
-            Debug.Log("Vertical has been pressed  is true" + moveVertical);
-        }*/
 
         Vector3 moveShip = new Vector3((moveHorizontal * m_PlayerShip.m_SData.GetTotalVertAccel()), (moveVertical * m_PlayerShip.m_SData.GetTotalThrustAccel()), 0.0f);
 

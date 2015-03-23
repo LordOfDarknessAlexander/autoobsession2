@@ -15,6 +15,7 @@ public class EnemySpawn : MonoBehaviour
     public List<GameObject> m_MiniBossPrefabs = new List<GameObject>();
     public List<GameObject> m_BossPrefabs = new List<GameObject>();
     public List<GameObject> enemyPool_ = new List<GameObject>();
+    public List<GameObject> bossPool_ = new List<GameObject>();
 
     public CanvasGroup m_KillsPanel;
     public Canvas m_BossStatCanvas;
@@ -59,10 +60,6 @@ public class EnemySpawn : MonoBehaviour
             m_Enemies.Clear();
             enemyPool_.Clear();
 
-            //populate enemy array
-            m_Enemies.Add(m_LightEmemy);
-
-            WaveSetup(10);
         }
 
         if (m_WaveNum == 1)
@@ -190,8 +187,6 @@ public class EnemySpawn : MonoBehaviour
 
     public void SpawnBoss(GameObject boss, int numEnemies)
     {
-        m_Boss = boss;
-
         //Turn on the Boss UI
         m_BossStatCanvas.enabled = true;
 
@@ -206,8 +201,17 @@ public class EnemySpawn : MonoBehaviour
         m_Enemies.Add(m_LightEmemy);
         m_Enemies.Add(m_MediumEmemy);
 
-        //m_Boss.GetComponent<Ship>().ChangeShip();
-        m_Boss.SetActive(true);
+        GameObject bossObj = (GameObject)Instantiate(boss);
+        boss.SetActive(false);
+        bossPool_.Add(bossObj);
+
+        Vector3 bossSpawn = new Vector3(0.0f, 8.0f, 0.0f);
+        Quaternion spawnBossRotation = Quaternion.identity;
+
+        boss.SetActive(true);
+        boss.transform.position = bossSpawn;
+        boss.transform.rotation = spawnBossRotation;
+
 
         m_NumEnemiesInPool = numEnemies;
 
@@ -226,43 +230,6 @@ public class EnemySpawn : MonoBehaviour
             StartCoroutine(Camera.main.GetComponent<Waves>().BossSpawner());
         }
     }
-
-   /* public void SpawnMiniBoss(GameObject miniBoss)
-    {
-        //Turn on the Boss UI
-        m_BossStatCanvas.alpha = 1;
-
-        //turn off kills required panel
-        m_KillsPanel.alpha = 0;
-
-        //clear enemy array
-        m_Enemies.Clear();
-        enemyPool_.Clear();
-
-        //populate enemy array
-        m_Enemies.Add(m_Type1Ememy);
-        m_Enemies.Add(m_Type2Ememy);
-
-        m_Boss.GetComponent<MiniBossShip>().ChangeSpirte();
-        m_Boss.SetActive(true);
-
-        m_NumEnemiesInPool = 15;
-
-        for (int e = 0; e < m_Enemies.Count; e++)
-        {
-            for (int i = 0; i < m_NumEnemiesInPool; i++)
-            {
-                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                obj.SetActive(false);
-                enemyPool_.Add(obj);
-            }
-        }
-
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            StartCoroutine(Camera.main.GetComponent<Waves>().BossSpawner());
-        }
-    }*/
 
     public void WaveSetup(int kills)
     {

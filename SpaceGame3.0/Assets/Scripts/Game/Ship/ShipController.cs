@@ -26,17 +26,19 @@ public class ShipController : MonoBehaviour
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
 
-        m_Data.m_HP -= damage;
+        m_Data.m_HP -= totalDamage_;
 
         if (m_Data.m_HP <= 0)
         {
-            Instantiate(m_Explosion, transform.position, transform.rotation);
-
             if (ship.tag == "Player")
             {
-                ship.GetComponent<SpawnPlayer>().m_Player.SetActive(false);
+                //StopAllCoroutines();
                 Camera.main.GetComponent<GameController>().SoftSave();
+                //ship.GetComponent<SpawnPlayer>().m_Player.SetActive(false); 
+                Destroy(ship);
                 Camera.main.GetComponent<GameController>().Respawn();
+                
+
             }
 
             if (ship.tag == "Enemy")
@@ -48,6 +50,7 @@ public class ShipController : MonoBehaviour
                 DropLoot();
                 Destroy(gameObject);
             }
+            Instantiate(m_Explosion, transform.position, transform.rotation);
         }
     }
 

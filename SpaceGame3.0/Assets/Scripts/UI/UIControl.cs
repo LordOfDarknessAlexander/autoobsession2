@@ -40,19 +40,16 @@ public class UIControl : MonoBehaviour
 
     void Update()
     {
-        currHealth_ = m_Player.GetComponent<ShipData>().m_HP;
-        currLives_ = m_GameControl.GetComponent<GameController>().m_Lives;
-        currScore_ = m_GameControl.GetComponent<GameController>().m_Score;
-        currSalvage_ = m_GameControl.GetComponent<GameController>().m_Salvage;
-
         if(m_Player != null)
         {
+            currHealth_ = m_Player.GetComponent<ShipData>().m_HP;
+            currLives_ = m_GameControl.GetComponent<GameController>().m_Lives;
+            currScore_ = m_GameControl.GetComponent<GameController>().m_Score;
+            currSalvage_ = m_GameControl.GetComponent<GameController>().m_Salvage;
+        
             m_PlayerHealth.value = m_Player.GetComponent<ShipData>().m_HP;
-            //Debug.Log(currHealth_);
-            m_LivesVal.text = currLives_.ToString();//m_GameControl.GetComponent<GameController>().m_Lives.ToString();
-            //Debug.Log(currLives_);
-            m_ScoreVal.text = currScore_.ToString();//m_GameControl.GetComponent<GameController>().m_Score.ToString();
-            //Debug.Log(currScore_);
+            m_LivesVal.text = currLives_.ToString();
+            m_ScoreVal.text = currScore_.ToString();
             m_SalvageVal.text = currSalvage_.ToString();
         }
     }

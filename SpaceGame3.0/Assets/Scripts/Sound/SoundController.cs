@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SoundController : MonoBehaviour {
+public class SoundController : MonoBehaviour 
+{
 
 	// Use this for initialization
 	void Start () {
