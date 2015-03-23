@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
     
     private GameController gc_; //Game Controller script for easier access
     private bool isNewPlayer_;
-    private float pointsTimer_; //Timer until the player receives their next set of points, starts at 300 because the interval is 5 minutes, and there are 300 seconds in 5 minutes
+    private float energyTimer_; //Timer until the player receives their next set of points, starts at 300 because the interval is 5 minutes, and there are 300 seconds in 5 minutes
     private string minutes_;
     private string seconds_;
 
@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour
             RemoveUI();
         }
 
-        pointsTimer_ = Constants.POINTS_TIMER;
+        energyTimer_ = Constants.ENERGY_TIMER;
 	}
 	
 	void Update ()
@@ -52,7 +52,7 @@ public class UIController : MonoBehaviour
         if (currPet_ != null)
         {
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
-            m_PointsText.text = m_PlayerData.m_Points.ToString();
+            m_PointsText.text = m_PlayerData.m_Energy.ToString();
             m_ShieldsText.text = m_PlayerData.m_Shields.ToString();
             UpdateTimer();
         }
@@ -60,15 +60,23 @@ public class UIController : MonoBehaviour
 
     void UpdateTimer()
     {
-        pointsTimer_ -= Time.deltaTime;
-        minutes_ = Mathf.Floor(pointsTimer_ / 60).ToString("00");
-        seconds_ = (pointsTimer_ % 60).ToString("00");
-        m_PointsTimerText.text = minutes_ + ":" + seconds_;
-
-        if(pointsTimer_ <= 0.0f)
+        if (gc_.m_PlayerData.m_Energy < Constants.DEFAULT_MAX_ENERGY)
         {
-            gc_.m_PlayerData.m_Points += 10;
-            pointsTimer_ = Constants.POINTS_TIMER;
+            m_PointsTimerText.enabled = true;
+            energyTimer_ -= Time.deltaTime;
+            minutes_ = Mathf.Floor(energyTimer_ / 60).ToString("00");
+            seconds_ = (energyTimer_ % 60).ToString("00");
+            m_PointsTimerText.text = minutes_ + ":" + seconds_;
+
+            if (energyTimer_ <= 0.0f)
+            {
+                gc_.m_PlayerData.m_Energy += Constants.ENERGY_REWARDED;
+                energyTimer_ = Constants.ENERGY_TIMER;
+            }
+        }
+        else
+        {
+            m_PointsTimerText.enabled = false;
         }
     }
 
@@ -130,12 +138,17 @@ public class UIController : MonoBehaviour
     //                -- This function will decrease the hunger level of the pet, remove the appropriate points from the player, and award them shields
     public void Feed()
     {
-        if (gc_.m_PlayerData.m_Points >= Constants.ACTION_COST)
+        if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
-            currPet_.GetComponent<Pet>().m_Hunger -= Constants.FEED_AMOUNT;
-            if (currPet_.GetComponent<Pet>().m_Hunger >= Constants.MAX_PET_STAT)
+            currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
+            if (currPet_.GetComponent<Pet>().m_Hunger >= Constants.MIN_PET_STAT)
             {
-                currPet_.GetComponent<Pet>().m_Hunger = Constants.MAX_PET_STAT;
+                currPet_.GetComponent<Pet>().m_Hunger = Constants.MIN_PET_STAT;
+                if(currPet_.GetComponent<Pet>().CheckShieldConditions())
+                {
+                    gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
+                }
+                
             }
             gc_.m_PlayerData.RemovePoints();
         }
@@ -145,12 +158,16 @@ public class UIController : MonoBehaviour
     //                -- This function will decrease the boredom level of the pet, remove the appropriate points from the player, and award them shields
     public void Play()
     {
-        if (gc_.m_PlayerData.m_Points >= Constants.ACTION_COST)
+        if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
-            currPet_.GetComponent<Pet>().m_Bored -= Constants.FEED_AMOUNT;
-            if (currPet_.GetComponent<Pet>().m_Bored >= Constants.MAX_PET_STAT)
+            currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
+            if (currPet_.GetComponent<Pet>().m_Bored >= Constants.MIN_PET_STAT)
             {
-                currPet_.GetComponent<Pet>().m_Bored = Constants.MAX_PET_STAT;
+                currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
+                if (currPet_.GetComponent<Pet>().CheckShieldConditions())
+                {
+                    gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
+                }
             }
             gc_.m_PlayerData.RemovePoints();
         }
@@ -160,12 +177,16 @@ public class UIController : MonoBehaviour
     //                -- This function will decrease the cleanliness level of the pet, remove the appropriate points from the player, and award them shields
     public void Clean()
     {
-        if (gc_.m_PlayerData.m_Points >= Constants.ACTION_COST)
+        if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
-            currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.FEED_AMOUNT;
-            if (currPet_.GetComponent<Pet>().m_Cleanliness >= Constants.MAX_PET_STAT)
+            currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.STAT_DECREASE_VAL;
+            if (currPet_.GetComponent<Pet>().m_Cleanliness >= Constants.MIN_PET_STAT)
             {
-                currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MAX_PET_STAT;
+                currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MIN_PET_STAT;
+                if (currPet_.GetComponent<Pet>().CheckShieldConditions())
+                {
+                    gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
+                }
             }
             gc_.m_PlayerData.RemovePoints();
         }

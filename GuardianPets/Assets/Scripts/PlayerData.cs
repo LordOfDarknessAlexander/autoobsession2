@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlayerData : MonoBehaviour
 {
     public List<GameObject> m_Pets = new List<GameObject>();
-    public int m_Points;
+    public int m_Energy;
     public int m_Shields;
 
     private int counter_ = 0;
@@ -38,7 +38,7 @@ public class PlayerData : MonoBehaviour
     //Once this counter reaches a certain number, it will add shields to the player's account
     public void RemovePoints()
     {
-        m_Points -= 20;
+        m_Energy -= Constants.ACTION_COST;
         counter_++;
         if(counter_ >= Constants.COUNTER_MAX)
         {

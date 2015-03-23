@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
             {
                 sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
             }
-            sData.m_Points = m_PlayerData.m_Points;
+            sData.m_Energy = m_PlayerData.m_Energy;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
@@ -101,7 +101,7 @@ public class GameController : MonoBehaviour
             {
                 sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
             }
-            sData.m_Points = m_PlayerData.m_Points;
+            sData.m_Energy = m_PlayerData.m_Energy;
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
@@ -144,8 +144,22 @@ public class GameController : MonoBehaviour
             m_PlayerData.m_Shields = sData.m_Shields;
             DateTime now = DateTime.Now;
             TimeSpan ts = now - Convert.ToDateTime(sData.m_CloseDate);
-            float pointsToAdd = (float)ts.TotalMinutes / 5;
-            m_PlayerData.m_Points = sData.m_Points + (int)pointsToAdd;
+            float minutesElapsed = (float)ts.TotalMinutes / 5;
+            float energyToAdd;
+            if(minutesElapsed >= 1)
+            {
+                energyToAdd = minutesElapsed;
+            }
+            else
+            {
+                energyToAdd = 0;
+            }
+
+            m_PlayerData.m_Energy = sData.m_Energy + (int)energyToAdd;
+            if(m_PlayerData.m_Energy > Constants.DEFAULT_MAX_ENERGY)
+            {
+                m_PlayerData.m_Energy = Constants.DEFAULT_MAX_ENERGY;
+            }
 
             SetUpGame();
             file.Close();
@@ -155,7 +169,7 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Failed to load, file doesn't exist");
             m_FirstTimePlayer = true;
-            m_PlayerData.m_Points = Constants.DEFAULT_START_POINTS;
+            m_PlayerData.m_Energy = Constants.DEFAULT_START_ENERGY;
             m_PlayerData.m_Shields = Constants.DEFAULT_START_SHIELDS;
         }
     }
@@ -168,6 +182,6 @@ class SaveData
     public string m_CurrPet; //Player's currently active pet
     public string m_CurrPetNickname; //Player's currently active pet's nickname
     public int m_Shields; //Player's current shields
-    public int m_Points; //Player's points at the time of the save
+    public int m_Energy; //Player's points at the time of the save
     public DateTime m_CloseDate; //Date the player stopped playing
 }
