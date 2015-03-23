@@ -100,7 +100,6 @@ public class UIController : MonoBehaviour
     //                -- The function will set the pet's nickname and activate the fear panel
     public void GiveNickname()
     {
-        //gc_.Save();
         if(!string.IsNullOrEmpty(m_NicknameIF.text) && currPet_ != null)
         {
             currPet_.GetComponent<Pet>().m_Nickname = m_NicknameIF.text;
@@ -121,6 +120,9 @@ public class UIController : MonoBehaviour
         if(!string.IsNullOrEmpty(m_FearIF.text) && currPet_ != null)
         {
             currPet_.GetComponent<Pet>().m_FearOne = m_FearIF.text;
+            currPet_.GetComponent<Pet>().m_Bored = Constants.DEFAULT_START_STATS;
+            currPet_.GetComponent<Pet>().m_Cleanliness = Constants.DEFAULT_START_STATS;
+            currPet_.GetComponent<Pet>().m_Hunger = Constants.DEFAULT_START_STATS;
             gc_.Save();
             Destroy(m_NewPlayerUI);
             m_GameUI.SetActive(true);
@@ -141,7 +143,7 @@ public class UIController : MonoBehaviour
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
             currPet_.GetComponent<Pet>().m_Hunger -= Constants.STAT_DECREASE_VAL;
-            if (currPet_.GetComponent<Pet>().m_Hunger >= Constants.MIN_PET_STAT)
+            if (currPet_.GetComponent<Pet>().m_Hunger <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Hunger = Constants.MIN_PET_STAT;
                 if(currPet_.GetComponent<Pet>().CheckShieldConditions())
@@ -150,7 +152,7 @@ public class UIController : MonoBehaviour
                 }
                 
             }
-            gc_.m_PlayerData.RemovePoints();
+            gc_.m_PlayerData.RemoveEnergy();
         }
     }
 
@@ -161,7 +163,7 @@ public class UIController : MonoBehaviour
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
             currPet_.GetComponent<Pet>().m_Bored -= Constants.STAT_DECREASE_VAL;
-            if (currPet_.GetComponent<Pet>().m_Bored >= Constants.MIN_PET_STAT)
+            if (currPet_.GetComponent<Pet>().m_Bored <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Bored = Constants.MIN_PET_STAT;
                 if (currPet_.GetComponent<Pet>().CheckShieldConditions())
@@ -169,7 +171,7 @@ public class UIController : MonoBehaviour
                     gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
                 }
             }
-            gc_.m_PlayerData.RemovePoints();
+            gc_.m_PlayerData.RemoveEnergy();
         }
     }
 
@@ -180,7 +182,7 @@ public class UIController : MonoBehaviour
         if (gc_.m_PlayerData.m_Energy >= Constants.ACTION_COST)
         {
             currPet_.GetComponent<Pet>().m_Cleanliness -= Constants.STAT_DECREASE_VAL;
-            if (currPet_.GetComponent<Pet>().m_Cleanliness >= Constants.MIN_PET_STAT)
+            if (currPet_.GetComponent<Pet>().m_Cleanliness <= Constants.MIN_PET_STAT)
             {
                 currPet_.GetComponent<Pet>().m_Cleanliness = Constants.MIN_PET_STAT;
                 if (currPet_.GetComponent<Pet>().CheckShieldConditions())
@@ -188,7 +190,7 @@ public class UIController : MonoBehaviour
                     gc_.m_PlayerData.m_Shields += Constants.SHIELDS_REWARDED;
                 }
             }
-            gc_.m_PlayerData.RemovePoints();
+            gc_.m_PlayerData.RemoveEnergy();
         }
     }
 

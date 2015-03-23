@@ -36,14 +36,8 @@ public class PlayerData : MonoBehaviour
 
     //This function is called by the button functions from the pets, this removes the points from the player (it's always the same) and increments a counter
     //Once this counter reaches a certain number, it will add shields to the player's account
-    public void RemovePoints()
+    public void RemoveEnergy()
     {
         m_Energy -= Constants.ACTION_COST;
-        counter_++;
-        if(counter_ >= Constants.COUNTER_MAX)
-        {
-            m_Shields += 10;
-            counter_ = 0;
-        }
     }
 }

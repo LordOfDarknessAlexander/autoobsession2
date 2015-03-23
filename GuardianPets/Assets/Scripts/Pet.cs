@@ -63,7 +63,7 @@ public class Pet : MonoBehaviour
     public bool CheckShieldConditions()
     {
         bool retVal;
-        if(m_Hunger == Constants.MAX_PET_STAT && m_Cleanliness == Constants.MAX_PET_STAT && m_Bored == Constants.MAX_PET_STAT)
+        if (m_Hunger == Constants.MIN_PET_STAT && m_Cleanliness == Constants.MIN_PET_STAT && m_Bored == Constants.MIN_PET_STAT)
         {
             retVal = true;
         }

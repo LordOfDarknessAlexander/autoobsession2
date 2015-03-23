@@ -74,8 +74,9 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat");
             SaveData sData = new SaveData();
+            Pet pet = pet_.GetComponent<Pet>();
 
-            //Insert save data here
+            //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
                 sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
@@ -85,6 +86,13 @@ public class GameController : MonoBehaviour
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = "Temp";
+
+            //Pet save data
+            sData.m_CurrPetFearOne = pet.m_FearOne;
+            sData.m_CurrPetFearTwo = pet.m_FearTwo;
+            sData.m_CurrPetBored = pet.m_Bored;
+            sData.m_CurrPetCleanliness = pet.m_Cleanliness;
+            sData.m_CurrPetHunger = pet.m_Hunger;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -95,8 +103,9 @@ public class GameController : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = new SaveData();
+            Pet pet = pet_.GetComponent<Pet>();
 
-            //Insert save data here
+            //Player save data
             for (int i = 0; i < m_PlayerData.m_Pets.Count; ++i)
             {
                 sData.m_Pets.Add(m_PlayerData.m_Pets[i].GetComponent<Pet>().m_PetName);
@@ -106,6 +115,13 @@ public class GameController : MonoBehaviour
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
             sData.m_CurrPetNickname = "Temp";
+
+            //Pet save data
+            sData.m_CurrPetFearOne = pet.m_FearOne;
+            sData.m_CurrPetFearTwo = pet.m_FearTwo;
+            sData.m_CurrPetBored = pet.m_Bored;
+            sData.m_CurrPetCleanliness = pet.m_Cleanliness;
+            sData.m_CurrPetHunger = pet.m_Hunger;
 
             bf.Serialize(file, sData);
             file.Close();
@@ -121,7 +137,7 @@ public class GameController : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + Path.DirectorySeparatorChar + "gpSaveData.dat", FileMode.Open);
             SaveData sData = (SaveData)bf.Deserialize(file);
 
-            //Insert load data here
+            //Player load data
             for (int i = 0; i < m_PetChoices.Count; ++i)
             {
                 for (int j = 0; j < sData.m_Pets.Count; ++j)
@@ -161,6 +177,13 @@ public class GameController : MonoBehaviour
                 m_PlayerData.m_Energy = Constants.DEFAULT_MAX_ENERGY;
             }
 
+            //Pet load data
+            pet_.GetComponent<Pet>().m_FearOne = sData.m_CurrPetFearOne;
+            pet_.GetComponent<Pet>().m_FearTwo = sData.m_CurrPetFearTwo;
+            pet_.GetComponent<Pet>().m_Hunger = sData.m_CurrPetHunger;
+            pet_.GetComponent<Pet>().m_Cleanliness = sData.m_CurrPetCleanliness;
+            pet_.GetComponent<Pet>().m_Bored = sData.m_CurrPetBored;
+
             SetUpGame();
             file.Close();
             m_FirstTimePlayer = false;
@@ -178,10 +201,18 @@ public class GameController : MonoBehaviour
 [Serializable]
 class SaveData
 {
+    //Player's save data
     public List<string> m_Pets = new List<string>(); //List of pets the player owns
     public string m_CurrPet; //Player's currently active pet
     public string m_CurrPetNickname; //Player's currently active pet's nickname
     public int m_Shields; //Player's current shields
     public int m_Energy; //Player's points at the time of the save
     public DateTime m_CloseDate; //Date the player stopped playing
+
+    //Save data for currPet
+    public string m_CurrPetFearOne;
+    public string m_CurrPetFearTwo;
+    public int m_CurrPetHunger;
+    public int m_CurrPetCleanliness;
+    public int m_CurrPetBored;
 }
