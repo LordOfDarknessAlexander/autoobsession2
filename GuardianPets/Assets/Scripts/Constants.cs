@@ -19,4 +19,5 @@ public class Constants : MonoBehaviour
     public const int ACTION_COST = 1; //Cost per action - play, wash, feed.
     public const int ENERGY_REWARDED = 1; //This is the energy you get from waiting the 5 minutes
     public const int SHIELDS_REWARDED = 10; //This is the amount of shields the player is awarded for meeting/maintaining the 3 conditions of the pet
+    public const int BASE_UPGRADE_COST = 10; //This is the base upgrade cost that gets multiplied with the upgrade level
 }

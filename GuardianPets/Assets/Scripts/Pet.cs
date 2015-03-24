@@ -57,6 +57,39 @@ public class Pet : MonoBehaviour
         }
     }
 
+    //This function is only called from places where stats need to be added off of the timer, such as when the game loads again after being closed
+    //numStats is the number of times a stat needs to be added - to clarify, NOT the amount of stats to be added(30) but the amount of times a stat is to be added(3)
+    public void AddStats(int numStats)
+    {
+        int counter = 1;
+        while(counter <= numStats)
+        {
+            int randNum = Random.Range(0, 3);
+            if (randNum == 0)
+            {
+                if (m_Hunger < Constants.MAX_PET_STAT)
+                {
+                    m_Hunger += Constants.STAT_INCREASE_VAL;
+                }
+            }
+            else if (randNum == 1)
+            {
+                if (m_Cleanliness < Constants.MAX_PET_STAT)
+                {
+                    m_Cleanliness += Constants.STAT_INCREASE_VAL;
+                }
+            }
+            else if (randNum == 2)
+            {
+                if (m_Bored < Constants.MAX_PET_STAT)
+                {
+                    m_Bored += Constants.STAT_INCREASE_VAL;
+                }
+            }
+            counter++;
+        }
+    }
+
     //This function is called whenever the player presses one of the three action buttons and returns a true or false value
     //True = all conditions are met to get a shield
     //False = not all conditions are met to get a shield

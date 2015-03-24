@@ -15,9 +15,10 @@ public class UIController : MonoBehaviour
     public PlayerData m_PlayerData; //Player data
 
     public Text m_NicknameText;
-    public Text m_PointsText; //Player's current points - UI element
+    public Text m_EnergyText; //Player's current points - UI element
     public Text m_ShieldsText; //Player's current shields = UI element
-    public Text m_PointsTimerText; //Text element for the Points - UI element
+    public Text m_EnergyTimerText; //Text element for the Points - UI element
+    public Slider m_EnergySlider;
     public string m_SelectedPet;
 
     private GameObject currPet_;
@@ -44,6 +45,8 @@ public class UIController : MonoBehaviour
         }
 
         energyTimer_ = Constants.ENERGY_TIMER;
+        m_EnergySlider.minValue = 0;
+        m_EnergySlider.maxValue = Constants.DEFAULT_MAX_ENERGY;
 	}
 	
 	void Update ()
@@ -52,8 +55,13 @@ public class UIController : MonoBehaviour
         if (currPet_ != null)
         {
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
-            m_PointsText.text = m_PlayerData.m_Energy.ToString();
+            m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + Constants.DEFAULT_MAX_ENERGY;
             m_ShieldsText.text = m_PlayerData.m_Shields.ToString();
+            m_EnergySlider.value = m_PlayerData.m_Energy;
+            if(m_PlayerData.m_Energy == 0)
+            {
+                m_EnergySlider.fillRect.GetComponent<Image>().color = Color.black;
+            }
             UpdateTimer();
         }
 	}
@@ -62,11 +70,11 @@ public class UIController : MonoBehaviour
     {
         if (gc_.m_PlayerData.m_Energy < Constants.DEFAULT_MAX_ENERGY)
         {
-            m_PointsTimerText.enabled = true;
+            m_EnergyTimerText.enabled = true;
             energyTimer_ -= Time.deltaTime;
             minutes_ = Mathf.Floor(energyTimer_ / 60).ToString("00");
             seconds_ = (energyTimer_ % 60).ToString("00");
-            m_PointsTimerText.text = minutes_ + ":" + seconds_;
+            m_EnergyTimerText.text = minutes_ + ":" + seconds_;
 
             if (energyTimer_ <= 0.0f)
             {
@@ -76,7 +84,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            m_PointsTimerText.enabled = false;
+            m_EnergyTimerText.enabled = false;
         }
     }
 

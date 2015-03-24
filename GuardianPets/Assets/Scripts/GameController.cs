@@ -184,6 +184,11 @@ public class GameController : MonoBehaviour
             pet_.GetComponent<Pet>().m_Cleanliness = sData.m_CurrPetCleanliness;
             pet_.GetComponent<Pet>().m_Bored = sData.m_CurrPetBored;
 
+            if (minutesElapsed >= 1)
+            {
+                pet_.GetComponent<Pet>().AddStats((int)minutesElapsed);
+            }
+
             SetUpGame();
             file.Close();
             m_FirstTimePlayer = false;
