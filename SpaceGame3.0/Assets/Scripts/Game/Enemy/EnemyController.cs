@@ -20,7 +20,14 @@ public class EnemyController : Enemy
     {
         if (m_ShipData.transform.position.y < -30)
         {
-            gameObject.SetActive(false);
+
+            Vector3 spawnPosition = new Vector3(Random.Range(-Camera.main.GetComponent<Waves>().m_SpawnArea.x, 
+                                                              Camera.main.GetComponent<Waves>().m_SpawnArea.x), 
+                                                              Camera.main.GetComponent<Waves>().m_SpawnArea.y, 
+                                                              Camera.main.GetComponent<Waves>().m_SpawnArea.z);
+            Quaternion spawnRotation = Quaternion.identity;
+            this.transform.position = spawnPosition;
+            this.transform.rotation = spawnRotation;
         }
     }
 
@@ -53,11 +60,11 @@ public class EnemyController : Enemy
         {
             Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
             Camera.main.GetComponent<GameController>().SoftSave();
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
             Camera.main.GetComponent<GameController>().Respawn();
             
             gameObject.SetActive(false);
-
        }
     }
 }

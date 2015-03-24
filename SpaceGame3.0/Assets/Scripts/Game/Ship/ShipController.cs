@@ -35,7 +35,7 @@ public class ShipController : MonoBehaviour
                 //StopAllCoroutines();
                 Camera.main.GetComponent<GameController>().SoftSave();
                 //ship.GetComponent<SpawnPlayer>().m_Player.SetActive(false); 
-                Destroy(ship);
+                Destroy(gameObject);
                 Camera.main.GetComponent<GameController>().Respawn();
                 
 
@@ -43,11 +43,13 @@ public class ShipController : MonoBehaviour
 
             if (ship.tag == "Enemy")
             {
+                Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
                 Camera.main.GetComponent<GameController>().m_Salvage += 50 * ship.GetComponent<EnemyShip>().m_Tier;
                 DropLoot();
+                Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
                 Destroy(gameObject);
             }
             Instantiate(m_Explosion, transform.position, transform.rotation);
@@ -61,7 +63,7 @@ public class ShipController : MonoBehaviour
         {
             if (Random.value >= Constants.DROP_CHANCE)
             {
-                Debug.Log("You dropped an item from the engines");
+                //Debug.Log("You dropped an item from the engines");
             }
         }
 
@@ -70,7 +72,7 @@ public class ShipController : MonoBehaviour
         {
             if (Random.value >= Constants.DROP_CHANCE)
             {
-                Debug.Log("You dropped an item from the Weapons");
+                //Debug.Log("You dropped an item from the Weapons");
             }
         }
     }
