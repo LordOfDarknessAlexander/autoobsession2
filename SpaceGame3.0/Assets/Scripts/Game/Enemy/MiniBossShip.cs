@@ -5,10 +5,10 @@ public class MiniBossShip : EnemyShip
 {
     public void Awake()
     {
-        SetStats();
+        SetMiniBossStats();
     }
 
-    public void SetStats()
+    public void SetMiniBossStats()
     {
         m_Level = m_GData.m_Level;
         m_Tier = m_GData.m_EnemyTier;

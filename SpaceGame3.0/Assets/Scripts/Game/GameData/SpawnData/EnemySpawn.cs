@@ -22,12 +22,14 @@ public class EnemySpawn : MonoBehaviour
 
     public Text m_WaveText;
     public Text m_ReqKillText;
+    public Text m_Control;
 
     public GameObject m_LightEmemy;
     public GameObject m_MediumEmemy;
     public GameObject m_HeavyEmemy;
     public GameObject m_MiniBoss;
     public GameObject m_Boss;
+    public GameObject m_BossObj;
 
     public float m_SpawnDelay;
     public float m_StartDelay;
@@ -38,6 +40,8 @@ public class EnemySpawn : MonoBehaviour
     public int m_NumEnemiesInPool;
     public int maxPoolSize_;
 
+    public GameObject m_Player;
+
     public void SetShipPrefab()
     {
         m_LightEmemy = m_LightEnemyPrefabs[m_GData.m_Level - 1];
@@ -45,6 +49,33 @@ public class EnemySpawn : MonoBehaviour
         m_HeavyEmemy = m_HeavyEnemyPrefabs[m_GData.m_Level - 1];
         m_MiniBoss = m_MiniBossPrefabs[m_GData.m_Level - 1];
         m_Boss = m_BossPrefabs[m_GData.m_Level - 1];
+    }
+    public void Update()
+    {
+        m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
+
+        if(Camera.main.GetComponent<GameController>().m_Play)
+        {
+            if (m_Player == null)
+            {
+                StopAllCoroutines();
+                Camera.main.GetComponent<GameController>().Respawn();
+            }
+
+            if (m_RequiredKills == 0)
+            {
+                m_WaveNum++;
+                m_WaveText.text = Camera.main.GetComponent<EnemySpawn>().m_WaveNum.ToString("F0");
+                Camera.main.GetComponent<GameController>().SoftSave(m_Player);
+                AISpawn();
+            }
+
+            if (Camera.main.GetComponent<GameController>().m_GameOver)
+            {
+                Camera.main.GetComponent<GameController>().m_Restart = true;
+                Camera.main.GetComponent<GameController>().GameOver();
+            }
+        }
     }
 
     public void AISpawn()
@@ -59,11 +90,11 @@ public class EnemySpawn : MonoBehaviour
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
-
         }
 
         if (m_WaveNum == 1)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
             m_Enemies.Clear();
@@ -77,6 +108,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 2)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -90,6 +123,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 3)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -103,6 +138,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 4)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -117,12 +154,15 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 5)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //Set Boss to Spawn
-            SpawnBoss(m_MiniBoss, 15);
+            BossSetUp(m_MiniBoss, 15);
         }
 
         if (m_WaveNum == 6)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().BossSpawner());
 
             //clear enemy array
             m_Enemies.Clear();
@@ -138,6 +178,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 7)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -152,6 +194,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 8)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -166,6 +210,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 9)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -180,13 +226,17 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 10)
         {
+            StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+
             //Set Boss to Spawn
-            SpawnBoss(m_Boss, 20);
+            BossSetUp(m_Boss, 20);
         }
     }
 
-    public void SpawnBoss(GameObject boss, int numEnemies)
+    public void BossSetUp(GameObject boss, int numEnemies)
     {
+        m_BossObj = boss;
+
         //Turn on the Boss UI
         m_BossStatCanvas.enabled = true;
 
@@ -201,17 +251,16 @@ public class EnemySpawn : MonoBehaviour
         m_Enemies.Add(m_LightEmemy);
         m_Enemies.Add(m_MediumEmemy);
 
-        GameObject bossObj = (GameObject)Instantiate(boss);
-        boss.SetActive(false);
+        GameObject bossObj = (GameObject)Instantiate(m_BossObj);
+        m_BossObj.SetActive(false);
         bossPool_.Add(bossObj);
 
         Vector3 bossSpawn = new Vector3(0.0f, 8.0f, 0.0f);
         Quaternion spawnBossRotation = Quaternion.identity;
 
-        boss.SetActive(true);
-        boss.transform.position = bossSpawn;
-        boss.transform.rotation = spawnBossRotation;
-
+        m_BossObj.SetActive(true);
+        m_BossObj.transform.position = bossSpawn;
+        m_BossObj.transform.rotation = spawnBossRotation;
 
         m_NumEnemiesInPool = numEnemies;
 
@@ -233,12 +282,12 @@ public class EnemySpawn : MonoBehaviour
 
     public void WaveSetup(int kills)
     {
-        Camera.main.GetComponent<GameController>().SoftSave();
+        Camera.main.GetComponent<GameController>().SoftSave(m_Player);
 
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
-        m_NumEnemiesInPool = 10;
+        m_NumEnemiesInPool = kills;
 
         for (int e = 0; e < m_Enemies.Count; e++)
         {
@@ -249,10 +298,14 @@ public class EnemySpawn : MonoBehaviour
                 enemyPool_.Add(obj);
             }
         }
+        StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+    }
 
-        if (GameObject.FindGameObjectWithTag("Player") != null)
+    public void DestroyAll()
+    {
+        for(int i = 0; i < enemyPool_.Count; ++i)
         {
-            StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
+            Destroy(enemyPool_[i]);
         }
     }
 }

@@ -71,7 +71,7 @@ public class GameData : MonoBehaviour
     {
         if (!File.Exists(Application.persistentDataPath + "/playerData.dat"))
         {
-            //Debug.Log("Creating file");
+            Debug.Log("Creating file at " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
             PlayerSave pData = new PlayerSave();
@@ -94,7 +94,7 @@ public class GameData : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Saving to " + Application.persistentDataPath);
+            Debug.Log("Saving to " + Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerSave pData = new PlayerSave();
@@ -121,7 +121,7 @@ public class GameData : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
         {
-            //Debug.Log("Loading");
+            Debug.Log("Loading");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
             PlayerSave pData = (PlayerSave)bf.Deserialize(file);

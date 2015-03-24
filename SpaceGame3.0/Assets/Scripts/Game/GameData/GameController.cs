@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 
     public Canvas m_Win;
     public Canvas m_Lose;
+    public Canvas m_BossStatCanvas;
 
     public UIControl m_UIControl;
 
@@ -30,10 +31,27 @@ public class GameController : MonoBehaviour
     public int m_Kills;
     public int m_Salvage;
 
+    public List<GameObject> m_TempItems;
+
     public int m_TempKills;
     public int m_TempScore;
     public int m_TempSalvage;
     public int m_TempWaveNum;
+    public int m_TempEnemiesKilledLifetime;
+    public int m_TempTotalScore;
+    public int m_TempWavesCompleted;
+    public int m_TempShipLevel;
+    public int m_TempEngineLevel;
+    public int m_TempDamageLevel;
+    public int m_TempHealthLevel;
+    public int m_TempShieldLevel;
+
+    public bool m_TempHasShield;
+
+    public int m_TempHP;
+    public int m_TempShield;
+    public int m_TempDamageModifer;
+    public int m_TempEngineModifier;
 
     public bool m_Restart;
     public bool m_GameOver;
@@ -42,8 +60,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_ESpawn.m_BossStatCanvas.enabled = false;
-        m_ESpawn.SetShipPrefab();
+        //m_BossStatCanvas.enabled = false;
 
         m_Lose.enabled = false;
         m_Win.enabled = false;
@@ -51,15 +68,13 @@ public class GameController : MonoBehaviour
         m_Restart = false;
         m_GameOver = false;
         m_Play = false;
-        
+
         m_PSpawn.Spawn();
-        
+        m_Player = m_PSpawn.m_Player;
     }
 
     void Update()
     {
-        m_Player = m_PSpawn.m_Player;
-
         if(Input.GetKey(KeyCode.Return))
         {
             m_GData.Save();
@@ -67,7 +82,7 @@ public class GameController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.C))
         {
-            SoftSave();
+            SoftSave(m_Player);
         }
 
         if(!m_Play)
@@ -81,15 +96,19 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if(m_Restart)
+        if (m_Restart)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Application.LoadLevel(Application.loadedLevel);
+                LoadSoftSave(m_Player);
+                m_Lives--;
+                m_Restart = false;
+                Camera.main.GetComponent<Waves>().RestartCurrentWave();
             }
-            if(Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                Application.LoadLevel("Start");
+                m_Restart = false;
+                Application.LoadLevel("StarMap");
             }
         }
 
@@ -105,6 +124,7 @@ public class GameController : MonoBehaviour
         if(m_Play)
         {
             m_ControlText.text = "";
+            m_ESpawn.SetShipPrefab();
             m_ESpawn.AISpawn();
         }
     }
@@ -119,12 +139,28 @@ public class GameController : MonoBehaviour
         m_Win.enabled = true;
     }
    
-    public void SoftSave()
+    public void SoftSave(GameObject player)
     {
         m_TempScore = m_Score;
         m_TempKills = m_Kills;
         m_TempSalvage = m_Salvage;
         m_TempWaveNum = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
+
+        m_TempHasShield = player.GetComponent<ShipData>().m_HasShield;
+
+        m_TempHP = player.GetComponent<ShipData>().m_HP;
+        m_TempShield = player.GetComponent<ShipData>().m_Shield;
+
+        m_TempItems = player.GetComponent<ShipData>().m_Inventory;
+
+       /* Debug.Log("Score = " + m_TempScore + " has been Saved");
+        Debug.Log("Kills = " + m_TempKills + " has been Saved");
+        Debug.Log("Salvage = " + m_TempSalvage + " has been Saved");
+        Debug.Log("Curent Wave = " + m_TempWaveNum + " has been Saved");
+        Debug.Log(m_TempHasShield + " has been Saved");
+        Debug.Log(m_TempHP + " has been Saved");
+        Debug.Log(m_TempShield + " has been Saved");
+        Debug.Log(m_TempItems.Count + " has been Saved");*/
     }
 
     public void ClearSoftSave()
@@ -135,12 +171,29 @@ public class GameController : MonoBehaviour
         m_TempWaveNum = 0;
     }
 
-    public void LoadSoftSave()
+    public void LoadSoftSave(GameObject player)
     {
         m_Score = m_TempScore;
         m_Kills = m_TempKills;
         m_Salvage = m_TempSalvage;
-        Camera.main.GetComponent<Waves>().m_CurrentWave = m_TempWaveNum;
+        Camera.main.GetComponent<EnemySpawn >().m_WaveNum = m_TempWaveNum;
+
+        player.GetComponent<ShipData>().m_HasShield = m_TempHasShield;
+
+        player.GetComponent<ShipData>().m_HP = m_TempHP;
+        player.GetComponent<ShipData>().m_Shield = m_TempShield;
+
+        player.GetComponent<ShipData>().m_Inventory = m_TempItems;
+
+        /*Debug.Log("Score = " + m_TempScore + " has been loaded");
+        Debug.Log("Kills = " + m_TempKills + " has been loaded");
+        Debug.Log("Salvage = " + m_TempSalvage + " has been loaded");
+        Debug.Log("Curent Wave = " + m_TempWaveNum + " has been loaded");
+        Debug.Log(m_TempHasShield + " has been loaded");
+        Debug.Log(m_TempHP + " has been loaded");
+        Debug.Log(m_TempShield + " has been loaded");
+        Debug.Log(m_TempItems.Count);*/
+
     }
 	
 	public void Respawn()
@@ -150,29 +203,17 @@ public class GameController : MonoBehaviour
             m_Restart = true;
 
             m_ControlText.text = "Press 'R' for Restart or 'Q' to Quit";
-
-
-            if(m_Restart)
-            {
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    Camera.main.GetComponent<Waves>().RestartCurrentWave();
-                }
-                if(Input.GetKeyDown(KeyCode.Q))
-                {
-                    Application.LoadLevel("StarMap");
-                }
-            }
         }
         else
         {
             m_GameOver = true;
+            GameOver();
         }
     }
 
     public void SetPlayerSave()
     {
-        LoadSoftSave();
+        LoadSoftSave(m_Player);
 
         m_PData.m_EnemiesKilledLifetime += m_Kills;
         m_PData.m_TotalScore += m_Score;

@@ -27,6 +27,11 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_Inventory = m_PData.m_Items;
     }
 
+    public void SetSavedStats(GameObject player)
+    {
+        Camera.main.GetComponent<GameController>().LoadSoftSave(player);
+    }
+
     public void Spawn()
     {
 
@@ -34,9 +39,7 @@ public class SpawnPlayer : MonoBehaviour
         {
             Camera.main.GetComponent<GameController>().m_ControlText.text = "";
 
-            Camera.main.GetComponent<GameController>().m_Lives--;
-
-            for (int i = 0; i < Camera.main.GetComponent<GameController>().m_Lives + 1; ++i)
+            for (int i = 0; i < Camera.main.GetComponent<GameController>().m_Lives; ++i)
             {
                 playerObj_ = m_PlayerPrefab[m_PData.m_ShipLevel - 1];
                 GameObject obj = (GameObject)Instantiate(playerObj_);
@@ -47,21 +50,31 @@ public class SpawnPlayer : MonoBehaviour
             m_Player = playerPool[0];
             SetStats(m_Player);
 
-            //for(int i = 0; i < playerPool.Count; i++)
-            //{
-                Vector3 playerSpawn = new Vector3(0.0f, -5.0f, 0.0f);
-                Quaternion spawnPlayerRotation = Quaternion.identity;
+            Vector3 playerSpawn = new Vector3(0.0f, -5.0f, 0.0f);
+            Quaternion spawnPlayerRotation = Quaternion.identity;
 
-                m_Player.SetActive(true);
-                m_Player.transform.position = playerSpawn;
-                m_Player.transform.rotation = spawnPlayerRotation;
+            m_Player.SetActive(true);
+            m_Player.transform.position = playerSpawn;
+            m_Player.transform.rotation = spawnPlayerRotation;
 
-            //}
         }
         else if (Camera.main.GetComponent<GameController>().m_Lives == 0)
         {
             Camera.main.GetComponent<GameController>().m_GameOver = true;
             Camera.main.GetComponent<GameController>().GameOver();
         } 
+    }
+
+    public void PlayerRespawn()
+    {
+        m_Player = playerPool[0];
+        SetSavedStats(m_Player);
+
+        Vector3 playerSpawn = new Vector3(0.0f, -5.0f, 0.0f);
+        Quaternion spawnPlayerRotation = Quaternion.identity;
+
+        m_Player.SetActive(true);
+        m_Player.transform.position = playerSpawn;
+        m_Player.transform.rotation = spawnPlayerRotation;
     }
 }

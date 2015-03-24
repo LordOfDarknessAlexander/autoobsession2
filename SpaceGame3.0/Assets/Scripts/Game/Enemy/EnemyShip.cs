@@ -8,8 +8,6 @@ public class EnemyShip : Ship
 
     public GameData m_GData;
 
-    public int m_SalvageVal;
-
     public void Awake()
     {
         SetStats();

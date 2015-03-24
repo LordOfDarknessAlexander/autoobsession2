@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class BossShip : EnemyShip 
 {
-    public void Awake()
+    new public void Awake()
     {
-        SetStats();
+        SetBossStats();
     }
 
-    public void SetStats()
+    public void SetBossStats()
     {
         m_Level = m_GData.m_Level;
         m_Tier = m_GData.m_EnemyTier;

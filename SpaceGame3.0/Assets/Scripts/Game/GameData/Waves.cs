@@ -16,11 +16,14 @@ public class Waves : MonoBehaviour
 
     public Vector3 m_SpawnArea;
 
+    public Text m_Control;
+
 	// Update is called once per frame
 	public void Awake() 
     {
         m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
 	}
+
 
     public IEnumerator WaveSpawner()
     {
@@ -28,14 +31,12 @@ public class Waves : MonoBehaviour
 
         while (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills > 0)
         {
-            for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool; ++i)
-            {
-                Debug.Log(Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool);
+            m_Control.text = "";
 
+            for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++i)
+            {
                 Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
                 Quaternion spawnRotation = Quaternion.identity;
-
-                Debug.Log(Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].ToString());
 
                 Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].SetActive(true);
                 Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.position = spawnPosition;
@@ -46,26 +47,9 @@ public class Waves : MonoBehaviour
             }
             yield return new WaitForSeconds(m_WaveDelay);
 
-
-            if (m_Player == null)
-            {
-                Camera.main.GetComponent<GameController>().Respawn();
-                break;
-            }
-
             if (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills == 0)
             {
-                Camera.main.GetComponent<EnemySpawn>().m_WaveNum++;
-                Camera.main.GetComponent<EnemySpawn>().m_WaveText.text = Camera.main.GetComponent<EnemySpawn>().m_WaveNum.ToString("F0");
-                Camera.main.GetComponent<GameController>().SoftSave();
-                Camera.main.GetComponent<EnemySpawn>().AISpawn();
-            }
-
-            if (Camera.main.GetComponent<GameController>().m_GameOver)
-            {
-                Camera.main.GetComponent<GameController>().m_Restart = true;
-                Camera.main.GetComponent<GameController>().GameOver();
-                break;
+                m_Control.text = "Next Wave";
             }
         }
     }
@@ -97,23 +81,11 @@ public class Waves : MonoBehaviour
                 {
                     Camera.main.GetComponent<EnemySpawn>().m_WaveNum++;
                     Camera.main.GetComponent<EnemySpawn>().m_WaveText.text = Camera.main.GetComponent<EnemySpawn>().m_WaveNum.ToString("F0");
-                    Camera.main.GetComponent<GameController>().SoftSave();
+                    Camera.main.GetComponent<GameController>().SoftSave(m_Player);
                     Camera.main.GetComponent<EnemySpawn>().m_BossStatCanvas.enabled = false;
                     Camera.main.GetComponent<EnemySpawn>().m_KillsPanel.alpha = 1;
-                    Camera.main.GetComponent<EnemySpawn>().AISpawn();
-                }
-
-                if (GameObject.FindGameObjectWithTag("Player") == null)
-                {
-                    StopAllCoroutines();
-                    Camera.main.GetComponent<GameController>().Respawn();
-                    break;
-                }
-
-                if (Camera.main.GetComponent<GameController>().m_GameOver)
-                {
-                    Camera.main.GetComponent<GameController>().GameOver();
-                    break;
+                    //Camera.main.GetComponent<EnemySpawn>().AISpawn();
+                    Camera.main.GetComponent<GameController>().Win();
                 }
             }
         }
@@ -122,9 +94,9 @@ public class Waves : MonoBehaviour
 
     public void RestartCurrentWave()
     {
-        Camera.main.GetComponent<GameController>().LoadSoftSave();
+        Camera.main.GetComponent<EnemySpawn>().DestroyAll();
 
-        Camera.main.GetComponent<SpawnPlayer>().Spawn();
+        Camera.main.GetComponent<SpawnPlayer>().PlayerRespawn();
 
         Camera.main.GetComponent<EnemySpawn>().m_WaveNum = m_CurrentWave;
 

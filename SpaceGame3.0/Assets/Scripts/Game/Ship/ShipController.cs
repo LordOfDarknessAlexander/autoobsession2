@@ -32,13 +32,9 @@ public class ShipController : MonoBehaviour
         {
             if (ship.tag == "Player")
             {
-                //StopAllCoroutines();
-                Camera.main.GetComponent<GameController>().SoftSave();
-                //ship.GetComponent<SpawnPlayer>().m_Player.SetActive(false); 
-                Destroy(gameObject);
+                StopAllCoroutines();
                 Camera.main.GetComponent<GameController>().Respawn();
-                
-
+                ship.SetActive(false);
             }
 
             if (ship.tag == "Enemy")
@@ -47,33 +43,16 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
-                Camera.main.GetComponent<GameController>().m_Salvage += 50 * ship.GetComponent<EnemyShip>().m_Tier;
-                DropLoot();
+                Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
+                DropLoot(ship);
                 Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
-                Destroy(gameObject);
+                Destroy(ship);
             }
             Instantiate(m_Explosion, transform.position, transform.rotation);
         }
     }
 
-    private void DropLoot()
+    private void DropLoot(GameObject ship)
     {
-        //go through engines, drop if random number > mDropChance
-        foreach (EngineData engine in m_Data.m_Engines)
-        {
-            if (Random.value >= Constants.DROP_CHANCE)
-            {
-                //Debug.Log("You dropped an item from the engines");
-            }
-        }
-
-        //go through weapons, drop if random number > mDropChance
-        foreach (Weapon weapon in m_Data.m_Weapons)
-        {
-            if (Random.value >= Constants.DROP_CHANCE)
-            {
-                //Debug.Log("You dropped an item from the Weapons");
-            }
-        }
     }
 }
