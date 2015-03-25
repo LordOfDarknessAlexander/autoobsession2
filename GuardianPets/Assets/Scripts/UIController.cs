@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     public GameObject m_FearPanel; //Panel for the fear prompt
     public GameObject m_CurrentPet; //UI Element for the current pet
     public GameObject m_UpgradePanel; //Panel for the upgrades
+    public GameObject m_CameraPlane; //Plane which is drawing the camera on it
+    public GameObject m_RadarOverlay; //Image overlay which will have a radar with a rotating arm on it
     public InputField m_NicknameIF; //Input field for the nickname prompt
     public InputField m_FearIF; //Input field for the fear prompt
     public PlayerData m_PlayerData; //Player data
@@ -208,5 +210,12 @@ public class UIController : MonoBehaviour
     public void CloseMenu()
     {
         m_UpgradePanel.SetActive(false);
+    }
+
+    public void OpenScanner()
+    {
+        m_GameUI.SetActive(false);
+        m_CameraPlane.SetActive(true);
+        m_RadarOverlay.SetActive(true);
     }
 }

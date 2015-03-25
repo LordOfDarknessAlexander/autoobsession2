@@ -4,6 +4,7 @@ using System.Collections;
 public class Constants : MonoBehaviour 
 {
     public const float AUTO_SAVE_TIME = 100.0f; //Max time for the autosave timer
+    public const float CLOCK_DEGREES_AND_OFFSET = 360.0f;
 
     public const int MAX_PETS = 6; //Maximum amount of pets you can own
     public const int MAX_PET_STAT = 100; //Highest any of the pet stats - hunger, boredom, cleanliness - can go
@@ -20,4 +21,5 @@ public class Constants : MonoBehaviour
     public const int ENERGY_REWARDED = 1; //This is the energy you get from waiting the 5 minutes
     public const int SHIELDS_REWARDED = 10; //This is the amount of shields the player is awarded for meeting/maintaining the 3 conditions of the pet
     public const int BASE_UPGRADE_COST = 10; //This is the base upgrade cost that gets multiplied with the upgrade level
+    public const int RADAR_TIME = 60; //Time in seconds for radar to rotate around once
 }
