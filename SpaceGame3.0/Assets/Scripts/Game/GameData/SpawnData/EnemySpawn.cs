@@ -66,7 +66,6 @@ public class EnemySpawn : MonoBehaviour
             {
                 m_WaveNum++;
                 m_WaveText.text = Camera.main.GetComponent<EnemySpawn>().m_WaveNum.ToString("F0");
-                Camera.main.GetComponent<GameController>().SoftSave(m_Player);
                 AISpawn();
             }
 
@@ -94,6 +93,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 1)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -108,6 +108,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 2)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
+
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -123,6 +125,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 3)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -138,6 +141,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 4)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -154,6 +158,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 5)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //Set Boss to Spawn
@@ -162,6 +167,8 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 6)
         {
+            m_GData.Save();
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().BossSpawner());
 
             //clear enemy array
@@ -178,6 +185,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 7)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -194,6 +202,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 8)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -210,6 +219,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 9)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //clear enemy array
@@ -226,6 +236,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 10)
         {
+            Camera.main.GetComponent<GameController>().SoftSave(m_Player);
             StopCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
 
             //Set Boss to Spawn
@@ -235,6 +246,7 @@ public class EnemySpawn : MonoBehaviour
 
     public void BossSetUp(GameObject boss, int numEnemies)
     {
+
         m_BossObj = boss;
 
         //Turn on the Boss UI
@@ -282,7 +294,6 @@ public class EnemySpawn : MonoBehaviour
 
     public void WaveSetup(int kills)
     {
-        Camera.main.GetComponent<GameController>().SoftSave(m_Player);
 
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");

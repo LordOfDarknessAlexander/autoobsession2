@@ -5,19 +5,24 @@ public class Items : MonoBehaviour
 {
     public List<GameObject> m_PowerUps;
 
+    //drop from engines
     //instant use
-    //health regen
-    //shields(will give temp shields if player doesn't currently have any and will regen them if the player has shields)
-    //bonus salvage
-    //temp double health
-    //temp double shields
+    //health regen 25% chance to drop
+    //shields(will give temp shields if player doesn't currently have any and will regen them if the player has shields) 25 % chance to drop
+    //bonus salvage 25% chance to drop
+    //temp double max health 15% chance to drop
+    //temp double max shields 15% chance to drop
 
+    //drop from weapons
     //store for use by player choice
-    //bombs(medium explosice radius with proxdetection)
-    //nuke(kills every enemy on the screen)
-    //multishot
-    //
+    //bombs(medium explosive radius with prox-detection)
+        //explosive type 10% chance to drop
+        //EMP type(disable enemy shields or temporaily preventing them firing and at the player) 10% chance
+        //multi-bomb(3-4 smaller bombs that act like mines, each has a slightly smaller blast radius and damage output) 10% chance
+        //nuke(kills every enemy on the screen, EXTREMLY RARE DROP) .05% chance to drop
+    //multishot(fires 3 bolts 1 forward, one left one 45 degree angle and on right on a 45 degree angle) 20% chance
+    //Laser(solid beam that last for 10 seconds doing 3 times the damage of a normal bolt) 5% chance
 
-    //specofoc drops from bosses(guaranteed)
-    //free upgrade(weapon, shield, engine, health)
+    //specific drops from bosses(guaranteed)
+    //free random upgrade(weapon, shield, engine, health) 100% chance of dropping one of these, each has a 25% chance of being dropped
 }

@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public Canvas m_Win;
     public Canvas m_Lose;
     public Canvas m_BossStatCanvas;
+    public Canvas m_MainUI;
 
     public UIControl m_UIControl;
 
@@ -62,6 +63,8 @@ public class GameController : MonoBehaviour
     {
         //m_BossStatCanvas.enabled = false;
 
+        m_MainUI.enabled = true;
+
         m_Lose.enabled = false;
         m_Win.enabled = false;
 
@@ -100,7 +103,7 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                LoadSoftSave(m_Player);
+                m_ControlText.text = "";
                 m_Lives--;
                 m_Restart = false;
                 Camera.main.GetComponent<Waves>().RestartCurrentWave();
@@ -153,14 +156,7 @@ public class GameController : MonoBehaviour
 
         m_TempItems = player.GetComponent<ShipData>().m_Inventory;
 
-       /* Debug.Log("Score = " + m_TempScore + " has been Saved");
-        Debug.Log("Kills = " + m_TempKills + " has been Saved");
-        Debug.Log("Salvage = " + m_TempSalvage + " has been Saved");
-        Debug.Log("Curent Wave = " + m_TempWaveNum + " has been Saved");
-        Debug.Log(m_TempHasShield + " has been Saved");
-        Debug.Log(m_TempHP + " has been Saved");
-        Debug.Log(m_TempShield + " has been Saved");
-        Debug.Log(m_TempItems.Count + " has been Saved");*/
+        Debug.Log("Soft Save complete");
     }
 
     public void ClearSoftSave()
@@ -176,7 +172,7 @@ public class GameController : MonoBehaviour
         m_Score = m_TempScore;
         m_Kills = m_TempKills;
         m_Salvage = m_TempSalvage;
-        Camera.main.GetComponent<EnemySpawn >().m_WaveNum = m_TempWaveNum;
+        Camera.main.GetComponent<EnemySpawn>().m_WaveNum = m_TempWaveNum;
 
         player.GetComponent<ShipData>().m_HasShield = m_TempHasShield;
 
@@ -185,27 +181,25 @@ public class GameController : MonoBehaviour
 
         player.GetComponent<ShipData>().m_Inventory = m_TempItems;
 
-        /*Debug.Log("Score = " + m_TempScore + " has been loaded");
-        Debug.Log("Kills = " + m_TempKills + " has been loaded");
-        Debug.Log("Salvage = " + m_TempSalvage + " has been loaded");
-        Debug.Log("Curent Wave = " + m_TempWaveNum + " has been loaded");
-        Debug.Log(m_TempHasShield + " has been loaded");
-        Debug.Log(m_TempHP + " has been loaded");
-        Debug.Log(m_TempShield + " has been loaded");
-        Debug.Log(m_TempItems.Count);*/
-
+        Debug.Log("Soft Save Loaded");
     }
 	
 	public void Respawn()
     {
         if(m_Lives != 0)
         {
+            Camera.main.GetComponent<EnemySpawn>().DestroyAll();
+
             m_Restart = true;
 
             m_ControlText.text = "Press 'R' for Restart or 'Q' to Quit";
         }
         else
         {
+            Camera.main.GetComponent<EnemySpawn>().DestroyAll();
+
+            m_MainUI.enabled = false;
+
             m_GameOver = true;
             GameOver();
         }

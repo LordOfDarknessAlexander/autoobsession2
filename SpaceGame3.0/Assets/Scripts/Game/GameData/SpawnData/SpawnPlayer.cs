@@ -29,7 +29,13 @@ public class SpawnPlayer : MonoBehaviour
 
     public void SetSavedStats(GameObject player)
     {
-        Camera.main.GetComponent<GameController>().LoadSoftSave(player);
+        m_Player.GetComponent<PlayerShip>().m_DamageModifier = m_PData.m_DamageModifer;
+        m_Player.GetComponent<PlayerController>().m_Salvage = Camera.main.GetComponent<GameController>().m_Salvage;
+        m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
+        m_Player.GetComponent<ShipData>().m_HasShield = Camera.main.GetComponent<GameController>().m_TempHasShield;
+        m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+        m_Player.GetComponent<ShipData>().m_MaxCargoCapacity = (100 * (m_Player.GetComponent<ShipData>().SetCargoCapacity())) * (m_PData.m_EngineModifier);
+        m_Player.GetComponent<ShipData>().m_Inventory = Camera.main.GetComponent<GameController>().m_TempItems;
     }
 
     public void Spawn()

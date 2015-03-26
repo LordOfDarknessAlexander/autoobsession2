@@ -17,4 +17,5 @@ public class Constants : MonoBehaviour
     public const int DEFAULT_UPGRADE_AMT = 20;//Amount each upgrade increases it's stat by
     public const int DEFAULT_UPGRADE_MODIFIER = 2;//Amount each level increases damage and engines(multiply current stat buy this number)
     public const float DROP_CHANCE = 0.5f;//Base chance for enemies to drop power ups
+    public const int BASE_ENEMY_INVO_SIZE = 3;
 }

@@ -13,17 +13,11 @@ public class Win : MonoBehaviour
     public Text m_CurrentKills;
     public Text m_CurrentScore;
 
-    public void Start()
-    {
-        
-    }
-
     public void Continue()
     {
-           
         //save progress and let player continue playing
         m_GData.Save();
-        //Application.LoadLevel();
+        Application.LoadLevel("StarMap");
     }
 
     public void SaveAndQuit()

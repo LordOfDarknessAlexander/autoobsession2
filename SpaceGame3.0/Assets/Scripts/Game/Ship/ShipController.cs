@@ -54,5 +54,15 @@ public class ShipController : MonoBehaviour
 
     private void DropLoot(GameObject ship)
     {
+        if(ship.tag == "Enemy")
+        {
+            this.GetComponent<EnemyShip>().DropLoot(ship);
+        }
+
+        if(ship.tag == "Boss")
+        {
+            this.GetComponent<BossShip>().DropLoot(ship);
+            this.GetComponent<BossShip>().BossLootDrop(ship);
+        }
     }
 }

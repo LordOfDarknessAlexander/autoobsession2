@@ -59,9 +59,7 @@ public class EnemyController : Enemy
         if (other.collider.tag == "Player")
         {
             Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
-            Camera.main.GetComponent<GameController>().SoftSave(other.gameObject);
             other.gameObject.SetActive(false);
-            //Destroy(other.gameObject);
             Camera.main.GetComponent<GameController>().Respawn();
             
             gameObject.SetActive(false);

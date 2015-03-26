@@ -6,17 +6,18 @@ public class Gameover : MonoBehaviour
 {
     public GameData m_GData;
 
-    public Button m_Restart;
+    public Button m_Continue;
     public Button m_Quit;
 
-    public void Restart()
+    public void Continue()
     {
         m_GData.Save();
-        //Application.LoadLevel("Main");
+        Application.LoadLevel("StarMap");
     }
 
     public void Quit()
     {
         m_GData.Save();
+        Application.Quit();
     }
 }

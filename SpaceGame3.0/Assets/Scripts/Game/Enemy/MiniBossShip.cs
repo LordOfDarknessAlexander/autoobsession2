@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MiniBossShip : EnemyShip
 {
-    public void Awake()
+    public List<GameObject> m_BossDrops;
+
+    private int randDrop_;
+
+    new public void Awake()
     {
         SetMiniBossStats();
     }
@@ -25,4 +30,27 @@ public class MiniBossShip : EnemyShip
         m_ShieldLevel = m_GData.m_EnemyShieldLevel * m_Level * m_Tier;
         m_SalvageVal = m_GData.m_SalvageVal * m_Level * m_Tier;
     }
+
+    public void SetDrops()
+    {
+        randDrop_ = Random.Range(0, 101);
+
+        if (randDrop_ <= 25)
+        {
+            //spawn health token
+        }
+        else if (randDrop_ > 25 && randDrop_ <= 50)
+        {
+            //spawn shield token
+        }
+        else if (randDrop_ > 50 && randDrop_ <= 75)
+        {
+            //spawn weapons token
+        }
+        else
+        {
+            //spawn engines token
+        }
+    }
+
 }

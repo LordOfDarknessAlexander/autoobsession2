@@ -43,22 +43,22 @@ public class PlayerData : MonoBehaviour
             Destroy(gameObject);
         }
 
-        this.m_EnemiesKilledLifetime = 0;
-        this.m_TotalScore = 0;
-        this.m_WavesCompleted = 0;
-        this.m_Salvage = 0;
-        this.m_ShipLevel = 1;
-        this.m_EngineLevel = 1;
-        this.m_DamageLevel = 1;
-        this.m_HealthLevel = 1;
-        this.m_ShieldLevel = 0;
+        m_EnemiesKilledLifetime = 0;
+        m_TotalScore = 0;
+        m_WavesCompleted = 0;
+        m_Salvage = 0;
+        m_ShipLevel = 1;
+        m_EngineLevel = 1;
+        m_DamageLevel = 1;
+        m_HealthLevel = 1;
+        m_ShieldLevel = 0;
 
-        this.m_HasShield = false;
+        m_HasShield = false;
 
-        this.m_HP = 5 * m_ShipLevel * m_HealthLevel;
-        this.m_Shield = 10 * m_ShipLevel * m_ShieldLevel;
-        this.m_DamageModifer = 1 * m_ShipLevel * m_DamageLevel;
-        this.m_EngineModifier = 1 * m_ShipLevel * m_EngineLevel;
+        m_HP = 10 * m_ShipLevel * m_HealthLevel;
+        m_Shield = 10 * m_ShipLevel * m_ShieldLevel;
+        m_DamageModifer = 1 * m_ShipLevel * m_DamageLevel;
+        m_EngineModifier = 1 * m_ShipLevel * m_EngineLevel;
     }
 }
 
