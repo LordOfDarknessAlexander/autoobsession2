@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class EnemyShip : Ship
 {
     public int m_Tier;
+    public int m_SalvageVal;
 
     public GameData m_GData;
     public LootTable m_ItemToDrop;
@@ -14,7 +15,6 @@ public class EnemyShip : Ship
     public void Awake()
     {
         SetStats();
-        //SetIventory();
     }
 
     public void SetStats()
@@ -41,29 +41,34 @@ public class EnemyShip : Ship
             return (Constants.BASE_ENEMY_INVO_SIZE * (m_Level * m_Tier));
         }
     }
-   /* public void SetIventory()
+
+    public void DropLootEnemy(GameObject ship)
     {
-        m_SData.m_Inventory.Capacity = InventorySize;
+        int randNum = Random.Range(0, 100);
 
-
-        for(int i = 0; i < m_ItemToDrop.m_PowerUps.Count; ++i)
+        if (randNum < 50)
         {
-            //set and object from the ItemList based on randNum to be added to the ships inventory
-
-            for (int j = 0; j < m_SData.m_Inventory.Capacity; ++j)
-            {
-                m_SData.m_Inventory.Add(m_ItemToDrop.LootDrop());
-            }
+            m_ItemToDrop.LootDrop(ship);
         }
-    }*/
+        else
+        {
+            return;
+        }
+    }
 
-    /*public void DropLoot(GameObject parentShip)
+    public void DropLootBoss(GameObject ship)
     {
-        m_ItemToDrop.LootDrop();
+        int randNum = Random.Range(0, 100);
 
-        Vector3 spawnPosition = new Vector3(parentShip.transform.position.x, parentShip.transform.position.y, 0);
-        Quaternion spawnRotation = Quaternion.identity;
+        this.GetComponent<BossShip>().BossLootDrop(ship);
 
-        //Instantiate(m_ItemToDrop.LootDrop(), spawnPosition, spawnRotation);
-    }*/
+        if (randNum < 20)
+        {
+            m_ItemToDrop.LootDrop(ship);
+        }
+        else
+        {
+            return;
+        }
+    }
 }

@@ -6,7 +6,6 @@ public class ShipController : MonoBehaviour
 {
     public ShipData m_Data;
     public Ship m_Ship;
-    public LootTable m_LootDrop;
 
     public GameObject m_Explosion;
 
@@ -44,9 +43,7 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
-                DropLootEnemy(ship);
-                //Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
-                //Destroy(ship);
+                 ship.GetComponent<EnemyShip>().DropLootEnemy(ship);
                 ship.SetActive(false);
             }
             if (ship.tag == "Boss")
@@ -56,42 +53,12 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
-                DropLootBoss(ship);
-                //Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
-                //Destroy(ship);
+                ship.GetComponent<EnemyShip>().DropLootBoss(ship);
                 ship.SetActive(false);
             }
             Instantiate(m_Explosion, transform.position, transform.rotation);
         }
     }
 
-    private void DropLootEnemy(GameObject ship)
-    {
-        int randNum = Random.Range(0, 100);
 
-        if(randNum < 50)
-        {
-            m_LootDrop.LootDrop(ship);   
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    private void DropLootBoss(GameObject ship)
-    {
-        int randNum = Random.Range(0, 100);
-
-        this.GetComponent<BossShip>().BossLootDrop(ship);
-
-        if (randNum < 20)
-        {
-            m_LootDrop.LootDrop(ship);
-        }
-        else
-        {
-            return;
-        }
-    }
 }

@@ -18,6 +18,7 @@ public class LootTable : MonoBehaviour
         if(randNum_ <= 1)
         {
             //Bomb(Nuke)[8]
+
             Instantiate(m_ItemList.m_PowerUps[8], spawnPosition, spawnRotation);
         }
 

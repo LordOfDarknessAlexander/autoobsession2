@@ -9,7 +9,6 @@ public class Ship : MonoBehaviour
 
     public int m_DamageModifier;
     public int m_Level;
-    public int m_SalvageVal;
 
     public int m_EngineLevel;
     public int m_DamageLevel;
