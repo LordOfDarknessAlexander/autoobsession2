@@ -12,7 +12,7 @@ public class BossShip : EnemyShip
     new public void Awake()
     {
         SetBossStats();
-        SetIventory();
+        //SetIventory();
     }
 
     public void SetBossStats()

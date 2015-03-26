@@ -84,7 +84,6 @@ public class Waves : MonoBehaviour
                     Camera.main.GetComponent<GameController>().SoftSave(m_Player);
                     Camera.main.GetComponent<EnemySpawn>().m_BossStatCanvas.enabled = false;
                     Camera.main.GetComponent<EnemySpawn>().m_KillsPanel.alpha = 1;
-                    //Camera.main.GetComponent<EnemySpawn>().AISpawn();
                     Camera.main.GetComponent<GameController>().Win();
                 }
             }
@@ -95,8 +94,6 @@ public class Waves : MonoBehaviour
     public void RestartCurrentWave()
     {
         Camera.main.GetComponent<GameController>().LoadSoftSave(m_Player);
-
-        //Camera.main.GetComponent<EnemySpawn>().DestroyAll();
 
         Camera.main.GetComponent<SpawnPlayer>().PlayerRespawn();
 

@@ -7,14 +7,14 @@ public class EnemyShip : Ship
     public int m_Tier;
 
     public GameData m_GData;
-    public Items m_ItemList;
+    public LootTable m_ItemToDrop;
 
     private int randNum_;
 
     public void Awake()
     {
         SetStats();
-        SetIventory();
+        //SetIventory();
     }
 
     public void SetStats()
@@ -41,28 +41,29 @@ public class EnemyShip : Ship
             return (Constants.BASE_ENEMY_INVO_SIZE * (m_Level * m_Tier));
         }
     }
-    public void SetIventory()
+   /* public void SetIventory()
     {
         m_SData.m_Inventory.Capacity = InventorySize;
 
-        randNum_ = Random.Range(0, m_ItemList.m_PowerUps.Count);
 
-        for(int j = 0; j < m_SData.m_Inventory.Capacity; ++j)
+        for(int i = 0; i < m_ItemToDrop.m_PowerUps.Count; ++i)
         {
-            m_SData.m_Inventory.Add(m_ItemList.m_PowerUps[randNum_]);
-        }
-    }
+            //set and object from the ItemList based on randNum to be added to the ships inventory
 
-    public void DropLoot(GameObject parentShip)
+            for (int j = 0; j < m_SData.m_Inventory.Capacity; ++j)
+            {
+                m_SData.m_Inventory.Add(m_ItemToDrop.LootDrop());
+            }
+        }
+    }*/
+
+    /*public void DropLoot(GameObject parentShip)
     {
-        randNum_ = Random.Range(0, m_SData.m_Inventory.Count);
+        m_ItemToDrop.LootDrop();
 
         Vector3 spawnPosition = new Vector3(parentShip.transform.position.x, parentShip.transform.position.y, 0);
         Quaternion spawnRotation = Quaternion.identity;
 
-        for(int i = 0; i < m_SData.m_Inventory.Count; ++i)
-        {
-            Instantiate(m_SData.m_Inventory[i], spawnPosition, spawnRotation);
-        }
-    }
+        //Instantiate(m_ItemToDrop.LootDrop(), spawnPosition, spawnRotation);
+    }*/
 }

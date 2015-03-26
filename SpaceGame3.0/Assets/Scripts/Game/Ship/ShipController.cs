@@ -6,6 +6,7 @@ public class ShipController : MonoBehaviour
 {
     public ShipData m_Data;
     public Ship m_Ship;
+    public LootTable m_LootDrop;
 
     public GameObject m_Explosion;
 
@@ -32,7 +33,6 @@ public class ShipController : MonoBehaviour
         {
             if (ship.tag == "Player")
             {
-                StopAllCoroutines();
                 Camera.main.GetComponent<GameController>().Respawn();
                 ship.SetActive(false);
             }
@@ -44,25 +44,54 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
-                DropLoot(ship);
-                Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
-                Destroy(ship);
+                DropLootEnemy(ship);
+                //Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
+                //Destroy(ship);
+                ship.SetActive(false);
+            }
+            if (ship.tag == "Boss")
+            {
+                Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool -= 1;
+                Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
+                Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
+                Camera.main.GetComponent<GameController>().m_Score += 100;
+                Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
+                DropLootBoss(ship);
+                //Camera.main.GetComponent<EnemySpawn>().enemyPool_.Remove(ship);
+                //Destroy(ship);
+                ship.SetActive(false);
             }
             Instantiate(m_Explosion, transform.position, transform.rotation);
         }
     }
 
-    private void DropLoot(GameObject ship)
+    private void DropLootEnemy(GameObject ship)
     {
-        if(ship.tag == "Enemy")
-        {
-            this.GetComponent<EnemyShip>().DropLoot(ship);
-        }
+        int randNum = Random.Range(0, 100);
 
-        if(ship.tag == "Boss")
+        if(randNum < 20)
         {
-            this.GetComponent<BossShip>().DropLoot(ship);
-            this.GetComponent<BossShip>().BossLootDrop(ship);
+            m_LootDrop.LootDrop(ship);   
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private void DropLootBoss(GameObject ship)
+    {
+        int randNum = Random.Range(0, 100);
+
+        this.GetComponent<BossShip>().BossLootDrop(ship);
+
+        if (randNum < 20)
+        {
+            m_LootDrop.LootDrop(ship);
+        }
+        else
+        {
+            return;
         }
     }
 }
