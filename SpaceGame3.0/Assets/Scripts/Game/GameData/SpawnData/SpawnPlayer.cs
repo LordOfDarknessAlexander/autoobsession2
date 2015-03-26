@@ -23,7 +23,6 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         m_Player.GetComponent<ShipData>().m_HasShield = m_PData.m_HasShield;
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
-        m_Player.GetComponent<ShipData>().m_MaxCargoCapacity = (100 * (m_Player.GetComponent<ShipData>().SetCargoCapacity())) * (m_PData.m_EngineModifier);
         m_Player.GetComponent<ShipData>().m_Inventory = m_PData.m_Items;
     }
 
@@ -34,7 +33,6 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         m_Player.GetComponent<ShipData>().m_HasShield = Camera.main.GetComponent<GameController>().m_TempHasShield;
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
-        m_Player.GetComponent<ShipData>().m_MaxCargoCapacity = (100 * (m_Player.GetComponent<ShipData>().SetCargoCapacity())) * (m_PData.m_EngineModifier);
         m_Player.GetComponent<ShipData>().m_Inventory = Camera.main.GetComponent<GameController>().m_TempItems;
     }
 

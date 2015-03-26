@@ -39,17 +39,6 @@ public class ShipData : MonoBehaviour
         return retval;
     }
 
-    public float SetCargoCapacity()
-    {
-        float retval = 0.0f;
-
-        foreach(EngineData engine in m_Engines)
-        {
-            retval += engine.m_CargoCap;
-        }
-
-        return retval;
-    }
 
     public void AddItem(GameObject item)
     {
@@ -63,6 +52,7 @@ public class ShipData : MonoBehaviour
             //m_CurrentMass = newMass;
             //m_Rigidbody.mass = m_ShipMass +  m_CurrentMass;
         //}
+        m_Inventory.Add(item);
     }
 
 	// Use this for initialization
