@@ -69,7 +69,7 @@ public class ShipController : MonoBehaviour
     {
         int randNum = Random.Range(0, 100);
 
-        if(randNum < 20)
+        if(randNum < 50)
         {
             m_LootDrop.LootDrop(ship);   
         }

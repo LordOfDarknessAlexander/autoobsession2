@@ -53,16 +53,16 @@ public class ShipData : MonoBehaviour
 
     public void AddItem(GameObject item)
     {
-        float newMass = m_CurrentMass + item.GetComponent<PickupItem>().m_Mass;
-        if (newMass <= m_MaxCargoCapacity)
-        {
+        //float newMass = m_CurrentMass + item.GetComponent<PickupItem>().m_Mass;
+        //if (newMass <= m_MaxCargoCapacity)
+        //{
             item.transform.position = gameObject.transform.position;
             item.transform.parent = gameObject.transform;
             item.GetComponent<Renderer>().enabled = false;
             item.GetComponent<Collider>().enabled = false;
-            m_CurrentMass = newMass;
-            m_Rigidbody.mass = m_ShipMass +  m_CurrentMass;
-        }
+            //m_CurrentMass = newMass;
+            //m_Rigidbody.mass = m_ShipMass +  m_CurrentMass;
+        //}
     }
 
 	// Use this for initialization
