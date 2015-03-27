@@ -104,7 +104,7 @@ public class GameController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 m_ControlText.text = "";
-                m_Lives--;
+                //m_Lives--;
                 m_Restart = false;
                 Camera.main.GetComponent<Waves>().RestartCurrentWave();
             }
@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
         if(Input.GetKey(KeyCode.X))
         {
             m_Player.GetComponent<ShipController>().ApplyDamage(m_Player, 100);
-            Respawn();
+            //Respawn();
         }
     }
 
@@ -186,6 +186,8 @@ public class GameController : MonoBehaviour
 	
 	public void Respawn()
     {
+        m_Lives -= 1;
+
         if(m_Lives != 0)
         {
             Camera.main.GetComponent<EnemySpawn>().DestroyAll();

@@ -276,13 +276,18 @@ public class EnemySpawn : MonoBehaviour
 
         m_NumEnemiesInPool = numEnemies;
 
+        enemyPool_.Capacity = m_NumEnemiesInPool;
+
         for (int e = 0; e < m_Enemies.Count; e++)
         {
             for (int i = 0; i < m_NumEnemiesInPool; i++)
             {
-                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                obj.SetActive(false);
-                enemyPool_.Add(obj);
+                //if(enemyPool_.Count > enemyPool_.Capacity)
+                //{
+                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                    obj.SetActive(false);
+                    enemyPool_.Add(obj);
+               //}
             }
         }
 
@@ -300,13 +305,17 @@ public class EnemySpawn : MonoBehaviour
 
         m_NumEnemiesInPool = kills;
 
-        for (int e = 0; e < m_Enemies.Count; e++)
+        enemyPool_.Capacity = m_NumEnemiesInPool;
+        for (int i = 0; i < m_NumEnemiesInPool; i++)
         {
-            for (int i = 0; i < m_NumEnemiesInPool; i++)
+            for (int e = 0; e < m_Enemies.Count; e++)
             {
-                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                obj.SetActive(false);
-                enemyPool_.Add(obj);
+                //if (enemyPool_.Count > enemyPool_.Capacity)
+                //{
+                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                    obj.SetActive(false);
+                    enemyPool_.Add(obj);
+                //}
             }
         }
         StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());

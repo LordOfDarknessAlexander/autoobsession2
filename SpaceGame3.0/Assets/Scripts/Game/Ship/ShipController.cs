@@ -26,14 +26,29 @@ public class ShipController : MonoBehaviour
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
 
-        m_Data.m_HP -= totalDamage_;
+
+        if(m_Data.m_HasShield)
+        {
+            m_Data.m_Shield -= totalDamage_;
+        }
+        else
+        {
+            m_Data.m_HP -= totalDamage_;
+        }
+
+        if(m_Data.m_Shield <= 0)
+        {
+            m_Data.m_HasShield = false;
+        }
 
         if (m_Data.m_HP <= 0)
         {
             if (ship.tag == "Player")
             {
                 Camera.main.GetComponent<GameController>().Respawn();
+                //Camera.main.GetComponent<SpawnPlayer>().playerPool.Remove(ship);
                 ship.SetActive(false);
+                //Destroy(ship);
             }
 
             if (ship.tag == "Enemy")
@@ -43,14 +58,11 @@ public class ShipController : MonoBehaviour
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
-                 ship.GetComponent<EnemyShip>().DropLootEnemy(ship);
+                ship.GetComponent<EnemyShip>().DropLootEnemy(ship);
                 ship.SetActive(false);
             }
             if (ship.tag == "Boss")
             {
-                Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool -= 1;
-                Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
-                Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
                 Camera.main.GetComponent<GameController>().m_Score += 100;
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
                 ship.GetComponent<EnemyShip>().DropLootBoss(ship);
@@ -59,6 +71,4 @@ public class ShipController : MonoBehaviour
             Instantiate(m_Explosion, transform.position, transform.rotation);
         }
     }
-
-
 }

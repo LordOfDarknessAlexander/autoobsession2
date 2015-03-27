@@ -93,9 +93,9 @@ public class Waves : MonoBehaviour
 
     public void RestartCurrentWave()
     {
-        Camera.main.GetComponent<GameController>().LoadSoftSave(m_Player);
-
         Camera.main.GetComponent<SpawnPlayer>().PlayerRespawn();
+
+        Camera.main.GetComponent<GameController>().LoadSoftSave(m_Player);
 
         Camera.main.GetComponent<EnemySpawn>().m_WaveNum = Camera.main.GetComponent<GameController>().m_TempWaveNum;
 

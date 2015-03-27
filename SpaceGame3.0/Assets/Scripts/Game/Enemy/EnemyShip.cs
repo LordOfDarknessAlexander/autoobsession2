@@ -46,7 +46,7 @@ public class EnemyShip : Ship
     {
         int randNum = Random.Range(0, 100);
 
-        if (randNum < 50)
+        if (randNum < 20)
         {
             m_ItemToDrop.LootDrop(ship);
         }
