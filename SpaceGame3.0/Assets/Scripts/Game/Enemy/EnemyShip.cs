@@ -8,6 +8,7 @@ public class EnemyShip : Ship
     public int m_SalvageVal;
 
     public GameData m_GData;
+    public ShieldData m_ShieldData;
     public LootTable m_ItemToDrop;
 
     private int randNum_;

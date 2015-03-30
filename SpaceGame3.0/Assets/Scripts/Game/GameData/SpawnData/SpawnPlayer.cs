@@ -24,6 +24,11 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_HasShield = m_PData.m_HasShield;
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
         m_Player.GetComponent<ShipData>().m_Inventory = m_PData.m_Items;
+
+        if (m_Player.GetComponent<ShipData>().m_HasShield)
+        {
+            m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
+        }
     }
 
     public void SetSavedStats(GameObject player)
@@ -31,6 +36,7 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<PlayerShip>().m_DamageModifier = m_PData.m_DamageModifer;
         m_Player.GetComponent<PlayerController>().m_Salvage = Camera.main.GetComponent<GameController>().m_Salvage;
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
+
         m_Player.GetComponent<ShipData>().m_HasShield = Camera.main.GetComponent<GameController>().m_TempHasShield;
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
         m_Player.GetComponent<ShipData>().m_Inventory = Camera.main.GetComponent<GameController>().m_TempItems;

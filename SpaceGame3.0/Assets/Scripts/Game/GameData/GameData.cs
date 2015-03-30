@@ -43,7 +43,6 @@ public class GameData : MonoBehaviour
         else if(m_GData != null)
         {
             Destroy(gameObject);
-            //Debug.Log("Self Destructed due to another one existing");
         }
 
         //Initalizing Default Game Values

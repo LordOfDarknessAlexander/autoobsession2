@@ -270,6 +270,8 @@ public class EnemySpawn : MonoBehaviour
         Vector3 bossSpawn = new Vector3(0.0f, 8.0f, 0.0f);
         Quaternion spawnBossRotation = Quaternion.identity;
 
+        m_BossObj.GetComponent<EnemyShip>().m_ShieldData.SetShield(m_BossObj);
+
         m_BossObj.SetActive(true);
         m_BossObj.transform.position = bossSpawn;
         m_BossObj.transform.rotation = spawnBossRotation;

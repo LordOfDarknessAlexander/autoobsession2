@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Waves : MonoBehaviour 
 {
+
     public float m_SpawnDelay;
     public float m_StartDelay;
     public float m_WaveDelay;
@@ -39,6 +40,10 @@ public class Waves : MonoBehaviour
                 Quaternion spawnRotation = Quaternion.identity;
 
                 Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].SetActive(true);
+                if (Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].GetComponent<ShipData>().m_HasShield)
+                {
+                    Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].GetComponent<EnemyShip>().m_ShieldData.SetShield(Camera.main.GetComponent<EnemySpawn>().enemyPool_[i]);
+                }
                 Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.position = spawnPosition;
                 Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.rotation = spawnRotation;
 

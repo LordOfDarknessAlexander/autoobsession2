@@ -20,6 +20,8 @@ public class MiniBossShip : EnemyShip
 
         m_SData.m_HasShield = m_GData.m_HasShield;
 
+        m_ShieldData.SetShield(Camera.main.GetComponent<EnemySpawn>().m_BossObj);
+
         m_SData.m_HP = 10 * m_Level * m_Tier;
         m_SData.m_Shield = 5 * m_Level * m_Tier;
         m_DamageModifier = m_DamageLevel * Constants.DEFAULT_UPGRADE_MODIFIER;
@@ -31,26 +33,37 @@ public class MiniBossShip : EnemyShip
         m_SalvageVal = m_GData.m_SalvageVal * m_Level * m_Tier;
     }
 
-    public void SetDrops()
+    public void SetDrops(GameObject parentShip)
     {
         randDrop_ = Random.Range(0, 101);
+ 
+        Vector3 spawnPosition = new Vector3(parentShip.transform.position.x, parentShip.transform.position.y, 0);
+        Quaternion spawnRotation = Quaternion.identity;
 
         if (randDrop_ <= 25)
         {
             //spawn health token
+            Instantiate(m_BossDrops[0], spawnPosition, spawnRotation);
         }
         else if (randDrop_ > 25 && randDrop_ <= 50)
         {
             //spawn shield token
+            Instantiate(m_BossDrops[1], spawnPosition, spawnRotation);
         }
         else if (randDrop_ > 50 && randDrop_ <= 75)
         {
             //spawn weapons token
+            Instantiate(m_BossDrops[2], spawnPosition, spawnRotation);
         }
         else
         {
             //spawn engines token
+            Instantiate(m_BossDrops[3], spawnPosition, spawnRotation);
         }
     }
 
+    public void BossLootDrop(GameObject parentShip)
+    {
+        SetDrops(parentShip);
+    }
 }

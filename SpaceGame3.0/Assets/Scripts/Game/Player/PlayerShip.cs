@@ -5,6 +5,7 @@ public class PlayerShip : Ship
 {
     public PlayerController m_PController;
     public PlayerData m_PData;
+    public ShieldData m_ShieldData;
 
     public int m_MaxHP;
     public int m_MaxShieldHP;
