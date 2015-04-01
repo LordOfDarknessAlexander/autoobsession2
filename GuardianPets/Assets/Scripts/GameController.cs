@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
-            sData.m_CurrPetNickname = "Temp";
+            sData.m_CurrPetNickname = pet.m_Nickname;
 
             //Pet save data
             sData.m_CurrPetFearOne = pet.m_FearOne;
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
             sData.m_Shields = m_PlayerData.m_Shields;
             sData.m_CloseDate = DateTime.Now;
             sData.m_CurrPet = pet_.name;
-            sData.m_CurrPetNickname = "Temp";
+            sData.m_CurrPetNickname = pet.m_Nickname;
 
             //Pet save data
             sData.m_CurrPetFearOne = pet.m_FearOne;
@@ -183,6 +183,7 @@ public class GameController : MonoBehaviour
             pet_.GetComponent<Pet>().m_Hunger = sData.m_CurrPetHunger;
             pet_.GetComponent<Pet>().m_Cleanliness = sData.m_CurrPetCleanliness;
             pet_.GetComponent<Pet>().m_Bored = sData.m_CurrPetBored;
+            pet_.GetComponent<Pet>().m_Nickname = sData.m_CurrPetNickname;
 
             if (minutesElapsed >= 1)
             {

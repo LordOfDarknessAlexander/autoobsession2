@@ -16,11 +16,12 @@ public class UIController : MonoBehaviour
     public InputField m_FearIF; //Input field for the fear prompt
     public PlayerData m_PlayerData; //Player data
 
-    public Text m_NicknameText;
+    public Text m_NicknameText; //Text element for the pet's nickname;
+    public Text m_TitleText; //Text element for the pet's current title
     public Text m_EnergyText; //Player's current points - UI element
     public Text m_ShieldsText; //Player's current shields = UI element
     public Text m_EnergyTimerText; //Text element for the Points - UI element
-    public Slider m_EnergySlider;
+    public Slider m_EnergySlider; //Slider element for the Energy UI
     public string m_SelectedPet;
 
     private GameObject currPet_;
@@ -57,6 +58,7 @@ public class UIController : MonoBehaviour
         if (currPet_ != null)
         {
             m_NicknameText.text = currPet_.GetComponent<Pet>().m_Nickname;
+            m_TitleText.text = "The " + currPet_.GetComponent<Pet>().m_FearOne + " Destroyer";
             m_EnergyText.text = "Energy: " + m_PlayerData.m_Energy.ToString() + "/" + Constants.DEFAULT_MAX_ENERGY;
             m_ShieldsText.text = m_PlayerData.m_Shields.ToString();
             m_EnergySlider.value = m_PlayerData.m_Energy;
