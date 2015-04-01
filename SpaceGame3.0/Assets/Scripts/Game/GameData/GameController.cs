@@ -12,10 +12,11 @@ public class GameController : MonoBehaviour
 
     public GameData m_GData;
     public PlayerData m_PData;
-
-    public GameObject m_Player;
     public SpawnPlayer m_PSpawn;
     public EnemySpawn m_ESpawn;
+    public Waves m_Waves;
+
+    public GameObject m_Player;
 
     public Canvas m_Win;
     public Canvas m_Lose;
@@ -106,7 +107,7 @@ public class GameController : MonoBehaviour
                 m_ControlText.text = "";
                 //m_Lives--;
                 m_Restart = false;
-                Camera.main.GetComponent<Waves>().RestartCurrentWave();
+                m_Waves.RestartCurrentWave();
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -147,7 +148,7 @@ public class GameController : MonoBehaviour
         m_TempScore = m_Score;
         m_TempKills = m_Kills;
         m_TempSalvage = m_Salvage;
-        m_TempWaveNum = Camera.main.GetComponent<EnemySpawn>().m_WaveNum;
+        m_TempWaveNum = m_ESpawn.m_WaveNum;
 
         m_TempHasShield = player.GetComponent<ShipData>().m_HasShield;
 
@@ -172,11 +173,11 @@ public class GameController : MonoBehaviour
         m_Score = m_TempScore;
         m_Kills = m_TempKills;
         m_Salvage = m_TempSalvage;
-        Camera.main.GetComponent<EnemySpawn>().m_WaveNum = m_TempWaveNum;
+        m_ESpawn.m_WaveNum = m_TempWaveNum;
 
         player.GetComponent<ShipData>().m_HasShield = m_TempHasShield;
 
-        player.GetComponent<ShipData>().m_HP = m_TempHP;
+        player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         player.GetComponent<ShipData>().m_Shield = m_TempShield;
 
         player.GetComponent<ShipData>().m_Inventory = m_TempItems;
@@ -190,7 +191,7 @@ public class GameController : MonoBehaviour
 
         if(m_Lives != 0)
         {
-            Camera.main.GetComponent<EnemySpawn>().DestroyAll();
+            m_ESpawn.DestroyAll();
 
             m_Restart = true;
 
@@ -198,7 +199,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            Camera.main.GetComponent<EnemySpawn>().DestroyAll();
+            m_ESpawn.DestroyAll();
 
             m_MainUI.enabled = false;
 

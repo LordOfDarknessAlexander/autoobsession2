@@ -45,9 +45,9 @@ public class EnemyShip : Ship
 
     public void DropLootEnemy(GameObject ship)
     {
-        int randNum = Random.Range(0, 100);
+        randNum_ = Random.Range(0, 100);
 
-        if (randNum < 20)
+        if (randNum_ < 20)
         {
             m_ItemToDrop.LootDrop(ship);
         }
@@ -59,11 +59,11 @@ public class EnemyShip : Ship
 
     public void DropLootBoss(GameObject ship)
     {
-        int randNum = Random.Range(0, 100);
+        randNum_ = Random.Range(0, 100);
 
         this.GetComponent<BossShip>().BossLootDrop(ship);
 
-        if (randNum < 20)
+        if (randNum_ < 20)
         {
             m_ItemToDrop.LootDrop(ship);
         }

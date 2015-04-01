@@ -3,7 +3,6 @@ using System.Collections;
 
 public class EnemyController : Enemy 
 {
-
     public float m_MaxVel;
     public Vector3 m_CurrVel;
 

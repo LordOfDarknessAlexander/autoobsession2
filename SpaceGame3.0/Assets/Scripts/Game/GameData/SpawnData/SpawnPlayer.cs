@@ -6,6 +6,7 @@ public class SpawnPlayer : MonoBehaviour
 {
     public GameData m_GData;
     public PlayerData m_PData;
+    public GameController m_GController;
 
     public List<GameObject> m_PlayerPrefab = new List<GameObject>();
     public List<GameObject> playerPool = new List<GameObject>();
@@ -32,22 +33,22 @@ public class SpawnPlayer : MonoBehaviour
     public void SetSavedStats(GameObject player)
     {
         m_Player.GetComponent<PlayerShip>().m_DamageModifier = m_PData.m_DamageModifer;
-        m_Player.GetComponent<PlayerController>().m_Salvage = Camera.main.GetComponent<GameController>().m_Salvage;
+        m_Player.GetComponent<PlayerController>().m_Salvage = m_GController.m_Salvage;
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
 
-        m_Player.GetComponent<ShipData>().m_HasShield = Camera.main.GetComponent<GameController>().m_TempHasShield;
+        m_Player.GetComponent<ShipData>().m_HasShield = m_GController.m_TempHasShield;
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
-        m_Player.GetComponent<ShipData>().m_Inventory = Camera.main.GetComponent<GameController>().m_TempItems;
+        m_Player.GetComponent<ShipData>().m_Inventory = m_GController.m_TempItems;
     }
 
     public void Spawn()
     {
 
-        if (Camera.main.GetComponent<GameController>().m_Lives > 0)
+        if (m_GController.m_Lives > 0)
         {
-            Camera.main.GetComponent<GameController>().m_ControlText.text = "";
+            m_GController.m_ControlText.text = "";
 
-            for (int i = 0; i < Camera.main.GetComponent<GameController>().m_Lives; ++i)
+            for (int i = 0; i < m_GController.m_Lives; ++i)
             {
                 playerObj_ = m_PlayerPrefab[m_PData.m_ShipLevel - 1];
                 GameObject obj = (GameObject)Instantiate(playerObj_);
@@ -66,10 +67,10 @@ public class SpawnPlayer : MonoBehaviour
             m_Player.transform.rotation = spawnPlayerRotation;
 
         }
-        else if (Camera.main.GetComponent<GameController>().m_Lives == 0)
+        else if (m_GController.m_Lives == 0)
         {
-            Camera.main.GetComponent<GameController>().m_GameOver = true;
-            Camera.main.GetComponent<GameController>().GameOver();
+            m_GController.m_GameOver = true;
+            m_GController.GameOver();
         } 
     }
 

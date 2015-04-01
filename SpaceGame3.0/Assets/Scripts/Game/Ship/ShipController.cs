@@ -46,9 +46,7 @@ public class ShipController : MonoBehaviour
             if (ship.tag == "Player")
             {
                 Camera.main.GetComponent<GameController>().Respawn();
-                //Camera.main.GetComponent<SpawnPlayer>().playerPool.Remove(ship);
                 ship.SetActive(false);
-                //Destroy(ship);
             }
 
             if (ship.tag == "Enemy")

@@ -22,7 +22,6 @@ public class StarMapUI : MonoBehaviour
     public GameData m_GData;
     public LevelData m_LData;
 
-    private int level;
     private int upgradeCost_;
     private int shieldUpgradeCounter_; //Amount of upgrades in the shield by the player
     private int engineUpgradeCounter_; //Amount of upgrades in the engines by the player

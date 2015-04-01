@@ -52,10 +52,17 @@ public class GameData : MonoBehaviour
 
         //Initalize Default Enemy Data
         m_HasShield = false;
+        if(m_HasShield)
+        {
+            m_EnemyShield = 5 * (m_Level * m_EnemyTier);
+        }
+        else
+        {
+            m_EnemyShield = 0;
+        }
 
         m_EnemyTier = 1;
-        m_EnemyHP = 5;
-        m_EnemyShield = 5;
+        m_EnemyHP = 5 * (m_Level * m_EnemyTier);
 
         m_EnemyEngineLevel = 1 * m_EnemyTier;
         m_EnemyDamageLevel = 1 * m_EnemyTier;

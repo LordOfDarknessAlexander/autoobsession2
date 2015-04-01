@@ -21,6 +21,7 @@ public class TreasureChestPU : PowerUps
     {
         //generate randNum between 1000 and 50000
         int randNum = Random.Range(1000, 50000);
+
         //apply randNum to players Salvage collected(not total earned until after wave 5 or 10)
         Camera.main.GetComponent<GameController>().m_Salvage += randNum;
     }
