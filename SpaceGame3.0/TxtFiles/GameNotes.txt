@@ -371,22 +371,22 @@ Credits
 
 Power ups
 	Triggered on Pick-up
-		Health(heals player to full health)
-		Shield(if !HasShield give temp shield, else give full shield)
-		Double Max Health(heals player to full health, gives double the max until the extra is gone)
-		Double Max Shield(if !hasShield give temp shield at double base value, else heals the player shield to full, gives double the max value until extra is gone)
-		Treasure Chest(random amount of salvage, min 500, max 50000)
+	/	Health(heals player to full health)
+	/	Shield(if !HasShield give temp shield, else give full shield)
+	/	Double Max Health(heals player to full health, gives double the max until the extra is gone)
+	/	Double Max Shield(if !hasShield give temp shield at double base value, else heals the player shield to full, gives double the max value until extra is gone)
+	/	Treasure Chest(random amount of salvage, min 1000, max 50000)
 		
 	Set to Storage(triggered with button press)
 		Bombs
-			explosive(medium blast radius, proximity detection, medium damage)
-			EMP(disables shields or temporarily disables weapons(5 second))
-			Multi-Bomb(3 or 4 bombs that drift doing low to mid damage)
-		Multi-shot(fires 3 bolts, forward, left 45 degrees, right 45 degrees)
-		Missiles(replaces bolts with a rocket the does double damage, 50 missiles)
-		Missile battery(fire 10 missiles that track nearby enemies)
+	/		explosive(medium blast radius, proximity detection, medium damage)
+	/		EMP(disables shields or temporarily disables weapons(5 second))
+	/		Multi-Bomb(3 or 4 bombs that drift doing low to mid damage)
+	/	Multi-shot(fires 3 bolts, forward, left 45 degrees, right 45 degrees)
+	/	Missiles(replaces bolts with a rocket the does double damage, 50 missiles)
+	/	Missile battery(fire 10 missiles that track nearby enemies)
 		Laser(beam that last for 10 seconds doing 3 times normal damage)
-		Nuke(extremely rare drop, kills everything on the screen except player)
+	/	Nuke(extremely rare drop, kills everything on the screen except player)
 		
 	Boss specific(guaranteed)
 		random upgrade token(weapon, shield, engine, health)

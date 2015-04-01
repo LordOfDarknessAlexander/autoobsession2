@@ -12,6 +12,7 @@ public class Waves : MonoBehaviour
     public float m_WaveDelay;
     
     public int m_CurrentWave;
+    public int m_EnemyCount;
 
     public GameObject m_Player;
 
@@ -36,24 +37,27 @@ public class Waves : MonoBehaviour
 
             for (int i = 0; i < Camera.main.GetComponent<EnemySpawn>().enemyPool_.Count; ++i)
             {
-                Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
-                Quaternion spawnRotation = Quaternion.identity;
-
-                Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].SetActive(true);
-                if (Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].GetComponent<ShipData>().m_HasShield)
+                if (m_EnemyCount < 8)
                 {
-                    Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].GetComponent<EnemyShip>().m_ShieldData.SetShield(Camera.main.GetComponent<EnemySpawn>().enemyPool_[i]);
+                    Vector3 spawnPosition = new Vector3(Random.Range(-m_SpawnArea.x, m_SpawnArea.x), m_SpawnArea.y, m_SpawnArea.z);
+                    Quaternion spawnRotation = Quaternion.identity;
+
+                    Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].SetActive(true);
+                    if (Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].GetComponent<ShipData>().m_HasShield)
+                    {
+                        Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].GetComponent<EnemyShip>().m_ShieldData.SetShield(Camera.main.GetComponent<EnemySpawn>().enemyPool_[i]);
+                    }
+                    Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.position = spawnPosition;
+                    Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.rotation = spawnRotation;
+                    m_EnemyCount++;
                 }
-                Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.position = spawnPosition;
-                Camera.main.GetComponent<EnemySpawn>().enemyPool_[i].transform.rotation = spawnRotation;
 
                 yield return new WaitForSeconds(m_SpawnDelay);
 
             }
-            yield return new WaitForSeconds(m_WaveDelay);
-
             if (Camera.main.GetComponent<EnemySpawn>().m_RequiredKills == 0)
             {
+                yield return new WaitForSeconds(m_WaveDelay);
                 m_Control.text = "Next Wave";
             }
         }

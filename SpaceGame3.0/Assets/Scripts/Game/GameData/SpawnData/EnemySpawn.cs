@@ -308,17 +308,19 @@ public class EnemySpawn : MonoBehaviour
         m_NumEnemiesInPool = kills;
 
         enemyPool_.Capacity = m_NumEnemiesInPool;
+
         for (int i = 0; i < m_NumEnemiesInPool; i++)
         {
-            for (int e = 0; e < m_Enemies.Count; e++)
-            {
-                //if (enemyPool_.Count > enemyPool_.Capacity)
+            int randEnemy = Random.Range(0, m_Enemies.Count);
+            //for (int e = 0; e < m_Enemies.Count; e++)
+            //{
+                //if (enemyPool_.Count < enemyPool_.Capacity)
                 //{
-                    GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
+                    GameObject obj = (GameObject)Instantiate(m_Enemies[randEnemy]);
                     obj.SetActive(false);
                     enemyPool_.Add(obj);
                 //}
-            }
+            //}
         }
         StartCoroutine(Camera.main.GetComponent<Waves>().WaveSpawner());
     }
@@ -328,6 +330,8 @@ public class EnemySpawn : MonoBehaviour
         for(int i = 0; i < enemyPool_.Count; ++i)
         {
             Destroy(enemyPool_[i]);
+
+            enemyPool_.RemoveAt(i);
         }
     }
 }

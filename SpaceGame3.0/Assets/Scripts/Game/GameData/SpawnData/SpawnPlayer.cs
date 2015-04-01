@@ -25,10 +25,8 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
         m_Player.GetComponent<ShipData>().m_Inventory = m_PData.m_Items;
 
-        if (m_Player.GetComponent<ShipData>().m_HasShield)
-        {
-            m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
-        }
+        m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
+
     }
 
     public void SetSavedStats(GameObject player)

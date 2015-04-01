@@ -10,4 +10,5 @@ UI elements now have borders
 Score now displaying correctly
 Soft save implemented between waves, resets to beginning of wave on death
 Just need to figure out the damn player respawn
-Enemy spawn working but not as expected
+Enemy spawn working but not as expected(need to slow down spawning on higher waves)
+Need to fix gameover function
