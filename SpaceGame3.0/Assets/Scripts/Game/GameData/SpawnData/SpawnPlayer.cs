@@ -23,6 +23,14 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<PlayerController>().m_Salvage = m_PData.m_Salvage;
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         m_Player.GetComponent<ShipData>().m_HasShield = m_PData.m_HasShield;
+        if (m_Player.GetComponent<ShipData>().m_HasShield)
+        {
+            m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+        }
+        else
+        {
+            m_Player.GetComponent<ShipData>().m_Shield = 0;
+        }
         m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
         m_Player.GetComponent<ShipData>().m_Inventory = m_PData.m_Items;
 

@@ -28,7 +28,7 @@ public class MiniBossController : Enemy
     public override void Update()
     {
         //Boss will stay at top of play area until Destroyed moving only side to side
-        float moveVertical = this.m_ShipData.GetTotalThrustAccel();
+        float moveVertical = this.m_ShipData.GetTotalVertAccel();
 
         if (m_Target != null)
         {

@@ -57,14 +57,6 @@ public class Waves : MonoBehaviour
                 yield return new WaitForSeconds(m_SpawnDelay);
 
             }
-            /*if (m_ESpawn.m_RequiredKills == 0)
-            {
-                m_Control.text = "Next Wave";
-
-                break;
-                //yield return new WaitForSeconds(m_WaveDelay);
-                
-            }*/
         }
     }
 
@@ -76,7 +68,7 @@ public class Waves : MonoBehaviour
 
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                for (int i = 0; i < m_ESpawn.m_NumEnemiesInPool; ++i)
+                for (int i = 0; i < m_ESpawn.enemyPool_.Count; ++i)
                 {
                     if (m_EnemyCount < 6)
                     {
@@ -100,7 +92,7 @@ public class Waves : MonoBehaviour
                     m_ESpawn.m_WaveNum++;
                     m_ESpawn.m_WaveText.text = m_ESpawn.m_WaveNum.ToString("F0");
                     m_GController.SoftSave(m_Player);
-                    m_ESpawn.m_BossStatCanvas.enabled = false;
+                    m_ESpawn.m_BossPanel.alpha = 0;
                     m_ESpawn.m_KillsPanel.alpha = 1;
                     m_GController.Win();
                 }
@@ -114,7 +106,7 @@ public class Waves : MonoBehaviour
     {
         m_PSpawn.PlayerRespawn();
 
-        m_GController.LoadSoftSave(m_Player);
+        m_GController.SetPlayerSave(m_Player);
 
         m_ESpawn.m_WaveNum = m_GController.m_TempWaveNum;
 

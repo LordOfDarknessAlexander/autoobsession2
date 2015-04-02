@@ -20,18 +20,13 @@ public class GameData : MonoBehaviour
     public PlayerData m_PData;
 
     //Enemy Data
-    public bool m_HasShield;
-
     public int m_Level;
     public int m_EnemyTier;
-    public int m_EnemyHP;
-    public int m_EnemyShield;
 
     public int m_EnemyEngineLevel;
     public int m_EnemyDamageLevel;
     public int m_EnemyHealthLevel;
     public int m_EnemyShieldLevel;
-    public int m_SalvageVal;
     
 	void Awake () 
     {
@@ -51,24 +46,12 @@ public class GameData : MonoBehaviour
         m_SFXVol = 100;
 
         //Initalize Default Enemy Data
-        m_HasShield = false;
-        if(m_HasShield)
-        {
-            m_EnemyShield = 5 * (m_Level * m_EnemyTier);
-        }
-        else
-        {
-            m_EnemyShield = 0;
-        }
-
         m_EnemyTier = 1;
-        m_EnemyHP = 5 * (m_Level * m_EnemyTier);
 
         m_EnemyEngineLevel = 1 * m_EnemyTier;
         m_EnemyDamageLevel = 1 * m_EnemyTier;
         m_EnemyHealthLevel = 1 * m_EnemyTier;
         m_EnemyShieldLevel = 1 * m_EnemyTier;
-        m_SalvageVal = 100 * (m_Level * m_EnemyTier);
 
         Load();
 	}
@@ -152,5 +135,4 @@ public class GameData : MonoBehaviour
             Debug.Log("Failed to load, file doesn't exist");
         }
     }
-
 }

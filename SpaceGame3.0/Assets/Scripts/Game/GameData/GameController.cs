@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
 
     public Canvas m_Win;
     public Canvas m_Lose;
-    public Canvas m_BossStatCanvas;
+    public CanvasGroup m_BossPanel;
     public Canvas m_MainUI;
 
     public UIControl m_UIControl;
@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        //m_BossStatCanvas.enabled = false;
+        m_BossPanel.alpha = 0;
 
         m_MainUI.enabled = true;
 
@@ -104,10 +104,7 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                m_ControlText.text = "";
-                //m_Lives--;
-                m_Restart = false;
-                m_Waves.RestartCurrentWave();
+                Respawn();
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -119,7 +116,6 @@ public class GameController : MonoBehaviour
         if(Input.GetKey(KeyCode.X))
         {
             m_Player.GetComponent<ShipController>().ApplyDamage(m_Player, 100);
-            //Respawn();
         }
     }
 
@@ -131,15 +127,24 @@ public class GameController : MonoBehaviour
             m_ESpawn.SetShipPrefab();
             m_ESpawn.AISpawn();
         }
+        else
+        {
+            m_ControlText.text = "";
+            m_ESpawn.DestroyAllEnemies();
+            m_MainUI.enabled = false;
+            m_Lose.enabled = true;
+        }
     }
 
     public void GameOver()
     {
+        m_Play = false;
         m_Lose.enabled = true;
     }
 
     public void Win()
     {
+        m_Play = false;
         m_Win.enabled = true;
     }
    
@@ -187,11 +192,18 @@ public class GameController : MonoBehaviour
 	
 	public void Respawn()
     {
+        m_ControlText.text = "";
+        m_Restart = false;
+        m_Waves.RestartCurrentWave();
+    }
+
+    public void EnableRestart()
+    {
         m_Lives -= 1;
 
-        if(m_Lives != 0)
+        if (m_Lives >= 0)
         {
-            m_ESpawn.DestroyAll();
+            m_ESpawn.DestroyAllEnemies();
 
             m_Restart = true;
 
@@ -199,18 +211,13 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            m_ESpawn.DestroyAll();
-
-            m_MainUI.enabled = false;
-
-            m_GameOver = true;
-            GameOver();
+            m_Play = false;
         }
     }
 
-    public void SetPlayerSave()
+    public void SetPlayerSave(GameObject player)
     {
-        LoadSoftSave(m_Player);
+        LoadSoftSave(player);
 
         m_PData.m_EnemiesKilledLifetime += m_Kills;
         m_PData.m_TotalScore += m_Score;

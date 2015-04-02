@@ -20,7 +20,7 @@ public class EnemySpawn : MonoBehaviour
     public List<GameObject> bossPool_ = new List<GameObject>();
 
     public CanvasGroup m_KillsPanel;
-    public Canvas m_BossStatCanvas;
+    public CanvasGroup m_BossPanel;
 
     public Text m_WaveText;
     public Text m_ReqKillText;
@@ -39,7 +39,7 @@ public class EnemySpawn : MonoBehaviour
 
     public int m_RequiredKills;
     public int m_WaveNum;
-    public int m_NumEnemiesInPool;
+    //public int m_NumEnemiesInPool;
     public int maxPoolSize_;
 
     public GameObject m_Player;
@@ -63,22 +63,33 @@ public class EnemySpawn : MonoBehaviour
             if (m_Player == null)
             {
                 spawn_.Stop();
-                m_GController.Respawn();
+                m_GController.EnableRestart();
             }
 
             if (m_RequiredKills == 0)
             {
-                spawn_.Stop();
+                //spawn_.Stop();
+                DestroyAllEnemies();
                 m_WaveNum++;
                 m_WaveText.text = m_WaveNum.ToString("F0");
-                AISpawn();
-            }
 
-            if (m_GController.m_GameOver)
-            {
-                spawn_.Stop();
-                m_GController.m_Restart = false;
-                m_GController.GameOver();
+                if(m_WaveNum == 6)
+                {
+                    m_GData.Save();
+                    m_Control.text = "Next Wave";
+                    AISpawn();
+                }
+                if (m_WaveNum > 10)
+                {
+                    m_GController.m_Play = false;
+                    m_GData.Save();
+                    m_GController.Win();
+                }
+                else
+                {
+                    m_Control.text = "Next Wave";
+                    AISpawn();
+                }
             }
         }
     }
@@ -91,16 +102,10 @@ public class EnemySpawn : MonoBehaviour
             m_WaveText.text = m_WaveNum.ToString("F0");
 
             SetShipPrefab();
-
-            //clear enemy array
-            m_Enemies.Clear();
-            enemyPool_.Clear();
         }
 
         if (m_WaveNum == 1)
         {
-            //m_GController.SoftSave(m_Player);
-
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -115,7 +120,6 @@ public class EnemySpawn : MonoBehaviour
         {
             m_GController.SoftSave(m_Player);
 
-            m_Control.text = "Next Wave";
             //clear enemy array
             m_Enemies.Clear();
             enemyPool_.Clear();
@@ -246,7 +250,7 @@ public class EnemySpawn : MonoBehaviour
         m_BossObj = boss;
 
         //Turn on the Boss UI
-        m_BossStatCanvas.enabled = true;
+        m_BossPanel.alpha = 0;
 
         //turn off kills required panel
         m_KillsPanel.alpha = 0;
@@ -272,18 +276,17 @@ public class EnemySpawn : MonoBehaviour
         m_BossObj.transform.position = bossSpawn;
         m_BossObj.transform.rotation = spawnBossRotation;
 
-        m_NumEnemiesInPool = numEnemies;
+        //m_NumEnemiesInPool = numEnemies;
 
-        enemyPool_.Capacity = m_NumEnemiesInPool;
+        enemyPool_.Capacity = numEnemies;//m_NumEnemiesInPool;
 
-        for (int e = 0; e < m_Enemies.Count; e++)
+        for (int i = 0; i < enemyPool_.Capacity/*m_NumEnemiesInPool*/; i++)
         {
-            for (int i = 0; i < m_NumEnemiesInPool; i++)
-            {
-                GameObject obj = (GameObject)Instantiate(m_Enemies[e]);
-                obj.SetActive(false);
-                enemyPool_.Add(obj);
-            }
+            int randEnemy = Random.Range(0, m_Enemies.Count);
+
+            GameObject obj = (GameObject)Instantiate(m_Enemies[randEnemy]);
+            obj.SetActive(false);
+            enemyPool_.Add(obj);
         }
 
         if (GameObject.FindGameObjectWithTag("Player") != null)
@@ -297,11 +300,12 @@ public class EnemySpawn : MonoBehaviour
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
-        m_NumEnemiesInPool = kills;
+        //m_NumEnemiesInPool = kills;
 
-        enemyPool_.Capacity = m_NumEnemiesInPool;
+        //enemyPool_.Capacity = m_NumEnemiesInPool;
+        enemyPool_.Capacity = kills;
 
-        for (int i = 0; i < m_NumEnemiesInPool; i++)
+        for (int i = 0; i < enemyPool_.Capacity/*m_NumEnemiesInPool*/; i++)
         {
             int randEnemy = Random.Range(0, m_Enemies.Count);
 
@@ -312,7 +316,7 @@ public class EnemySpawn : MonoBehaviour
         spawn_ = new Task(m_Waves.WaveSpawner(), true);
     }
 
-    public void DestroyAll()
+    public void DestroyAllEnemies()
     {
         for(int i = 0; i < enemyPool_.Count; ++i)
         {

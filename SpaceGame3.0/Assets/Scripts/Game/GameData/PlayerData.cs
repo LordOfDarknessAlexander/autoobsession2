@@ -55,14 +55,20 @@ public class PlayerData : MonoBehaviour
 
         m_HasShield = false;
 
+        if(m_ShieldLevel == 0)
+        {
+            m_HasShield = false;
+        }
+        else
+        {
+            m_HasShield = true;
+        }
+
         if (m_HasShield)
         {
             m_Shield = 10 * m_ShipLevel * m_ShieldLevel;
         }
-        else
-        {
-            m_Shield = 0;
-        } 
+   
 
         m_HP = 10 * m_ShipLevel * m_HealthLevel;
         m_DamageModifer = 1 * m_ShipLevel * m_DamageLevel;

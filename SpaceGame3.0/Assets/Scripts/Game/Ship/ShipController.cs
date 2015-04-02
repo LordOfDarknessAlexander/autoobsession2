@@ -38,20 +38,20 @@ public class ShipController : MonoBehaviour
 
         if(m_Data.m_Shield <= 0)
         {
-            m_Data.m_HasShield = false;
+            ship.GetComponent<ShieldData>().SetShield(ship);
         }
 
         if (m_Data.m_HP <= 0)
         {
             if (ship.tag == "Player")
             {
-                Camera.main.GetComponent<GameController>().Respawn();
+                Camera.main.GetComponent<GameController>().EnableRestart();
                 ship.SetActive(false);
             }
 
             if (ship.tag == "Enemy")
             {
-                Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool -= 1;
+                //Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool -= 1;
                 Camera.main.GetComponent<Waves>().m_EnemyCount--;
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
