@@ -42,7 +42,7 @@ public class UIControl : MonoBehaviour
         m_PlayerShield.maxValue = maxPlayerShield_;
         m_PlayerShield.minValue = minShield_;
 
-        m_PlayerShield.image.enabled = false;
+        m_PlayerShield.GetComponentInChildren<Image>().enabled = false;
 
         maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_SData.m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
