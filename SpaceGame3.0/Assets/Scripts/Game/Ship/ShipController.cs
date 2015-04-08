@@ -26,7 +26,6 @@ public class ShipController : MonoBehaviour
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
 
-
         if(m_Data.m_HasShield)
         {
             m_Data.m_Shield -= totalDamage_;
@@ -38,7 +37,8 @@ public class ShipController : MonoBehaviour
 
         if(m_Data.m_Shield <= 0)
         {
-            ship.GetComponent<ShieldData>().SetShield(ship);
+            m_Data.m_HasShield = false;
+            ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
         }
 
         if (m_Data.m_HP <= 0)
@@ -51,19 +51,20 @@ public class ShipController : MonoBehaviour
 
             if (ship.tag == "Enemy")
             {
-                //Camera.main.GetComponent<EnemySpawn>().m_NumEnemiesInPool -= 1;
                 Camera.main.GetComponent<Waves>().m_EnemyCount--;
                 Camera.main.GetComponent<EnemySpawn>().m_RequiredKills -= 1;
                 Camera.main.GetComponent<EnemySpawn>().m_ReqKillText.text = Camera.main.GetComponent<EnemySpawn>().m_RequiredKills.ToString();
-                Camera.main.GetComponent<GameController>().m_Score += 100;
+                Camera.main.GetComponent<GameController>().m_Score += ship.GetComponent<EnemyShip>().m_ScoreVal * (ship.GetComponent<EnemyShip>().m_Level *
+                                                                                                                  ship.GetComponent<EnemyShip>().m_Tier);
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
                 ship.GetComponent<EnemyShip>().DropLootEnemy(ship);
                 ship.SetActive(false);
             }
             if (ship.tag == "Boss")
             {
-                Camera.main.GetComponent<GameController>().m_Score += 100;
-                Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<EnemyShip>().m_SalvageVal;
+                Camera.main.GetComponent<GameController>().m_Score += ship.GetComponent<BossShip>().m_ScoreVal * (ship.GetComponent<BossShip>().m_Level * 
+                                                                                                                  ship.GetComponent<BossShip>().m_Tier);
+                Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<BossShip>().m_SalvageVal;
                 ship.GetComponent<EnemyShip>().DropLootBoss(ship);
                 ship.SetActive(false);
             }

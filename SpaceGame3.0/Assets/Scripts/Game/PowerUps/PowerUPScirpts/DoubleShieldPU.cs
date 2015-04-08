@@ -24,12 +24,14 @@ public class DoubleShieldPU : PowerUps
         if(player.GetComponent<ShipData>().m_HasShield)
         {
             player.GetComponent<ShipData>().m_Shield = player.GetComponent<PlayerShip>().m_MaxShieldHP * 2;
+            player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
         }
         //if player does not have shields, set shileds to true with double base hp
         else
         {
             player.GetComponent<ShipData>().m_HasShield = true;
             player.GetComponent<ShipData>().m_Shield = player.GetComponent<PlayerShip>().m_MaxShieldHP * 2;
+            player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
         }
     }
 

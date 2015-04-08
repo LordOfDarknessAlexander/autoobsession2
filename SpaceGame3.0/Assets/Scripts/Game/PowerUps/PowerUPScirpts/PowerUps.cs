@@ -5,7 +5,7 @@ public abstract class PowerUps : MonoBehaviour
 {
     public GameData m_GData;
     public PlayerData m_PData;
-    public GameController m_GController;
+    //public GameController m_GController;
 
     public bool m_IsStorable;
 

@@ -24,12 +24,11 @@ public class MissilePU : PowerUps
         //damage = 20 + 25% per player damage level
         //when out of ammo reset to bolt
 
-        throw new System.NotImplementedException();
     }
     
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+        
     }
     
 }

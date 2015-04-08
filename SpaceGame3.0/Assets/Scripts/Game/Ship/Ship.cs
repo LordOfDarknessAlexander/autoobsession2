@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Ship : MonoBehaviour
 {
     public ShipData m_SData;
+    public ShieldData m_ShieldData;
 
     public int m_DamageModifier;
     public int m_Level;

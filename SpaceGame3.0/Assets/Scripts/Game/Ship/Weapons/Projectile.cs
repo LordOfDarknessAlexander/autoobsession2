@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     {
         GetComponent<Rigidbody>().velocity = transform.up * m_ForwardAccel;
 
-        OnExit();
+        //OnExit();
     }
 
     void OnCollisionEnter(Collision collision)

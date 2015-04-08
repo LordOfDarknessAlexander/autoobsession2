@@ -22,13 +22,23 @@ public class ShieldPU : PowerUps
         //if player has shields, set players shields to their max hp
         if(player.GetComponent<ShipData>().m_HasShield)
         {
-            player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+            //check to see if shield health under its max, if not then do nothing
+            if (player.GetComponent<ShipData>().m_Shield < player.GetComponent<PlayerShip>().m_MaxShieldHP)
+            {
+                player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
+                player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+            }
+            else
+            {
+                return;
+            }
         }
-        //if player does not have shields, set HasShield to true at max for plyer lvl
+        //if player does not have shields, set HasShield to true at max for player lvl
         else
         {
             player.GetComponent<ShipData>().m_HasShield = true;
             player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+            player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
         }
     }
     public override void UseItem(GameObject player)

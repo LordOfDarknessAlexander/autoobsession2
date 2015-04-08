@@ -6,7 +6,7 @@ public class MultiShotPU : PowerUps
     //when used set player bolt to fire 3 shots
     public override void Start()
     {
-        m_IsStorable = true;
+        m_IsStorable = false;
     }
     public override void Update()
     {
@@ -20,10 +20,12 @@ public class MultiShotPU : PowerUps
 
     public override void ItemAffect(GameObject player)
     {
-        throw new System.NotImplementedException();
+        //Sets players guns to fire 3 shots from each one
+        //they will fire parllel to each other
+        //damage will be normal for each shot
     }
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

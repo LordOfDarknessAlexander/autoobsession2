@@ -13,10 +13,6 @@ public class ShieldData : MonoBehaviour
             {
                 m_ShieldPos.GetComponent<Renderer>().enabled = true;
             }
-            else
-            {
-                m_ShieldPos.GetComponent<Renderer>().enabled = false;
-            }
         }
         else
         {

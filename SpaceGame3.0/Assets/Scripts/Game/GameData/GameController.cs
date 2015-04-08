@@ -162,6 +162,15 @@ public class GameController : MonoBehaviour
 
         m_TempItems = player.GetComponent<ShipData>().m_Inventory;
 
+        for (int i = 0; i < m_TempItems.Count; ++i)
+        {
+            for (int j = 0; j < player.GetComponent<ShipData>().m_Inventory.Count; ++j)
+            {
+                player.GetComponent<ShipData>().m_Inventory[j].name = m_TempItems[i].name;
+            }
+        }
+
+
         Debug.Log("Soft Save complete");
     }
 
@@ -186,6 +195,15 @@ public class GameController : MonoBehaviour
         player.GetComponent<ShipData>().m_Shield = m_TempShield;
 
         player.GetComponent<ShipData>().m_Inventory = m_TempItems;
+
+        for (int i = 0; i < m_TempItems.Count; ++i)
+        {
+            for (int j = 0; j < player.GetComponent<ShipData>().m_Inventory.Count; ++j)
+            {
+                player.GetComponent<ShipData>().m_Inventory[j].name = m_TempItems[i].name;
+            }
+        }
+
 
         Debug.Log("Soft Save Loaded");
     }
@@ -222,7 +240,14 @@ public class GameController : MonoBehaviour
         m_PData.m_EnemiesKilledLifetime += m_Kills;
         m_PData.m_TotalScore += m_Score;
         m_PData.m_Salvage += m_Salvage;
-        m_PData.m_Items = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory;
+        for (int i = 0; i < m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory.Count; ++i)
+        {
+            for(int j = 0; j < m_PData.m_Items.Count; ++j)
+            {
+                m_PData.m_Items[j].name = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory[i].name;
+            }
+        }
+            
 
         m_GData.Save();
     }

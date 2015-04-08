@@ -9,6 +9,8 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour 
 {
+    public PlayerData m_PData;
+
     public Weapon m_WeaponData;
     public ShipController m_ShipController;
     public PlayerShip m_PlayerShip;
@@ -19,12 +21,14 @@ public class PlayerController : MonoBehaviour
     public int m_Salvage;
 
     private float nextShot_;
+    private GameObject player_;
 
     public void Start()
     {
         nextShot_ = 0.0f;
         m_PlayerShip = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerShip>();
         m_ShipController = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<ShipController>();
+        player_ = Camera.main.GetComponent<SpawnPlayer>().m_Player;
     }
 
     public void Update()
@@ -43,6 +47,14 @@ public class PlayerController : MonoBehaviour
         this.GetComponent<Rigidbody>().position = new Vector3(Mathf.Clamp(GetComponent<Rigidbody>().position.x, m_PlayerBoundary.xMin, m_PlayerBoundary.xMax),
                                          Mathf.Clamp(GetComponent<Rigidbody>().position.y, m_PlayerBoundary.yMin, m_PlayerBoundary.yMax),
                                          0.0f);
+
+        //check for shields
+        /*if (m_PlayerShip.m_SData.m_HasShield)
+        {
+            m_PlayerShip.m_SData.m_Shield = 0;
+            m_PlayerShip.m_ShieldData.SetShield(player_);
+        }*/
+
 
         //to fire weapons
         if (Input.GetButton("Fire"))

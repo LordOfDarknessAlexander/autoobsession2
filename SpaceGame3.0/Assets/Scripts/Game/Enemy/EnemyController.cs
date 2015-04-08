@@ -59,7 +59,7 @@ public class EnemyController : Enemy
         {
             Instantiate(m_ShipController.m_Explosion, transform.position, transform.rotation);
             other.gameObject.SetActive(false);
-            Camera.main.GetComponent<GameController>().Respawn();
+            Camera.main.GetComponent<GameController>().EnableRestart();
             
             gameObject.SetActive(false);
        }

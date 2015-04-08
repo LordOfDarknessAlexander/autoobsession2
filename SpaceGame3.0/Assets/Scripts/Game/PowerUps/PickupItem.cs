@@ -10,7 +10,7 @@ public class PickupItem : MonoBehaviour
         {
             if(this.GetComponent<PowerUps>().m_IsStorable)
             {
-               other.gameObject.GetComponent<ShipData>().m_Inventory.Add(gameObject);
+               other.gameObject.GetComponent<ShipData>().AddItem(gameObject);
                gameObject.SetActive(false);
             }
             else

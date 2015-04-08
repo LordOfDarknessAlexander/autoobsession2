@@ -37,14 +37,13 @@ public class UIControl : MonoBehaviour
         m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
         m_WavesCompleted = m_PData.m_WavesCompleted;
 
-
-        maxPlayerShield_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_SData.m_Shield;
+        maxPlayerShield_ = m_Player.GetComponent<ShipData>().m_Shield;
         m_PlayerShield.maxValue = maxPlayerShield_;
         m_PlayerShield.minValue = minShield_;
 
-        m_PlayerShield.GetComponentInChildren<Image>().enabled = false;
+        m_PlayerShield.value = minShield_;
 
-        maxPlayerHealth_ = m_Player.GetComponent<PlayerController>().m_PlayerShip.m_SData.m_HP;
+        maxPlayerHealth_ = m_Player.GetComponent<ShipData>().m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
         m_PlayerHealth.minValue = minHealth_;
     }
@@ -61,14 +60,13 @@ public class UIControl : MonoBehaviour
 
             if(m_Player.GetComponent<ShipData>().m_HasShield)
             {
-                if (m_Player.GetComponent<ShipData>().m_Shield > minShield_)
+                if(m_Player.GetComponent<ShipData>().m_Shield > minShield_)
                 {
-                    m_PlayerShield.image.enabled = true;
                     m_PlayerShield.value = m_Player.GetComponent<ShipData>().m_Shield;
                 }
                 else
                 {
-                    m_PlayerShield.image.enabled = false;
+                    m_PlayerShield.value = minShield_;
                 }
             }
         
