@@ -70,13 +70,7 @@ public class SpawnPlayer : MonoBehaviour
             m_Player.SetActive(true);
             m_Player.transform.position = playerSpawn;
             m_Player.transform.rotation = spawnPlayerRotation;
-
         }
-        else if (m_GController.m_Lives == 0)
-        {
-            m_GController.m_GameOver = true;
-            m_GController.GameOver();
-        } 
     }
 
     public void PlayerRespawn()

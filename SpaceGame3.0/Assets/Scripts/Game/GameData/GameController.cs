@@ -88,17 +88,20 @@ public class GameController : MonoBehaviour
         {
             SoftSave(m_Player);
         }
-
-        if(!m_Play)
+        if (m_Lives > 0)
         {
-            m_ControlText.text = "Press 'Z' to begin";
-
-            if(Input.GetKey(KeyCode.Z))
+            if (!m_Play)
             {
-                m_Play = true;
-                Play();
+                m_ControlText.text = "Press 'Z' to begin";
+
+                if (Input.GetKey(KeyCode.Z))
+                {
+                    m_Play = true;
+                    Play();
+                }
             }
         }
+
 
         if (m_Restart)
         {
@@ -126,13 +129,6 @@ public class GameController : MonoBehaviour
             m_ControlText.text = "";
             m_ESpawn.SetShipPrefab();
             m_ESpawn.AISpawn();
-        }
-        else
-        {
-            m_ControlText.text = "";
-            m_ESpawn.DestroyAllEnemies();
-            m_MainUI.enabled = false;
-            m_Lose.enabled = true;
         }
     }
 
@@ -219,7 +215,7 @@ public class GameController : MonoBehaviour
     {
         m_Lives -= 1;
 
-        if (m_Lives >= 0)
+        if (m_Lives > 0)
         {
             m_ESpawn.DestroyAllEnemies();
 
@@ -229,7 +225,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            m_Play = false;
+            GameOver();
+            //m_Play = false;
         }
     }
 
@@ -249,6 +246,6 @@ public class GameController : MonoBehaviour
         }
             
 
-        m_GData.Save();
+        //m_GData.Save();
     }
 }
