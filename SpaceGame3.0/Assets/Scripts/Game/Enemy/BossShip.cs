@@ -24,7 +24,7 @@ public class BossShip : EnemyShip
         m_ShieldData.SetShield(Camera.main.GetComponent<EnemySpawn>().m_BossObj);
 
         m_SData.m_HP = 10 * m_Level * m_Tier;
-        m_SData.m_Shield = 10 * m_Level * m_Tier;
+        m_SData.m_CurrShield = 10 * m_Level * m_Tier;
         m_DamageModifier = m_DamageLevel * Constants.DEFAULT_UPGRADE_MODIFIER;
 
         m_EngineLevel = m_GData.m_EnemyEngineLevel * m_Level * m_Tier;

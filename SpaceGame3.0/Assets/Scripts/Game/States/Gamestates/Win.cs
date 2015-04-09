@@ -12,6 +12,11 @@ public class Win : MonoBehaviour
 
     public Text m_CurrentKills;
     public Text m_CurrentScore;
+    public void Awake()
+    {
+        m_CurrentKills.text = Camera.main.GetComponent<GameController>().m_Kills.ToString();
+        m_CurrentScore.text = Camera.main.GetComponent<GameController>().m_Score.ToString();
+    }
 
     public void Continue()
     {
@@ -25,6 +30,6 @@ public class Win : MonoBehaviour
     {
         //save player progress and quit application
         m_GData.Save();
-        Application.Quit();
+        Application.LoadLevel("Start");
     }
 }

@@ -37,11 +37,9 @@ public class UIControl : MonoBehaviour
         m_EnemiesKilledLifetime = m_PData.m_EnemiesKilledLifetime;
         m_WavesCompleted = m_PData.m_WavesCompleted;
 
-        maxPlayerShield_ = m_Player.GetComponent<ShipData>().m_Shield;
+        maxPlayerShield_ = m_Player.GetComponent<PlayerShip>().m_MaxShieldHP;
         m_PlayerShield.maxValue = maxPlayerShield_;
         m_PlayerShield.minValue = minShield_;
-
-        m_PlayerShield.value = minShield_;
 
         maxPlayerHealth_ = m_Player.GetComponent<ShipData>().m_HP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
@@ -50,27 +48,16 @@ public class UIControl : MonoBehaviour
 
     void Update()
     {
-        if(m_Player != null)
+        if (m_Player != null)
         {
             currHealth_ = m_Player.GetComponent<ShipData>().m_HP;
-            currShield_ = m_Player.GetComponent<ShipData>().m_Shield;
+            currShield_ = m_Player.GetComponent<ShipData>().m_CurrShield;
             currLives_ = m_GameControl.GetComponent<GameController>().m_Lives;
             currScore_ = m_GameControl.GetComponent<GameController>().m_Score;
             currSalvage_ = m_GameControl.GetComponent<GameController>().m_Salvage;
 
-            if(m_Player.GetComponent<ShipData>().m_HasShield)
-            {
-                if(m_Player.GetComponent<ShipData>().m_Shield > minShield_)
-                {
-                    m_PlayerShield.value = m_Player.GetComponent<ShipData>().m_Shield;
-                }
-                else
-                {
-                    m_PlayerShield.value = minShield_;
-                }
-            }
-        
             m_PlayerHealth.value = m_Player.GetComponent<ShipData>().m_HP;
+            m_PlayerShield.value = currShield_;
             m_LivesVal.text = currLives_.ToString();
             m_ScoreVal.text = currScore_.ToString();
             m_SalvageVal.text = currSalvage_.ToString();

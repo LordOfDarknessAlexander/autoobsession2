@@ -39,7 +39,7 @@ public class EnemyShip : Ship
         else
         {
             m_SData.m_HasShield = true;
-            m_SData.m_Shield = 5 * m_Level * m_Tier;
+            m_SData.m_CurrShield = 5 * m_Level * m_Tier;
         }
 
     }

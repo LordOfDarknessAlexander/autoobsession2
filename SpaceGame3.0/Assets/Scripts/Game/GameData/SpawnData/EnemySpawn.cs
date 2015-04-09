@@ -39,7 +39,6 @@ public class EnemySpawn : MonoBehaviour
 
     public int m_RequiredKills;
     public int m_WaveNum;
-    //public int m_NumEnemiesInPool;
     public int maxPoolSize_;
 
     public GameObject m_Player;
@@ -68,7 +67,6 @@ public class EnemySpawn : MonoBehaviour
 
             if (m_RequiredKills == 0)
             {
-                //spawn_.Stop();
                 DestroyAllEnemies();
                 m_WaveNum++;
                 m_WaveText.text = m_WaveNum.ToString("F0");
@@ -172,7 +170,6 @@ public class EnemySpawn : MonoBehaviour
 
         if (m_WaveNum == 6)
         {
-            m_GData.Save();
             m_GController.SoftSave(m_Player);
 
             //clear enemy array

@@ -37,7 +37,7 @@ public class BossUIContol : MonoBehaviour
             currSalvage_ = Camera.main.GetComponent<GameController>().m_Salvage;
 
             m_BossHealth.value = m_BossObj.GetComponent<ShipData>().m_HP;
-            m_BossShield.value = m_BossObj.GetComponent<ShipData>().m_Shield;
+            m_BossShield.value = m_BossObj.GetComponent<ShipData>().m_CurrShield;
         }
     }
 }

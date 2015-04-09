@@ -115,12 +115,7 @@ public class GameController : MonoBehaviour
                 Application.LoadLevel("StarMap");
             }
         }
-
-        if(Input.GetKey(KeyCode.X))
-        {
-            m_Player.GetComponent<ShipController>().ApplyDamage(m_Player, 100);
-        }
-    }
+     }
 
     public void Play()
     {
@@ -135,12 +130,16 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         m_Play = false;
+        m_MainUI.enabled = false;
+        m_ESpawn.DestroyAllEnemies();
         m_Lose.enabled = true;
     }
 
     public void Win()
     {
         m_Play = false;
+        m_MainUI.enabled = false;
+        m_ESpawn.DestroyAllEnemies();
         m_Win.enabled = true;
     }
    
@@ -154,7 +153,7 @@ public class GameController : MonoBehaviour
         m_TempHasShield = player.GetComponent<ShipData>().m_HasShield;
 
         m_TempHP = player.GetComponent<ShipData>().m_HP;
-        m_TempShield = player.GetComponent<ShipData>().m_Shield;
+        m_TempShield = player.GetComponent<ShipData>().m_CurrShield;
 
         m_TempItems = player.GetComponent<ShipData>().m_Inventory;
 
@@ -188,7 +187,7 @@ public class GameController : MonoBehaviour
         player.GetComponent<ShipData>().m_HasShield = m_TempHasShield;
 
         player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
-        player.GetComponent<ShipData>().m_Shield = m_TempShield;
+        player.GetComponent<ShipData>().m_CurrShield = m_TempShield;
 
         player.GetComponent<ShipData>().m_Inventory = m_TempItems;
 
@@ -226,7 +225,6 @@ public class GameController : MonoBehaviour
         else
         {
             GameOver();
-            //m_Play = false;
         }
     }
 
@@ -244,8 +242,5 @@ public class GameController : MonoBehaviour
                 m_PData.m_Items[j].name = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory[i].name;
             }
         }
-            
-
-        //m_GData.Save();
     }
 }

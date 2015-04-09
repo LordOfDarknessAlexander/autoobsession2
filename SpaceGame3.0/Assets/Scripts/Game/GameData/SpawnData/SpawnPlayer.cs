@@ -55,12 +55,12 @@ public class SpawnPlayer : MonoBehaviour
 
             if (m_Player.GetComponent<ShipData>().m_HasShield)
             {
-                m_Player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+                m_Player.GetComponent<ShipData>().m_CurrShield = m_PData.m_Shield;
                 m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
             }
             else
             {
-                m_Player.GetComponent<ShipData>().m_Shield = 0;
+                m_Player.GetComponent<ShipData>().m_CurrShield = 0;
                 m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
             }
             

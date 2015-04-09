@@ -34,6 +34,6 @@ public class PlayerShip : Ship
         levelUpgradeCounter_ = m_PData.m_ShipLevel;
 
         m_MaxHP = m_PData.m_HP;
-        m_MaxShieldHP = m_PData.m_Shield;
+        m_MaxShieldHP = 10 * (m_PData.m_ShieldLevel + 1);
     }
 }

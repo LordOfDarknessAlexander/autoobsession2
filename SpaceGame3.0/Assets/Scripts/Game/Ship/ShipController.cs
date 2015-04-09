@@ -28,14 +28,14 @@ public class ShipController : MonoBehaviour
 
         if(m_Data.m_HasShield)
         {
-            m_Data.m_Shield -= totalDamage_;
+            m_Data.m_CurrShield -= totalDamage_;
         }
         else
         {
             m_Data.m_HP -= totalDamage_;
         }
 
-        if(m_Data.m_Shield <= 0)
+        if(m_Data.m_CurrShield <= 0)
         {
             m_Data.m_HasShield = false;
             ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);

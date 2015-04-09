@@ -23,10 +23,10 @@ public class ShieldPU : PowerUps
         if(player.GetComponent<ShipData>().m_HasShield)
         {
             //check to see if shield health under its max, if not then do nothing
-            if (player.GetComponent<ShipData>().m_Shield < player.GetComponent<PlayerShip>().m_MaxShieldHP)
+            if (player.GetComponent<ShipData>().m_CurrShield < player.GetComponent<PlayerShip>().m_MaxShieldHP)
             {
                 player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
-                player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+                player.GetComponent<ShipData>().m_CurrShield = m_PData.m_Shield;
             }
             else
             {
@@ -37,7 +37,7 @@ public class ShieldPU : PowerUps
         else
         {
             player.GetComponent<ShipData>().m_HasShield = true;
-            player.GetComponent<ShipData>().m_Shield = m_PData.m_Shield;
+            player.GetComponent<ShipData>().m_CurrShield = m_PData.m_Shield;
             player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
         }
     }

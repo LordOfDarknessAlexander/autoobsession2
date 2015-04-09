@@ -9,7 +9,7 @@ public class ShieldData : MonoBehaviour
     {
         if(ship.GetComponent<ShipData>().m_HasShield)
         {
-            if (ship.GetComponent<ShipData>().m_Shield > 0)
+            if (ship.GetComponent<ShipData>().m_CurrShield > 0)
             {
                 m_ShieldPos.GetComponent<Renderer>().enabled = true;
             }

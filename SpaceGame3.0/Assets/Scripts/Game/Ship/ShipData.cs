@@ -18,7 +18,8 @@ public class ShipData : MonoBehaviour
     //public float m_CurrentMass; //total mass of ship
     //public float m_ShipMass;// mass of ship without cargo, weapons
     public int m_HP;
-    public int m_Shield;
+    public int m_CurrShield;
+    public int m_MaxShield;
     public bool m_HasShield;
 
     public float GetTotalThrustAccel()
