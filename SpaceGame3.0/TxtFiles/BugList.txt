@@ -1,0 +1,5 @@
+Space Shooter Bug List
+
+GameOver function not activating, gameover not being set to true
+Bosses not taking damage/fixed
+
