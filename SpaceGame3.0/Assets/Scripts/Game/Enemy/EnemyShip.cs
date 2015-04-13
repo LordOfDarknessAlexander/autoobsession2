@@ -69,7 +69,7 @@ public class EnemyShip : Ship
     {
         randNum_ = Random.Range(0, 100);
 
-        this.GetComponent<BossShip>().BossLootDrop(ship);
+        ship.GetComponent<BossShip>().BossLootDrop(ship);
 
         if (randNum_ < 20)
         {
@@ -80,4 +80,21 @@ public class EnemyShip : Ship
             return;
         }
     }
+
+    public void DropLootMiniBoss(GameObject ship)
+    {
+        randNum_ = Random.Range(0, 100);
+
+        ship.GetComponent<MiniBossShip>().BossLootDrop(ship);
+
+        if (randNum_ < 20)
+        {
+            m_ItemToDrop.LootDrop(ship);
+        }
+        else
+        {
+            return;
+        }
+    }
+
 }

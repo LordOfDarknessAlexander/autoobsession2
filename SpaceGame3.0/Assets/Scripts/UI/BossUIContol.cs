@@ -13,10 +13,8 @@ public class BossUIContol : MonoBehaviour
     private int maxBossHealth_; //Bosses max health
     private int minHealth_ = 0; //Minimum health the player or enemy can ever have, obviously it's 0
 
-    private int currHealth_;
-    private int currLives_;
-    private int currScore_;
-    private int currSalvage_;
+    private int currBossHealth_;
+
 
     void Awake()
     {
@@ -31,12 +29,9 @@ public class BossUIContol : MonoBehaviour
     {
         if (m_BossObj != null)
         {
-            currHealth_ = m_BossObj.GetComponent<ShipData>().m_HP;
-            currLives_ = Camera.main.GetComponent<GameController>().m_Lives;
-            currScore_ = Camera.main.GetComponent<GameController>().m_Score;
-            currSalvage_ = Camera.main.GetComponent<GameController>().m_Salvage;
+            currBossHealth_ = m_BossObj.GetComponent<ShipData>().m_HP;
 
-            m_BossHealth.value = m_BossObj.GetComponent<ShipData>().m_HP;
+            m_BossHealth.value = currBossHealth_;
             m_BossShield.value = m_BossObj.GetComponent<ShipData>().m_CurrShield;
         }
     }

@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
+
 
 public class UIControl : MonoBehaviour
 {
     public GameData m_GData;
     public PlayerData m_PData;
+    public PowerUpControls m_PUControls;
 
     public GameObject m_GameControl;
     public GameObject m_Player; //The player game object
@@ -13,12 +16,12 @@ public class UIControl : MonoBehaviour
     public Slider m_PlayerShield;//Slider that is activated to show player shiled health, turn off if hasShield is false;
     public Text m_LivesVal; //Text element for the current number of lives the player has
     public Text m_ScoreVal; //Text element for the player's current score
-    public Text m_SalvageVal;
+    public Text m_SalvageVal;//Text elememnt for the collected salvage
 
     private int maxPlayerHealth_; //Player's max health
     private int minHealth_ = 0; //Minimum health the player or enemy can ever have, obviously it's 0
-    private int maxPlayerShield_;
-    private int minShield_ = 0;
+    private int maxPlayerShield_;//Player's Max shield hp
+    private int minShield_ = 0;//
    
     private int currHealth_;
     private int currShield_;
@@ -41,7 +44,7 @@ public class UIControl : MonoBehaviour
         m_PlayerShield.maxValue = maxPlayerShield_;
         m_PlayerShield.minValue = minShield_;
 
-        maxPlayerHealth_ = m_Player.GetComponent<ShipData>().m_HP;
+        maxPlayerHealth_ = m_Player.GetComponent<PlayerShip>().m_MaxHP;
         m_PlayerHealth.maxValue = maxPlayerHealth_;
         m_PlayerHealth.minValue = minHealth_;
     }
@@ -56,11 +59,13 @@ public class UIControl : MonoBehaviour
             currScore_ = m_GameControl.GetComponent<GameController>().m_Score;
             currSalvage_ = m_GameControl.GetComponent<GameController>().m_Salvage;
 
-            m_PlayerHealth.value = m_Player.GetComponent<ShipData>().m_HP;
+            m_PlayerHealth.value = currHealth_;
             m_PlayerShield.value = currShield_;
             m_LivesVal.text = currLives_.ToString();
             m_ScoreVal.text = currScore_.ToString();
             m_SalvageVal.text = currSalvage_.ToString();
+
+            m_PUControls.SetPowerUpImages();
         }
     }
 }

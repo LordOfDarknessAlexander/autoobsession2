@@ -11,7 +11,8 @@ public class PlayerData : MonoBehaviour
 {
     public static PlayerData m_PData;
 
-    public List<GameObject> m_Items;
+    public List<String> m_Items;
+    public List<String> m_Tokens;
 
     public int m_EnemiesKilledLifetime;
     public int m_TotalScore;
@@ -22,6 +23,7 @@ public class PlayerData : MonoBehaviour
     public int m_DamageLevel;
     public int m_HealthLevel;
     public int m_ShieldLevel;
+    public int m_TempShieldLevel;
 
     public bool m_HasShield;
 
@@ -52,8 +54,7 @@ public class PlayerData : MonoBehaviour
         m_DamageLevel = 1;
         m_HealthLevel = 1;
         m_ShieldLevel = 0;
-
-        m_HasShield = false;
+        m_TempShieldLevel = 1;
 
         if(m_ShieldLevel == 0)
         {
@@ -66,11 +67,11 @@ public class PlayerData : MonoBehaviour
 
         if (m_HasShield)
         {
-            m_Shield = 10 * m_ShipLevel * m_ShieldLevel;
+            m_Shield = 10 * (m_ShipLevel * m_ShieldLevel);
         }
    
 
-        m_HP = 10 * m_ShipLevel * m_HealthLevel;
+        m_HP = 20 * m_ShipLevel * m_HealthLevel;
         m_DamageModifer = 1 * m_ShipLevel * m_DamageLevel;
         m_EngineModifier = 1 * m_ShipLevel * m_EngineLevel;
     }
@@ -92,5 +93,6 @@ class PlayerSave
     public int m_HP;
     public int m_Shield;
 
-    public List<GameObject> m_Items;
+    public List<String> m_Items;
+    public List<String> m_Tokens;
 }

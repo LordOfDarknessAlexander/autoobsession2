@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     public int m_Kills;
     public int m_Salvage;
 
-    public List<GameObject> m_TempItems;
+    public List<String> m_TempItems;
 
     public int m_TempKills;
     public int m_TempScore;
@@ -155,17 +155,15 @@ public class GameController : MonoBehaviour
         m_TempHP = player.GetComponent<ShipData>().m_HP;
         m_TempShield = player.GetComponent<ShipData>().m_CurrShield;
 
-        m_TempItems = player.GetComponent<ShipData>().m_Inventory;
+        //m_TempItems = player.GetComponent<ShipData>().m_Inventory[].name;
 
-        for (int i = 0; i < m_TempItems.Count; ++i)
+        for (int i = 0; i < player.GetComponent<ShipData>().m_Inventory.Count; ++i)
         {
-            for (int j = 0; j < player.GetComponent<ShipData>().m_Inventory.Count; ++j)
+            for (int j = 0; j < m_TempItems.Count; ++j)
             {
-                player.GetComponent<ShipData>().m_Inventory[j].name = m_TempItems[i].name;
+                player.GetComponent<ShipData>().m_Inventory[i].name = m_TempItems[j];
             }
         }
-
-
         Debug.Log("Soft Save complete");
     }
 
@@ -189,13 +187,13 @@ public class GameController : MonoBehaviour
         player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         player.GetComponent<ShipData>().m_CurrShield = m_TempShield;
 
-        player.GetComponent<ShipData>().m_Inventory = m_TempItems;
+        //player.GetComponent<ShipData>().m_Inventory[].name = m_TempItems;
 
         for (int i = 0; i < m_TempItems.Count; ++i)
         {
             for (int j = 0; j < player.GetComponent<ShipData>().m_Inventory.Count; ++j)
             {
-                player.GetComponent<ShipData>().m_Inventory[j].name = m_TempItems[i].name;
+                player.GetComponent<ShipData>().m_Inventory[j].name = m_TempItems[i];
             }
         }
 
@@ -239,7 +237,7 @@ public class GameController : MonoBehaviour
         {
             for(int j = 0; j < m_PData.m_Items.Count; ++j)
             {
-                m_PData.m_Items[j].name = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory[i].name;
+                m_PData.m_Items[j] = m_PSpawn.m_Player.GetComponent<ShipData>().m_Inventory[i].name;
             }
         }
     }

@@ -14,15 +14,19 @@ public class SpawnPlayer : MonoBehaviour
     public GameObject m_Player;
     private GameObject playerObj_;
 
-
     public void SetStats(GameObject player)
     {
         m_Player.GetComponent<PlayerShip>().m_DamageModifier = m_PData.m_DamageModifer;
         m_Player.GetComponent<PlayerController>().m_Salvage = m_PData.m_Salvage;
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         m_Player.GetComponent<ShipData>().m_HasShield = m_PData.m_HasShield;
-        m_Player.GetComponent<ShipData>().m_Inventory = m_PData.m_Items;
-
+        for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Inventory.Count; ++i)
+        {
+            for (int j = 0; j < m_PData.m_Items.Count; ++j)
+            {
+                m_PData.m_Items[j] = m_Player.GetComponent<ShipData>().m_Inventory[i].name;
+            }
+        }
     }
 
     public void SetSavedStats(GameObject player)
@@ -32,7 +36,13 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
 
         m_Player.GetComponent<ShipData>().m_HasShield = m_GController.m_TempHasShield;
-        m_Player.GetComponent<ShipData>().m_Inventory = m_GController.m_TempItems;
+        for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Inventory.Count; ++i)
+        {
+            for (int j = 0; j < m_PData.m_Items.Count; ++j)
+            {
+                m_PData.m_Items[j] = m_Player.GetComponent<ShipData>().m_Inventory[i].name;
+            }
+        }
     }
 
     public void Spawn()
@@ -77,6 +87,17 @@ public class SpawnPlayer : MonoBehaviour
     {
         m_Player = playerPool_[0];
         SetSavedStats(m_Player);
+
+        if (m_Player.GetComponent<ShipData>().m_HasShield)
+        {
+            m_Player.GetComponent<ShipData>().m_CurrShield = m_PData.m_Shield;
+            m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
+        }
+        else
+        {
+            m_Player.GetComponent<ShipData>().m_CurrShield = 0;
+            m_Player.GetComponent<PlayerShip>().m_ShieldData.SetShield(m_Player);
+        }
 
         Vector3 playerSpawn = new Vector3(0.0f, -5.0f, 0.0f);
         Quaternion spawnPlayerRotation = Quaternion.identity;

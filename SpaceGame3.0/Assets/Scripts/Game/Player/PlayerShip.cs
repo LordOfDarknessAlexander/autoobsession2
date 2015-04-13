@@ -6,8 +6,10 @@ public class PlayerShip : Ship
     public PlayerController m_PController;
     public PlayerData m_PData;
 
+    public bool m_HasTempShield;
     public int m_MaxHP;
     public int m_MaxShieldHP;
+    public int m_TempShieldHP;
 
     private int shieldUpgradeCounter_ = 1; //Amount of upgrades in the shield by the player
     private int engineUpgradeCounter_ = 1; //Amount of upgrades in the engines by the player
@@ -33,7 +35,9 @@ public class PlayerShip : Ship
         engineUpgradeCounter_ = m_PData.m_EngineLevel;
         levelUpgradeCounter_ = m_PData.m_ShipLevel;
 
-        m_MaxHP = m_PData.m_HP;
-        m_MaxShieldHP = 10 * (m_PData.m_ShieldLevel + 1);
+        m_HasTempShield = false;
+        m_TempShieldHP = 20;
+        m_MaxHP = 20 * HealthLevel;
+        m_MaxShieldHP = 10 * (m_PData.m_ShieldLevel);
     }
 }

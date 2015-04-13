@@ -37,6 +37,14 @@ public class ShipController : MonoBehaviour
 
         if(m_Data.m_CurrShield <= 0)
         {
+            if(ship.tag == "Player")
+            {
+                if(ship.GetComponent<PlayerShip>().m_HasTempShield)
+                {
+                    ship.GetComponent<PlayerShip>().m_HasTempShield = false;
+                }
+            }
+
             m_Data.m_HasShield = false;
             ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
         }
@@ -60,10 +68,16 @@ public class ShipController : MonoBehaviour
                 ship.GetComponent<EnemyShip>().DropLootEnemy(ship);
                 ship.SetActive(false);
             }
+            if (ship.tag == "MiniBoss")
+            {
+                Camera.main.GetComponent<GameController>().m_Score += ship.GetComponent<MiniBossShip>().m_ScoreVal;
+                Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<MiniBossShip>().m_SalvageVal;
+                ship.GetComponent<EnemyShip>().DropLootMiniBoss(ship);
+                ship.SetActive(false);
+            }
             if (ship.tag == "Boss")
             {
-                Camera.main.GetComponent<GameController>().m_Score += ship.GetComponent<BossShip>().m_ScoreVal * (ship.GetComponent<BossShip>().m_Level * 
-                                                                                                                  ship.GetComponent<BossShip>().m_Tier);
+                Camera.main.GetComponent<GameController>().m_Score += ship.GetComponent<BossShip>().m_ScoreVal;
                 Camera.main.GetComponent<GameController>().m_Salvage += ship.GetComponent<BossShip>().m_SalvageVal;
                 ship.GetComponent<EnemyShip>().DropLootBoss(ship);
                 ship.SetActive(false);

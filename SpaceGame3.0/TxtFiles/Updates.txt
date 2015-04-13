@@ -7,4 +7,4 @@ UI elements now have borders
 Score now displaying correctly
 Soft save implemented between waves, resets to beginning of wave on death
 Enemy spawn working, cap implemented
-Shield image is now turning on when shields are active and off when they are depleted
+Shield image is now turning on when shields are active and off when they are depleted, working in UI as well

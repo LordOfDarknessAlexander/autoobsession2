@@ -43,7 +43,6 @@ Axis Input
 	
 Audio File needed
 	Background music
-	engine sounds????
 	
 UIs
 Win Scene
@@ -66,7 +65,7 @@ Credits
 
 Game UI
 	Life counter / done
-	Enemy counter / 
+	Enemy counter / done
 	Score display / done
 	Power ups Display / done
 	Health Indicator / done

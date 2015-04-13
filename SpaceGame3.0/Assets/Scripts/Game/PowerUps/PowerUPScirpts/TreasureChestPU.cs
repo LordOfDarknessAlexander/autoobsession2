@@ -13,14 +13,14 @@ public class TreasureChestPU : PowerUps
         {
             Vector3 movement = new Vector3(0, m_DropSpeed, 0);
 
-            GetComponent<Rigidbody>().velocity = transform.up * m_DropSpeed;
+            GetComponent<Rigidbody>().velocity = movement;
         }
     }
 
     public override void ItemAffect(GameObject player)
     {
-        //generate randNum between 1000 and 50000
-        int randNum = Random.Range(1000, 50000);
+        //generate randNum between 500 and 15000
+        int randNum = Random.Range(500, 15000);
 
         //apply randNum to players Salvage collected(not total earned until after wave 5 or 10)
         Camera.main.GetComponent<GameController>().m_Salvage += randNum;

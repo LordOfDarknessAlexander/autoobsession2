@@ -14,7 +14,7 @@ public class NukePU : PowerUps
         {
             Vector3 movement = new Vector3(0, m_DropSpeed, 0);
 
-            GetComponent<Rigidbody>().velocity = transform.up * m_DropSpeed;
+            GetComponent<Rigidbody>().velocity = movement;
         }
     }
 
@@ -22,6 +22,7 @@ public class NukePU : PowerUps
     {
         Camera.main.GetComponent<EnemySpawn>().DestroyAllEnemies();
     }
+
     public override void UseItem(GameObject player)
     {
         ItemAffect(player);
