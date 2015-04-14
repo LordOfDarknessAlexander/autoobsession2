@@ -171,6 +171,7 @@ public class EnemySpawn : MonoBehaviour
         if (m_WaveNum == 6)
         {
             m_GController.SoftSave(m_Player);
+            m_KillsPanel.alpha = 1;
 
             //clear enemy array
             m_Enemies.Clear();

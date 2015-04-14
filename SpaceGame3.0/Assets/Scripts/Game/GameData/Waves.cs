@@ -94,7 +94,6 @@ public class Waves : MonoBehaviour
                     m_GController.SoftSave(m_Player);
                     m_ESpawn.m_BossPanel.alpha = 0;
                     m_ESpawn.m_KillsPanel.alpha = 1;
-                    //m_GController.Win();
                 }
                 yield return new WaitForSeconds(m_WaveDelay);
 

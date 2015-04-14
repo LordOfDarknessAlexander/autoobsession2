@@ -20,6 +20,7 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<PlayerController>().m_Salvage = m_PData.m_Salvage;
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
         m_Player.GetComponent<ShipData>().m_HasShield = m_PData.m_HasShield;
+
         for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Inventory.Count; ++i)
         {
             for (int j = 0; j < m_PData.m_Items.Count; ++j)
@@ -36,6 +37,7 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.GetComponent<ShipData>().m_HP = m_PData.m_HP;
 
         m_Player.GetComponent<ShipData>().m_HasShield = m_GController.m_TempHasShield;
+
         for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Inventory.Count; ++i)
         {
             for (int j = 0; j < m_PData.m_Items.Count; ++j)
