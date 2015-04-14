@@ -45,8 +45,7 @@ public class ShieldPU : PowerUps
                 player.GetComponent<ShipData>().m_HP = player.GetComponent<PlayerShip>().m_MaxHP;
             }
             player.GetComponent<ShipData>().m_HasShield = true;
-            //player.GetComponent<PlayerData>().m_TempShieldLevel = 1;
-            player.GetComponent<ShipData>().m_CurrShield = player.GetComponent<PlayerShip>().m_MaxShieldHP;
+            player.GetComponent<ShipData>().m_CurrShield = player.GetComponent<PlayerShip>().m_TempShieldHP;
             player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
         }
     }

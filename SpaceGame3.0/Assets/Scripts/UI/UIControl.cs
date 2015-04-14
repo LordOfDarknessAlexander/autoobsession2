@@ -21,7 +21,7 @@ public class UIControl : MonoBehaviour
     private int maxPlayerHealth_; //Player's max health
     private int minHealth_ = 0; //Minimum health the player or enemy can ever have, obviously it's 0
     private int maxPlayerShield_;//Player's Max shield hp
-    private int minShield_ = 0;//
+    private int minShield_ = 0;
    
     private int currHealth_;
     private int currShield_;

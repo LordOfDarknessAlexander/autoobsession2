@@ -28,7 +28,7 @@ public class PowerUpControls : MonoBehaviour
         {
             if (m_Player.GetComponent<ShipData>().m_Inventory[0] != null)
             {
-                m_Boost1.GetComponent<Renderer>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<Renderer>().material;
+                m_Boost1.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<MeshRenderer>().material;
             }
             else
             {
@@ -37,20 +37,20 @@ public class PowerUpControls : MonoBehaviour
 
             if (m_Player.GetComponent<ShipData>().m_Inventory[1] != null)
             {
-                m_Boost2.GetComponent<Renderer>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<Renderer>().material;
+                m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().material;
             }
             else
             {
-                m_Boost2.GetComponent<Renderer>().material = m_BlankImage;
+                m_Boost2.GetComponent<Image>().material = m_BlankImage;
             }
 
             if (m_Player.GetComponent<ShipData>().m_Inventory[2] != null)
             {
-                m_Boost3.GetComponent<Renderer>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<Renderer>().material;
+                m_Boost3.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<MeshRenderer>().material;
             }
             else
             {
-                m_Boost3.GetComponent<Renderer>().material = m_BlankImage;
+                m_Boost3.GetComponent<Image>().material = m_BlankImage;
             }
         }
     }
@@ -62,8 +62,8 @@ public class PowerUpControls : MonoBehaviour
             if (m_Boost1.GetComponent<Image>().material != m_BlankImage)
             {
                 item.GetComponent<PowerUps>().UseItem(item);
-                m_ActiveBoost.GetComponent<Renderer>().material = m_Boost1.GetComponent<Renderer>().material;
-                m_Boost1.GetComponent<Renderer>().material = m_BlankImage;
+                m_ActiveBoost.GetComponent<Image>().material = m_Boost1.GetComponent<Image>().material;
+                m_Boost1.GetComponent<Image>().material = m_BlankImage;
                 Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(0);
             }
             else
@@ -77,8 +77,8 @@ public class PowerUpControls : MonoBehaviour
             if (m_Boost2.GetComponent<Image>().material != m_BlankImage)
             {
                 item.GetComponent<PowerUps>().UseItem(item);
-                m_ActiveBoost.GetComponent<Renderer>().material = m_Boost2.GetComponent<Renderer>().material;
-                m_Boost2.GetComponent<Renderer>().material = m_BlankImage;
+                m_ActiveBoost.GetComponent<Image>().material = m_Boost2.GetComponent<Image>().material;
+                m_Boost2.GetComponent<Image>().material = m_BlankImage;
                 Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(1);
             }
             else
@@ -92,8 +92,8 @@ public class PowerUpControls : MonoBehaviour
             if (m_Boost3.GetComponent<Image>().material != m_BlankImage)
             {
                 item.GetComponent<PowerUps>().UseItem(item);
-                m_ActiveBoost.GetComponent<Renderer>().material = m_Boost3.GetComponent<Renderer>().material;
-                m_Boost3.GetComponent<Renderer>().material = m_BlankImage;
+                m_ActiveBoost.GetComponent<Image>().material = m_Boost3.GetComponent<Image>().material;
+                m_Boost3.GetComponent<Image>().material = m_BlankImage;
                 Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(2);
             }
             else
