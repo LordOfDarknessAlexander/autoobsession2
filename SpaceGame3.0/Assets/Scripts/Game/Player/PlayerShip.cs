@@ -35,7 +35,6 @@ public class PlayerShip : Ship
         engineUpgradeCounter_ = m_PData.m_EngineLevel;
         levelUpgradeCounter_ = m_PData.m_ShipLevel;
 
-        //m_HasTempShield = false;
         m_TempShieldHP = 10;
         m_MaxHP = 20 * HealthLevel;
         m_MaxShieldHP = 10 * (m_PData.m_ShieldLevel);

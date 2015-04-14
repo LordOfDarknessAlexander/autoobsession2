@@ -8,7 +8,7 @@ public class ShipData : MonoBehaviour
     public Weapon.WeaponStateData[] m_WeaponState;
     public Rigidbody m_Rigidbody;
     public List<GameObject> m_Inventory;
-    public PowerUpControls m_PowerUpControl;
+    //public PowerUpControls m_PowerUpControl;
 
     public float m_ForwardAccel;
     public float m_VerticalAccel;

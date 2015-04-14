@@ -27,11 +27,12 @@ public class BossShip : EnemyShip
         m_SData.m_CurrShield = 10 * m_Level * m_Tier;
         m_DamageModifier = m_DamageLevel * Constants.DEFAULT_UPGRADE_MODIFIER;
 
-        m_EngineLevel = m_GData.m_EnemyEngineLevel * m_Level * m_Tier;
-        m_DamageLevel = m_GData.m_EnemyDamageLevel * m_Level * m_Tier;
-        m_HealthLevel = m_GData.m_EnemyHealthLevel * m_Level * m_Tier;
-        m_ShieldLevel = m_GData.m_EnemyShieldLevel * m_Level * m_Tier;
-        m_SalvageVal = 500 * m_Level * m_Tier;
+        m_EngineLevel = m_GData.m_EnemyEngineLevel * (m_Level * m_Tier);
+        m_DamageLevel = m_GData.m_EnemyDamageLevel * (m_Level * m_Tier);
+        m_HealthLevel = m_GData.m_EnemyHealthLevel * (m_Level * m_Tier);
+        m_ShieldLevel = m_GData.m_EnemyShieldLevel * (m_Level * m_Tier);
+        m_SalvageVal = 500 * (m_Level * m_Tier);
+        m_ScoreVal = m_SalvageVal * 2;
     }
 
     public void SetDrops(GameObject parentShip)

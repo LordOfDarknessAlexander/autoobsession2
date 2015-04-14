@@ -11,18 +11,33 @@ public class ShieldData : MonoBehaviour
         {
             if (ship.GetComponent<ShipData>().m_HasShield)
             {
+                Debug.Log("ShieldHP Value is " + ship.GetComponent<ShipData>().m_CurrShield);
+
                 if (ship.GetComponent<ShipData>().m_CurrShield > 0)
                 {
-                    m_ShieldPos.GetComponent<Renderer>().enabled = true;
+                    m_ShieldPos.GetComponent<MeshRenderer>().enabled = true;
                 }
                 else
                 {
-                    m_ShieldPos.GetComponent<Renderer>().enabled = false;
+                    m_ShieldPos.GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
+            else if(ship.GetComponent<PlayerShip>().m_HasTempShield)
+            {
+                Debug.Log("ShieldHP Value is " + ship.GetComponent<ShipData>().m_CurrShield);
+
+                if (ship.GetComponent<ShipData>().m_CurrShield > 0)
+                {
+                    m_ShieldPos.GetComponent<MeshRenderer>().enabled = true;
+                }
+                else
+                {
+                    m_ShieldPos.GetComponent<MeshRenderer>().enabled = false;
                 }
             }
             else
             {
-                m_ShieldPos.GetComponent<Renderer>().enabled = false;
+                m_ShieldPos.GetComponent<MeshRenderer>().enabled = false;
             }
         }
     }

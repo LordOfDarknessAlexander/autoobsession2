@@ -37,7 +37,7 @@ public class DoubleShieldPU : PowerUps
             {
                 player.GetComponent<ShipData>().m_HP = player.GetComponent<PlayerShip>().m_MaxHP;
             }
-            player.GetComponent<ShipData>().m_HasShield = true;
+            player.GetComponent<PlayerShip>().m_HasTempShield = true;
             player.GetComponent<ShipData>().m_CurrShield = player.GetComponent<PlayerShip>().m_TempShieldHP * 2;
             player.GetComponent<PlayerShip>().m_ShieldData.SetShield(player);
         }
