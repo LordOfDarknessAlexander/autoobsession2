@@ -315,6 +315,11 @@ public class StarMapUI : MonoBehaviour
                 m_PData.m_Salvage -= upgradeCost_;
                 levelUpgradeCounter_++;
                 m_PData.m_ShipLevel = PlayerShipLevel;
+                m_PData.m_ShieldLevel = 0;
+                m_PData.m_EngineLevel = 1;
+                m_PData.m_HealthLevel = 1;
+                m_PData.m_DamageLevel = 1;
+
             }
         }
         else
