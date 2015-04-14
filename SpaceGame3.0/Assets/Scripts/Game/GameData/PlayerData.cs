@@ -72,8 +72,8 @@ public class PlayerData : MonoBehaviour
    
 
         m_HP = 20 * m_ShipLevel * m_HealthLevel;
-        m_DamageModifer = 1 * m_ShipLevel * m_DamageLevel;
-        m_EngineModifier = 1 * m_ShipLevel * m_EngineLevel;
+        m_DamageModifer = 1 * (m_ShipLevel * m_DamageLevel);
+        m_EngineModifier = 1 * (m_ShipLevel * m_EngineLevel);
     }
 }
 

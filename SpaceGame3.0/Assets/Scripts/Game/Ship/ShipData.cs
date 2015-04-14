@@ -15,7 +15,7 @@ public class ShipData : MonoBehaviour
 
     public int m_HP;
     public int m_CurrShield;
-    public int m_MaxShield;
+    //public int m_MaxShield;
  
     public bool m_HasShield;
 
