@@ -147,23 +147,65 @@ public class StarMapUI : MonoBehaviour
 
         m_Salvage.text = "You have " + m_PData.m_Salvage.ToString() + " Salvage";
 
+        if(m_PData.m_Tokens.Count > 0)
+        {
+            for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
+            {
+                if (m_PData.m_Tokens[i] == "HealthToken")
+                {
+                    m_HealthText.text = "Cost: 1 Health Token";
+                }
+                else
+                {
+                    m_HealthText.text = "Cost: " + HealthUpgradeCost.ToString() + "\nCurrent Level: " + HealthLevel;
+                }
 
-        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
-        {
-            
-        }
-            m_HealthText.text = "Cost: " + HealthUpgradeCost.ToString() + "\nCurrent Level: " + HealthLevel;
-        if(!m_PData.m_HasShield)
-        {
-            m_ShieldText.text = "Cost: " + BuyShieldCost.ToString() + "\nCurrent Level: " + ShieldLevel;
+                if (m_PData.m_Tokens[i] == "SheildToken")
+                {
+                    m_ShieldText.text = "Cost: 1 ShieldToken";
+                }
+                else
+                {
+                    if (!m_PData.m_HasShield)
+                    {
+                        m_ShieldText.text = "Cost: " + BuyShieldCost.ToString() + "\nCurrent Level: " + ShieldLevel;
+                    }
+                    else
+                    {
+                        m_ShieldText.text = "Cost: " + ShieldUpgradeCost.ToString() + "\nCurrent Level: " + ShieldLevel;
+                    }
+                }
+
+                if (m_PData.m_Tokens[i] == "DamageToken")
+                {
+                    m_DamageText.text = "Cost: 1 Engine Token";
+                }
+                else
+                {
+                    m_DamageText.text = "Cost: " + DamageUpgradeCost.ToString() + "\nCurrent Level: " + DamageLevel;
+                }
+
+                if (m_PData.m_Tokens[i] == "EngineToken")
+                {
+                    m_EngineText.text = "Cost: " + EngineUpgradeCost.ToString() + "\nCurrent Level: " + EngineLevel;
+                }
+            }
         }
         else
         {
-            m_ShieldText.text = "Cost: " + ShieldUpgradeCost.ToString() + "\nCurrent Level: " + ShieldLevel;
+            m_HealthText.text = "Cost: " + HealthUpgradeCost.ToString() + "\nCurrent Level: " + HealthLevel;
+            if (!m_PData.m_HasShield)
+            {
+                m_ShieldText.text = "Cost: " + BuyShieldCost.ToString() + "\nCurrent Level: " + ShieldLevel;
+            }
+            else
+            {
+                m_ShieldText.text = "Cost: " + ShieldUpgradeCost.ToString() + "\nCurrent Level: " + ShieldLevel;
+            }
+            m_DamageText.text = "Cost: " + DamageUpgradeCost.ToString() + "\nCurrent Level: " + DamageLevel;
+            m_EngineText.text = "Cost: " + EngineUpgradeCost.ToString() + "\nCurrent Level: " + EngineLevel;
+            m_TierText.text = "Cost: " + TierUpgradeCost.ToString() + "\nCurrent Level: " + PlayerShipLevel;
         }
-        m_DamageText.text = "Cost: " + DamageUpgradeCost.ToString() + "\nCurrent Level: " + DamageLevel;
-        m_EngineText.text = "Cost: " + EngineUpgradeCost.ToString() + "\nCurrent Level: " + EngineLevel;
-        m_TierText.text = "Cost: " + TierUpgradeCost.ToString() + "\nCurrent Level: " + PlayerShipLevel;
     }
 
     public void SetPlayerData()
@@ -211,87 +253,111 @@ public class StarMapUI : MonoBehaviour
     //Button function
     public void UpgradeDamage()
     {
-        m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * damageUpgradeCounter_;
-        if (m_PData.m_Salvage >= upgradeCost_)
+        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
         {
-            if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+            if (m_PData.m_Tokens[i] == "DamageToken")
             {
-                m_PData.m_Salvage -= upgradeCost_;
+                upgradeCost_ = 0;
+                m_PData.m_Tokens.Remove("DamageToken");
                 damageUpgradeCounter_++;
                 m_PData.m_DamageLevel = DamageLevel;
             }
-        }
-        else
-        {
-            m_Control.text = "You don't have enough Salvage";
+            else
+            {
+                m_Control.text = "";
+                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * damageUpgradeCounter_;
+                if (m_PData.m_Salvage >= upgradeCost_)
+                {
+                    if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                    {
+                        m_PData.m_Salvage -= upgradeCost_;
+                        damageUpgradeCounter_++;
+                        m_PData.m_DamageLevel = DamageLevel;
+                    }
+                }
+                else
+                {
+                    m_Control.text = "You don't have enough Salvage";
+                }
+            }
         }
     }
     //Button function
     public void UpgradeEngine()
     {
-        m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * engineUpgradeCounter_;
-        if (m_PData.m_Salvage >= upgradeCost_)
+        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
         {
-            if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+            if(m_PData.m_Tokens[i] == "EngineToken")
             {
-                m_PData.m_Salvage -= upgradeCost_;
-                engineUpgradeCounter_++;
-                m_PData.m_EngineLevel = EngineLevel;
+             upgradeCost_ = 0;
+            m_PData.m_Tokens.Remove("EngineToken");
+            engineUpgradeCounter_++;
+            m_PData.m_EngineLevel = EngineLevel;
+           }
+            else
+            {
+                m_Control.text = "";
+                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * engineUpgradeCounter_;
+                if (m_PData.m_Salvage >= upgradeCost_)
+                {
+                    if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                    {
+                        m_PData.m_Salvage -= upgradeCost_;
+                        engineUpgradeCounter_++;
+                        m_PData.m_EngineLevel = EngineLevel;
+                    }
+                }
+                else
+                {
+                    m_Control.text = "You don't have enough Salvage";
+                }
             }
-        }
-        else
-        {
-            m_Control.text = "You don't have enough Salvage";
         }
     }
     //Button function
     public void UpgradeHealth()
     {
-        m_Control.text = "";
-        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * healthUpgradeCounter_;
-        if (m_PData.m_Salvage >= upgradeCost_)
+        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
         {
-            if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+            if(m_PData.m_Tokens[i] == "HealthToken")
             {
-                m_PData.m_Salvage -= upgradeCost_;
+                m_PData.m_Tokens.Remove("HealthToken");
                 healthUpgradeCounter_++;
                 m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
                 m_PData.m_HealthLevel = HealthLevel;
             }
-        }
-        else
-        {
-            m_Control.text = "You don't have enough Salvage";
+            else
+            {
+                m_Control.text = "";
+                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * healthUpgradeCounter_;
+                if (m_PData.m_Salvage >= upgradeCost_)
+                {
+                    if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                    {
+                        m_PData.m_Salvage -= upgradeCost_;
+                        healthUpgradeCounter_++;
+                        m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
+                        m_PData.m_HealthLevel = HealthLevel;
+                    }
+                }
+                else
+                {
+                    m_Control.text = "You don't have enough Salvage";
+                }
+            }
         }
     }
     //Button function
     public void UpgradeShield()
     {
-        m_Control.text = "";
-        if(!m_PData.m_HasShield)
+        for (int i = 0; i < m_PData.m_Tokens.Count; i++)
         {
-            upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel + 1;
-            if (m_PData.m_Salvage >= upgradeCost_)
+            if (m_PData.m_Tokens[i] == "ShieldToken")
             {
-                m_PData.m_HasShield = true;
-                shieldUpgradeCounter_++;
-            }
-            else
-            {
-                m_Control.text = "You don't have enough Salvage";
-            }
-        }
-        else
-        {
-            m_Control.text = "";
-            upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * shieldUpgradeCounter_;
-            if (m_PData.m_Salvage >= upgradeCost_)
-            {
+                upgradeCost_ = 0;
                 if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
                 {
-                    m_PData.m_Salvage -= upgradeCost_;
+                    m_PData.m_Tokens.Remove("ShieldToken");
                     shieldUpgradeCounter_++;
                     m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
                     m_PData.m_ShieldLevel = ShieldLevel;
@@ -299,7 +365,39 @@ public class StarMapUI : MonoBehaviour
             }
             else
             {
-                m_Control.text = "You don't have enough Salvage";
+                m_Control.text = "";
+                if (!m_PData.m_HasShield)
+                {
+                    upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel + 1;
+                    if (m_PData.m_Salvage >= upgradeCost_)
+                    {
+                        m_PData.m_HasShield = true;
+                        shieldUpgradeCounter_++;
+                    }
+                    else
+                    {
+                        m_Control.text = "You don't have enough Salvage";
+                    }
+                }
+                else
+                {
+                    m_Control.text = "";
+                    upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * shieldUpgradeCounter_;
+                    if (m_PData.m_Salvage >= upgradeCost_)
+                    {
+                        if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                        {
+                            m_PData.m_Salvage -= upgradeCost_;
+                            shieldUpgradeCounter_++;
+                            m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
+                            m_PData.m_ShieldLevel = ShieldLevel;
+                        }
+                    }
+                    else
+                    {
+                        m_Control.text = "You don't have enough Salvage";
+                    }
+                }
             }
         }
     }
@@ -319,7 +417,6 @@ public class StarMapUI : MonoBehaviour
                 m_PData.m_EngineLevel = 1;
                 m_PData.m_HealthLevel = 1;
                 m_PData.m_DamageLevel = 1;
-
             }
         }
         else
