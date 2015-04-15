@@ -25,7 +25,18 @@ public class ShipController : MonoBehaviour
     public void ApplyDamage(GameObject ship, int damage)
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
-
+        if(ship.tag == "Player")
+        {
+            if(ship.GetComponent<PlayerShip>().m_HasTempShield)
+            {
+                m_Data.m_CurrShield -= totalDamage_;
+                if (m_Data.m_CurrShield <= 0)
+                {
+                    ship.GetComponent<PlayerShip>().m_HasTempShield = false;
+                    ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
+                }
+            }
+        }
         if(m_Data.m_HasShield)
         {
             m_Data.m_CurrShield -= totalDamage_;

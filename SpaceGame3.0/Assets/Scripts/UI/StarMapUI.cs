@@ -128,7 +128,6 @@ public class StarMapUI : MonoBehaviour
             levelUpgradeCounter_ = value;
         }
     }
-
     public void Awake()
     {
         shieldUpgradeCounter_ = 1;
@@ -207,7 +206,6 @@ public class StarMapUI : MonoBehaviour
             m_TierText.text = "Cost: " + TierUpgradeCost.ToString() + "\nCurrent Level: " + PlayerShipLevel;
         }
     }
-
     public void SetPlayerData()
     {
         m_PData.m_ShipLevel = PlayerShipLevel;
@@ -216,8 +214,6 @@ public class StarMapUI : MonoBehaviour
         m_PData.m_ShieldLevel = ShieldLevel;
         m_PData.m_DamageLevel = DamageLevel;
     }
-
-
     public void LoadLevel(int level_)
     {
         m_Control.text = "";
@@ -236,7 +232,6 @@ public class StarMapUI : MonoBehaviour
             Application.LoadLevel("Main");
         }
     }
-
     //Button function -- If the user presses the spaceship this function will fire
     //                -- The function opens up the Upgrade menu, where they can then upgrade their ship or upgrade to a higher tier ship entirely
     public void UpgradeMenu()
@@ -253,150 +248,253 @@ public class StarMapUI : MonoBehaviour
     //Button function
     public void UpgradeDamage()
     {
-        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
+        if(m_PData.m_Tokens.Count > 0)
         {
-            if (m_PData.m_Tokens[i] == "DamageToken")
+            for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
             {
-                upgradeCost_ = 0;
-                m_PData.m_Tokens.Remove("DamageToken");
-                damageUpgradeCounter_++;
-                m_PData.m_DamageLevel = DamageLevel;
-            }
-            else
-            {
-                m_Control.text = "";
-                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * damageUpgradeCounter_;
-                if (m_PData.m_Salvage >= upgradeCost_)
+                if (m_PData.m_Tokens[i] == "DamageToken")
                 {
-                    if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-                    {
-                        m_PData.m_Salvage -= upgradeCost_;
-                        damageUpgradeCounter_++;
-                        m_PData.m_DamageLevel = DamageLevel;
-                    }
-                }
-                else
-                {
-                    m_Control.text = "You don't have enough Salvage";
-                }
-            }
-        }
-    }
-    //Button function
-    public void UpgradeEngine()
-    {
-        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
-        {
-            if(m_PData.m_Tokens[i] == "EngineToken")
-            {
-             upgradeCost_ = 0;
-            m_PData.m_Tokens.Remove("EngineToken");
-            engineUpgradeCounter_++;
-            m_PData.m_EngineLevel = EngineLevel;
-           }
-            else
-            {
-                m_Control.text = "";
-                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * engineUpgradeCounter_;
-                if (m_PData.m_Salvage >= upgradeCost_)
-                {
-                    if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-                    {
-                        m_PData.m_Salvage -= upgradeCost_;
-                        engineUpgradeCounter_++;
-                        m_PData.m_EngineLevel = EngineLevel;
-                    }
-                }
-                else
-                {
-                    m_Control.text = "You don't have enough Salvage";
-                }
-            }
-        }
-    }
-    //Button function
-    public void UpgradeHealth()
-    {
-        for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
-        {
-            if(m_PData.m_Tokens[i] == "HealthToken")
-            {
-                m_PData.m_Tokens.Remove("HealthToken");
-                healthUpgradeCounter_++;
-                m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
-                m_PData.m_HealthLevel = HealthLevel;
-            }
-            else
-            {
-                m_Control.text = "";
-                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * healthUpgradeCounter_;
-                if (m_PData.m_Salvage >= upgradeCost_)
-                {
-                    if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-                    {
-                        m_PData.m_Salvage -= upgradeCost_;
-                        healthUpgradeCounter_++;
-                        m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
-                        m_PData.m_HealthLevel = HealthLevel;
-                    }
-                }
-                else
-                {
-                    m_Control.text = "You don't have enough Salvage";
-                }
-            }
-        }
-    }
-    //Button function
-    public void UpgradeShield()
-    {
-        for (int i = 0; i < m_PData.m_Tokens.Count; i++)
-        {
-            if (m_PData.m_Tokens[i] == "ShieldToken")
-            {
-                upgradeCost_ = 0;
-                if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
-                {
-                    m_PData.m_Tokens.Remove("ShieldToken");
-                    shieldUpgradeCounter_++;
-                    m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
-                    m_PData.m_ShieldLevel = ShieldLevel;
-                }
-            }
-            else
-            {
-                m_Control.text = "";
-                if (!m_PData.m_HasShield)
-                {
-                    upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel + 1;
-                    if (m_PData.m_Salvage >= upgradeCost_)
-                    {
-                        m_PData.m_HasShield = true;
-                        shieldUpgradeCounter_++;
-                    }
-                    else
-                    {
-                        m_Control.text = "You don't have enough Salvage";
-                    }
+                    upgradeCost_ = 0;
+                    m_PData.m_Tokens.Remove("DamageToken");
+                    damageUpgradeCounter_++;
+                    m_PData.m_DamageLevel = DamageLevel;
                 }
                 else
                 {
                     m_Control.text = "";
-                    upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * shieldUpgradeCounter_;
+                    upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * damageUpgradeCounter_;
                     if (m_PData.m_Salvage >= upgradeCost_)
                     {
-                        if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                        if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
                         {
                             m_PData.m_Salvage -= upgradeCost_;
-                            shieldUpgradeCounter_++;
-                            m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
-                            m_PData.m_ShieldLevel = ShieldLevel;
+                            damageUpgradeCounter_++;
+                            m_PData.m_DamageLevel = DamageLevel;
                         }
                     }
                     else
                     {
                         m_Control.text = "You don't have enough Salvage";
                     }
+                }
+            }
+        }
+        else
+        {
+            m_Control.text = "";
+            upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * damageUpgradeCounter_;
+            if (m_PData.m_Salvage >= upgradeCost_)
+            {
+                if (damageUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                {
+                    m_PData.m_Salvage -= upgradeCost_;
+                    damageUpgradeCounter_++;
+                    m_PData.m_DamageLevel = DamageLevel;
+                }
+            }
+            else
+            {
+                m_Control.text = "You don't have enough Salvage";
+            }
+        }
+    }
+    //Button function
+    public void UpgradeEngine()
+    {
+        if (m_PData.m_Tokens.Count > 0)
+        {
+            for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
+            {
+                if (m_PData.m_Tokens[i] == "EngineToken")
+                {
+                    upgradeCost_ = 0;
+                    m_PData.m_Tokens.Remove("EngineToken");
+                    engineUpgradeCounter_++;
+                    m_PData.m_EngineLevel = EngineLevel;
+                }
+                else
+                {
+                    m_Control.text = "";
+                    upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * engineUpgradeCounter_;
+                    if (m_PData.m_Salvage >= upgradeCost_)
+                    {
+                        if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                        {
+                            m_PData.m_Salvage -= upgradeCost_;
+                            engineUpgradeCounter_++;
+                            m_PData.m_EngineLevel = EngineLevel;
+                        }
+                    }
+                    else
+                    {
+                        m_Control.text = "You don't have enough Salvage";
+                    }
+                }
+            }
+        }
+        else
+        {
+            m_Control.text = "";
+            upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * engineUpgradeCounter_;
+            if (m_PData.m_Salvage >= upgradeCost_)
+            {
+                if (engineUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                {
+                    m_PData.m_Salvage -= upgradeCost_;
+                    engineUpgradeCounter_++;
+                    m_PData.m_EngineLevel = EngineLevel;
+                }
+            }
+            else
+            {
+                m_Control.text = "You don't have enough Salvage";
+            }
+        }
+    }
+    //Button function
+    public void UpgradeHealth()
+    {
+        if (m_PData.m_Tokens.Count > 0)
+        {
+            for (int i = 0; i < m_PData.m_Tokens.Count; ++i)
+            {
+                if (m_PData.m_Tokens[i] == "HealthToken")
+                {
+                    m_PData.m_Tokens.Remove("HealthToken");
+                    healthUpgradeCounter_++;
+                    m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
+                    m_PData.m_HealthLevel = HealthLevel;
+                }
+                else
+                {
+                    m_Control.text = "";
+                    upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * healthUpgradeCounter_;
+                    if (m_PData.m_Salvage >= upgradeCost_)
+                    {
+                        if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                        {
+                            m_PData.m_Salvage -= upgradeCost_;
+                            healthUpgradeCounter_++;
+                            m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
+                            m_PData.m_HealthLevel = HealthLevel;
+                        }
+                    }
+                    else
+                    {
+                        m_Control.text = "You don't have enough Salvage";
+                    }
+                }
+            }
+        }
+        else
+        {
+            m_Control.text = "";
+            upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * healthUpgradeCounter_;
+            if (m_PData.m_Salvage >= upgradeCost_)
+            {
+                if (healthUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                {
+                    m_PData.m_Salvage -= upgradeCost_;
+                    healthUpgradeCounter_++;
+                    m_PData.m_HP += Constants.DEFAULT_UPGRADE_AMT;
+                    m_PData.m_HealthLevel = HealthLevel;
+                }
+            }
+            else
+            {
+                m_Control.text = "You don't have enough Salvage";
+            }
+        }
+    }
+    //Button function
+    public void UpgradeShield()
+    {
+        if (m_PData.m_Tokens.Count > 0)
+        {
+            for (int i = 0; i < m_PData.m_Tokens.Count; i++)
+            {
+                if (m_PData.m_Tokens[i] == "ShieldToken")
+                {
+                    upgradeCost_ = 0;
+                    if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                    {
+                        m_PData.m_Tokens.Remove("ShieldToken");
+                        shieldUpgradeCounter_++;
+                        m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
+                        m_PData.m_ShieldLevel = ShieldLevel;
+                    }
+                }
+                else
+                {
+                    m_Control.text = "";
+                    if (!m_PData.m_HasShield)
+                    {
+                        upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel + 1;
+                        if (m_PData.m_Salvage >= upgradeCost_)
+                        {
+                            m_PData.m_HasShield = true;
+                            shieldUpgradeCounter_++;
+                        }
+                        else
+                        {
+                            m_Control.text = "You don't have enough Salvage";
+                        }
+                    }
+                    else
+                    {
+                        m_Control.text = "";
+                        upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * shieldUpgradeCounter_;
+                        if (m_PData.m_Salvage >= upgradeCost_)
+                        {
+                            if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                            {
+                                m_PData.m_Salvage -= upgradeCost_;
+                                shieldUpgradeCounter_++;
+                                m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
+                                m_PData.m_ShieldLevel = ShieldLevel;
+                            }
+                        }
+                        else
+                        {
+                            m_Control.text = "You don't have enough Salvage";
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            m_Control.text = "";
+            if (!m_PData.m_HasShield)
+            {
+                upgradeCost_ = Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel + 1;
+                if (m_PData.m_Salvage >= upgradeCost_)
+                {
+                    m_PData.m_HasShield = true;
+                    shieldUpgradeCounter_++;
+                }
+                else
+                {
+                    m_Control.text = "You don't have enough Salvage";
+                }
+            }
+            else
+            {
+                m_Control.text = "";
+                upgradeCost_ = (Constants.BASE_UPGRADE_COST * m_PData.m_ShipLevel) * shieldUpgradeCounter_;
+                if (m_PData.m_Salvage >= upgradeCost_)
+                {
+                    if (shieldUpgradeCounter_ < Constants.MAX_UPGRADE_LEVEL)
+                    {
+                        m_PData.m_Salvage -= upgradeCost_;
+                        shieldUpgradeCounter_++;
+                        m_PData.m_Shield += Constants.DEFAULT_UPGRADE_AMT;
+                        m_PData.m_ShieldLevel = ShieldLevel;
+                    }
+                }
+                else
+                {
+                    m_Control.text = "You don't have enough Salvage";
                 }
             }
         }

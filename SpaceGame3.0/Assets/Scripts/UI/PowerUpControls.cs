@@ -20,22 +20,43 @@ public class PowerUpControls : MonoBehaviour
         m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
     }
 
+    public void Update()
+    {
+        SetPowerUpImages();
+        ItemsUse(gameObject);
+    }
 
 
     public void SetPowerUpImages()
     {
-        if(m_Player.GetComponent<ShipData>().m_Inventory.Count > 0)
+        if(m_Player.GetComponent<ShipData>().m_Inventory.Count == 0)
         {
-            if (m_Player.GetComponent<ShipData>().m_Inventory[0] != null)
+            m_Boost1.GetComponent<Image>().material = m_BlankImage;
+            m_Boost2.GetComponent<Image>().material = m_BlankImage;
+            m_Boost3.GetComponent<Image>().material = m_BlankImage;
+        }
+
+        else
+        {
+            if (m_Player.GetComponent<ShipData>().m_Inventory.Count > 0 && m_Player.GetComponent<ShipData>().m_Inventory.Count < 2)
             {
-                m_Boost1.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<MeshRenderer>().material;
-            }
-            else
-            {
-                m_Boost1.GetComponent<Image>().material = m_BlankImage;
+                //if (m_Player.GetComponent<ShipData>().m_Inventory[0] != null)
+                //{
+                    m_Boost1.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<MeshRenderer>().material;
+                //}
             }
 
-            if (m_Player.GetComponent<ShipData>().m_Inventory[1] != null)
+            if(m_Player.GetComponent<ShipData>().m_Inventory.Count > 1 && m_Player.GetComponent<ShipData>().m_Inventory.Count < 3)
+            {
+                m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().material;
+            }
+
+            if(m_Player.GetComponent<ShipData>().m_Inventory.Count > 2)
+            {
+                m_Boost3.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<MeshRenderer>().material;
+            }
+        }
+            /*if (m_Player.GetComponent<ShipData>().m_Inventory[1] != null)
             {
                 m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().material;
             }
@@ -52,19 +73,20 @@ public class PowerUpControls : MonoBehaviour
             {
                 m_Boost3.GetComponent<Image>().material = m_BlankImage;
             }
-        }
+        }*/
+        
     }
 
     public void ItemsUse(GameObject item)
     {
-        if (Input.GetKey(KeyCode.V) || Input.GetButton("m_Boost1"))
+        if (Input.GetKey(KeyCode.V))
         {
             if (m_Boost1.GetComponent<Image>().material != m_BlankImage)
             {
-                item.GetComponent<PowerUps>().UseItem(item);
                 m_ActiveBoost.GetComponent<Image>().material = m_Boost1.GetComponent<Image>().material;
                 m_Boost1.GetComponent<Image>().material = m_BlankImage;
                 Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(0);
+                item.GetComponent<PowerUps>().UseItem(item);
             }
             else
             {
@@ -72,14 +94,14 @@ public class PowerUpControls : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.B) || Input.GetButton("m_Boost2"))
+        if (Input.GetKey(KeyCode.B))
         {
             if (m_Boost2.GetComponent<Image>().material != m_BlankImage)
             {
-                item.GetComponent<PowerUps>().UseItem(item);
                 m_ActiveBoost.GetComponent<Image>().material = m_Boost2.GetComponent<Image>().material;
                 m_Boost2.GetComponent<Image>().material = m_BlankImage;
                 Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(1);
+                item.GetComponent<PowerUps>().UseItem(item);
             }
             else
             {
@@ -87,14 +109,14 @@ public class PowerUpControls : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.N) || Input.GetButton("m_Boost3"))
+        if (Input.GetKey(KeyCode.N))
         {
             if (m_Boost3.GetComponent<Image>().material != m_BlankImage)
             {
-                item.GetComponent<PowerUps>().UseItem(item);
                 m_ActiveBoost.GetComponent<Image>().material = m_Boost3.GetComponent<Image>().material;
                 m_Boost3.GetComponent<Image>().material = m_BlankImage;
                 Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(2);
+                item.GetComponent<PowerUps>().UseItem(item);
             }
             else
             {

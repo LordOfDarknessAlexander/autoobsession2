@@ -92,8 +92,6 @@ public class UIControl : MonoBehaviour
             m_LivesVal.text = currLives_.ToString();
             m_ScoreVal.text = currScore_.ToString();
             m_SalvageVal.text = currSalvage_.ToString();
-
-            m_PUControls.SetPowerUpImages();
         }
     }
 }

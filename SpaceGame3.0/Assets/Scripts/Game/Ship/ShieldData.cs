@@ -9,7 +9,7 @@ public class ShieldData : MonoBehaviour
     {
         if(ship.tag == "Player")
         {
-            if (ship.GetComponent<ShipData>().m_HasShield)
+            if(ship.GetComponent<PlayerShip>().m_HasTempShield)
             {
                 Debug.Log("ShieldHP Value is " + ship.GetComponent<ShipData>().m_CurrShield);
 
@@ -22,7 +22,7 @@ public class ShieldData : MonoBehaviour
                     m_ShieldPos.GetComponent<MeshRenderer>().enabled = false;
                 }
             }
-            else if(ship.GetComponent<PlayerShip>().m_HasTempShield)
+            else if (ship.GetComponent<ShipData>().m_HasShield)
             {
                 Debug.Log("ShieldHP Value is " + ship.GetComponent<ShipData>().m_CurrShield);
 
