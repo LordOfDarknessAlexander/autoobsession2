@@ -18,6 +18,10 @@ public class PowerUpControls : MonoBehaviour
     public void Start()
     {
         m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
+ 
+        m_Boost1.GetComponent<Image>().material = m_BlankImage;
+        m_Boost2.GetComponent<Image>().material = m_BlankImage;
+        m_Boost3.GetComponent<Image>().material = m_BlankImage;
     }
 
     public void Update()
@@ -29,15 +33,15 @@ public class PowerUpControls : MonoBehaviour
 
     public void SetPowerUpImages()
     {
-        if(m_Player.GetComponent<ShipData>().m_Inventory.Count == 0)
+        /*if(m_Player.GetComponent<ShipData>().m_Inventory.Count == 0)
         {
             m_Boost1.GetComponent<Image>().material = m_BlankImage;
             m_Boost2.GetComponent<Image>().material = m_BlankImage;
             m_Boost3.GetComponent<Image>().material = m_BlankImage;
-        }
+        }*/
 
-        else
-        {
+        //else
+        //{
             if (m_Player.GetComponent<ShipData>().m_Inventory.Count > 0 && m_Player.GetComponent<ShipData>().m_Inventory.Count < 2)
             {
                 //if (m_Player.GetComponent<ShipData>().m_Inventory[0] != null)
@@ -55,7 +59,7 @@ public class PowerUpControls : MonoBehaviour
             {
                 m_Boost3.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<MeshRenderer>().material;
             }
-        }
+        //}
             /*if (m_Player.GetComponent<ShipData>().m_Inventory[1] != null)
             {
                 m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().material;
@@ -85,8 +89,8 @@ public class PowerUpControls : MonoBehaviour
             {
                 m_ActiveBoost.GetComponent<Image>().material = m_Boost1.GetComponent<Image>().material;
                 m_Boost1.GetComponent<Image>().material = m_BlankImage;
-                Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(0);
                 item.GetComponent<PowerUps>().UseItem(item);
+                Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(0);
             }
             else
             {
@@ -100,8 +104,8 @@ public class PowerUpControls : MonoBehaviour
             {
                 m_ActiveBoost.GetComponent<Image>().material = m_Boost2.GetComponent<Image>().material;
                 m_Boost2.GetComponent<Image>().material = m_BlankImage;
-                Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(1);
                 item.GetComponent<PowerUps>().UseItem(item);
+                Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(1);
             }
             else
             {
@@ -115,8 +119,8 @@ public class PowerUpControls : MonoBehaviour
             {
                 m_ActiveBoost.GetComponent<Image>().material = m_Boost3.GetComponent<Image>().material;
                 m_Boost3.GetComponent<Image>().material = m_BlankImage;
-                Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(2);
                 item.GetComponent<PowerUps>().UseItem(item);
+                Camera.main.GetComponent<ShipData>().m_Inventory.RemoveAt(2);
             }
             else
             {
