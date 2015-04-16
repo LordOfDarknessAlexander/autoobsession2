@@ -22,12 +22,12 @@ public class LaserPU : PowerUps
         //change bolt to laser for 30 seconds
         //damage = 20 + 25% per player damage level
         //return to bolt after timer expires
-        throw new System.NotImplementedException();
+        Debug.Log("Used a Laser");
     }
     
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+        ItemAffect(player);
     }
     
 }

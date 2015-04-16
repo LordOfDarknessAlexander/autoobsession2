@@ -23,12 +23,12 @@ public class MissilePU : PowerUps
         //change player shot to missile with 50 ammo.
         //damage = 20 + 25% per player damage level
         //when out of ammo reset to bolt
-
+        Debug.Log("Use a Missle");
     }
     
     public override void UseItem(GameObject player)
     {
-        
+        ItemAffect(player);
     }
     
 }

@@ -20,12 +20,12 @@ public class MissileBatteryPU : PowerUps
     //launch 10 small missiles with tracking
     public override void ItemAffect(GameObject player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Used a MissileBattery");
     }
 
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+        ItemAffect(player);
     }
     //damage = 10/missile + 25% per player damage level
 }

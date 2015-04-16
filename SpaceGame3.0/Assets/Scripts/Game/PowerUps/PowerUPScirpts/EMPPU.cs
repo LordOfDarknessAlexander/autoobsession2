@@ -20,12 +20,12 @@ public class EMPPU : PowerUps
 
     public override void ItemAffect(GameObject player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("You used an EMP bomb");
     }
     //damage  = 10 + eleiminates shields(if enemy has one)/ disables firing for 5 seconds
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+       ItemAffect(player);
     }
 
 }

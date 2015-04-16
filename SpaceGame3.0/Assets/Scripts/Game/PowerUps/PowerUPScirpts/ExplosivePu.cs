@@ -21,12 +21,12 @@ public class ExplosivePu : PowerUps
     //slow moving projectile 
     public override void ItemAffect(GameObject player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Used and Explosive Bomb");
     }
     //damage = 20 + 25% per player damage level
 
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+        ItemAffect(player);
     }
 }

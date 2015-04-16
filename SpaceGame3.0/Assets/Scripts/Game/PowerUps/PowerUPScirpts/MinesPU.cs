@@ -20,11 +20,11 @@ public class MinesPU : PowerUps
     //launch 5 mines that spread out and drift until hit by an enemy
     public override void ItemAffect(GameObject player)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Used Mines");
     }
     //damage is = 15/each + 25% per player damage level
     public override void UseItem(GameObject player)
     {
-        throw new System.NotImplementedException();
+        ItemAffect(player);
     }
 }

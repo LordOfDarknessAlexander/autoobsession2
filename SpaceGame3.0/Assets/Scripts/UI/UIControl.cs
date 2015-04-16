@@ -64,23 +64,21 @@ public class UIControl : MonoBehaviour
         if (m_Player != null)
         {
             currHealth_ = m_Player.GetComponent<ShipData>().m_HP;
-            if(m_Player.GetComponent<ShipData>().m_HasShield)
+            if (m_Player.GetComponent<ShipData>().m_HasShield)
             {
-                m_PlayerShield.enabled = true;
                 currShield_ = m_Player.GetComponent<ShipData>().m_CurrShield;
             }
             else
             {
-                m_PlayerShield.enabled = false;
-            } 
-            if(m_Player.GetComponent<PlayerShip>().m_HasTempShield)
+                currShield_ = 0;
+            }
+            if (m_Player.GetComponent<PlayerShip>().m_HasTempShield)
             {
-                m_TempShield.enabled = true;
                 currTempShield_ = m_Player.GetComponent<ShipData>().m_CurrShield;
             }
             else
             {
-                m_TempShield.enabled = false;
+                currTempShield_ = 0;
             }
             currLives_ = m_GameControl.GetComponent<GameController>().m_Lives;
             currScore_ = m_GameControl.GetComponent<GameController>().m_Score;

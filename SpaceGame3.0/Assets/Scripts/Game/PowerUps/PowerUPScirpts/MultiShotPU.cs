@@ -23,9 +23,10 @@ public class MultiShotPU : PowerUps
         //Sets players guns to fire 3 shots from each one
         //they will fire parallel to each other
         //damage will be normal for each shot
+        Debug.Log("Used MultiShot");
     }
     public override void UseItem(GameObject player)
     {
-        
+        ItemAffect(player);
     }
 }
