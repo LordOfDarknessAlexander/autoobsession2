@@ -25,6 +25,7 @@ public class ShipController : MonoBehaviour
     public void ApplyDamage(GameObject ship, int damage)
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
+        //if player ship
         if(ship.tag == "Player")
         {
             if(ship.GetComponent<PlayerShip>().m_HasTempShield)
@@ -36,19 +37,37 @@ public class ShipController : MonoBehaviour
                     ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
                 }
             }
-        }
-        if(m_Data.m_HasShield)
-        {
-            m_Data.m_CurrShield -= totalDamage_;
-            if (m_Data.m_CurrShield <= 0)
+            else if(m_Data.m_HasShield)
             {
-                m_Data.m_HasShield = false;
-                ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
+                m_Data.m_CurrShield -= totalDamage_;
+                if (m_Data.m_CurrShield <= 0)
+                {
+                    m_Data.m_HasShield = false;
+                    ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
+                }
+            }
+            else
+            {
+                m_Data.m_HP -= totalDamage_;
             }
         }
-        else
+
+        //if enemy
+        if (ship.tag != "Player")
         {
-            m_Data.m_HP -= totalDamage_;
+            if (m_Data.m_HasShield)
+            {
+                m_Data.m_CurrShield -= totalDamage_;
+                if (m_Data.m_CurrShield <= 0)
+                {
+                    m_Data.m_HasShield = false;
+                    ship.GetComponent<Ship>().m_ShieldData.SetShield(ship);
+                }
+            }
+            else
+            {
+                m_Data.m_HP -= totalDamage_;
+            }
         }
 
         if (m_Data.m_HP <= 0)

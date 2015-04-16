@@ -11,8 +11,6 @@ public class ShieldData : MonoBehaviour
         {
             if(ship.GetComponent<PlayerShip>().m_HasTempShield)
             {
-                Debug.Log("ShieldHP Value is " + ship.GetComponent<ShipData>().m_CurrShield);
-
                 if (ship.GetComponent<ShipData>().m_CurrShield > 0)
                 {
                     m_ShieldPos.GetComponent<MeshRenderer>().enabled = true;
