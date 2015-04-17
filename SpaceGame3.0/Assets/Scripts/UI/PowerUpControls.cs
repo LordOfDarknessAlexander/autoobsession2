@@ -39,44 +39,14 @@ public class PowerUpControls : MonoBehaviour
 
     public void SetPowerUpImages()
     {
-        //if (m_Player.GetComponent<ShipData>().m_Inventory.Count > 0 && m_Player.GetComponent<ShipData>().m_Inventory.Count < 2)
-        //{
-            item1_ = m_Player.GetComponent<ShipData>().m_Inventory[0];
-            //if (m_Player.GetComponent<ShipData>().m_Inventory[0] != null)
-            //{
-                m_Boost1.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<MeshRenderer>().sharedMaterial;
-            //}
-            //else
-            //{
-                //m_Boost1.GetComponent<Image>().material = m_BlankImage;
-            //}
-        //}
+        item1_ = m_Player.GetComponent<ShipData>().m_Inventory[0];
+        m_Boost1.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<MeshRenderer>().sharedMaterial;
 
-        //if(m_Player.GetComponent<ShipData>().m_Inventory.Count > 1 && m_Player.GetComponent<ShipData>().m_Inventory.Count < 3)
-        //{
-            item2_ = m_Player.GetComponent<ShipData>().m_Inventory[1];
-            //if(m_Player.GetComponent<ShipData>().m_Inventory[1] != null)
-            //{
-                m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().sharedMaterial;
-            //}
-            //else
-            //{
-                //m_Boost2.GetComponent<Image>().material = m_BlankImage;
-            //}
-        //}
-
-        //if(m_Player.GetComponent<ShipData>().m_Inventory.Count > 2)
-        //{
-            item3_ = m_Player.GetComponent<ShipData>().m_Inventory[2];
-            //if (m_Player.GetComponent<ShipData>().m_Inventory != null)
-            //{
-                m_Boost3.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<MeshRenderer>().sharedMaterial;
-            //}
-            //else
-            //{
-                //m_Boost3.GetComponent<Image>().material = m_BlankImage;
-            //}
-        //}
+        item2_ = m_Player.GetComponent<ShipData>().m_Inventory[1];
+        m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().sharedMaterial;
+ 
+        item3_ = m_Player.GetComponent<ShipData>().m_Inventory[2];
+        m_Boost3.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<MeshRenderer>().sharedMaterial;
     }
 
     public void ItemsUse()

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MissilePU : PowerUps
+public class AddLife : PowerUps
 {
     public override void Start()
     {
-        m_IsStorable = true;
+        m_IsStorable = false;
     }
     public override void Update()
     {
@@ -16,21 +16,14 @@ public class MissilePU : PowerUps
             GetComponent<Rigidbody>().velocity = movement;
         }
     }
-
-    
+    //set player Health to double maxHP
     public override void ItemAffect(GameObject player)
     {
-        //change player shot to missile with 50 ammo.
-        //player.GetComponent<Weapon>().m_MaxAmmo = 50;
-        player.GetComponent<PlayerController>().m_WeaponData.SetProjectile(player.GetComponent<PlayerController>().m_WeaponData.m_ProjectilePrefabs[3]);
-        //damage = 20 + 25% per player damage level
-        //when out of ammo reset to bolt
-        Debug.Log("Use a Missle");
+        Camera.main.GetComponent<GameController>().m_Lives += 1;
     }
-    
+
     public override void UseItem(GameObject player)
     {
         ItemAffect(player);
     }
-    
 }

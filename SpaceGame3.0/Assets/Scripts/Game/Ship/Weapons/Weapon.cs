@@ -26,10 +26,17 @@ public class Weapon : MonoBehaviour
         }
     };
 
+    public List<GameObject> m_ProjectilePrefabs;
+
     public Transform m_Blaster;
     public GameObject m_Shot;
     public float m_Cooldown;
     public int m_MaxAmmo;
+
+    public void SetProjectile(GameObject projectile)
+    {
+        m_Shot = projectile;
+    }
 
     public void Fire(WeaponStateData stateData, GameObject parentShip, string collisionLayerName)
     {
