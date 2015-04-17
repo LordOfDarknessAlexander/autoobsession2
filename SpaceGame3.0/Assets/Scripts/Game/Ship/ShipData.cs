@@ -41,18 +41,20 @@ public class ShipData : MonoBehaviour
 
     public void AddItem(GameObject item)
     {
-        if (m_Inventory.Count == m_Inventory.Capacity)
-        {
-            for (int i = 0; i < m_Inventory.Count; ++i)
+        //if (m_Inventory.Count == m_Inventory.Capacity)
+        //{
+            for (int i = 0; i < m_Inventory.Capacity; ++i)
             {
                 if (m_Inventory[i].gameObject == m_NullItem)
                 {
                     item.transform.position = gameObject.transform.position;
                     item.transform.parent = gameObject.transform;
+                    m_Inventory.RemoveAt(i);
                     m_Inventory.Insert(i, item);
+                    return;
                 }
             }
-        }
+        //}
     }
 
     public void RemoveItem(GameObject item)
