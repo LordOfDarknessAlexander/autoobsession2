@@ -3,14 +3,13 @@ using System.Collections;
 
 public class CameraAccess : MonoBehaviour 
 {
-    WebCamTexture cam;
-
-    public Renderer rend;
+    private WebCamTexture cam_;
+    public Renderer m_Renderer;
 
 	void Start ()
     {
-        cam = new WebCamTexture();
-        rend.material.mainTexture = cam;
-        cam.Play();
+        cam_ = new WebCamTexture();
+        m_Renderer.material.mainTexture = cam_;
+        cam_.Play();
 	}
 }

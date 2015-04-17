@@ -5,6 +5,7 @@ public class Constants : MonoBehaviour
 {
     public const float AUTO_SAVE_TIME = 100.0f; //Max time for the autosave timer
     public const float CLOCK_DEGREES_AND_OFFSET = 360.0f;
+    public const float MAX_SCANNER_TIME = 10.0f; //Max time the scanner can run for
 
     public const int MAX_PETS = 6; //Maximum amount of pets you can own
     public const int MAX_PET_STAT = 100; //Highest any of the pet stats - hunger, boredom, cleanliness - can go

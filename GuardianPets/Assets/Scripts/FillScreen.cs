@@ -16,7 +16,7 @@ public class FillScreen : MonoBehaviour
         }
         else
         {
-            float pos = (cam.nearClipPlane + 0.01f);
+            float pos = (cam.farClipPlane - 0.5f);
             transform.position = cam.transform.position + cam.transform.forward * pos;
             transform.LookAt(cam.transform);
             transform.Rotate(90.0f, 0.0f, 0.0f);

@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject m_UpgradePanel; //Panel for the upgrades
     public GameObject m_CameraPlane; //Plane which is drawing the camera on it
     public GameObject m_RadarOverlay; //Image overlay which will have a radar with a rotating arm on it
+    public GameObject m_BackgroundPlane; //Plane which is drawing the background on it
     public InputField m_NicknameIF; //Input field for the nickname prompt
     public InputField m_FearIF; //Input field for the fear prompt
     public PlayerData m_PlayerData; //Player data
@@ -25,10 +26,12 @@ public class UIController : MonoBehaviour
     public string m_SelectedPet;
 
     private GameObject currPet_;
-    
     private GameController gc_; //Game Controller script for easier access
+
     private bool isNewPlayer_;
+    private bool scannerActive_;
     private float energyTimer_; //Timer until the player receives their next set of points, starts at 300 because the interval is 5 minutes, and there are 300 seconds in 5 minutes
+    private float scannerTimer_; //This is the timer that once it reaches the max, will turn off the camera access and return to the normal screen
     private string minutes_;
     private string seconds_;
 
@@ -89,6 +92,15 @@ public class UIController : MonoBehaviour
         else
         {
             m_EnergyTimerText.enabled = false;
+        }
+
+        if(scannerActive_)
+        {
+            scannerTimer_ += Time.deltaTime;
+            if(scannerTimer_ >= Constants.MAX_SCANNER_TIME)
+            {
+                CloseScanner();
+            }
         }
     }
 
@@ -216,8 +228,21 @@ public class UIController : MonoBehaviour
 
     public void OpenScanner()
     {
+        scannerActive_ = true;
         m_GameUI.SetActive(false);
         m_CameraPlane.SetActive(true);
         m_RadarOverlay.SetActive(true);
+        m_BackgroundPlane.SetActive(false);
+        currPet_.SetActive(false);
+    }
+
+    public void CloseScanner()
+    {
+        scannerActive_ = false;
+        m_GameUI.SetActive(true);
+        m_CameraPlane.SetActive(false);
+        m_RadarOverlay.SetActive(false);
+        m_BackgroundPlane.SetActive(true);
+        currPet_.SetActive(true);
     }
 }
