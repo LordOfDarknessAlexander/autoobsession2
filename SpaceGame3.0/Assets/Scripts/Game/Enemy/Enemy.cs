@@ -11,4 +11,6 @@ public abstract class Enemy : MonoBehaviour
     public abstract void Awake();
     public abstract void OnExit();
     public abstract void Update();
+    public abstract void SetProjectiles();
+    
 }

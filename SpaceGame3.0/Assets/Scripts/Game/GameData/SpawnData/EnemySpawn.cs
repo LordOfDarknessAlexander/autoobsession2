@@ -274,11 +274,9 @@ public class EnemySpawn : MonoBehaviour
         m_BossObj.transform.position = bossSpawn;
         m_BossObj.transform.rotation = spawnBossRotation;
 
-        //m_NumEnemiesInPool = numEnemies;
+        enemyPool_.Capacity = numEnemies;
 
-        enemyPool_.Capacity = numEnemies;//m_NumEnemiesInPool;
-
-        for (int i = 0; i < enemyPool_.Capacity/*m_NumEnemiesInPool*/; i++)
+        for (int i = 0; i < enemyPool_.Capacity; i++)
         {
             int randEnemy = Random.Range(0, m_Enemies.Count);
 
@@ -298,12 +296,9 @@ public class EnemySpawn : MonoBehaviour
         m_RequiredKills = kills;
         m_ReqKillText.text = m_RequiredKills.ToString("F0");
 
-        //m_NumEnemiesInPool = kills;
-
-        //enemyPool_.Capacity = m_NumEnemiesInPool;
         enemyPool_.Capacity = kills;
 
-        for (int i = 0; i < enemyPool_.Capacity/*m_NumEnemiesInPool*/; i++)
+        for (int i = 0; i < enemyPool_.Capacity; i++)
         {
             int randEnemy = Random.Range(0, m_Enemies.Count);
 

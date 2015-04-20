@@ -37,4 +37,9 @@ public class BossController : Enemy
             return;
         }
     }
+
+    public override void SetProjectiles()
+    {
+        throw new System.NotImplementedException();
+    }
 }

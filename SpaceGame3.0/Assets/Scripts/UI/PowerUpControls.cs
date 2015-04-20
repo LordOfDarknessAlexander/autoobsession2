@@ -21,19 +21,12 @@ public class PowerUpControls : MonoBehaviour
     public void Start()
     {
         m_Player = Camera.main.GetComponent<SpawnPlayer>().m_Player;
- 
-        //m_Boost1.GetComponent<Image>().material = m_BlankImage;
-        //m_Boost2.GetComponent<Image>().material = m_BlankImage;
-        //m_Boost3.GetComponent<Image>().material = m_BlankImage;
     }
 
     public void Update()
     {
         SetPowerUpImages();
         ItemsUse();
-        Debug.Log("Item1 = " + item1_);
-        Debug.Log("Item2 = " + item2_);
-        Debug.Log("Item3 = " + item3_);
     }
 
 

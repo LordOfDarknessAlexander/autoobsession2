@@ -45,6 +45,15 @@ public class EnemyController : Enemy
 
             m_CurrVel = GetComponent<Rigidbody>().velocity;
 
+            //set player ammo to max
+            foreach (Weapon weapon in this.GetComponent<ShipData>().m_Weapons)
+            {
+                for (int i = 0; i < this.GetComponent<ShipData>().m_Weapons.Length; ++i)
+                {
+                    this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
+                }
+            }
+
             m_ShipController.FireWeapons("EnemyProjectile");
         }
         else
@@ -63,5 +72,18 @@ public class EnemyController : Enemy
             
             gameObject.SetActive(false);
        }
+    }
+
+    public override void SetProjectiles()
+    {
+        foreach (Weapon weapon in this.GetComponent<ShipData>().m_Weapons)
+        {
+            for (int i = 0; i < this.GetComponent<ShipData>().m_Weapons.Length; ++i)
+            {
+                this.GetComponentInChildren<Weapon>().m_MaxAmmo = 1000;
+                this.GetComponentInChildren<Weapon>().SetProjectile(this.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
+                this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
+            }
+        }
     }
 }
