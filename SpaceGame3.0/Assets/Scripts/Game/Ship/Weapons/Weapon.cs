@@ -40,10 +40,9 @@ public class Weapon : MonoBehaviour
 
     public void Fire(WeaponStateData stateData, GameObject parentShip, string collisionLayerName)
     {
-        m_Shot.GetComponent<Projectile>().DamageToApply(parentShip);
-
         Instantiate(m_Shot, m_Blaster.position, m_Blaster.rotation);
-       
+
+        stateData.m_Ammo -= 1;
         stateData.m_CooldownTimer = m_Cooldown;
     }
 }

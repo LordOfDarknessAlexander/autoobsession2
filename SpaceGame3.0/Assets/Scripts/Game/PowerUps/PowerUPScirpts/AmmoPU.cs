@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MissilePU : PowerUps
+public class AmmoPU : PowerUps
 {
     public override void Start()
     {
-        m_IsStorable = true;
+        m_IsStorable = false;
     }
     public override void Update()
     {
@@ -16,18 +16,22 @@ public class MissilePU : PowerUps
             GetComponent<Rigidbody>().velocity = movement;
         }
     }
-    
+
     public override void ItemAffect(GameObject player)
     {
-        //change player shot to missile with 50 ammo.
-        player.GetComponentInChildren<Weapon>().m_MaxAmmo = 50;
-        player.GetComponentInChildren<Weapon>().SetProjectile(player.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[3]);
-        Debug.Log("Use a Missle");
+        //set player ammo to max
+        foreach(Weapon weapon in player.GetComponent<ShipData>().m_Weapons)
+        {
+            for(int i = 0; i < player.GetComponent<ShipData>().m_Weapons.Length; ++i)
+            {
+               player.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = player.GetComponentInChildren<Weapon>().m_MaxAmmo;
+            }
+        }
     }
-    
+
     public override void UseItem(GameObject player)
     {
         ItemAffect(player);
     }
-    
 }
+

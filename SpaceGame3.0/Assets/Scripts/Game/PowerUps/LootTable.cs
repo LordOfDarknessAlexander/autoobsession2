@@ -14,8 +14,13 @@ public class LootTable : MonoBehaviour
 
         Vector3 spawnPosition = new Vector3(parentShip.transform.position.x, parentShip.transform.position.y, 0);
         Quaternion spawnRotation = Quaternion.identity;
+        if(randNum_> 0)
+        {
+            //Missile[10]
+            Instantiate(m_ItemList.m_PowerUps[10], spawnPosition, spawnRotation);
+        }
 
-        if(randNum_ <= 1)
+        else if(randNum_ <= 1)
         {
             //Bomb(Nuke)[8]
 
@@ -33,8 +38,13 @@ public class LootTable : MonoBehaviour
             //MissileBattery[11]
             Instantiate(m_ItemList.m_PowerUps[11], spawnPosition, spawnRotation);
         }
+        else if(randNum_ > 11 && randNum_ <= 16)
+        {
+            //Free Life[13]
+            Instantiate(m_ItemList.m_PowerUps[13], spawnPosition, spawnRotation);
+        }
 
-        else if (randNum_ > 12 && randNum_ <= 27)
+        else if (randNum_ > 16 && randNum_ <= 27)
         {
             //Dobuble Health[2]
             Instantiate(m_ItemList.m_PowerUps[2], spawnPosition, spawnRotation);
@@ -87,6 +97,12 @@ public class LootTable : MonoBehaviour
             //Health[0]
             Instantiate(m_ItemList.m_PowerUps[0], spawnPosition, spawnRotation);
         }
+        else if (randNum_ > 147 && randNum_ <= 172)
+        {
+            //more Ammo[14]
+            Instantiate(m_ItemList.m_PowerUps[14], spawnPosition, spawnRotation);
+        }
+
         else
         {
             //Shield[1]

@@ -15,9 +15,12 @@ public class ShipController : MonoBehaviour
     {
         for (int i = 0; i < m_Data.m_WeaponState.Length; ++i)
         {
-            if (m_Data.m_WeaponState[i].m_CooldownTimer <= 0.0f)
+            if(m_Data.m_WeaponState[i].m_Ammo > 0)
             {
-                m_Data.m_Weapons[i].Fire(m_Data.m_WeaponState[i], gameObject, collisionLayerName);
+                if (m_Data.m_WeaponState[i].m_CooldownTimer <= 0.0f)
+                {
+                    m_Data.m_Weapons[i].Fire(m_Data.m_WeaponState[i], gameObject, collisionLayerName);
+                }
             }
         }
     }
@@ -25,6 +28,8 @@ public class ShipController : MonoBehaviour
     public void ApplyDamage(GameObject ship, int damage)
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
+
+        Debug.Log(totalDamage_);
         //if player ship
         if(ship.tag == "Player")
         {
