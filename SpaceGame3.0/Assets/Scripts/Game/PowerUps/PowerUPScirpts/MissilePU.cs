@@ -22,7 +22,7 @@ public class MissilePU : PowerUps
     {
         //change player shot to missile with 50 ammo.
         //player.GetComponent<Weapon>().m_MaxAmmo = 50;
-        player.GetComponent<PlayerController>().m_WeaponData.SetProjectile(player.GetComponent<PlayerController>().m_WeaponData.m_ProjectilePrefabs[3]);
+        player.GetComponentInChildren<Weapon>().SetProjectile(player.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[3]);
         //damage = 20 + 25% per player damage level
         //when out of ammo reset to bolt
         Debug.Log("Use a Missle");

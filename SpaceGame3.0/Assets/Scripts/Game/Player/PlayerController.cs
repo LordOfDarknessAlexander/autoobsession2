@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerData m_PData;
 
-    public Weapon m_WeaponData;
+    public Weapon m_Weapon;
     public ShipController m_ShipController;
     public PlayerShip m_PlayerShip;
     public Boundary m_PlayerBoundary;

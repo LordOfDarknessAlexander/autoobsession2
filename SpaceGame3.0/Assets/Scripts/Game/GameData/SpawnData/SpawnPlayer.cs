@@ -64,7 +64,6 @@ public class SpawnPlayer : MonoBehaviour
 
             m_Player = playerPool_[0];
             SetStats(m_Player);
-            m_Player.GetComponent<PlayerController>().m_WeaponData.SetProjectile(m_Player.GetComponent<PlayerController>().m_WeaponData.m_ProjectilePrefabs[0]);
 
             if (m_Player.GetComponent<ShipData>().m_HasShield)
             {
@@ -83,6 +82,8 @@ public class SpawnPlayer : MonoBehaviour
             m_Player.SetActive(true);
             m_Player.transform.position = playerSpawn;
             m_Player.transform.rotation = spawnPlayerRotation;
+            m_Player.GetComponentInChildren<Weapon>().SetProjectile(m_Player.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
+            //m_Player.GetComponent<PlayerController>().m_Weapon.SetProjectile(m_Player.GetComponent<PlayerController>().m_Weapon.m_ProjectilePrefabs[0]);
         }
     }
 
@@ -90,7 +91,7 @@ public class SpawnPlayer : MonoBehaviour
     {
         m_Player = playerPool_[0];
         SetSavedStats(m_Player);
-        m_Player.GetComponent<PlayerController>().m_WeaponData.SetProjectile(m_Player.GetComponent<PlayerController>().m_WeaponData.m_ProjectilePrefabs[0]);
+        m_Player.GetComponent<PlayerController>().m_Weapon.SetProjectile(m_Player.GetComponent<PlayerController>().m_Weapon.m_ProjectilePrefabs[0]);
 
         if (m_Player.GetComponent<ShipData>().m_HasShield)
         {
