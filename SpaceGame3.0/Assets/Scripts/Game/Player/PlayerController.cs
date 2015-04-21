@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         m_PlayerShip = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<PlayerShip>();
         m_ShipController = Camera.main.GetComponent<SpawnPlayer>().m_Player.GetComponent<ShipController>();
         //set player ammo to max
-        ResetProjectile();
+        ResetProjectileAmmo();
     }
 
     public void Update()
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (m_PlayerShip.m_SData.m_WeaponState[i].m_Ammo == 0)
                     {
-                        ResetProjectile();
+                        ResetProjectileAmmo();
                     }
                     else if (nextShot_ <= 0.0f)
                     {
@@ -70,18 +70,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
-
     }
 
-    public void ResetProjectile()
+    public void ResetProjectileAmmo()
     {
         foreach (Weapon weapon in this.GetComponent<ShipData>().m_Weapons)
         {
             for (int i = 0; i < this.GetComponent<ShipData>().m_Weapons.Length; ++i)
             {
                 //set player ammo to max
-                this.GetComponentInChildren<Weapon>().m_MaxAmmo = 5000;
+                this.GetComponentInChildren<Weapon>().m_MaxAmmo = 500;
                 this.GetComponentInChildren<Weapon>().SetProjectile(this.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
                 this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
             }

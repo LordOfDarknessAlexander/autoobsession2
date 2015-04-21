@@ -19,10 +19,9 @@ public class MissilePU : PowerUps
     
     public override void ItemAffect(GameObject player)
     {
-        //change player shot to missile with 50 ammo.
-        player.GetComponentInChildren<Weapon>().m_MaxAmmo = 50;
+        //change player shot to missile with 20 ammo.
+        player.GetComponent<ShipData>().m_WeaponState[0].m_Ammo = 20;
         player.GetComponentInChildren<Weapon>().SetProjectile(player.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[3]);
-        Debug.Log("Use a Missle");
     }
     
     public override void UseItem(GameObject player)

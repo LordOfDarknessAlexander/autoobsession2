@@ -19,15 +19,14 @@ public class MissileProjectile : Projectile
         enemies_ = new List<Transform>();
         AddPotentialTargets();
         m_Damage = 20;
-        player_.GetComponentInChildren<Weapon>().m_MaxAmmo = 50;
 
-        foreach (Weapon weapon in player_.GetComponent<ShipData>().m_Weapons)
-        {
-            for (int i = 0; i < player_.GetComponent<ShipData>().m_Weapons.Length; ++i)
-            {
-                player_.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = player_.GetComponentInChildren<Weapon>().m_MaxAmmo;
-            }
-        }
+        //foreach (Weapon weapon in player_.GetComponent<ShipData>().m_Weapons[0])
+        //{
+            //for (int i = 0; i < player_.GetComponent<ShipData>().m_Weapons.Length; ++i)
+            //{
+                //player_.GetComponent<ShipData>().m_WeaponState[0].m_Ammo = 20;
+            //}
+        //}
     }
 
     public void Update()
@@ -85,13 +84,5 @@ public class MissileProjectile : Projectile
         {
             return;
         }
-    }
-
-    public void  RotateMissileToTarget()
-    {
-        Vector3 dir = this.transform.position - transform.position; 
-        float angle = (Mathf.Atan2(dir.y, dir.x)) * Mathf.Rad2Deg; 
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); 
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime);
     }
 }
