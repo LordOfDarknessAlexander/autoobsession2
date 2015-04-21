@@ -20,7 +20,7 @@ public class NukePU : PowerUps
 
     public override void ItemAffect(GameObject player)
     {
-        Camera.main.GetComponent<EnemySpawn>().DestroyAllEnemies();
+        //Camera.main.GetComponent<EnemySpawn>().DestroyAllEnemies();
     }
 
     public override void UseItem(GameObject player)
