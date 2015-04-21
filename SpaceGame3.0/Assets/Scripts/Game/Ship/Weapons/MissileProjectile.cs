@@ -10,6 +10,7 @@ public class MissileProjectile : Projectile
     private Transform currentTarget_;
 
     private float distance_;
+    private float speed_ = 10.0f;
 
     public void Start()
     {
@@ -32,12 +33,20 @@ public class MissileProjectile : Projectile
     public void Update()
     {
         SetTarget();
-        if(this.currentTarget_ == null)
+        if (currentTarget_ != null)
         {
-            SetTarget();
+            distance_ = Vector3.Distance(currentTarget_.position, transform.position);
+            Vector3 dir = transform.position - currentTarget_.position;
+            float angle = ((Mathf.Atan2(dir.y, dir.x)) * Mathf.Rad2Deg) + 90.0f;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, speed_);
+
+            transform.position = Vector3.MoveTowards(transform.position, currentTarget_.position, this.m_ForwardAccel * Time.deltaTime);
         }
-        distance_ = Vector3.Distance(currentTarget_.position, transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget_.position, this.GetComponent<Projectile>().m_ForwardAccel * Time.deltaTime);
+        else
+        {
+            GetComponent<Rigidbody>().velocity = transform.up * m_ForwardAccel;
+        }
     }
 
     private void AddPotentialTargets()
@@ -64,17 +73,25 @@ public class MissileProjectile : Projectile
 
     public void SetTarget()
     {
-        if(currentTarget_ == null)
+        if(enemies_.Count > 0)
         {
-            DistanceToTarget();
-            currentTarget_ = enemies_[0];
+            if(currentTarget_ == null)
+            {
+                DistanceToTarget();
+                currentTarget_ = enemies_[0];
+            }
+        }
+        else
+        {
+            return;
         }
     }
 
-   /* public void TrackEnemy()
+    public void  RotateMissileToTarget()
     {
-        SetTarget();
-        distance_ = Vector3.Distance(currentTarget_.position, transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, currentTarget_.position, this.GetComponent<Projectile>().m_ForwardAccel * Time.deltaTime);
-    }*/
+        Vector3 dir = this.transform.position - transform.position; 
+        float angle = (Mathf.Atan2(dir.y, dir.x)) * Mathf.Rad2Deg; 
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward); 
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime);
+    }
 }
