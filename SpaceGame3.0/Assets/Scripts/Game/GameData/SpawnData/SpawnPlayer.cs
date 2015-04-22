@@ -84,13 +84,7 @@ public class SpawnPlayer : MonoBehaviour
             m_Player.transform.rotation = spawnPlayerRotation;
             m_Player.GetComponentInChildren<Weapon>().SetProjectile(m_Player.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
 
-            foreach (Weapon weapon in m_Player.GetComponent<ShipData>().m_Weapons)
-            {
-                for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Weapons.Length; ++i)
-                {
-                    m_Player.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = m_Player.GetComponentInChildren<Weapon>().m_MaxAmmo;
-                }
-            }
+            SetProjectile();
         }
     }
 
@@ -118,12 +112,14 @@ public class SpawnPlayer : MonoBehaviour
         m_Player.transform.rotation = spawnPlayerRotation;
         m_Player.GetComponentInChildren<Weapon>().SetProjectile(m_Player.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
 
-        foreach (Weapon weapon in m_Player.GetComponent<ShipData>().m_Weapons)
+        SetProjectile();
+    }
+
+    public void SetProjectile()
+    {
+        for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Weapons.Length; ++i)
         {
-            for (int i = 0; i < m_Player.GetComponent<ShipData>().m_Weapons.Length; ++i)
-            {
-                m_Player.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = m_Player.GetComponentInChildren<Weapon>().m_MaxAmmo;
-            }
+            m_Player.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = m_Player.GetComponentInChildren<Weapon>().m_MaxAmmo;
         }
     }
 }

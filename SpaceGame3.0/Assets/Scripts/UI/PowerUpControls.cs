@@ -6,13 +6,8 @@ using UnityEngine.UI;
 public class PowerUpControls : MonoBehaviour 
 {
     public GameObject m_Player;
-    private GameObject item1_;
-    private GameObject item2_;
-    private GameObject item3_;
 
     public Material m_BlankImage;
-
-    //public Image m_ActiveBoost;
  
     public Button m_Boost1;
     public Button m_Boost2;
@@ -32,13 +27,10 @@ public class PowerUpControls : MonoBehaviour
 
     public void SetPowerUpImages()
     {
-        item1_ = m_Player.GetComponent<ShipData>().m_Inventory[0];
         m_Boost1.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<MeshRenderer>().sharedMaterial;
 
-        item2_ = m_Player.GetComponent<ShipData>().m_Inventory[1];
         m_Boost2.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<MeshRenderer>().sharedMaterial;
  
-        item3_ = m_Player.GetComponent<ShipData>().m_Inventory[2];
         m_Boost3.GetComponent<Image>().material = m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<MeshRenderer>().sharedMaterial;
     }
 
@@ -48,10 +40,8 @@ public class PowerUpControls : MonoBehaviour
         {
             if (m_Boost1.GetComponent<Image>().material != m_BlankImage)
             {
-                //m_ActiveBoost.GetComponent<Image>().material = m_Boost1.GetComponent<Image>().material;
                 m_Player.GetComponent<ShipData>().m_Inventory[0].GetComponent<PowerUps>().UseItem(m_Player);
                 m_Player.GetComponent<ShipData>().m_Inventory[0] = m_Player.GetComponent<ShipData>().m_NullItem;
-                //Debug.Log("Item1 = " + item1_);
             }
             else
             {
@@ -63,10 +53,8 @@ public class PowerUpControls : MonoBehaviour
         {
             if (m_Boost2.GetComponent<Image>().material != m_BlankImage)
             {
-                //m_ActiveBoost.GetComponent<Image>().material = m_Boost2.GetComponent<Image>().material;
                 m_Player.GetComponent<ShipData>().m_Inventory[1].GetComponent<PowerUps>().UseItem(m_Player);
                 m_Player.GetComponent<ShipData>().m_Inventory[1] = m_Player.GetComponent<ShipData>().m_NullItem;
-                //Debug.Log("Item2 = " + item2_);
             }
             else
             {
@@ -78,10 +66,8 @@ public class PowerUpControls : MonoBehaviour
         {
             if (m_Boost3.GetComponent<Image>().material != m_BlankImage)
             {
-                //m_ActiveBoost.GetComponent<Image>().material = m_Boost3.GetComponent<Image>().material;
                 m_Player.GetComponent<ShipData>().m_Inventory[2].GetComponent<PowerUps>().UseItem(m_Player);
                 m_Player.GetComponent<ShipData>().m_Inventory[2] = m_Player.GetComponent<ShipData>().m_NullItem;
-                //Debug.Log("Item3 = " + item3_);
             }
             else
             {

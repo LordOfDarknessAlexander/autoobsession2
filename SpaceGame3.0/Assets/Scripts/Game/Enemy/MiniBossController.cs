@@ -50,14 +50,14 @@ public class MiniBossController : Enemy
 
     public override void SetProjectiles()
     {
-        foreach (Weapon weapon in this.GetComponent<ShipData>().m_Weapons)
-        {
+        //foreach (Weapon weapon in this.GetComponent<ShipData>().m_Weapons)
+        //{
             for (int i = 0; i < this.GetComponent<ShipData>().m_Weapons.Length; ++i)
             {
                 this.GetComponentInChildren<Weapon>().m_MaxAmmo = 1000;
                 this.GetComponentInChildren<Weapon>().SetProjectile(this.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
                 this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
             }
-        }
+        //}
     }
 }

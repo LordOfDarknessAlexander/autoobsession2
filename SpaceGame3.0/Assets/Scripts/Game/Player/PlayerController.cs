@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerData m_PData;
 
-    //public Weapon m_Weapon;
+    public GameObject m_Enemy;
+
     public ShipController m_ShipController;
     public PlayerShip m_PlayerShip;
     public Boundary m_PlayerBoundary;
@@ -33,6 +34,10 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        if(m_Enemy == null)
+        {
+            m_Enemy = GameObject.FindGameObjectWithTag("Enemy");
+        }
         //to move player around scene
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
@@ -49,19 +54,18 @@ public class PlayerController : MonoBehaviour
                                          0.0f);
 
         //to fire weapons
-        if (Input.GetButton("Fire"))
+        nextShot_ -= Time.deltaTime;
+        if (m_Enemy != null)
         {
-            nextShot_ -= Time.deltaTime;
-
-            foreach (Weapon weapon in m_PlayerShip.m_SData.m_Weapons)
+            for (int i = 0; i < m_PlayerShip.m_SData.m_Weapons.Length; ++i)
             {
-                for (int i = 0; i < m_PlayerShip.m_SData.m_Weapons.Length; ++i)
+                if (m_PlayerShip.m_SData.m_WeaponState[i].m_Ammo == 0)
                 {
-                    if (m_PlayerShip.m_SData.m_WeaponState[i].m_Ammo == 0)
-                    {
-                        ResetProjectileAmmo();
-                    }
-                    else if (nextShot_ <= 0.0f)
+                    ResetProjectileAmmo();
+                }
+                else
+                {
+                    if (nextShot_ <= 0.0f)
                     {
                         m_ShipController.FireWeapons("PlayerShot");
 
@@ -74,15 +78,12 @@ public class PlayerController : MonoBehaviour
 
     public void ResetProjectileAmmo()
     {
-        foreach (Weapon weapon in this.GetComponent<ShipData>().m_Weapons)
+        for (int i = 0; i < this.GetComponent<ShipData>().m_Weapons.Length; ++i)
         {
-            for (int i = 0; i < this.GetComponent<ShipData>().m_Weapons.Length; ++i)
-            {
-                //set player ammo to max
-                this.GetComponentInChildren<Weapon>().m_MaxAmmo = 500;
-                this.GetComponentInChildren<Weapon>().SetProjectile(this.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
-                this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
-            }
+            //set player ammo to max
+            this.GetComponentInChildren<Weapon>().m_MaxAmmo = 500;
+            this.GetComponentInChildren<Weapon>().SetProjectile(this.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
+            this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
         }
     }
 }

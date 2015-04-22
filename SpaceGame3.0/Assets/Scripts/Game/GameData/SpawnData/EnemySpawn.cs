@@ -305,6 +305,10 @@ public class EnemySpawn : MonoBehaviour
             GameObject obj = (GameObject)Instantiate(m_Enemies[randEnemy]);
             obj.SetActive(false);
             enemyPool_.Add(obj);
+            for (int j = 0; j < enemyPool_.Count; ++j)
+            {
+                enemyPool_[j].gameObject.name = "Enemy" + j;
+            }
         }
         spawn_ = new Task(m_Waves.WaveSpawner(), true);
     }
