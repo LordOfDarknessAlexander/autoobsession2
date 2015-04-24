@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class MissileProjectile : Projectile 
 {
     private List<Transform> enemies_;
-    private List<Transform> missiles_;
-    public  GameObject m_CurrentTarget;
+    public  Transform m_CurrentTarget;
 
     private float speed_ = 10.0f;
 
@@ -14,9 +13,7 @@ public class MissileProjectile : Projectile
     {
         m_CurrentTarget = null;
         enemies_ = new List<Transform>();
-        missiles_ = new List<Transform>();
         AddPotentialTargets();
-        AddOtherMissiles();
         m_Damage = 10;
     }
 
@@ -68,34 +65,20 @@ public class MissileProjectile : Projectile
             if(m_CurrentTarget == null)
             {
                 DistanceToTarget();
-                m_CurrentTarget = enemies_[0].gameObject;
-                if (missiles_.Count > 1)
+                for (int i = 0; i < enemies_.Count; ++i)
                 {
-                    for (int i = 0; i < missiles_.Count; ++i)
+                    m_CurrentTarget = enemies_[0];
+
+                    if (!m_CurrentTarget.GetComponent<ShipData>().m_IsTargetted)
                     {
-                        if(missiles_[i].GetComponent<MissileProjectile>().m_CurrentTarget != null)
-                        {
-                            for (int j = 0; j < enemies_.Count; ++j)
-                            {
-                                if (m_CurrentTarget.name == missiles_[i].GetComponent<MissileProjectile>().m_CurrentTarget.name)
-                                {
-                                    m_CurrentTarget = enemies_[j + 1].gameObject;
-                                }
-                                else
-                                {
-                                    return;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            return;
-                        }
+                        //m_CurrentTarget = enemies_[i];
+                        enemies_[i].GetComponent<ShipData>().m_IsTargetted = true;
+                        return;
                     }
-                }
-                else
-                {
-                    return;
+                    else if(m_CurrentTarget.GetComponent<ShipData>().m_IsTargetted)
+                    {
+                        m_CurrentTarget = enemies_[i + 1];
+                    }
                 }
            }
         }
@@ -104,19 +87,4 @@ public class MissileProjectile : Projectile
             return;
         }
     }
-
-    private void AddOtherMissiles()
-    {
-        GameObject[] missilesInList_ = GameObject.FindGameObjectsWithTag("PlayerShot");
-        foreach (GameObject missile_ in missilesInList_)
-        {
-            AddMissileToList(missile_.transform);
-        }
-    }
-
-    private void AddMissileToList(Transform missile)
-    {
-        missiles_.Add(missile);
-    }
-
 }

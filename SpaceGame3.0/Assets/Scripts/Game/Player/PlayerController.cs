@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             //set player ammo to max
             this.GetComponentInChildren<Weapon>().m_MaxAmmo = 500;
+            this.m_FireRate = 0.25f;
             this.GetComponentInChildren<Weapon>().SetProjectile(this.GetComponentInChildren<Weapon>().m_ProjectilePrefabs[0]);
             this.GetComponent<ShipData>().m_WeaponState[i].m_Ammo = this.GetComponentInChildren<Weapon>().m_MaxAmmo;
         }
