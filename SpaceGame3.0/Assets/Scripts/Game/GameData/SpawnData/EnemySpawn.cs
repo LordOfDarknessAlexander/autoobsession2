@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour
 {
+    #region variables
     public GameData m_GData;
     public Waves m_Waves;
     public GameController m_GController;
@@ -44,6 +45,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject m_Player;
 
     private Task spawn_;
+    #endregion
 
     public void SetShipPrefab()
     {

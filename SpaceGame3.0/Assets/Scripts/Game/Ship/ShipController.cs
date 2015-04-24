@@ -58,7 +58,7 @@ public class ShipController : MonoBehaviour
         }
 
         //if enemy
-        if (ship.tag == "Enemy")
+        if (ship.tag != "Player")
         {
             if (m_Data.m_HasShield)
             {

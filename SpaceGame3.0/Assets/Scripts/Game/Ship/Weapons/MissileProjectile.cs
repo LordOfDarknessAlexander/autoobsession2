@@ -67,24 +67,14 @@ public class MissileProjectile : Projectile
                 DistanceToTarget();
                 for (int i = 0; i < enemies_.Count; ++i)
                 {
-                    m_CurrentTarget = enemies_[0];
-
-                    if (!m_CurrentTarget.GetComponent<ShipData>().m_IsTargetted)
+                    if (enemies_[i].GetComponent<ShipData>().m_IsTargetted == false)
                     {
-                        //m_CurrentTarget = enemies_[i];
+                        m_CurrentTarget = enemies_[i];
                         enemies_[i].GetComponent<ShipData>().m_IsTargetted = true;
-                        return;
-                    }
-                    else if(m_CurrentTarget.GetComponent<ShipData>().m_IsTargetted)
-                    {
-                        m_CurrentTarget = enemies_[i + 1];
+                        break;
                     }
                 }
            }
-        }
-        else
-        {
-            return;
         }
     }
 }

@@ -54,7 +54,29 @@ public class PlayerController : MonoBehaviour
                                          0.0f);
 
         //to fire weapons
-        nextShot_ -= Time.deltaTime;
+        if (Input.GetButton("Fire"))
+        {
+            nextShot_ -= Time.deltaTime;
+
+            for (int i = 0; i < m_PlayerShip.m_SData.m_Weapons.Length; ++i)
+            {
+                if (m_PlayerShip.m_SData.m_WeaponState[i].m_Ammo == 0)
+                {
+                    ResetProjectileAmmo();
+                }
+                else
+                {
+                    if (nextShot_ <= 0.0f)
+                    {
+                        m_ShipController.FireWeapons("PlayerShot");
+
+                        nextShot_ = m_FireRate;
+                    }
+                }
+            }
+        }
+
+        /*nextShot_ -= Time.deltaTime;
         if (m_Enemy != null)
         {
             for (int i = 0; i < m_PlayerShip.m_SData.m_Weapons.Length; ++i)
@@ -73,7 +95,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 
     public void ResetProjectileAmmo()
