@@ -78,6 +78,7 @@ public class ShipController : MonoBehaviour
         {
             if (ship.tag == "Player")
             {
+                ship.GetComponent<PlayerController>().enabled = false;//disable player
                 Camera.main.GetComponent<GameController>().EnableRestart();
                 ship.SetActive(false);
             }

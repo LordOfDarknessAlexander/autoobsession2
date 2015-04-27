@@ -16,7 +16,7 @@ public class Items : MonoBehaviour
     //drop from weapons
     //store for use by player choice
     //bombs(medium explosive radius with prox-detection)
-        //explosive type 10% chance to drop
+        //explosive mine type 10% chance to drop
         //EMP type(disable enemy shields or temporaily preventing them firing and at the player) 10% chance
         //multi-bomb(3-4 smaller bombs that act like mines, each has a slightly smaller blast radius and damage output) 10% chance
         //nuke(kills every enemy on the screen, EXTREMLY RARE DROP) .05% chance to drop

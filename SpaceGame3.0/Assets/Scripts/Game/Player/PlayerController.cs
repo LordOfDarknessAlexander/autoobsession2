@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //check if playing on a mobile device and activate this code if true
         /*nextShot_ -= Time.deltaTime;
         if (m_Enemy != null)
         {

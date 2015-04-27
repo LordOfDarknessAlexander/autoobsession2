@@ -5,9 +5,7 @@ using System.Collections.Generic;
 public class MissileBatteryPU : PowerUps
 {
     public GameObject m_MissilePrefab;
-    //public GameObject m_LaunchPointPrefab;
 
-    //public List<Transform> m_Missiles = new List<Transform>();
     public List<Transform> m_LaunchPoints = new List<Transform>();
     
     public float m_LaunchTimer;
@@ -77,7 +75,6 @@ public class MissileBatteryPU : PowerUps
                     }
                     yield return new WaitForSeconds(m_LaunchTimer);
                 }
-                //missilePool_.RemoveAt(0);
             }
         }
     }

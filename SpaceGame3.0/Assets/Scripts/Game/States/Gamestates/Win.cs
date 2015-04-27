@@ -11,11 +11,12 @@ public class Win : MonoBehaviour
     public PlayerData m_PData;
 
     public Text m_CurrentKills;
-    public Text m_CurrentScore;
+    public Text m_SalvageCollected;
+
     public void Awake()
     {
-        m_CurrentKills.text = Camera.main.GetComponent<GameController>().m_Kills.ToString();
-        m_CurrentScore.text = Camera.main.GetComponent<GameController>().m_Score.ToString();
+        m_CurrentKills.text = m_PData.m_EnemiesKilledLifetime.ToString();
+        m_SalvageCollected.text = m_PData.m_Salvage.ToString();
     }
 
     public void Continue()

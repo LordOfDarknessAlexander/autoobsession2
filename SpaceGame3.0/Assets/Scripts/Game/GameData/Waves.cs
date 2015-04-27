@@ -106,6 +106,7 @@ public class Waves : MonoBehaviour
         m_PSpawn.PlayerRespawn();
 
         m_GController.SetPlayerSave(m_Player);
+        m_GController.m_Player.GetComponent<PlayerController>().enabled = true;
 
         m_ESpawn.m_WaveNum = m_GController.m_TempWaveNum;
 

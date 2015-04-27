@@ -88,17 +88,16 @@ public class GameController : MonoBehaviour
         {
             SoftSave(m_Player);
         }
-        if (m_Lives > 0)
-        {
-            if (!m_Play)
-            {
-                m_ControlText.text = "Press 'Z' to begin";
 
-                if (Input.GetKey(KeyCode.Z))
-                {
-                    m_Play = true;
-                    Play();
-                }
+        if (!m_Play)
+        {
+            m_Player.GetComponent<PlayerController>().enabled = false;//disable player
+            m_ControlText.text = "Press 'Z' to begin";
+
+            if (Input.GetKey(KeyCode.Z))
+            {
+                m_Play = true;
+                Play();
             }
         }
 
@@ -122,6 +121,7 @@ public class GameController : MonoBehaviour
         if(m_Play)
         {
             m_ControlText.text = "";
+            m_Player.GetComponent<PlayerController>().enabled = true;//enable player
             m_ESpawn.SetShipPrefab();
             m_ESpawn.AISpawn();
         }
@@ -131,6 +131,7 @@ public class GameController : MonoBehaviour
     {
         m_Play = false;
         m_MainUI.enabled = false;
+        LoadSoftSave(m_Player);
         m_ESpawn.DestroyAllEnemies();
         m_Lose.enabled = true;
     }
@@ -140,6 +141,7 @@ public class GameController : MonoBehaviour
         m_Play = false;
         m_MainUI.enabled = false;
         m_ESpawn.DestroyAllEnemies();
+        LoadSoftSave(m_Player);
         m_Win.enabled = true;
     }
    
