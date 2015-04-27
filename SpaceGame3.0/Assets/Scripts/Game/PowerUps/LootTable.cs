@@ -16,8 +16,8 @@ public class LootTable : MonoBehaviour
         Quaternion spawnRotation = Quaternion.identity;
         if(randNum_> 0)
         {
-            //Missile[10]
-            Instantiate(m_ItemList.m_PowerUps[10], spawnPosition, spawnRotation);
+            //test code
+            Instantiate(m_ItemList.m_PowerUps[11], spawnPosition, spawnRotation);
         }
 
         else if(randNum_ <= 1)

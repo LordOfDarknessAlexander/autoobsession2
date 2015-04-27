@@ -5,19 +5,22 @@ using System.Collections.Generic;
 public class MissileBatteryPU : PowerUps
 {
     public GameObject m_MissilePrefab;
+    //public GameObject m_LaunchPointPrefab;
 
-    public List<Transform> m_Missiles = new List<Transform>();
+    //public List<Transform> m_Missiles = new List<Transform>();
     public List<Transform> m_LaunchPoints = new List<Transform>();
     
     public float m_LaunchTimer;
     public float m_Launch;
+
+    private List<GameObject> missilePool_ = new List<GameObject>();
 
     private Task launchMissiles_;
 
     public override void Start()
     {
         m_IsStorable = true;
-        m_Missiles.Capacity = 10;
+        missilePool_.Capacity = 10;
     }
     public override void Update()
     {
@@ -33,13 +36,19 @@ public class MissileBatteryPU : PowerUps
     public override void ItemAffect(GameObject player)
     {
         //set missile list to contain 10
-        for (int i = 0; i < m_Missiles.Capacity; ++i)
+        for (int i = 0; i < missilePool_.Capacity; ++i)
         {
-            m_Missiles.Add(m_MissilePrefab.transform);
+            GameObject obj = (GameObject)Instantiate(m_MissilePrefab);
+            obj.SetActive(false);
+            missilePool_.Add(obj);
+            for (int j = 0; j < missilePool_.Count; ++j)
+            {
+                missilePool_[j].gameObject.name = "Missile" + j;
+            }
+
         }
-        launchMissiles_ = new Task(Launch(), true);
         //launch 10 missiles from the 10 launch points
-        //set them on a delay by 0.5 seconds, 1(6, -6), 2(5, -5), 3(4, -4), 4(3, -3), 5(2 , -2)
+        launchMissiles_ = new Task(Launch(), true);
     }
 
     public override void UseItem(GameObject player)
@@ -51,18 +60,25 @@ public class MissileBatteryPU : PowerUps
     {
         yield return new WaitForSeconds(m_Launch);
 
-        while (m_Missiles.Capacity > 0)
+        while (missilePool_.Count > 0)
         {
-            for(int i = 0; i < m_Missiles.Count; ++i)
+            for (int i = 0; i < missilePool_.Count; ++i)
             {
                 for (int j = 0; j < m_LaunchPoints.Count; ++i)
                 {
-                    m_Missiles[i] = m_LaunchPoints[j];
-                    Instantiate(m_Missiles[i]);
-                    m_Missiles.RemoveAt(i);
+                    if(missilePool_.Count > 0)
+                    {
+                        Vector3 spawnPosition = new Vector3(m_LaunchPoints[i].position.x, m_LaunchPoints[i].position.y, m_LaunchPoints[i].position.z);
+                        Quaternion spawnRotation = Quaternion.identity;
+
+                        missilePool_[i].SetActive(true);
+                        missilePool_[i].transform.position = spawnPosition;
+                        missilePool_[i].transform.rotation = spawnRotation;
+                    }
+                    yield return new WaitForSeconds(m_LaunchTimer);
                 }
+                //missilePool_.RemoveAt(0);
             }
         }
-        yield return new WaitForSeconds(m_LaunchTimer);
     }
 }

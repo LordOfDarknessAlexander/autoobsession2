@@ -29,7 +29,6 @@ public class ShipController : MonoBehaviour
     {
         totalDamage_ = damage * ship.GetComponent<Ship>().m_DamageModifier;
 
-        Debug.Log(totalDamage_);
         //if player ship
         if(ship.tag == "Player")
         {
