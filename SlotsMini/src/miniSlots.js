@@ -55,7 +55,6 @@ $(document).ready(function()
 	
 	function init()
 	{
-		
 		//initialize bank
 		//will need accsess to the mamber datbase so that this can be set according to the clients information
 		money  = 1000;//for testing
@@ -150,7 +149,7 @@ $(document).ready(function()
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 		{
 			winnings = bet * 3;
-			$('div#resultsTextDiv').text("Uhh pinata");
+			$('div#resultsTextDiv').text("Congratulations, You win!");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
@@ -209,7 +208,6 @@ $(document).ready(function()
 			$('div#bankValue').text("You have $" + money);
 		console.log(winnings);
 	}
-
 	function startSpin()
 	{
 		if(gameFinished == true)
@@ -328,7 +326,6 @@ $(document).ready(function()
 			return;
 		}
 	}
-	
 	function stopButtonHandler(event)
 	{
 		if(gameFinished == false)
@@ -369,10 +366,10 @@ $(document).ready(function()
 		}
 		
 		slot1Context.drawImage(slotImage1, 
-					  (slot1Canvas.width / 2) - (slotImage1.width / 2), 
-					  (slot1Canvas.height / 2) - (slotImage1.height / 2), 
-					  slotImage1.width * 1.5, 
-					  slotImage1.height * 1.5);
+							  (slot1Canvas.width / 2) - (slotImage1.width / 2), 
+							  (slot1Canvas.height / 2) - (slotImage1.height / 2), 
+							  slotImage1.width * 1.5, 
+							  slotImage1.height * 1.5);
 
 		
 		//slot two
@@ -402,10 +399,10 @@ $(document).ready(function()
 		}
 		
 		slot2Context.drawImage(slotImage2, 
-					  (slot2Canvas.width / 2) - (slotImage2.width / 2), 
-					  (slot2Canvas.height / 2) - (slotImage2.height / 2), 
-					  slotImage2.width * 1.5, 
-					  slotImage2.height * 1.5);
+							  (slot2Canvas.width / 2) - (slotImage2.width / 2), 
+							  (slot2Canvas.height / 2) - (slotImage2.height / 2), 
+							  slotImage2.width * 1.5, 
+							  slotImage2.height * 1.5);
 
 		//slot3
 		if(slot3curr == 1)
@@ -486,7 +483,6 @@ $(document).ready(function()
 		}
 		return num;
 	}
-	
 	function playWinSound()
 	{
 		//stop other sounds

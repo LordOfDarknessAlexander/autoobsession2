@@ -149,7 +149,7 @@ $(document).ready(function()
 		else if(slot1curr == 4 && slot2curr == 4 && slot3curr == 4)
 		{
 			winnings = bet * 3;
-			$('div#resultsTextDiv').text("Uhh pinata");
+			$('div#resultsTextDiv').text("Congratulations, You win!");
 			$('div#wonTextDiv').text("You Won " + winnings);
 			//Play sound
 			playWinSound();
@@ -166,8 +166,7 @@ $(document).ready(function()
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 && slot2curr == 5 || 
-				slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
+		else if(slot1curr == 5 && slot2curr == 5 || slot1curr == 6 && slot2curr == 6 && slot3curr == 6)
 		{
 			winnings = bet * 2;
 			$('div#resultsTextDiv').text("Congratulations, You win!");
@@ -177,8 +176,7 @@ $(document).ready(function()
 			//Play Lights
 			turnOnLights();
 		}
-		else if(slot1curr == 5 || 
-				slot1curr == 6 && slot2curr == 6)
+		else if(slot1curr == 5 || slot1curr == 6 && slot2curr == 6)
 		{
 			winnings = bet * 1.75;
 			$('div#resultsTextDiv').text("Congratulations, You win!");
@@ -328,7 +326,6 @@ $(document).ready(function()
 			return;
 		}
 	}
-	
 	function stopButtonHandler(event)
 	{
 		if(gameFinished == false)
@@ -501,7 +498,7 @@ $(document).ready(function()
 	}
 	function playLossSound()
 	{
-		//stop othe sounds
+		//stop other sounds
 		startSpinSound .pause();
 		reelSpinning.pause();
 		
