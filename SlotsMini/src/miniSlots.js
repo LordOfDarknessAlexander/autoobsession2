@@ -345,27 +345,27 @@ $(document).ready(function()
 		//slot 1
 		if(slot1curr == 1)
 		{
-			slotImage1.src = 'images/ReelImages/carImage.png';
+			slotImage1.src = 'images/ReelImages/carImage.jpg';
 		}
 		else if(slot1curr == 2)
 		{
-			slotImage1.src = 'images/ReelImages/sevenImage.png';
+			slotImage1.src = 'images/ReelImages/sevenImage.jpg';
 		}
 		else if(slot1curr == 3)
 		{
-			slotImage1.src = 'images/ReelImages/tripleBar.png';
+			slotImage1.src = 'images/ReelImages/tripleBar.jpg';
 		}
 		else if(slot1curr == 4)
 		{
-			slotImage1.src = 'images/ReelImages/doubleBar.png';
+			slotImage1.src = 'images/ReelImages/doubleBar.jpg';
 		}
 		else if(slot1curr == 5)
 		{
-			slotImage1.src = 'images/ReelImages/singleBar.png';
+			slotImage1.src = 'images/ReelImages/singleBar.jpg';
 		}
 		else if(slot1curr == 6)
 		{
-			slotImage1.src = 'images/ReelImages/cherry.png';
+			slotImage1.src = 'images/ReelImages/cherry.jpg';
 		}
 		
 		slot1Context.drawImage(slotImage1, 
@@ -378,27 +378,27 @@ $(document).ready(function()
 		//slot two
 		if(slot2curr == 1)
 		{
-			slotImage2.src = 'images/ReelImages/carImage.png';
+			slotImage2.src = 'images/ReelImages/carImage.jpg';
 		}
 		else if(slot2curr == 2)
 		{
-			slotImage2.src = 'images/ReelImages/sevenImage.png';
+			slotImage2.src = 'images/ReelImages/sevenImage.jpg';
 		}
 		else if(slot2curr == 3)
 		{
-			slotImage2.src = 'images/ReelImages/tripleBar.png';
+			slotImage2.src = 'images/ReelImages/tripleBar.jpg';
 		}
 		else if(slot2curr == 4)
 		{
-			slotImage2.src = 'images/ReelImages/doubleBar.png';
+			slotImage2.src = 'images/ReelImages/doubleBar.jpg';
 		}
 		else if(slot2curr == 5)
 		{
-			slotImage2.src = 'images/ReelImages/singleBar.png';
+			slotImage2.src = 'images/ReelImages/singleBar.jpg';
 		}
 		else if(slot2curr == 6)
 		{
-			slotImage2.src = 'images/ReelImages/cherry.png';
+			slotImage2.src = 'images/ReelImages/cherry.jpg';
 		}
 		
 		slot2Context.drawImage(slotImage2, 
@@ -410,27 +410,27 @@ $(document).ready(function()
 		//slot3
 		if(slot3curr == 1)
 		{
-			slotImage3.src = 'images/ReelImages/carImage.png';
+			slotImage3.src = 'images/ReelImages/carImage.jpg';
 		}
 		else if(slot3curr == 2)
 		{
-			slotImage3.src = 'images/ReelImages/sevenImage.png';
+			slotImage3.src = 'images/ReelImages/sevenImage.jpg';
 		}
 		else if(slot3curr == 3)
 		{
-			slotImage3.src = 'images/ReelImages/tripleBar.png';
+			slotImage3.src = 'images/ReelImages/tripleBar.jpg';
 		}
 		else if(slot3curr == 4)
 		{
-			slotImage3.src = 'images/ReelImages/doubleBar.png';
+			slotImage3.src = 'images/ReelImages/doubleBar.jpg';
 		}
 		else if(slot3curr == 5)
 		{
-			slotImage3.src = 'images/ReelImages/singleBar.png';
+			slotImage3.src = 'images/ReelImages/singleBar.jpg';
 		}
 		else if(slot3curr == 6)
 		{
-			slotImage3.src = 'images/ReelImages/cherry.png';
+			slotImage3.src = 'images/ReelImages/cherry.jpg';
 		}
 		
 		slot3Context.drawImage(slotImage3, 
