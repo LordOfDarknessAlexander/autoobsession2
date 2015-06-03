@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Soomla.Highway;
+using Soomla.Levelup;
+using Soomla.Profile;
+using Soomla.Store;
 
 public class MainMenuScript : MonoBehaviour 
 {
 	void Start ()
     {
+        SoomlaHighway.Initialize();
+        SoomlaStore.Initialize(new GuardianPetsAssets());
+        SoomlaProfile.Initialize();
         Screen.orientation = ScreenOrientation.Landscape;
 	}
 	
